@@ -5,10 +5,9 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -43,18 +42,14 @@
   };
 
   # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-  };
+  services.xserver.xkb = { layout = "us"; };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.chu = {
     isNormalUser = true;
     description = "chu";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      zsh
-    ];
+    packages = with pkgs; [ zsh ];
   };
 
   # Allow unfree packages
@@ -66,6 +61,7 @@
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     git
+    killall
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -94,7 +90,7 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-  
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Zsh; which needs to be enabled in your home.nix.
