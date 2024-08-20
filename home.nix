@@ -56,7 +56,13 @@
 
   # Note! This must match $DOOMDIR
   # Comment this out prior to running `doom install`
-  xdg.configFile."doom".source = ./doom;
+  # xdg.configFile."doom".source = ./doom;
+  xdg.configFile."doom".source = pkgs.fetchFromGitHub {
+    owner = "chumutt";
+    repo = "doom";
+    rev = "main";
+    sha256 = "lVpkcRagU6TA3YpUE7gYk3DJ8mGdUKx1JzsHZtisja4=";
+  };
   # Uncomment after install, sync, and first run. Then:
   # 1. cd ~/.dotfiles
   # 2. mv $DOOMDIR .
