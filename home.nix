@@ -1,5 +1,5 @@
 { config, pkgs, ... }: {
-  imports = [ ./shells.nix ];
+  imports = [ ./shells.nix ]; # Do not rename to shell.nix: filename reserved.
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "chu";
