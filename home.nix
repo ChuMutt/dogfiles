@@ -16,6 +16,7 @@
       (ripgrep.override { withPCRE2 = true; })
       dmenu
       st
+      dwmblocks
       emacs-all-the-icons-fonts
       nixfmt-rfc-style # :lang nix
       fontconfig
@@ -56,21 +57,12 @@
     };
   };
 
-  # Note! This must match $DOOMDIR
-  # Comment this out prior to running `doom install`
-  # xdg.configFile."doom".source = ./doom;
   xdg.configFile."doom".source = pkgs.fetchFromGitHub {
     owner = "chumutt";
     repo = "doom";
     rev = "main";
     sha256 = "lVpkcRagU6TA3YpUE7gYk3DJ8mGdUKx1JzsHZtisja4=";
   };
-  # Uncomment after install, sync, and first run. Then:
-  # 1. cd ~/.dotfiles
-  # 2. mv $DOOMDIR .
-  # 3. git add doom
-  # 4. home-manager switch --flake .
-  # Then doom will reside in your dotfiles like a good imp.
 
   # Autoload fonts from packages installed via Home Manager
   fonts.fontconfig.enable = true;
