@@ -6,16 +6,14 @@
     stateVersion = "24.05"; # Please read the comment before changing.
 
     packages = with pkgs; [
-      zsh
       cachix
+      zsh
+      tldr
       bc
       rsync
       ffmpeg
       yt-dlp
-      fd
-      (ripgrep.override { withPCRE2 = true; })
       dmenu
-      st
       (dwmblocks.overrideAttrs { src = pkgs.fetchFromGitHub {
                                    owner = "chumutt";
                                    repo = "dwmblocks";
@@ -23,12 +21,14 @@
                                    sha256 = "KTW2fUWiWJjyHbpEbnaEq3wcuncn4fM5xk1o8CpEdOE=";
                                  };
                                }) # TODO add missing sb-* scripts
-      emacs-all-the-icons-fonts
-      nixfmt-rfc-style # :lang nix
-      fontconfig
-      (nerdfonts.override { fonts = [ "FiraCode" ]; }) # doom emacs default font
-      cmake
-      tldr
+      st
+      fd
+      # (ripgrep.override { withPCRE2 = true; })
+      # emacs-all-the-icons-fonts
+      # nixfmt-rfc-style # :lang nix
+      # fontconfig
+      # (nerdfonts.override { fonts = [ "FiraCode" ]; }) # doom emacs default font
+      # cmake
     ];
 
     file = { ".xinitrc".source = ./x11/xinitrc; };
@@ -52,11 +52,11 @@
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
-
+    zsh.enable = true;
     # Emacs
     emacs = {
-      package = pkgs.emacs29;
       enable = true;
+      package = pkgs.emacs29;
     };
 
     git = {
@@ -67,14 +67,15 @@
     };
   };
 
-  # Autoload fonts from packages installed via Home Manager
-  fonts.fontconfig.enable = true;
-
   # Note! This must match $EMACSDIR
   xdg.configFile."emacs".source = builtins.fetchGit {
     url = "https://github.com/doomemacs/doomemacs.git";
     rev = "03d692f129633e3bf0bd100d91b3ebf3f77db6d1";
   };
 
-  services.emacs.enable = true; # emacs daemon / server mode
+  # services.emacs.enable = true; # emacs daemon / server mode # Disabled for testing installation
+
+  # Autoload fonts from packages installed via Home Manager
+  # fonts.fontconfig.enable = true;
+
 }
