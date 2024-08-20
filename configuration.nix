@@ -115,5 +115,4 @@
     shadow = true;
     fadeDelta = 4;
   };
-
 }
