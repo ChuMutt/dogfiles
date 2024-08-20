@@ -1,0 +1,3 @@
+#+title: 🐶 dogfiles ❄
+#+description: nixos dotfiles
+#+author: chu
