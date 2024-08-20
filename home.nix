@@ -27,14 +27,11 @@
       nixfmt-rfc-style # :lang nix
       fontconfig
       (nerdfonts.override { fonts = [ "FiraCode" ]; }) # doom emacs default font
+      cmake
+      tldr
     ];
 
-    file = { ".xinitrc".source = ./x11/xinitrc;
-  	     "doom".source = pkgs.fetchFromGitHub {
-               owner = "chumutt";
-    	       repo = "doom";
-               rev = "main";
-               sha256 = "lVpkcRagU6TA3YpUE7gYk3DJ8mGdUKx1JzsHZtisja4="; }; };
+    file = { ".xinitrc".source = ./x11/xinitrc; };
 
     sessionVariables = {
       EDITOR = "neovim";
@@ -78,4 +75,6 @@
     url = "https://github.com/doomemacs/doomemacs.git";
     rev = "03d692f129633e3bf0bd100d91b3ebf3f77db6d1";
   };
+
+  services.emacs.enable = true; # emacs daemon / server mode
 }

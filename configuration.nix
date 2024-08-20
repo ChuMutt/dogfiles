@@ -35,8 +35,6 @@
   # Configure keymap in X11
   services.xserver.xkb = { layout = "us"; };
 
-  # services.emacs.package = pkgs.emacs-unstable;
-  services.emacs.enable = true; # emacs daemon / server mode
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.chu = {
