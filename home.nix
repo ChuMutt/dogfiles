@@ -35,7 +35,25 @@
   # '')
   # ];
 
-  home.packages = with pkgs; [ bc rsync ffmpeg yt-dlp fd (ripgrep.override {withPCRE2 = true;}) ];
+  home.packages = with pkgs; [
+    bc
+    rsync
+    ffmpeg
+    yt-dlp
+    # indexing / search dependencies (deps) for emacs
+    fd
+    (ripgrep.override { withPCRE2 = true; })
+    # emacs deps
+    emacs-all-the-icons-fonts
+    nixfmt # :lang nix
+
+    # fonts
+    fontconfig
+    (nerdfonts.override { fonts = [ "FireCode" ]; }) # doom emacs default font
+
+  ];
+  # Autoload fonts from packages installed via Home Manager
+  fonts.fontconfig.enable = true;
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -74,6 +92,25 @@
     TERMINAL_PROG = "st";
     VISUAL = "emacs";
     BROWSER = "librewolf";
+    # Doom Emacs
+    DOOMDIR = "${config.xdg.configHome}/doom";
+    EMACSDIR = "${config.xdg.configHome}/emacs";
+    DOOMLOCALDIR = "${config.xdg.dataHome}/doom";
+    DOOMPROFILELOADFILE = "${config.xdg.stateHome}/doom-profiles-load.el";
+  };
+
+  home.sessionPath = [ "${config.xdg.configHome}/emacs/bin" ];
+
+  programs.emacs.enable = true;
+  programs.emacs.package = pkgs.emacs29;
+
+  # Note! This must match $DOOMDIR
+  xdg.configFile."doom".source = ./doom;
+
+  # Note! This must match $EMACSDIR
+  xdg.configFile."emacs".source = builtins.fetchGit {
+    url = "https://github.com/doomemacs/doomemacs.git";
+    rev = "03d692f129633e3bf0bd100d91b3ebf3f77db6d1";
   };
 
   # Let Home Manager install and manage itself.
