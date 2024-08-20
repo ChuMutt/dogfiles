@@ -13,6 +13,7 @@
       rsync
       ffmpeg
       yt-dlp
+      fontconfig
       dmenu
       (dwmblocks.overrideAttrs { src = pkgs.fetchFromGitHub {
                                    owner = "chumutt";
@@ -22,13 +23,14 @@
                                  };
                                }) # TODO add missing sb-* scripts
       st
+
       fd
-      # (ripgrep.override { withPCRE2 = true; })
-      # emacs-all-the-icons-fonts
-      # nixfmt-rfc-style # :lang nix
-      # fontconfig
-      # (nerdfonts.override { fonts = [ "FiraCode" ]; }) # doom emacs default font
-      # cmake
+      (ripgrep.override { withPCRE2 = true; })
+      nixfmt-rfc-style # :lang nix
+      emacs-all-the-icons-fonts
+      (nerdfonts.override { fonts = [ "FiraCode" ]; }) # doom emacs default font
+      cmake
+
     ];
 
     file = { ".xinitrc".source = ./x11/xinitrc; };
@@ -73,9 +75,13 @@
     rev = "03d692f129633e3bf0bd100d91b3ebf3f77db6d1";
   };
 
+  xdg.configFile."doom".source = ./doom;
+
   # services.emacs.enable = true; # emacs daemon / server mode # Disabled for testing installation
 
   # Autoload fonts from packages installed via Home Manager
   # fonts.fontconfig.enable = true;
+
+
 
 }
