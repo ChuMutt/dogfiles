@@ -1,9 +1,0 @@
-#!/usr/bin/env sh
-
-# Doom Emacs bootstrap
-EMACSDIR=$XDG_CONFIG_HOME/emacs
-PATH=$PATH:$EMACSDIR/bin
-DOOMDIR=$XDG_CONFIG_HOME/doom
-DOOMLOCALDIR=$XDG_DATA_HOME/doom
-DOOMPROFILELOADFILE=$XDG_STATE_HOME/doom-profiles-load.el
-
