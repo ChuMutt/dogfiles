@@ -105,7 +105,17 @@
   # X11
   services.xserver = {
     enable = true;
-    windowManager.dwm.enable = true;
+    windowManager = {
+      dwm.package = pkgs.dwm.overrideAttrs {
+        src = pkgs.fetchFromGitHub {
+          owner = "chumutt";
+          repo = "dwm";
+          rev = "main";
+          sha256 = "P9ecPUWfdwW1MYFzWTifxIJyTZQDFCkfoV3HVheRte8=";
+        };
+      };
+      dwm.enable = true;
+    };
     autorun = false;
     displayManager.startx.enable = true; # use startx command to start x server
   };
