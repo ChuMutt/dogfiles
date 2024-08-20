@@ -80,7 +80,7 @@
   # services.emacs.enable = true; # emacs daemon / server mode # Disabled for testing installation
 
   # Autoload fonts from packages installed via Home Manager
-  # fonts.fontconfig.enable = true;
+  fonts.fontconfig.enable = true;
 
 
 
