@@ -43,6 +43,14 @@
 
   # Configure keymap in X11
   services.xserver.xkb = { layout = "us"; };
+  services.emacs.package = pkgs.emacs-unstable;
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url =
+        "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
+    }))
+  ];
+  services.emacs.enable = true; # emacs daemon / server mode
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.chu = {
