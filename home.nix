@@ -22,14 +22,19 @@
                                    rev = "main";
                                    sha256 = "KTW2fUWiWJjyHbpEbnaEq3wcuncn4fM5xk1o8CpEdOE=";
                                  };
-                               })
+                               }) # TODO add missing sb-* scripts
       emacs-all-the-icons-fonts
       nixfmt-rfc-style # :lang nix
       fontconfig
       (nerdfonts.override { fonts = [ "FiraCode" ]; }) # doom emacs default font
     ];
 
-    file = { ".xinitrc".source = ./x11/xinitrc; };
+    file = { ".xinitrc".source = ./x11/xinitrc;
+  	     "doom".source = pkgs.fetchFromGitHub {
+               owner = "chumutt";
+    	       repo = "doom";
+               rev = "main";
+               sha256 = "lVpkcRagU6TA3YpUE7gYk3DJ8mGdUKx1JzsHZtisja4="; }; };
 
     sessionVariables = {
       EDITOR = "neovim";
@@ -63,12 +68,12 @@
     };
   };
 
-  xdg.configFile."doom".source = pkgs.fetchFromGitHub {
-    owner = "chumutt";
-    repo = "doom";
-    rev = "main";
-    sha256 = "lVpkcRagU6TA3YpUE7gYk3DJ8mGdUKx1JzsHZtisja4=";
-  };
+  # xdg.configFile."doom".source = pkgs.fetchFromGitHub {
+  #   owner = "chumutt";
+  #   repo = "doom";
+  #   rev = "main";
+  #   sha256 = "lVpkcRagU6TA3YpUE7gYk3DJ8mGdUKx1JzsHZtisja4=";
+  # };
 
   # Autoload fonts from packages installed via Home Manager
   fonts.fontconfig.enable = true;
