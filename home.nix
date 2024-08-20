@@ -14,6 +14,8 @@
       yt-dlp
       fd
       (ripgrep.override { withPCRE2 = true; })
+      dmenu
+      st
       emacs-all-the-icons-fonts
       nixfmt-rfc-style # :lang nix
       fontconfig
