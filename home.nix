@@ -20,7 +20,8 @@
       (nerdfonts.override { fonts = [ "FiraCode" ]; }) # doom emacs default font
     ];
 
-    file = { };
+    file = { ".xinitrc".source = ./x11/xinitrc; };
+
     sessionVariables = {
       EDITOR = "neovim";
       TERMINAL = "st";
