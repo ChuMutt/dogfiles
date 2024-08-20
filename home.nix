@@ -55,6 +55,8 @@
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
+
+    # Emacs
     emacs = {
       package = pkgs.emacs29;
       enable = true;
@@ -67,13 +69,6 @@
       extraConfig = { init.defaultBranch = "main"; };
     };
   };
-
-  # xdg.configFile."doom".source = pkgs.fetchFromGitHub {
-  #   owner = "chumutt";
-  #   repo = "doom";
-  #   rev = "main";
-  #   sha256 = "lVpkcRagU6TA3YpUE7gYk3DJ8mGdUKx1JzsHZtisja4=";
-  # };
 
   # Autoload fonts from packages installed via Home Manager
   fonts.fontconfig.enable = true;
