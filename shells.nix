@@ -33,6 +33,7 @@ in {
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+    autocd = true;
 
     shellAliases = myShellAliases;
 

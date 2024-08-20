@@ -52,6 +52,7 @@
     isNormalUser = true;
     description = "chu";
     extraGroups = [ "networkmanager" "wheel" ];
+    # open.ssh.authorizedKeys.keys = [ "ssh-dss AAAB3Nza... user@blahblah" ];
     packages = with pkgs; [ zsh ];
   };
 
@@ -101,4 +102,19 @@
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
+  # X11
+  services.xserver = {
+    enable = true;
+    windowManager.dwm.enable = true;
+    autorun = false;
+    displayManager.startx.enable = true; # use startx command to start x server
+  };
+  # X11 compositor
+  services.picom = {
+    enable = true;
+    fade = true;
+    inactiveOpacity = 0.9;
+    shadow = true;
+    fadeDelta = 4;
+  };
 }
