@@ -35,7 +35,7 @@
   # '')
   # ];
 
-  home.packages = with pkgs; [ bc rsync ffmpeg yt-dlp ];
+  home.packages = with pkgs; [ bc rsync ffmpeg yt-dlp fd ripgrep.override {withPCRE2 = true;} ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
