@@ -16,7 +16,13 @@
       (ripgrep.override { withPCRE2 = true; })
       dmenu
       st
-      dwmblocks
+      (dwmblocks.overrideAttrs { src = pkgs.fetchFromGitHub {
+                                   owner = "chumutt";
+                                   repo = "dwmblocks";
+                                   rev = "main";
+                                   sha256 = "KTW2fUWiWJjyHbpEbnaEq3wcuncn4fM5xk1o8CpEdOE=";
+                                 };
+                               })
       emacs-all-the-icons-fonts
       nixfmt-rfc-style # :lang nix
       fontconfig
