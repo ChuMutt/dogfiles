@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, inputs, lib, pkgs, callPackage, ... }:
 
 {
   imports = [ # Include the results of the hardware scan.
@@ -43,13 +43,8 @@
 
   # Configure keymap in X11
   services.xserver.xkb = { layout = "us"; };
-  services.emacs.package = pkgs.emacs-unstable;
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url =
-        "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
-    }))
-  ];
+
+  # services.emacs.package = pkgs.emacs-unstable;
   services.emacs.enable = true; # emacs daemon / server mode
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
