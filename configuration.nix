@@ -53,7 +53,7 @@
     description = "chu";
     extraGroups = [ "networkmanager" "wheel" ];
     # open.ssh.authorizedKeys.keys = [ "ssh-dss AAAB3Nza... user@blahblah" ];
-    packages = with pkgs; [ zsh ];
+    # packages = with pkgs; [ ];
   };
 
   # Allow unfree packages

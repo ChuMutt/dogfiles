@@ -6,6 +6,7 @@
     stateVersion = "24.05"; # Please read the comment before changing.
 
     packages = with pkgs; [
+      zsh
       cachix
       bc
       rsync
