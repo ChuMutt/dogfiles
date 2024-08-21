@@ -93,6 +93,8 @@
   # Autoload fonts from packages installed via Home Manager
   fonts.fontconfig.enable = true;
 
+  services.pipewire.enable = true;
+  services.pipewire.wireplumber.enable = true;
 
 
 }
