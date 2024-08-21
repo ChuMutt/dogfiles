@@ -29,6 +29,8 @@
       arandr
       xwallpaper
       dunst
+      pavucontrol
+      raysession
 
       # Doom Emacs stack
       fd
