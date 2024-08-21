@@ -1,7 +1,15 @@
-{ config, inputs, lib, pkgs, callPackage, ... }:
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  callPackage,
+  ...
+}:
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix # hardware config
   ];
 
@@ -33,12 +41,14 @@
   };
 
   # Configure keymap in X11
-  services.xserver.xkb = { layout = "us"; };
+  services.xserver.xkb = {
+    layout = "us";
+  };
 
   # For if NixOS is a VM guest:
   services = {
     qemuGuest.enable = true;
-    spice-vdagentd.enable =  true;
+    spice-vdagentd.enable = true;
     # host requires org.qemu.guest_agent.0 virtio serial port.
   };
 
@@ -46,7 +56,10 @@
   users.users.chu = {
     isNormalUser = true;
     description = "chu";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     # open.ssh.authorizedKeys.keys = [ "ssh-dss AAAB3Nza... user@blahblah" ];
     # packages = with pkgs; [ ];
   };
@@ -79,8 +92,14 @@
 
   system.stateVersion = "24.11"; # Did you read the comment?
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.settings.trusted-users = [ "root" "chu" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  nix.settings.trusted-users = [
+    "root"
+    "chu"
+  ];
 
   # Zsh; which needs to be enabled in your home.nix.
   programs.zsh.enable = true;
@@ -111,4 +130,14 @@
     shadow = true;
     fadeDelta = 4;
   };
+
+  services.pipewire = {
+    enable = true;
+    wireplumber.enable = true;
+    alsa.enable = true;
+    audio.enable = true;
+    jack.enable = true;
+    pulse.enable = true;
+  };
+
 }

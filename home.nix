@@ -29,7 +29,6 @@
       arandr
       xwallpaper
       dunst
-      pipewire
 
       # Doom Emacs stack
       fd
@@ -99,14 +98,5 @@
 
   # Autoload fonts from packages installed via Home Manager
   fonts.fontconfig.enable = true;
-
-  services.pipewire = {
-    enable = true;
-    wireplumber.enable = true;
-    alsa.enable = true;
-    audio.enable = true;
-    jack.enable = true;
-    pulse.enable = true;
-  };
 
 }
