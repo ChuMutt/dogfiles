@@ -23,7 +23,9 @@
                                  };
                                }) # TODO add missing sb-* scripts
       st
+      arandr
 
+      # Doom Emacs stack
       fd
       (ripgrep.override { withPCRE2 = true; })
       nixfmt-rfc-style # :lang nix
@@ -33,6 +35,7 @@
       cmake
       gcc
       libtool
+      #
 
     ];
 

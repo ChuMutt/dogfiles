@@ -35,6 +35,12 @@
   # Configure keymap in X11
   services.xserver.xkb = { layout = "us"; };
 
+  # For if NixOS is a VM guest:
+  services = {
+    qemuGuest.enable = true;
+    spice-vdagentd.enable =  true;
+    # host requires org.qemu.guest_agent.0 virtio serial port.
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.chu = {
