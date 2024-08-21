@@ -29,6 +29,7 @@
       nixfmt-rfc-style # :lang nix
       emacs-all-the-icons-fonts
       (nerdfonts.override { fonts = [ "FiraCode" ]; }) # doom emacs default font
+      gnumake
       cmake
 
     ];
@@ -47,7 +48,7 @@
       DOOMPROFILELOADFILE = "${config.xdg.stateHome}/doom-profiles-load.el";
     };
 
-    sessionPath = [ "${config.xdg.configHome}/emacs/bin" ];
+    # sessionPath = [ "${config.xdg.configHome}/emacs/bin" ];
 
   };
 
@@ -69,13 +70,19 @@
     };
   };
 
+  # thanks j4m3s
+  systemd.user.sessionVariables = {
+    DOOMLOCALDIR = "$HOME/.local/share/doomemacs";
+    DOOMPROFILELOADFILE="$HOME/.local/share/doomemacs/profiles/load.el";
+  };
+
+  # xdg.configFile."doom".source = ./doom;
+
   # Note! This must match $EMACSDIR
   xdg.configFile."emacs".source = builtins.fetchGit {
     url = "https://github.com/doomemacs/doomemacs.git";
-    rev = "03d692f129633e3bf0bd100d91b3ebf3f77db6d1";
+    rev = "c1c3b521d6c9af240f6841a0994f95149811ffea";
   };
-
-  xdg.configFile."doom".source = ./doom;
 
   # services.emacs.enable = true; # emacs daemon / server mode # Disabled for testing installation
 

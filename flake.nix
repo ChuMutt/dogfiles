@@ -3,12 +3,24 @@
 
   inputs = {
 
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    emacs-overlay = {
+    url = "github:nix-community/emacs-overlay";
+    inputs = {
+      nixpkgs.follows = "nixpkgs-unstable";
+      nixpkgs-stable.follows = "nixpkgs";
+      };
+    };
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+
   };
 
   outputs = { self, nixpkgs, home-manager, ... }:
