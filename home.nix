@@ -81,7 +81,7 @@
     DOOMPROFILELOADFILE="$HOME/.local/share/doomemacs/profiles/load.el";
   };
 
-
+  # emacs daemon (emacsclient) service
   services.emacs.enable = true;
 
   # Autoload fonts from packages installed via Home Manager
