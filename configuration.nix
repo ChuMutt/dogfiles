@@ -75,6 +75,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.openssh.settings.PermitRootLogin = "yes"; # Unsafe
 
   system.stateVersion = "24.11"; # Did you read the comment?
 
