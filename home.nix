@@ -42,6 +42,7 @@
 
       librewolf
       thunderbird
+      nextcloud-client
     ];
 
     file = { ".xinitrc".source = ./x11/xinitrc; };
