@@ -24,6 +24,8 @@
                                }) # TODO add missing sb-* scripts
       st
       arandr
+      xwallpaper
+      dunst
 
       # Doom Emacs stack
       fd
