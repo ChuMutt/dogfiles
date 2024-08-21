@@ -31,6 +31,8 @@
       (nerdfonts.override { fonts = [ "FiraCode" ]; }) # doom emacs default font
       gnumake
       cmake
+      gcc
+      libtool
 
     ];
 
@@ -76,15 +78,8 @@
     DOOMPROFILELOADFILE="$HOME/.local/share/doomemacs/profiles/load.el";
   };
 
-  # xdg.configFile."doom".source = ./doom;
 
-  # Note! This must match $EMACSDIR
-  # xdg.configFile."emacs".source = builtins.fetchGit {
-  #   url = "https://github.com/doomemacs/doomemacs.git";
-  #   rev = "c1c3b521d6c9af240f6841a0994f95149811ffea";
-  # };
-
-  # services.emacs.enable = true; # emacs daemon / server mode # Disabled for testing installation
+  services.emacs.enable = true;
 
   # Autoload fonts from packages installed via Home Manager
   fonts.fontconfig.enable = true;
