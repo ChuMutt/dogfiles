@@ -38,9 +38,10 @@
       cmake
       gcc
       libtool
-      librewolf
       #
 
+      librewolf
+      thunderbird
     ];
 
     file = { ".xinitrc".source = ./x11/xinitrc; };
