@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   imports = [ ./shells.nix ]; # Do not rename to shell.nix: filename reserved.
   home = {
     username = "chu";
@@ -16,17 +17,19 @@
       yt-dlp
       fontconfig
       dmenu
-      (dwmblocks.overrideAttrs { src = pkgs.fetchFromGitHub {
-                                   owner = "chumutt";
-                                   repo = "dwmblocks";
-                                   rev = "main";
-                                   sha256 = "KTW2fUWiWJjyHbpEbnaEq3wcuncn4fM5xk1o8CpEdOE=";
-                                 };
-                               }) # TODO add missing sb-* scripts
+      (dwmblocks.overrideAttrs {
+        src = pkgs.fetchFromGitHub {
+          owner = "chumutt";
+          repo = "dwmblocks";
+          rev = "main";
+          sha256 = "KTW2fUWiWJjyHbpEbnaEq3wcuncn4fM5xk1o8CpEdOE=";
+        };
+      }) # TODO add missing sb-* scripts
       st
       arandr
       xwallpaper
       dunst
+      pipewire
 
       # Doom Emacs stack
       fd
@@ -45,7 +48,9 @@
       nextcloud-client
     ];
 
-    file = { ".xinitrc".source = ./x11/xinitrc; };
+    file = {
+      ".xinitrc".source = ./x11/xinitrc;
+    };
 
     sessionVariables = {
       EDITOR = "neovim";
@@ -77,14 +82,16 @@
       enable = true;
       userName = "chumutt";
       userEmail = "chufilthymutt@gmail.com";
-      extraConfig = { init.defaultBranch = "main"; };
+      extraConfig = {
+        init.defaultBranch = "main";
+      };
     };
   };
 
   # thanks j4m3s
   systemd.user.sessionVariables = {
     DOOMLOCALDIR = "$HOME/.local/share/doomemacs";
-    DOOMPROFILELOADFILE="$HOME/.local/share/doomemacs/profiles/load.el";
+    DOOMPROFILELOADFILE = "$HOME/.local/share/doomemacs/profiles/load.el";
   };
 
   # emacs daemon (emacsclient) service
@@ -93,8 +100,13 @@
   # Autoload fonts from packages installed via Home Manager
   fonts.fontconfig.enable = true;
 
-  services.pipewire.enable = true;
-  services.pipewire.wireplumber.enable = true;
-
+  services.pipewire = {
+    enable = true;
+    wireplumber.enable = true;
+    alsa.enable = true;
+    audio.enable = true;
+    jack.enable = true;
+    pulse.enable = true;
+  };
 
 }
