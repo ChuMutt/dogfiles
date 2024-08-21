@@ -48,7 +48,7 @@
       DOOMPROFILELOADFILE = "${config.xdg.stateHome}/doom-profiles-load.el";
     };
 
-    # sessionPath = [ "${config.xdg.configHome}/emacs/bin" ];
+    sessionPath = [ "${config.xdg.configHome}/emacs/bin" ]; # ./doom sync, upgrade etc
 
   };
 
@@ -59,7 +59,7 @@
     # Emacs
     emacs = {
       enable = true;
-      package = pkgs.emacs29;
+      # package = pkgs.emacs29;
     };
 
     git = {
@@ -79,10 +79,10 @@
   # xdg.configFile."doom".source = ./doom;
 
   # Note! This must match $EMACSDIR
-  xdg.configFile."emacs".source = builtins.fetchGit {
-    url = "https://github.com/doomemacs/doomemacs.git";
-    rev = "c1c3b521d6c9af240f6841a0994f95149811ffea";
-  };
+  # xdg.configFile."emacs".source = builtins.fetchGit {
+  #   url = "https://github.com/doomemacs/doomemacs.git";
+  #   rev = "c1c3b521d6c9af240f6841a0994f95149811ffea";
+  # };
 
   # services.emacs.enable = true; # emacs daemon / server mode # Disabled for testing installation
 
