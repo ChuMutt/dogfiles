@@ -7,6 +7,7 @@
 
     packages = with pkgs; [
       cachix
+      man-db
       zsh
       tldr
       bc
