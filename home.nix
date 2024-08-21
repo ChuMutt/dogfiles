@@ -38,6 +38,7 @@
       cmake
       gcc
       libtool
+      librewolf
       #
 
     ];
