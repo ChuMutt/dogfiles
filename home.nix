@@ -42,7 +42,6 @@
       cmake
       gcc
       libtool
-      #
 
       librewolf
       thunderbird
@@ -76,7 +75,6 @@
     # Emacs
     emacs = {
       enable = true;
-      # package = pkgs.emacs29;
     };
 
     git = {
