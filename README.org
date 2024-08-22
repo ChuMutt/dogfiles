@@ -199,3 +199,11 @@ a work in progress! not a good idea to install right now!
 
 }
 #+end_src
+* TODO future derivations
+** home-manager bootstrap script
+home-mananger (hm) takes care of itself in a declarative manner but it must be boostrapped imperatively first
+#+begin_src sh :shebang '#!/usr/bin/env/ sh :tangle ./hm-bootstrap
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager &&
+nix-channel --update &&
+nix-shell '<home-manager>' -A install
+#+end_src
