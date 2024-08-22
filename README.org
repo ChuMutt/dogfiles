@@ -369,6 +369,7 @@ in {
 }
 #+end_src
 * x11
+** xinitrc
 #+begin_src :tangle ./x11/xinitrc :mkdirp t
 dwm
 #+end_src
