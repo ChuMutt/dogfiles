@@ -4,7 +4,7 @@
 
 a work in progress! not a good idea to install right now!
 
-* system configuration
+* configuration
 #+begin_src nix :tangle ./configuration.nix
 {
   config,
