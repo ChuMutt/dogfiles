@@ -29,7 +29,7 @@
       arandr
       xwallpaper
       dunst
-      wal
+      pywal # the new wal
       pavucontrol
       raysession
 
