@@ -29,6 +29,7 @@
       arandr
       xwallpaper
       dunst
+      wal
       pavucontrol
       raysession
 
