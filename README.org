@@ -6,14 +6,7 @@ a work in progress! not a good idea to install right now!
 
 * configuration
 #+begin_src nix :tangle ./configuration.nix
-{
-  config,
-  inputs,
-  lib,
-  pkgs,
-  callPackage,
-  ...
-}:
+{ config, inputs, lib, pkgs, callPackage, ... }:
 
 {
   imports = [
@@ -49,9 +42,7 @@ a work in progress! not a good idea to install right now!
   };
 
   # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-  };
+  services.xserver.xkb = { layout = "us"; };
 
   # For if NixOS is a VM guest:
   services = {
@@ -64,10 +55,7 @@ a work in progress! not a good idea to install right now!
   users.users.chu = {
     isNormalUser = true;
     description = "chu";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
+    extraGroups = [ "networkmanager" "wheel" ];
     # open.ssh.authorizedKeys.keys = [ "ssh-dss AAAB3Nza... user@blahblah" ];
     # packages = with pkgs; [ ];
   };
@@ -100,14 +88,8 @@ a work in progress! not a good idea to install right now!
 
   system.stateVersion = "24.11"; # Did you read the comment?
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-  nix.settings.trusted-users = [
-    "root"
-    "chu"
-  ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.trusted-users = [ "root" "chu" ];
 
   # Zsh; which needs to be enabled in your home.nix.
   programs.zsh.enable = true;
@@ -167,10 +149,10 @@ a work in progress! not a good idea to install right now!
     };
 
     emacs-overlay = {
-    url = "github:nix-community/emacs-overlay";
-    inputs = {
-      nixpkgs.follows = "nixpkgs-unstable";
-      nixpkgs-stable.follows = "nixpkgs";
+      url = "github:nix-community/emacs-overlay";
+      inputs = {
+        nixpkgs.follows = "nixpkgs-unstable";
+        nixpkgs-stable.follows = "nixpkgs";
       };
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
@@ -201,8 +183,7 @@ a work in progress! not a good idea to install right now!
 #+end_src
 * home.nix
 #+begin_src nix :tangle ./home.nix
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   imports = [ ./shells.nix ]; # Do not rename to shell.nix: filename reserved.
   home = {
     username = "chu";
@@ -252,9 +233,7 @@ a work in progress! not a good idea to install right now!
       nextcloud-client
     ];
 
-    file = {
-      ".xinitrc".source = ./x11/xinitrc;
-    };
+    file = { ".xinitrc".source = ./x11/xinitrc; };
 
     sessionVariables = {
       EDITOR = "neovim";
@@ -268,7 +247,8 @@ a work in progress! not a good idea to install right now!
       DOOMPROFILELOADFILE = "${config.xdg.stateHome}/doom-profiles-load.el";
     };
 
-    sessionPath = [ "${config.xdg.configHome}/emacs/bin" ]; # ./doom sync, upgrade etc
+    sessionPath =
+      [ "${config.xdg.configHome}/emacs/bin" ]; # ./doom sync, upgrade etc
 
   };
 
@@ -277,17 +257,13 @@ a work in progress! not a good idea to install right now!
     home-manager.enable = true;
     zsh.enable = true;
     # Emacs
-    emacs = {
-      enable = true;
-    };
+    emacs = { enable = true; };
 
     git = {
       enable = true;
       userName = "chumutt";
       userEmail = "chufilthymutt@gmail.com";
-      extraConfig = {
-        init.defaultBranch = "main";
-      };
+      extraConfig = { init.defaultBranch = "main"; };
     };
   };
 
