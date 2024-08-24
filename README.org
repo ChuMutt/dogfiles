@@ -46,9 +46,10 @@ $ dotfiles/install.zsh \
 
 + Then reboot and you're good to go!
 
-> [!WARNING]
-> Don't forget to change your `root` and `$USER` passwords! They are set to
-> `nixos` by default.
+⚠ *WARNING* ⚠
+
+Don't forget to change your `root` and `$USER` passwords! They are set to
+`nixos` by default.
 
 
 * configuration
