@@ -1,6 +1,6 @@
 #+title: 🐶 dogfiles ❄
 #+description: nixos dotfiles
-#+author: chu
+#+author: chu the pup
 
 work in progress! ⚠✨not a good idea to install right now!✨⚠
 
