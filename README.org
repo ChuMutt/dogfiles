@@ -2,20 +2,24 @@
 #+description: nixos dotfiles
 #+author: chu
 
-work in progress! not a good idea to install right now!
+work in progress! ⚠✨not a good idea to install right now!✨⚠
+
+* credits
+
+- [[https://github.com/hlissner/dotfiles/commits?author=hlissner][hlissner/dotfiles]]
 
 * installation
 
 + Acquire or build a NixOS 24.05+ image:
 
-#+begin_src shell
+#+begin_src shell :noeval t
 # Yoink nixos-unstable from upstream
 wget -O nixos.iso https://channels.nixos.org/nixos-unstable/latest-nixos-minimal-x86_64-linux.iso
 #+end_src
 
 + Write it to a USB drive:
 
-#+begin_src shell
+#+begin_src shell :noeval t
 # Replace /dev/sdX with the correct partition!
 cp nixos.iso /dev/sdX
 #+end_src
@@ -26,7 +30,7 @@ cp nixos.iso /dev/sdX
 
 + Clone these dotfiles somewhere:
 
-#+begin_src shell
+#+begin_src shell :noeval t
 git clone --recursive https://github.com/chumutt/dogfiles
 #+end_src
 
@@ -34,23 +38,64 @@ git clone --recursive https://github.com/chumutt/dogfiles
 
 + Run the installer:
 
-#+begin_src shell
+#+begin_src shell :noeval t
 # The options are optional, but these are their default values, if you omit them.
-$ dotfiles/install.zsh \
+dotfiles/install.zsh \
       --root /mnt \
-      --flake /mnt/etc/dogfiles \
+      --flake /mnt/etc/dotfiles \
       --user "$USER" \
       --host "$HOST" \
-      --dest /mnt/home/$USER/.config/dogfiles
+      --dest /mnt/home/$USER/.config/dotfiles
 #+end_src
 
 + Then reboot and you're good to go!
 
 ⚠ *WARNING* ⚠
 
-Don't forget to change your `root` and `$USER` passwords! They are set to
-`nixos` by default.
+*Don't forget to change your `root` and `$USER` passwords!* They are set to `nixos` by default.
 
+** the installer
+
+Deploy and install this nixos system.
+
+#+name: install.zsh
+#+begin_src shell :shebang #!/usr/bin/env zsh :tangle ./install.zsh :noeval t
+zparseopts -E -F -D -- -flake=flake \
+                       -user=user \
+                       -host=host \
+                       -dest=dest \
+                       -root=root || exit 1
+
+local root="${root[2]:-/mnt}"
+local flake="${flake[2]:-$root/etc/dotfiles}"
+local host="${host[2]:-$HOST}"
+local user="${user[2]:-chu}"
+local dest="${dest[2]:-$root/home/$user/.config/dotfiles}"
+
+if [[ "$USER" == nixos ]]; then
+  >&2 echo "Error: not in the nixos installer"
+  exit 1
+elif [[ -z "$host" ]]; then
+  >&2 echo "Error: no --host set"
+  exit 2
+fi
+
+set -e
+if [[ ! -d "$flake" ]]; then
+  local url=https://github.com/chumutt/dogfiles
+  [[ "$user" == chu ]] && url="git@github.com:chumutt/dogfiles.git"
+  rm -rf "$flake"
+  git clone --recursive "$url" "$flake"
+  chown "$user:users" -R "$flake"
+fi
+
+# export HEYENV="{\"user\":\"$user\",\"host\":\"$host\",\"path\":\"${flake#$root}\",\"theme\":\"$THEME\"}"
+nixos-install \
+    --impure \
+    --show-trace \
+    --root "$root" \
+    --flake "${flake}#${host}"
+#+end_src
 
 * configuration
 
@@ -396,6 +441,6 @@ in {
 
 ** xinitrc
 
-#+begin_src :tangle ./x11/xinitrc :mkdirp t
+#+begin_src shell :tangle ./x11/xinitrc :mkdirp yes
 dwm
 #+end_src
