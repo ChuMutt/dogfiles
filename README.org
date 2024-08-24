@@ -4,7 +4,57 @@
 
 a work in progress! not a good idea to install right now!
 
+* installation
+
+1. Acquire or build a NixOS 24.05+ image:
+
+#+begin_src shell
+# Yoink nixos-unstable from upstream
+wget -O nixos.iso https://channels.nixos.org/nixos-unstable/latest-nixos-minimal-x86_64-linux.iso
+#+end_src
+
+2. Write it to a USB drive:
+
+#+begin_src shell
+# Replace /dev/sdX with the correct partition!
+cp nixos.iso /dev/sdX
+#+end_src
+
+3. Restart and boot into the installer.
+
+4. Do your partitions and mount your root to =/mnt=  ([[https://github.com/hlissner/dotfiles/blob/master/hosts/udon/README.org][for example]]).
+
+5. Clone these dotfiles somewhere:
+
+#+begin_src shell
+git clone --recursive https://github.com/chumutt/dogfiles
+#+end_src
+
+6. Create a host config in =hosts/= (see [[https://github.com/hlissner/dotfiles/blob/master/hosts][existing ones]] for examples).
+
+7. Run the installer:
+
+#+begin_src shell
+# The options are optional, but these are their default values, if you omit them.
+$ dotfiles/install.zsh \
+      --root /mnt \
+      --flake /mnt/etc/dogfiles \
+      --user "$USER" \
+      --host "$HOST" \
+      --dest /mnt/home/$USER/.config/dogfiles
+#+end_src
+
+8. Then reboot and you're good to go!
+
+#+begin_src markdown
+> [!WARNING]
+> Don't forget to change your `root` and `$USER` passwords! They are set to
+> `nixos` by default.
+#+end_src
+
+
 * configuration
+
 #+begin_src nix :tangle ./configuration.nix
 { config, inputs, lib, pkgs, callPackage, ... }:
 
@@ -132,7 +182,9 @@ a work in progress! not a good idea to install right now!
 
 }
 #+end_src
+
 * flake
+
 #+begin_src nix :tangle ./flake.nix
 {
   description = "chunixos";
@@ -181,7 +233,9 @@ a work in progress! not a good idea to install right now!
 
 }
 #+end_src
+
 * home.nix
+
 #+begin_src nix :tangle ./home.nix
 { config, pkgs, ... }: {
   imports = [ ./shells.nix ]; # Do not rename to shell.nix: filename reserved.
@@ -281,7 +335,9 @@ a work in progress! not a good idea to install right now!
 
 }
 #+end_src
+
 * shells.nix
+
 #+begin_src nix :tangle ./shells.nix
 { config, lib, pkgs, ... }:
 
@@ -336,8 +392,11 @@ in {
 
 }
 #+end_src
+
 * x11
+
 ** xinitrc
+
 #+begin_src :tangle ./x11/xinitrc :mkdirp t
 dwm
 #+end_src
