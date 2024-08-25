@@ -253,15 +253,18 @@ nixos-install \
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     # TODO: Secrets mgmt.
     # agenix = {
     #   url = "github:ryantm/agenix";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
+
     # TODO: Declarative partitions
     # disko.url = "github:nix-community/disko";
     # disko.inputs.nixpkgs.follows = "nixpkgs";
