@@ -11,7 +11,7 @@ with bultins;
     profiles = {
       role = "workstation";
       user = "chu";
-      networks=["us"];
+      networks = [ "us" ];
       hardware = [
         "cpu/amd"
         "gpu/amd"
