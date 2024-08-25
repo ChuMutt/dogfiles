@@ -79,7 +79,7 @@
   services.openssh.enable = true;
   services.openssh.settings.PermitRootLogin = "yes"; # Unsafe
 
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Do not change.
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.trusted-users = [ "root" "chu" ];
@@ -100,7 +100,6 @@
           sha256 = "P9ecPUWfdwW1MYFzWTifxIJyTZQDFCkfoV3HVheRte8=";
         };
       };
-      dwm.enable = true;
     };
     autorun = false;
     displayManager.startx.enable = true; # use startx command to start x server

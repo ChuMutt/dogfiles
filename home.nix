@@ -1,9 +1,9 @@
 { config, pkgs, ... }: {
-  imports = [ ./shells.nix ]; # Do not rename to shell.nix: filename reserved.
+  imports = [ ./shells.nix ]; # Do not rename to shell.nix: filename is reserved.
   home = {
     username = "chu";
     homeDirectory = "/home/chu";
-    stateVersion = "24.05";
+    stateVersion = "24.05"; # Do not change.
 
     packages = with pkgs; [
       cachix
@@ -15,6 +15,7 @@
       ffmpeg
       yt-dlp
       fontconfig
+      # put dwm here (?)
       dmenu
       (dwmblocks.overrideAttrs {
         src = pkgs.fetchFromGitHub {

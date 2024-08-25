@@ -31,25 +31,6 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
   };
 
-  # outputs = { self, nixpkgs, home-manager, ... }:
-  #   let
-  #     lib = nixpkgs.lib;
-  #     system = "x86_64-linux";
-  #     pkgs = nixpkgs.legacyPackages.${system};
-  #   in {
-  #     nixosConfigurations = {
-  #       nixos = lib.nixosSystem { # change "nixos" to your username
-  #         inherit system;
-  #         modules = [ ./configuration.nix ];
-  #       };
-  #     };
-  #     homeConfigurations = {
-  #       chu = home-manager.lib.homeManagerConfiguration {
-  #         inherit pkgs;
-  #         modules = [ ./home.nix ];
-  #       };
-  #     };
-  #   };
 # Pass flake inputs to external config files:
   outputs = inputs@{ self, nixpkgs, nixos-hardware, ... }:
     let
@@ -69,10 +50,10 @@
       modules.default = import ./.;
 
       apps.install = mkApp ./install.zsh;
-      devShells.default = import ./shell.nix;
-      checks = mapModules ./test import;
-      overlays = mapModules ./overlays import;
-      packages = mapModules ./packages import;
+      # devShells.default = import ./shell.nix;
+      # checks = mapModules ./test import;
+      # overlays = mapModules ./overlays import;
+      # packages = mapModules ./packages import;
       # templates = import ./templates args;
     };
 }
