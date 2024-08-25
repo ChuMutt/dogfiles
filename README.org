@@ -326,7 +326,7 @@ nixos-install \
       ffmpeg
       yt-dlp
       fontconfig
-      # put dwm here (?]
+      # put dwm here (?)
       dmenu
       (dwmblocks.overrideAttrs {
         src = pkgs.fetchFromGitHub {
