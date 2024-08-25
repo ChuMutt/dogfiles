@@ -3,7 +3,7 @@
   home = {
     username = "chu";
     homeDirectory = "/home/chu";
-    stateVersion = "24.05"; # Please read the comment before changing.
+    stateVersion = "24.05";
 
     packages = with pkgs; [
       cachix
