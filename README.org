@@ -73,6 +73,9 @@ dotfiles/install.zsh \
 
 See [[id:0f689c0a-5481-4709-9486-fa5ff2147daa][install.zsh]].
 
+* .gitignore
+#+begin_src raw :tangle ./.gitignore
+#+end_src
 * .editorconfig
 
 #+begin_src conf :tangle ./.editorconfig
@@ -558,10 +561,11 @@ in mkShell {
 }
 #+end_src
 
-* hosts
+* hosts/
 
-** chunix
+** chunix/
 
+*** default.nix
 #+begin_src nix :tangle ./hosts/chunix/default.nix :mkdirp yes
 { lib, ... };
 
@@ -576,7 +580,7 @@ with bultins;
     profiles = {
       role = "workstation";
       user = "chu";
-      networks=["us"];
+      networks = [ "us" ];
       hardware = [
         "cpu/amd"
         "gpu/amd"
