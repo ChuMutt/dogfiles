@@ -112,6 +112,14 @@ nixos-install \
     --flake "${flake}#${host}"
 #+end_src
 
+* .editorconfig
+
+#+begin_src conf :tangle ./.editorconfig
+[{bin/*,**/*.zsh,.zshrc,.zshenv}]
+indent_style = space
+indent_size = 2
+#+end_src
+
 * configuration
 
 #+begin_src nix :tangle ./configuration.nix
@@ -453,6 +461,7 @@ with bultins;
   };
 }
 #+end_src
+
 * shells.nix
 
 #+begin_src nix :tangle ./shells.nix
@@ -518,10 +527,3 @@ in {
 dwm
 #+end_src
 
-* .editorconfig
-
-#+begin_src conf :tangle ./.editorconfig
-[{bin/*,**/*.zsh,.zshrc,.zshenv}]
-indent_style = space
-indent_size = 2
-#+end_src
