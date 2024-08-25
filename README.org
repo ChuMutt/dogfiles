@@ -196,7 +196,7 @@ nixos-install \
   services.openssh.enable = true;
   services.openssh.settings.PermitRootLogin = "yes"; # Unsafe
 
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Do not change.
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.trusted-users = [ "root" "chu" ];
@@ -279,25 +279,6 @@ nixos-install \
     nixos-hardware.url = "github:nixos/nixos-hardware";
   };
 
-  # outputs = { self, nixpkgs, home-manager, ... }:
-  #   let
-  #     lib = nixpkgs.lib;
-  #     system = "x86_64-linux";
-  #     pkgs = nixpkgs.legacyPackages.${system};
-  #   in {
-  #     nixosConfigurations = {
-  #       nixos = lib.nixosSystem { # change "nixos" to your username
-  #         inherit system;
-  #         modules = [ ./configuration.nix ];
-  #       };
-  #     };
-  #     homeConfigurations = {
-  #       chu = home-manager.lib.homeManagerConfiguration {
-  #         inherit pkgs;
-  #         modules = [ ./home.nix ];
-  #       };
-  #     };
-  #   };
 # Pass flake inputs to external config files:
   outputs = inputs@{ self, nixpkgs, nixos-hardware, ... }:
     let
@@ -317,10 +298,10 @@ nixos-install \
       modules.default = import ./.;
 
       apps.install = mkApp ./install.zsh;
-      devShells.default = import ./shell.nix;
-      checks = mapModules ./test import;
-      overlays = mapModules ./overlays import;
-      packages = mapModules ./packages import;
+      # devShells.default = import ./shell.nix;
+      # checks = mapModules ./test import;
+      # overlays = mapModules ./overlays import;
+      # packages = mapModules ./packages import;
       # templates = import ./templates args;
     };
 }
@@ -330,11 +311,11 @@ nixos-install \
 
 #+begin_src nix :tangle ./home.nix
 { config, pkgs, ... }: {
-  imports = [ ./shells.nix ]; # Do not rename to shell.nix: filename reserved.
+  imports = [ ./shells.nix ]; # Do not rename to shell.nix: filename is reserved.
   home = {
     username = "chu";
     homeDirectory = "/home/chu";
-    stateVersion = "24.05";
+    stateVersion = "24.05"; # Do not change.
 
     packages = with pkgs; [
       cachix
