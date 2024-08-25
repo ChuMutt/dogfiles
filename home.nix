@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   imports = [ ./shells.nix ]; # Do not rename to shell.nix: filename reserved.
   home = {
     username = "chu";
@@ -44,14 +43,11 @@
       gcc
       libtool
 
-      librewolf
       thunderbird
       nextcloud-client
     ];
 
-    file = {
-      ".xinitrc".source = ./x11/xinitrc;
-    };
+    file = { ".xinitrc".source = ./x11/xinitrc; };
 
     sessionVariables = {
       EDITOR = "neovim";
@@ -65,7 +61,8 @@
       DOOMPROFILELOADFILE = "${config.xdg.stateHome}/doom-profiles-load.el";
     };
 
-    sessionPath = [ "${config.xdg.configHome}/emacs/bin" ]; # ./doom sync, upgrade etc
+    sessionPath =
+      [ "${config.xdg.configHome}/emacs/bin" ]; # ./doom sync, upgrade etc
 
   };
 
@@ -74,17 +71,13 @@
     home-manager.enable = true;
     zsh.enable = true;
     # Emacs
-    emacs = {
-      enable = true;
-    };
+    emacs = { enable = true; };
 
     git = {
       enable = true;
       userName = "chumutt";
       userEmail = "chufilthymutt@gmail.com";
-      extraConfig = {
-        init.defaultBranch = "main";
-      };
+      extraConfig = { init.defaultBranch = "main"; };
     };
   };
 
@@ -99,15 +92,5 @@
 
   # Autoload fonts from packages installed via Home Manager
   fonts.fontconfig.enable = true;
-
-  xdg.portal= {
-    enable=true;
-    configPackages = with pkgs; [
-      xdg-desktop-portal-gtk
-    ];
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-    ];
-  };
 
 }

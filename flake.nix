@@ -13,10 +13,10 @@
     };
 
     emacs-overlay = {
-    url = "github:nix-community/emacs-overlay";
-    inputs = {
-      nixpkgs.follows = "nixpkgs-unstable";
-      nixpkgs-stable.follows = "nixpkgs";
+      url = "github:nix-community/emacs-overlay";
+      inputs = {
+        nixpkgs.follows = "nixpkgs-unstable";
+        nixpkgs-stable.follows = "nixpkgs";
       };
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
