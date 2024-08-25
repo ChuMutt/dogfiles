@@ -459,3 +459,11 @@ in {
 #+begin_src sh :tangle ./x11/xinitrc :mkdirp yes
 dwm
 #+end_src
+
+* .editorconfig
+
+#+begin_src conf :tangle ./.editorconfig
+[{bin/*,**/*.zsh,.zshrc,.zshenv}]
+indent_style = space
+indent_size = 2
+#+end_src
