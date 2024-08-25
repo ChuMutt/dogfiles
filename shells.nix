@@ -2,8 +2,8 @@
 
 let
   myShellAliases = {
-    supdate = "sudo nixos-rebuild switch --flake ~/.dotfiles";
-    hupdate = "home-manager switch --flake ~/.dotfiles";
+    supdate = "sudo nixos-rebuild switch --flake ~/.config/dotfiles";
+    hupdate = "home-manager switch --flake ~/.config/dotfiles";
     update = "supdate && hupdate";
 
     cp = "cp -iv";

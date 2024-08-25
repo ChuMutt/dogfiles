@@ -67,9 +67,18 @@
   };
 
   programs = {
-    # Let Home Manager install and manage itself.
     home-manager.enable = true;
     zsh.enable = true;
+    librewolf = {
+      enable = true;
+      settings = {
+        "webgl.disabled" = false;
+        "privacy.resistFingerprinting" = false;
+        "privacy.clearOnShutdown.history" = false;
+        "privacy.clearOnShutdown.cookies" = false;
+        "network.cookie.lifetimePolicy" = 0;
+      };
+    };
     # Emacs
     emacs = { enable = true; };
 
