@@ -1,4 +1,4 @@
-#+title: 🐶 dogfiles ❄
+#+title:<center> 🐶❄ dogfiles 🐶❄ </center>
 #+description: nixos dotfiles
 #+author: chu the pup
 
