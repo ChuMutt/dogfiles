@@ -2,7 +2,7 @@
 #+description: nixos dotfiles
 #+author: chu the pup
 
-#+begin_html
+#+begin_export html
 <p align="center">
 
 <a href="https://github.com/nixos/nixpkgs"><img src="https://img.shields.io/badge/NixOS-24.05-royalblue.svg?style=for-the-badge&logo=nixos&labelColor=black"></a>
@@ -14,7 +14,7 @@
 <a href="https://github.com/doomemacs"><img src="https://img.shields.io/badge/Made_with-Doom_Emacs-blueviolet.svg?style=flat-square&logo=GNU%20Emacs&logoColor=black"></a>
 
 </p>
-#+end_html
+#+end_export
 
 work in progress! ⚠✨not a good idea to install right now!✨⚠
 
@@ -112,6 +112,11 @@ nixos-install \
     --flake "${flake}#${host}"
 #+end_src
 
+* hosts (profiles)
+** chunix
+#+begin_src nix :tangle ./hosts/chunix/default.nix :mkdirp yes
+
+#+end_src
 * configuration
 
 #+begin_src nix :tangle ./configuration.nix
@@ -242,7 +247,7 @@ nixos-install \
 }
 #+end_src
 
-* flake
+* flake.nix
 
 #+begin_src nix :tangle ./flake.nix
 {
