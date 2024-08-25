@@ -217,7 +217,6 @@ nixos-install \
           sha256 = "P9ecPUWfdwW1MYFzWTifxIJyTZQDFCkfoV3HVheRte8=";
         };
       };
-      dwm.enable = true;
     };
     autorun = false;
     displayManager.startx.enable = true; # use startx command to start x server
