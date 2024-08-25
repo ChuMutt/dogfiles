@@ -1,11 +1,6 @@
 #+title: 🐶 dogfiles ❄
 #+description: nixos dotfiles
 #+author: chu the pup
-#+begin_src markdown
-[![Made with Doom Emacs](https://img.shields.io/badge/Made_with-Doom_Emacs-blueviolet.svg?style=flat-square&logo=GNU%20Emacs&logoColor=white)](https://github.com/doomemacs)
-[![NixOS Unstable](https://img.shields.io/badge/NixOS-24.05-blue.svg?style=flat-square&logo=NixOS&logoColor=white)](https://nixos.org)
-#+end_src
-
 
 #+begin_html
 <p align="center">
