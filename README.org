@@ -82,9 +82,8 @@ indent_size = 2
 #+end_src
 
 * default.nix
-#+begin_src nix :tangle ./default.nix
-# default.nix
 
+#+begin_src nix :tangle ./default.nix
 { hey, lib, options, config, pkgs, ... }:
 
 with lib;
