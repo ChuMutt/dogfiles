@@ -1,13 +1,32 @@
 #+title: 🐶 dogfiles ❄
 #+description: nixos dotfiles
 #+author: chu the pup
+#+begin_src markdown
+[![Made with Doom Emacs](https://img.shields.io/badge/Made_with-Doom_Emacs-blueviolet.svg?style=flat-square&logo=GNU%20Emacs&logoColor=white)](https://github.com/doomemacs)
+[![NixOS Unstable](https://img.shields.io/badge/NixOS-24.05-blue.svg?style=flat-square&logo=NixOS&logoColor=white)](https://nixos.org)
+#+end_src
+
+
+#+begin_html
+<p align="center">
+
+<a href="https://github.com/nixos/nixpkgs"><img src="https://img.shields.io/badge/NixOS-24.05-royalblue.svg?style=for-the-badge&logo=nixos&labelColor=black"></a>
+
+<a href="https://orgmode.org"><img src="https://img.shields.io/badge/Org-literate%20config-seagreen?style=for-the-badge&logo=org&labelColor=black"></a>
+
+<a href="https://www.gnu.org/software/emacs/emacs.html#Releases"><img src="https://img.shields.io/badge/Emacs-29.4-blueviolet.svg?style=for-the-badge&logo=GNU%20Emacs&labelColor=black"></a>
+
+<a href="https://github.com/doomemacs"><img src="https://img.shields.io/badge/Made_with-Doom_Emacs-blueviolet.svg?style=flat-square&logo=GNU%20Emacs&logoColor=black"></a>
+
+</p>
+#+end_html
 
 work in progress! ⚠✨not a good idea to install right now!✨⚠
 
 * credits
 
 - [[https://github.com/hlissner/dotfiles/commits?author=hlissner][hlissner/dotfiles]]
-
+- [[https://github.com/idlip/d-nix][idlip/d-nix]]
 * installation
 
 + Acquire or build a NixOS 24.05+ image:
@@ -58,7 +77,7 @@ dotfiles/install.zsh \
 
 Deploy and install this nixos system.
 
-#+name: install.zsh
+#+name: installer
 #+begin_src shell :shebang #!/usr/bin/env zsh :tangle ./install.zsh :noeval t
 zparseopts -E -F -D -- -flake=flake \
                        -user=user \
