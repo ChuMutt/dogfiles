@@ -1,3 +1,0 @@
-[{bin/*,**/*.zsh,.zshrc,.zshenv}]
-indent_style = space
-indent_size = 2
