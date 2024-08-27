@@ -36,7 +36,7 @@
   # '')
   # ];
 
-  home.packages = with pkgs; [ st git git-crypt zsh neovim lf firefox gnupg ];
+  home.packages = with pkgs; [ st git git-crypt zsh neovim lf firefox gnupg pinentry ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -79,4 +79,5 @@
     userEmail = "chufilthymutt@gmail.com";
     userName = "chumutt";
   };
+  programs.gpg.enable=true;
 }
