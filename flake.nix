@@ -5,10 +5,12 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
@@ -21,12 +23,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./hosts/default/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.chu = import ./hosts/default/home.nix;
-            }
+            inputs.home-manager.nixosModules.default
           ];
         };
       };

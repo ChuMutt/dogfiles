@@ -7,6 +7,7 @@
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./users/chu/chu.nix
     inputs.home-manager.nixosModules.default
     ../../modules/default.nix
   ];
@@ -72,16 +73,20 @@
   ];
 
   # modules
+  ## shells
+  zsh.enable = true;
   ## version control (vc)
   git.enable = true;
   ## editor(s)
   neovim.enable = true;
-  ## browser(s)
-  firefox.enable = true;
-  ## file manager(s)
-  lf.enable = true;
   ## terminal emulators
   st.enable = true;
+  ## file manager(s)
+  lf.enable = true;
+  ## browser(s)
+  firefox.enable = true;
+
+  programs.zsh.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -105,14 +110,6 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.chu = {
-    isNormalUser = true;
-    description = "chu";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ ];
   };
 
   home-manager = {

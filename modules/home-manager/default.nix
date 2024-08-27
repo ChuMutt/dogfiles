@@ -7,5 +7,6 @@
     ./filemanagers/default.nix
     ./vc/default.nix
     ./tty/default.nix
+    ./shells/default.nix
   ];
 }
