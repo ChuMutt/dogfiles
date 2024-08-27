@@ -36,7 +36,7 @@
   # '')
   # ];
 
-  home.packages = with pkgs; [ st git git-crypt zsh neovim lf firefox gnupg pinentry ];
+  home.packages = with pkgs; [ st git git-crypt zsh neovim lf firefox gnupg pinentry xwallpaper];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -72,6 +72,7 @@
   home.sessionVariables = {
     # EDITOR = "emacs";
     EDITOR="neovim";
+    DOGFILES="$XDG_CONFIG_HOME/dogfiles";
   };
 
   # Let Home Manager install and manage itself.
