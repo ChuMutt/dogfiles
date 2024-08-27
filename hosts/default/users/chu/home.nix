@@ -71,13 +71,17 @@
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
+    EDITOR="neovim";
   };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   programs.git = {
+    enable=true;
     userEmail = "chufilthymutt@gmail.com";
     userName = "chumutt";
+    aliases = {ci="commit";co="checkout";s="status";};
+    extraConfig = {push={autoSetupRemote=true;};};
   };
   programs.gpg.enable=true;
 }
