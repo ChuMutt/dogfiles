@@ -8,7 +8,8 @@
       # ${pkgs.feh}/bin/feh --bg-${wCfg.mode} \
         # ${optionalString wCfg.combineScreens "--no-xinerama"} \
         # --no-fehbg \
-        xwallpaper --fill $XDG_DATA_HOME/bg #*
+        # xwallpaper --fill $XDG_DATA_HOME/bg #*
+        xwallpaper --fill $DOGFILES/bg #*
     fi
   '';
 in {
