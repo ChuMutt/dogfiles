@@ -74,7 +74,7 @@
 
   # modules
   ## shells
-  # zsh.enable = true;
+  zsh.enable = true;
   ## version control (vc)
   # git.enable = true;
   ## editor(s)
@@ -85,6 +85,8 @@
   # lf.enable = true;
   ## browser(s)
   # firefox.enable = true;
+  ## display manager(s) (login screens)
+  startx.enable = true;
 
   programs.zsh.enable = true;
 

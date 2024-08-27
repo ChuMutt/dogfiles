@@ -46,6 +46,8 @@
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
 
+    ".xinitrc".text=''dwm'';
+
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
     #   org.gradle.console=verbose
@@ -72,7 +74,7 @@
   home.sessionVariables = {
     # EDITOR = "emacs";
     EDITOR="neovim";
-    DOGFILES="$XDG_CONFIG_HOME/dogfiles";
+    DOTFILES_HOME="$XDG_CONFIG_HOME/dogfiles";
   };
 
   # Let Home Manager install and manage itself.
