@@ -115,7 +115,7 @@
   home-manager = {
     # also pass inputs to home-manager modules
     extraSpecialArgs = { inherit inputs; };
-    users = { "chu" = import ./home.nix; };
+    users = { "chu" = import ./users/chu/home.nix; };
   };
 
   system.stateVersion = "24.11"; # Do not change.
