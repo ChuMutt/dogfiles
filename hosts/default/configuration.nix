@@ -68,23 +68,23 @@
   environment.systemPackages = with pkgs; [
     # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
-    st
+    # st
     home-manager
   ];
 
   # modules
   ## shells
-  zsh.enable = true;
+  # zsh.enable = true;
   ## version control (vc)
-  git.enable = true;
+  # git.enable = true;
   ## editor(s)
-  neovim.enable = true;
+  # neovim.enable = true;
   ## terminal emulators
-  st.enable = true;
+  # st.enable = true;
   ## file manager(s)
-  lf.enable = true;
+  # lf.enable = true;
   ## browser(s)
-  firefox.enable = true;
+  # firefox.enable = true;
 
   programs.zsh.enable = true;
 

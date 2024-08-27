@@ -36,7 +36,7 @@
   # '')
   # ];
 
-  home.packages = with pkgs; [ ];
+  home.packages = with pkgs; [ st git git-crypt zsh neovim lf firefox gnupg ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
