@@ -1,5 +1,12 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ ./home-manager/default.nix ./nixos/default.nix ];
+  imports = [
+    ./browsers/default.nix
+    ./editors/default.nix
+    ./filemanagers/default.nix
+    ./vc/default.nix
+    ./tty/default.nix
+    ./shells/default.nix
+  ];
 }
