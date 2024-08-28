@@ -7,7 +7,7 @@
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./users/chu/chu.nix
+    ./chu.nix
     inputs.home-manager.nixosModules.default
     ../../modules/default.nix
   ];
@@ -125,7 +125,7 @@
   home-manager = {
     # also pass inputs to home-manager modules
     extraSpecialArgs = { inherit inputs; };
-    users = { "chu" = import ./users/chu/home.nix; };
+    users = { "chu" = import ./home.nix; };
   };
 
   system.stateVersion = "24.11"; # Do not change.
