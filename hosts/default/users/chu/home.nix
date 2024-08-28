@@ -36,7 +36,7 @@
   # '')
   # ];
 
-  home.packages = with pkgs; [ st git git-crypt zsh neovim lf firefox gnupg pinentry ];
+  home.packages = with pkgs; [ st git git-crypt neovim lf firefox gnupg pinentry ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -76,9 +76,10 @@
     EDITOR="neovim";
     DOTFILES_HOME="$XDG_CONFIG_HOME/dogfiles";
   };
-
+  ## user programs settings
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
   # Git
   programs.git = {
     enable=true;
@@ -87,6 +88,7 @@
     aliases = {ci="commit";co="checkout";s="status";};
     extraConfig = {push={autoSetupRemote=true;};};
   };
+
   # GnuPG
   programs.gpg.enable=true;
   programs.zsh.enable=true;
