@@ -79,13 +79,21 @@
   ## editor(s)
   # neovim.enable = true;
   ## display manager(s) (login screens)
-  startx.enable = true; # otherwise defaults to lightdm gtk greeter when you log in
+  startx.enable =
+    true; # otherwise defaults to lightdm gtk greeter when you log in
   ## terminal emulators
   # st.enable = true;
   ## file manager(s)
   # lf.enable = true;
   ## browser(s)
   # firefox.enable = true;
+
+  programs.sudo.enable = true;
+  # Wheel can sudo w/o password
+  programs.sudo.extraConfig = ''
+    %wheel ALL=(ALL:ALL) ALL
+    %wheel ALL=(ALL:ALL) NOPASSWD: /bin/shutdown,/bin/reboot,/bin/systemctl suspend,/bin/wifi-menu,/bin/mount,/bin/umount
+  '';
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
