@@ -4,8 +4,8 @@ let
 cfg=config.chu;
 in
 {
-  options = { chu.enable = lib.mkEnableOption "enable user module \"chu\"";
-  chu.userName = lib.mkOption { default = "chu";
+  options.chu = { enable = lib.mkEnableOption "enable user module \"chu\"";
+  userName = lib.mkOption { default = "chu";
   description=''chu'';};};
   config = lib.mkIf cfg.enable {
     users.users.${cfg.userName} = {
