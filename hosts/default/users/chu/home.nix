@@ -75,7 +75,8 @@
     EDITOR="neovim";
     DOTFILES_HOME="$XDG_CONFIG_HOME/dogfiles";
   };
-  ## user programs settings
+
+  ## User programs settings
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -90,6 +91,7 @@
 
   # GnuPG
   programs.gpg.enable=true;
+
   # Z-Shell (zsh)
   programs.zsh.enable=true;
 }
