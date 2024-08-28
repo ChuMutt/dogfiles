@@ -36,7 +36,16 @@
   # '')
   # ];
 
-  home.packages = with pkgs; [ st git git-crypt neovim lf firefox gnupg pinentry ];
+  home.packages = with pkgs; [
+    lukesmithxyz-st
+    git
+    git-crypt
+    neovim
+    lukesmithxyz-lf
+    firefox
+    gnupg
+    pinentry
+  ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -46,7 +55,7 @@
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
 
-    ".xinitrc".text=''dwm'';
+    ".xinitrc".text = "dwm";
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
@@ -72,8 +81,8 @@
   #  /etc/profiles/per-user/chu/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    EDITOR="neovim";
-    DOTFILES_HOME="$XDG_CONFIG_HOME/dogfiles";
+    EDITOR = "neovim";
+    DOTFILES_HOME = "$XDG_CONFIG_HOME/dogfiles";
   };
 
   ## User programs settings
@@ -82,16 +91,20 @@
 
   # Git
   programs.git = {
-    enable=true;
+    enable = true;
     userEmail = "chufilthymutt@gmail.com";
     userName = "chumutt";
-    aliases = {ci="commit";co="checkout";s="status";};
-    extraConfig = {push={autoSetupRemote=true;};};
+    aliases = {
+      ci = "commit";
+      co = "checkout";
+      s = "status";
+    };
+    extraConfig = { push = { autoSetupRemote = true; }; };
   };
 
   # GnuPG
-  programs.gpg.enable=true;
+  programs.gpg.enable = true;
 
   # Z-Shell (zsh)
-  programs.zsh.enable=true;
+  programs.zsh.enable = true;
 }
