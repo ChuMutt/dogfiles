@@ -72,23 +72,21 @@
     home-manager
   ];
 
-  # modules
+  # system modules
   ## shells
-  zsh.enable = true;
+  #zsh.enable = true;
   ## version control (vc)
-  # git.enable = true;
+  git.enable = true;
   ## editor(s)
   # neovim.enable = true;
+  ## display manager(s) (login screens)
+  startx.enable = true; # otherwise defaults to lightdm gtk greeter when you log in
   ## terminal emulators
   # st.enable = true;
   ## file manager(s)
   # lf.enable = true;
   ## browser(s)
   # firefox.enable = true;
-  ## display manager(s) (login screens)
-  startx.enable = true;
-
-  programs.zsh.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
