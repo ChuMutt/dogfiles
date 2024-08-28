@@ -72,7 +72,6 @@
   #  /etc/profiles/per-user/chu/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
     EDITOR="neovim";
     DOTFILES_HOME="$XDG_CONFIG_HOME/dogfiles";
   };
@@ -91,5 +90,6 @@
 
   # GnuPG
   programs.gpg.enable=true;
+  # Z-Shell (zsh)
   programs.zsh.enable=true;
 }
