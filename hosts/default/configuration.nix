@@ -73,7 +73,7 @@
 
   # system modules
   ## shells
-  #zsh.enable = true;
+  zsh.enable = true;
   ## version control (vc)
   git.enable = true;
   ## editor(s)
@@ -88,9 +88,9 @@
   ## browser(s)
   # firefox.enable = true;
 
-  programs.sudo.enable = true;
+  security.sudo.enable = true;
   # Wheel can sudo w/o password
-  programs.sudo.extraConfig = ''
+  security.sudo.extraConfig = ''
     %wheel ALL=(ALL:ALL) ALL
     %wheel ALL=(ALL:ALL) NOPASSWD: /bin/shutdown,/bin/reboot,/bin/systemctl suspend,/bin/wifi-menu,/bin/mount,/bin/umount
   '';

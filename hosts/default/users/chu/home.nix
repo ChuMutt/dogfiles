@@ -37,11 +37,12 @@
   # ];
 
   home.packages = with pkgs; [
+    tldr
     lukesmithxyz-st
+    lf
     git
     git-crypt
     neovim
-    lukesmithxyz-lf
     firefox
     gnupg
     pinentry
