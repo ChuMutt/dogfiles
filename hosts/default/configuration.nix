@@ -12,6 +12,9 @@
     ../../modules/default.nix
   ];
 
+  chu.enable = true;
+  chu.userName = "chu";
+
   # Bootloader.
   boot = {
     # systemd-boot (UEFI)
