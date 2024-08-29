@@ -35,6 +35,15 @@
             inputs.home-manager.nixosModules.default
           ];
         };
+        dogleash = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [
+            ./hosts/dogleash/configuration.nix
+            inputs.home-manager.nixosModules.default
+          ];
+        };
       };
     };
 }
