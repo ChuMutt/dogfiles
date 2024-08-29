@@ -4,5 +4,5 @@
 }:
 
 {
-  imports = [ .x11/startx.nix ];
+  imports = [ ./x11/startx.nix ];
 }
