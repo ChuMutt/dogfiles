@@ -145,9 +145,7 @@
   };
 
   #opengl
-  hardware.graphics = {
-    enable = true;
-  };
+  hardware.graphics = { enable = true; };
 
   home-manager = {
     # also pass inputs to home-manager modules
