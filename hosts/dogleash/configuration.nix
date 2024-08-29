@@ -13,8 +13,8 @@
     ../../modules/default.nix
   ];
 
-  chu.enable=true;
-  chu.userName="chu";
+  chu.enable = true;
+  chu.userName = "chu";
 
   # Bootloader.
   boot = {
@@ -22,8 +22,8 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    initrd.luks.devices."luks-5e6afb19-ccc8-4bca-89ab-6b52892435b5".device = 
-    "/dev/disk/by-uuid/5e6afb19-ccc8-4bca-89ab-6b52892435b5";
+    initrd.luks.devices."luks-5e6afb19-ccc8-4bca-89ab-6b52892435b5".device =
+      "/dev/disk/by-uuid/5e6afb19-ccc8-4bca-89ab-6b52892435b5";
   };
 
   networking = {
@@ -145,9 +145,7 @@
   };
 
   #opengl
-  hardware.graphics = {
-    enable = true;
-  };
+  hardware.graphics = { enable = true; };
 
   home-manager = {
     # also pass inputs to home-manager modules
