@@ -42,13 +42,26 @@
       tldr
       # st
       lukesmithxyz-st
-      xclip
+      xclip # copy and paste
+      unclutter # hides inactive mice
+      maim # screenshots
+      pulsemixer # audio controller
+      w3m # terminal web browser
+      mediainfo # provides audio/video file info
+      redshift # f.lux for x11
+      slock
+      roswell
+      ispell
+      aspell
+      hunspell
       lf
       git
       git-crypt
       neovim
       nixfmt-rfc-style
       firefox
+      nextcloud-client
+      keepassxc
       gnupg
       pinentry
       arandr
@@ -88,12 +101,15 @@
     #
     #  /etc/profiles/per-user/chu/etc/profile.d/hm-session-vars.sh
     #
+
     sessionVariables = {
       EDITOR = "neovim";
       DOTFILES_HOME = "$XDG_CONFIG_HOME/dogfiles";
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+        "\\\${HOME}/.steam/root/compatibilitytools.d";
     };
-    shellAliases = {
 
+    shellAliases = {
       g = "git";
       ga = "git add .";
       gc = "git commit -m";
@@ -101,12 +117,15 @@
       "..." = "cd ../..";
       "...." = "cd ../../..";
 
-      "chu-sync" = " sudo nixos-rebuild switch --flake ~/.config/dogfiles/#default";
+      "chu-sync" =
+        " sudo nixos-rebuild switch --flake ~/.config/dogfiles/#default";
 
     };
   };
+
   ## User programs settings
   programs = {
+
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
@@ -120,11 +139,7 @@
         co = "checkout";
         s = "status";
       };
-      extraConfig = {
-        push = {
-          autoSetupRemote = true;
-        };
-      };
+      extraConfig = { push = { autoSetupRemote = true; }; };
     };
 
     # GnuPG
@@ -140,11 +155,7 @@
     firefox.profiles.chu = {
       name = "chu";
       path = "chu";
-      search = {
-        default = "DuckDuckGo";
-      };
-
+      search = { default = "DuckDuckGo"; };
     };
-
   };
 }
