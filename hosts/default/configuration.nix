@@ -87,15 +87,15 @@
   ## version control (vc)
   git.enable = true;
   ## editor(s)
-  # neovim.enable = true;
+  neovim.enable = true;
   ## display manager(s) (login screens)
   startx.enable = true; # otherwise defaults to lightdm gtk greeter when you log in
   ## terminal emulators
-  # st.enable = true;
+  st.enable = true;
   ## file manager(s)
-  # lf.enable = true;
+  lf.enable = true;
   ## browser(s)
-  # firefox.enable = true;
+  firefox.enable = true;
 
   security.sudo.enable = true;
   # Wheel can sudo w/o password

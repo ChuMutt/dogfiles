@@ -42,6 +42,7 @@
       tldr
       # st
       lukesmithxyz-st
+      xclip
       lf
       git
       git-crypt
@@ -100,7 +101,7 @@
       "..." = "cd ../..";
       "...." = "cd ../../..";
 
-      "chu-sync " = " sudo nixos-rebuild switch --flake ~/.config/dogfiles/#default";
+      "chu-sync" = " sudo nixos-rebuild switch --flake ~/.config/dogfiles/#default";
 
     };
   };
