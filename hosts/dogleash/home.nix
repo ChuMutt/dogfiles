@@ -38,34 +38,36 @@
     # ];
 
     packages = with pkgs; [
+      # cli
       zsh
+      neovim
+      git
+      git-crypt
       tldr
-      # st
-      lukesmithxyz-st
-      xclip # copy and paste
-      unclutter # hides inactive mice
-      maim # screenshots
-      pulsemixer # audio controller
       w3m # terminal web browser
-      mediainfo # provides audio/video file info
-      redshift # f.lux for x11
-      slock
       roswell
+      xclip # terminal copy and paste
+      pulsemixer # audio controller
       ispell
       aspell
       hunspell
       lf
-      git
-      git-crypt
-      neovim
+      mediainfo # provides audio/video file info
       nixfmt-rfc-style
+      gnupg
+      pinentry
+
+      # gui/X11
+      dwm
+      st
+      unclutter # hides inactive mice
+      maim # screenshots
+      redshift # f.lux for x11
+      slock
       firefox
       nextcloud-client
       keepassxc
-      gnupg
-      pinentry
       arandr
-
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
