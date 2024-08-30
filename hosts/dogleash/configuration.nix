@@ -29,7 +29,6 @@
       efi.canTouchEfiVariables = true;
     };
     initrd.luks.devices."luks-5e6afb19-ccc8-4bca-89ab-6b52892435b5".device = "/dev/disk/by-uuid/5e6afb19-ccc8-4bca-89ab-6b52892435b5";
-    };
   };
 
   networking = {
