@@ -32,7 +32,7 @@
   };
 
   networking = {
-    hostName = "chunixos"; # Define your hostname.
+    hostName = "chunixos-vm"; # Define your hostname.
     networkmanager.enable = true; # Enable networking
   };
 
