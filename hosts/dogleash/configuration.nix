@@ -4,6 +4,11 @@
 
 { config, pkgs, inputs, ... }:
 
+let
+  chuDwm=pkgs.stdenv.mkDerivation rec { pname="dwm";version="6.4"; src=pkgs.fetchFromGitHub {owner="chumutt";repo="dwm";rev="main";sha256="sha256-P9ecPUWfdwW1MYFzWTifxIJyTZQDFCkfoV3HVheRte8=";};
+                                        buildInputs=[pkgs.xorg.libX11 pkgs.xorg.libXft pkgs.xorg.libXinerama pkgs.fontconfig];
+                                        meta=with pkgs.lib; {description="Dynamic window manager";license=licenses.mit;platforms=platforms.linux;};};
+in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -49,13 +54,13 @@
       LC_TIME = "en_US.UTF-8";
     };
   };
-
-  # Enable the X11 windowing system.
   services.xserver = {
+  # Enable the X11 windowing system.
     enable = true;
+  # Enable the 'dwm' window manager.
     windowManager.dwm={
       enable = true;
-      package = dwm.overrideAttrs { src = fetchgit {url="https://github.com/chumutt/dwm";hash="";}; };
+      package = chuDwm;
     };
     # Configure keymap in X11
     xkb.layout = "us";
