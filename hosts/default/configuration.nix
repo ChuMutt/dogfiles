@@ -82,6 +82,8 @@
       wget
       home-manager
       protonup # imperative bootstrap for proton-ge
+
+      nixfmt-rfc-style
     ];
 
     sessionVariables = {

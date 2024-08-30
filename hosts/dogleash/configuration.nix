@@ -83,6 +83,7 @@
       wget
       home-manager
       protonup # imperative bootstrap for proton-ge
+      nixfmt-rfc-style
     ];
 
     sessionVariables = {
@@ -116,7 +117,7 @@
     rtkit.enable = true;
   };
   programs = {
-
+    bash.promptInit = "PS1=\"# \"";
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
     mtr.enable = true;

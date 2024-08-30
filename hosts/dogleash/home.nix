@@ -40,6 +40,7 @@
     packages = with pkgs; [
       # cli
       zsh
+      bash
       neovim
       git
       git-crypt
@@ -128,7 +129,6 @@
 
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
-
     # Git
     git = {
       enable = true;
@@ -145,9 +145,11 @@
         };
       };
     };
+
     ssh.enable=true;
     ssh.controlMaster="yes";
     ssh.forwardAgent=true;
+
     # GnuPG
     gpg.enable = true;
 
@@ -157,6 +159,8 @@
       autosuggestion.enable = true;
       autocd = true;
     };
+
+    bash.enable=true;
 
     firefox.profiles.chu = {
       name = "chu";
