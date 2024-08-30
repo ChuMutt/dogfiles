@@ -28,9 +28,7 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    initrd = {
-      luks.devices."luks-5e6afb19-ccc8-4bca-89ab-6b52892435b5".device = "/dev/disk/by-uuid/5e6afb19-ccc8-4bca-89ab-6b52892435b5";
-      network.ssh.enable = true;
+    initrd.luks.devices."luks-5e6afb19-ccc8-4bca-89ab-6b52892435b5".device = "/dev/disk/by-uuid/5e6afb19-ccc8-4bca-89ab-6b52892435b5";
     };
   };
 
@@ -113,9 +111,7 @@
   security = {
     sudo = {
       enable = true;
-      # Wheel can sudo w/o password
       extraConfig = ''
-        %wheel ALL=(ALL:ALL) ALL
         %wheel ALL=(ALL:ALL) NOPASSWD: /bin/shutdown,/bin/reboot,/bin/systemctl suspend,/bin/wifi-menu,/bin/mount,/bin/umount
       '';
     };
