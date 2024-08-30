@@ -104,8 +104,7 @@
     sessionVariables = {
       EDITOR = "neovim";
       DOTFILES_HOME = "$XDG_CONFIG_HOME/dogfiles";
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-        "\\\${HOME}/.steam/root/compatibilitytools.d";
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\\\${HOME}/.steam/root/compatibilitytools.d";
     };
 
     shellAliases = {
@@ -116,8 +115,7 @@
       "..." = "cd ../..";
       "...." = "cd ../../..";
 
-      "chu-sync" =
-        " sudo nixos-rebuild switch --flake ~/.config/dogfiles/#default";
+      "chu-sync" = " sudo nixos-rebuild switch --flake ~/.config/dogfiles/#default";
 
     };
   };
@@ -138,7 +136,11 @@
         co = "checkout";
         s = "status";
       };
-      extraConfig = { push = { autoSetupRemote = true; }; };
+      extraConfig = {
+        push = {
+          autoSetupRemote = true;
+        };
+      };
     };
 
     # GnuPG
@@ -154,7 +156,9 @@
     firefox.profiles.chu = {
       name = "chu";
       path = "chu";
-      search = { default = "DuckDuckGo"; };
+      search = {
+        default = "DuckDuckGo";
+      };
     };
   };
 }

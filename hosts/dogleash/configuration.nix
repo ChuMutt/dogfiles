@@ -2,7 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [
@@ -13,17 +18,17 @@
     ../../modules/default.nix
   ];
 
-  chu.enable=true;
-  chu.userName="chu";
+  chu.enable = true;
+  chu.userName = "chu";
 
   # Bootloader.
   boot = {
-    loader = { # systemd-boot (UEFI)
+    loader = {
+      # systemd-boot (UEFI)
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    initrd.luks.devices."luks-5e6afb19-ccc8-4bca-89ab-6b52892435b5".device = 
-    "/dev/disk/by-uuid/5e6afb19-ccc8-4bca-89ab-6b52892435b5";
+    initrd.luks.devices."luks-5e6afb19-ccc8-4bca-89ab-6b52892435b5".device = "/dev/disk/by-uuid/5e6afb19-ccc8-4bca-89ab-6b52892435b5";
   };
 
   networking = {
@@ -50,10 +55,10 @@
     };
   };
   services.xserver = {
-  # Enable the X11 windowing system.
+    # Enable the X11 windowing system.
     enable = true;
-  # Enable the 'dwm' window manager.
-    windowManager.dwm={
+    # Enable the 'dwm' window manager.
+    windowManager.dwm = {
       enable = true;
     };
     # Configure keymap in X11
@@ -82,8 +87,7 @@
     ];
 
     sessionVariables = {
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-        "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
     };
   };
 
@@ -95,8 +99,7 @@
   ## editor(s)
   neovim.enable = true;
   ## display manager(s) (login screens)
-  startx.enable =
-    true; # otherwise defaults to lightdm gtk greeter when you log in
+  startx.enable = true; # otherwise defaults to lightdm gtk greeter when you log in
   ## terminal emulators
   st.enable = true;
   ## file manager(s)
@@ -153,8 +156,12 @@
 
   home-manager = {
     # also pass inputs to home-manager modules
-    extraSpecialArgs = { inherit inputs; };
-    users = { "chu" = import ./home.nix; };
+    extraSpecialArgs = {
+      inherit inputs;
+    };
+    users = {
+      "chu" = import ./home.nix;
+    };
   };
 
   system.stateVersion = "24.11"; # Do not change.

@@ -2,7 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [
@@ -18,12 +23,12 @@
 
   # Bootloader.
   boot = {
-    loader = { # systemd-boot (UEFI)
+    loader = {
+      # systemd-boot (UEFI)
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    initrd.luks.devices."luks-c233bfdc-56f5-4381-982a-3e17a746e0da".device =
-      "/dev/disk/by-uuid/c233bfdc-56f5-4381-982a-3e17a746e0da";
+    initrd.luks.devices."luks-c233bfdc-56f5-4381-982a-3e17a746e0da".device = "/dev/disk/by-uuid/c233bfdc-56f5-4381-982a-3e17a746e0da";
   };
 
   networking = {
@@ -80,8 +85,7 @@
     ];
 
     sessionVariables = {
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-        "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
     };
   };
 
@@ -93,8 +97,7 @@
   ## editor(s)
   neovim.enable = true;
   ## display manager(s) (login screens)
-  startx.enable =
-    true; # otherwise defaults to lightdm gtk greeter when you log in
+  startx.enable = true; # otherwise defaults to lightdm gtk greeter when you log in
   ## terminal emulators
   st.enable = true;
   ## file manager(s)
@@ -145,12 +148,18 @@
   };
 
   #opengl
-  hardware.graphics = { enable = true; };
+  hardware.graphics = {
+    enable = true;
+  };
 
   home-manager = {
     # also pass inputs to home-manager modules
-    extraSpecialArgs = { inherit inputs; };
-    users = { "chu" = import ./home.nix; };
+    extraSpecialArgs = {
+      inherit inputs;
+    };
+    users = {
+      "chu" = import ./home.nix;
+    };
   };
 
   system.stateVersion = "24.11"; # Do not change.
