@@ -13,8 +13,8 @@
     ../../modules/default.nix
   ];
 
-  chu.enable = true;
-  chu.userName = "chu";
+  chu.enable=true;
+  chu.userName="chu";
 
   # Bootloader.
   boot = {
@@ -22,8 +22,8 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    initrd.luks.devices."luks-5e6afb19-ccc8-4bca-89ab-6b52892435b5".device =
-      "/dev/disk/by-uuid/5e6afb19-ccc8-4bca-89ab-6b52892435b5";
+    initrd.luks.devices."luks-5e6afb19-ccc8-4bca-89ab-6b52892435b5".device = 
+    "/dev/disk/by-uuid/5e6afb19-ccc8-4bca-89ab-6b52892435b5";
   };
 
   networking = {
@@ -53,10 +53,13 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    windowManager.dwm.enable = true;
+    windowManager.dwm={
+      enable = true;
+      package = dwm.overrideAttrs { src = ../../modules/nixos/x11/dwm; };
+    };
     # Configure keymap in X11
     xkb.layout = "us";
-    # videoDrivers = [ "amdgpu" ];
+    videoDrivers = [ "amdgpu" ];
   };
 
   # Enable CUPS to print documents.
@@ -145,7 +148,9 @@
   };
 
   #opengl
-  hardware.graphics = { enable = true; };
+  hardware.graphics = {
+    enable = true;
+  };
 
   home-manager = {
     # also pass inputs to home-manager modules
