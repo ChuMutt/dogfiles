@@ -145,7 +145,7 @@
         };
       };
     };
-
+    ssh.enable=true;
     # GnuPG
     gpg.enable = true;
 
