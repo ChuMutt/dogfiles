@@ -55,7 +55,7 @@
     enable = true;
     windowManager.dwm={
       enable = true;
-      package = dwm.overrideAttrs { src = ../../modules/nixos/x11/dwm; };
+      package = dwm.overrideAttrs { src = fetchgit {url="https://github.com/chumutt/dwm";hash="";}; };
     };
     # Configure keymap in X11
     xkb.layout = "us";
