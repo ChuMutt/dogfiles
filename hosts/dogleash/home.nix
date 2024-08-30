@@ -146,6 +146,8 @@
       };
     };
     ssh.enable=true;
+    ssh.controlMaster="yes";
+    ssh.forwardAgent=true;
     # GnuPG
     gpg.enable = true;
 
