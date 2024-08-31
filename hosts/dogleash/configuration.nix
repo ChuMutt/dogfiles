@@ -28,7 +28,8 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    initrd.luks.devices."luks-5e6afb19-ccc8-4bca-89ab-6b52892435b5".device = "/dev/disk/by-uuid/5e6afb19-ccc8-4bca-89ab-6b52892435b5";
+    initrd.luks.devices."luks-5e6afb19-ccc8-4bca-89ab-6b52892435b5".device
+    = "/dev/disk/by-uuid/5e6afb19-ccc8-4bca-89ab-6b52892435b5";
   };
 
   networking = {
@@ -146,18 +147,13 @@
     jack.enable = true;
   };
 
-  #opengl
-  hardware.graphics = {
-    enable = true;
-  };
-
   home-manager = {
     # also pass inputs to home-manager modules
     extraSpecialArgs = {
       inherit inputs;
     };
     users = {
-      "chu" = import ./home.nix;
+      "chu" = import ../../home.nix;
     };
   };
 

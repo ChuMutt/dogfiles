@@ -61,7 +61,6 @@
     windowManager.dwm.enable = true;
     # Configure keymap in X11
     xkb.layout = "us";
-    # videoDrivers = [ "amdgpu" ];
   };
 
   # Enable CUPS to print documents.
@@ -76,24 +75,24 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment = {
-
     systemPackages = with pkgs; [
       # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       wget
       home-manager
       protonup # imperative bootstrap for proton-ge
-
-      nixfmt-rfc-style
     ];
 
     sessionVariables = {
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
     };
+    shells = with pkgs; [ zsh ];
   };
 
   # system modules
   ## shells
   zsh.enable = true;
+  users.defaultUserShell=pkgs.zsh;
+
   ## version control (vc)
   git.enable = true;
   ## editor(s)
@@ -110,16 +109,11 @@
   security = {
     sudo = {
       enable = true;
-      # Wheel can sudo w/o password
-      extraConfig = ''
-        %wheel ALL=(ALL:ALL) ALL
-        %wheel ALL=(ALL:ALL) NOPASSWD: /bin/shutdown,/bin/reboot,/bin/systemctl suspend,/bin/wifi-menu,/bin/mount,/bin/umount
-      '';
     };
     rtkit.enable = true;
   };
-  programs = {
 
+  programs = {
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
     mtr.enable = true;
@@ -149,18 +143,13 @@
     jack.enable = true;
   };
 
-  #opengl
-  hardware.graphics = {
-    enable = true;
-  };
-
   home-manager = {
     # also pass inputs to home-manager modules
     extraSpecialArgs = {
       inherit inputs;
     };
     users = {
-      "chu" = import ./home.nix;
+      "chu" = import ../../home.nix;
     };
   };
 

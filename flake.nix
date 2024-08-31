@@ -27,12 +27,12 @@
     in
     {
       nixosConfigurations = {
-        vm = lib.nixosSystem {
+        chunixos-vm = lib.nixosSystem {
           specialArgs = {
             inherit inputs;
           };
           modules = [
-            ./hosts/vm/configuration.nix
+            ./hosts/chunixos-vm/configuration.nix
             inputs.home-manager.nixosModules.default
           ];
         };
@@ -46,5 +46,13 @@
           ];
         };
       };
+      homeConfigurations = {
+        chu = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./home.nix ];
+        };
+      };
+
+
     };
 }

@@ -107,6 +107,7 @@
 
     sessionVariables = {
       EDITOR = "neovim";
+      # VISUAL= "emacs";
       DOTFILES_HOME = "$XDG_CONFIG_HOME/dogfiles";
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\\\${HOME}/.steam/root/compatibilitytools.d";
     };
@@ -126,7 +127,6 @@
 
   ## User programs settings
   programs = {
-
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
     # Git
@@ -145,23 +145,18 @@
         };
       };
     };
-
     ssh.enable=true;
     ssh.controlMaster="yes";
     ssh.forwardAgent=true;
-
     # GnuPG
     gpg.enable = true;
-
     # Z-Shell (zsh)
     zsh = {
       enable = true;
       autosuggestion.enable = true;
       autocd = true;
     };
-
     bash.enable=true;
-
     firefox.profiles.chu = {
       name = "chu";
       path = "chu";
