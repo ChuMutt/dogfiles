@@ -23,10 +23,11 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      lib = nixpkgs.lib;
     in
     {
       nixosConfigurations = {
-        vm = nixpkgs.lib.nixosSystem {
+        vm = lib.nixosSystem {
           specialArgs = {
             inherit inputs;
           };
@@ -35,7 +36,7 @@
             inputs.home-manager.nixosModules.default
           ];
         };
-        dogleash = nixpkgs.lib.nixosSystem {
+        dogleash = lib.nixosSystem {
           specialArgs = {
             inherit inputs;
           };
