@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
-
 {
+  imports=[./modules/home-manager/default.nix];
   home = {
     # Home Manager needs a bit of information about you and the paths it should
     # manage.
@@ -120,7 +120,7 @@
       "..." = "cd ../..";
       "...." = "cd ../../..";
 
-      "chu-sync" = " sudo nixos-rebuild switch --flake ~/.config/dogfiles/#default";
+      "chu-sync" = " sudo nixos-rebuild switch --flake ~/.config/dogfiles/#$HOST";
 
     };
   };
@@ -145,9 +145,9 @@
         };
       };
     };
-    ssh.enable=true;
+    ssh.enable = true;
     ssh.controlMaster="yes";
-    ssh.forwardAgent=true;
+    ssh.forwardAgent = true;
     # GnuPG
     gpg.enable = true;
     # Z-Shell (zsh)
@@ -156,7 +156,7 @@
       autosuggestion.enable = true;
       autocd = true;
     };
-    bash.enable=true;
+    bash.enable = true;
     firefox.profiles.chu = {
       name = "chu";
       path = "chu";

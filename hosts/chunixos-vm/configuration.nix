@@ -13,9 +13,12 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    # Include user module
     ./chu.nix
+    # Include user home configuration
     inputs.home-manager.nixosModules.default
-    ../../modules/default.nix
+    # Include system modules
+    ../../modules/nixos/default.nix
   ];
 
   chu.enable = true;
@@ -90,21 +93,21 @@
 
   # system modules
   ## shells
-  zsh.enable = true;
-  users.defaultUserShell=pkgs.zsh;
+  # zsh.enable = true;
+  # users.defaultUserShell=pkgs.zsh;
 
   ## version control (vc)
-  git.enable = true;
+  # git.enable = true;
   ## editor(s)
-  neovim.enable = true;
+  # neovim.enable = true;
   ## display manager(s) (login screens)
-  startx.enable = true; # otherwise defaults to lightdm gtk greeter when you log in
+  # startx.enable = true; # otherwise defaults to lightdm gtk greeter when you log in
   ## terminal emulators
-  st.enable = true;
+  # st.enable = true;
   ## file manager(s)
-  lf.enable = true;
+  # lf.enable = true;
   ## browser(s)
-  firefox.enable = true;
+  #firefox.enable = true;
 
   security = {
     sudo = {
@@ -125,6 +128,7 @@
     steam.enable = true;
     gamemode.enable = true;
 
+    zsh.enable = true;
   };
   # List services that you want to enable:
 
