@@ -97,7 +97,7 @@
   # users.defaultUserShell=pkgs.zsh;
 
   ## version control (vc)
-  git.enable = true;
+  # git.enable = true;
   ## editor(s)
   #neovim.enable = true;
   ## display manager(s) (login screens)
