@@ -97,11 +97,11 @@
   # users.defaultUserShell=pkgs.zsh;
 
   ## version control (vc)
-  # git.enable = true;
+  git.enable = true;
   ## editor(s)
-  # neovim.enable = true;
+  #neovim.enable = true;
   ## display manager(s) (login screens)
-  # startx.enable = true; # otherwise defaults to lightdm gtk greeter when you log in
+  startx.enable = true; # otherwise defaults to lightdm gtk greeter when you log in
   ## terminal emulators
   # st.enable = true;
   ## file manager(s)
