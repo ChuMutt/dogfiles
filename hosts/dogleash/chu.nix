@@ -1,14 +1,7 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, pkgs, ... }:
 
-let
-  cfg = config.chu;
-in
-{
+let cfg = config.chu;
+in {
   options.chu = {
     enable = lib.mkEnableOption ''enable user module "chu"'';
     userName = lib.mkOption {
@@ -21,12 +14,7 @@ in
       isNormalUser = true;
       initialPassword = "qwerty";
       description = "chu";
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-        "video"
-        "audio"
-      ];
+      extraGroups = [ "networkmanager" "wheel" "video" "audio" ];
       shell = pkgs.zsh;
     };
   };
