@@ -1,6 +1,5 @@
-{ config, pkgs, ... }:
-{
-  imports=[./modules/home-manager/default.nix];
+{ pkgs, ... }: {
+  imports = [ ./modules/home-manager/default.nix ];
   home = {
     # Home Manager needs a bit of information about you and the paths it should
     # manage.
@@ -109,7 +108,8 @@
       EDITOR = "neovim";
       # VISUAL= "emacs";
       DOTFILES_HOME = "$XDG_CONFIG_HOME/dogfiles";
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\\\${HOME}/.steam/root/compatibilitytools.d";
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+        "\\\${HOME}/.steam/root/compatibilitytools.d";
     };
 
     shellAliases = {
@@ -120,7 +120,8 @@
       "..." = "cd ../..";
       "...." = "cd ../../..";
 
-      "chu-sync" = " sudo nixos-rebuild switch --flake ~/.config/dogfiles/#$HOST";
+      "chu-sync" =
+        " sudo nixos-rebuild switch --flake ~/.config/dogfiles/#$HOST";
 
     };
   };
@@ -139,14 +140,10 @@
         co = "checkout";
         s = "status";
       };
-      extraConfig = {
-        push = {
-          autoSetupRemote = true;
-        };
-      };
+      extraConfig = { push = { autoSetupRemote = true; }; };
     };
     ssh.enable = true;
-    ssh.controlMaster="yes";
+    ssh.controlMaster = "yes";
     ssh.forwardAgent = true;
     # GnuPG
     gpg.enable = true;
@@ -160,9 +157,7 @@
     firefox.profiles.chu = {
       name = "chu";
       path = "chu";
-      search = {
-        default = "DuckDuckGo";
-      };
+      search = { default = "DuckDuckGo"; };
     };
   };
 }
