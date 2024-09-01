@@ -145,9 +145,7 @@
     ssh.enable = true;
     ssh.controlMaster = "yes";
     ssh.forwardAgent = true;
-    # GnuPG
     gpg.enable = true;
-    # Z-Shell (zsh)
     zsh = {
       enable = true;
       autosuggestion.enable = true;
