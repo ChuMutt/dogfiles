@@ -48,6 +48,15 @@
       lib = nixpkgs.lib;
     in {
       nixosConfigurations = {
+
+        chunix = lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/chunix/configuration.nix
+            inputs.home-manager.nixosModules.default
+          ];
+        };
+
         chunixos-vm = lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
@@ -55,6 +64,7 @@
             inputs.home-manager.nixosModules.default
           ];
         };
+
         dogleash = lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
@@ -63,6 +73,7 @@
           ];
         };
       };
+
       homeConfigurations = {
         chu = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
