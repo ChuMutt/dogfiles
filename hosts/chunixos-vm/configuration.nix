@@ -6,14 +6,19 @@
 
 {
   imports = [
+
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    # Include user module
-    ./chu.nix
-    # Include user home configuration
-    inputs.home-manager.nixosModules.default
+
     # Include system modules
     ../../modules/nixos/default.nix
+
+    # Include user module
+    ../../modules/profiles/default.nix
+
+    # Include user home configuration
+    inputs.home-manager.nixosModules.default
+
   ];
 
   chu.enable = true;
