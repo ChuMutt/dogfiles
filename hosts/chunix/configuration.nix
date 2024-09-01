@@ -70,15 +70,15 @@
     enable = true;
 
     # Enable the KDE Plasma Desktop Environment.
-    # displayManager.sddm.enable = true;
-    # desktopManager.plasma6.enable = true;
+    displayManager.sddm.enable = true;
+    desktopManager.plasma6.enable = true;
 
     # Enable the GNOME Desktop Environment.
     # displayManager.gdm.enable = true;
     # desktopManager.gnome.enable = true;
 
     # Enable the suckless dynamic window manager.
-    windowManager.dwm.enable = true;
+    # windowManager.dwm.enable = true;
 
     # Enable Emacs X Window Manager (EXWM)
     # windowManager.exwm.enable = true;
@@ -87,6 +87,7 @@
     xkb = { layout = "us";
             variant = "";
     };
+};
 
   # Enable bluetooth.
   hardware.bluetooth.enable = true;
@@ -119,9 +120,6 @@
 
     ];
   };
-
-  # Enable bluetooth.
-  hardware.bluetooth.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -178,7 +176,7 @@
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -200,7 +198,6 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
