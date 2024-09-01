@@ -38,16 +38,6 @@
 
     packages = with pkgs; [
 
-      # custom scripts
-
-      (writeShellScriptBin "chu-install-home-manager-unstable" ''
-        # home-manager is recommended for this setup
-        # this installs the standalone version (recommended)
-        nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager &&
-        nix-channel --update &&
-        nix-shell '<home-manager>' -A install # then run home-manager switch --flake ~/.config/dogfiles/#chunix
-      '')
-
       # cli
       zsh
       bash

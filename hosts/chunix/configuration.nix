@@ -84,15 +84,97 @@
     # windowManager.exwm.enable = true;
 
     # Configure keymap in X11
-    xkb.layout = "us";
-    xkb.variant = "";
+    xkb = { layout = "us";
+            variant = "";
+    };
+
+  # Enable bluetooth.
+  hardware.bluetooth.enable = true;
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.chu = {
+    isNormalUser = true;
+    description = "chu";
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [
+      kdePackages.kate
+      #  thunderbird
+
+      tldr
+      neovim
+      wget
+      git
+
+      # custom scripts
+
+      (writeShellScriptBin "chu-install-home-manager-unstable" ''
+      # doesn't work currently
+        # home-manager is recommended for this setup
+        # this installs the standalone version (recommended)
+        nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager &&
+        nix-channel --update &&
+        nix-shell '<home-manager>' -A install 
+	# then run home-manager switch --flake ~/.config/dogfiles/#chunix
+      '')
+
+    ];
   };
+
+  # Enable bluetooth.
+  hardware.bluetooth.enable = true;
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment = {
+    systemPackages = with pkgs; [
+      # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      wget
+      home-manager
+      protonup # imperative bootstrap for proton-ge
+    ];
+
+    sessionVariables = {
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+        "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
+    };
+    shells = with pkgs; [ zsh ];
+  };
+
+  startx.enable =
+    true; # otherwise defaults to lightdm gtk greeter when you log in
+
+  security = {
+    sudo = { enable = true; };
+    rtkit.enable = true;
+  };
+
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  programs = {
+    mtr.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+
+    zsh.enable = true;
+    nh.enable = true;
+    firefox.enable = true;
+    steam.enable = true;
+    gamemode.enable = true;
+
+  };
+
+  # List services that you want to enable:
+
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable bluetooth.
-  hardware.bluetooth.enable = true;
+  # Enable touchpad support (enabled default in most desktopManager).
+  # services.xserver.libinput.enable = true;
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
@@ -110,58 +192,15 @@
     #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.chu = {
-    isNormalUser = true;
-    description = "chu";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
-      #  thunderbird
-
-      tldr
-      neovim
-      wget
-      git
-
-    ];
+  home-manager = {
+    # also pass inputs to home-manager modules
+    extraSpecialArgs = { inherit inputs; };
+    users = { "chu" = import ../../home.nix; };
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs;
-    [
-      #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      #  wget
-    ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  programs = {
-    mtr.enable = true;
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
-
-    zsh.enable = true;
-
-    firefox.enable = true;
-
-    nh.enable = true;
-
-  };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -176,5 +215,7 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
+
+  nix.settings.experimental-features = "nix-command flakes";
 
 }
