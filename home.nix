@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./modules/home-manager/default.nix ];
+  imports = [ ./modules/home-manager/default.nix ]; # IDEA maybe have a list like an init.el instead of this?
   home = {
     # Home Manager needs a bit of information about you and the paths it should
     # manage.
