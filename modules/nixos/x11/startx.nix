@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
+{ config, lib, ... }: {
   options = {
     startx.enable = lib.mkEnableOption "enables startx as display manager";
   };
