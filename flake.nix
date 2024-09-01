@@ -4,6 +4,7 @@
   description = "nixOS config flake";
 
   inputs = {
+
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
