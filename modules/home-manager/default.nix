@@ -1,7 +1,1 @@
-{ lib, ... }:
-{
-  imports = [
-    ./cli/default.nix
-    ./gui/default.nix
-  ];
-}
+{ ... }: { imports = [ ./cli/default.nix ./gui/default.nix ]; }
