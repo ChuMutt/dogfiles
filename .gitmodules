@@ -1,0 +1,3 @@
+[submodule "modules/home-manager/gui/doom"]
+	path = modules/home-manager/gui/doom
+	url = git@github.com:chumutt/doom
