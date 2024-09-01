@@ -31,15 +31,15 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    boot.initrd.luks.devices."luks-168c511d-53ec-40cf-bf4a-810d13d4e9d8".device =
+    initrd.luks.devices."luks-168c511d-53ec-40cf-bf4a-810d13d4e9d8".device =
       "/dev/disk/by-uuid/168c511d-53ec-40cf-bf4a-810d13d4e9d8";
   };
 
   networking = {
-    hostName = "chunix-vm"; # Define your hostname.
+    hostName = "chunix"; # Define your hostname.
     networkmanager.enable = true; # Enable networking
     # Enables wireless support via wpa_supplicant.
-    wireless.enable = true; # Incompatible with NetworkManager.
+    # wireless.enable = true; # Incompatible with NetworkManager.
     # Configure network proxy if necessary
     # proxy.default = "http://user:password@proxy:port/";
     # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -150,7 +150,8 @@
       enableSSHSupport = true;
     };
 
-    # Install firefox.
+    zsh.enable = true;
+
     firefox.enable = true;
 
     nh.enable = true;
