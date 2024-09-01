@@ -37,6 +37,7 @@
     # ];
 
     packages = with pkgs; [
+
       # cli
       zsh
       bash
@@ -44,15 +45,15 @@
       git
       git-crypt
       tldr
-      w3m # terminal web browser
+      w3m
       roswell
-      xclip # terminal copy and paste
-      pulsemixer # audio controller
+      xclip
+      pulsemixer
       ispell
       aspell
       hunspell
       lf
-      mediainfo # provides audio/video file info
+      mediainfo
       nixfmt-rfc-style
       gnupg
       pinentry
@@ -60,14 +61,15 @@
       # gui/X11
       dwm
       st
-      unclutter # hides inactive mice
-      maim # screenshots
-      redshift # f.lux for x11
+      unclutter
+      maim
+      redshift
       slock
       firefox
       nextcloud-client
       keepassxc
       arandr
+
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
