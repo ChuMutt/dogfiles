@@ -84,10 +84,11 @@
     # windowManager.exwm.enable = true;
 
     # Configure keymap in X11
-    xkb = { layout = "us";
-            variant = "";
+    xkb = {
+      layout = "us";
+      variant = "";
     };
-};
+  };
 
   # Enable bluetooth.
   hardware.bluetooth.enable = true;
@@ -109,13 +110,13 @@
       # custom scripts
 
       (writeShellScriptBin "chu-install-home-manager-unstable" ''
-      # doesn't work currently
-        # home-manager is recommended for this setup
-        # this installs the standalone version (recommended)
-        nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager &&
-        nix-channel --update &&
-        nix-shell '<home-manager>' -A install 
-	# then run home-manager switch --flake ~/.config/dogfiles/#chunix
+              # doesn't work currently
+                # home-manager is recommended for this setup
+                # this installs the standalone version (recommended)
+                nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager &&
+                nix-channel --update &&
+                nix-shell '<home-manager>' -A install
+        	# then run home-manager switch --flake ~/.config/dogfiles/#chunix
       '')
 
     ];
