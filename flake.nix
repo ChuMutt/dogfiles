@@ -7,6 +7,7 @@
 
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "nixpkgs/nixos-24.05";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -25,11 +26,14 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    blender-bin = {
-      url = "github:edolstra/nix-warez?dir=blender";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    # blender-bin = {
+    #   url = "github:edolstra/nix-warez?dir=blender";
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # };
 
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+
+    # emacs bs
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       inputs = {
@@ -37,8 +41,11 @@
         nixpkgs-stable.follows = "nixpkgs";
       };
     };
-
-    nixos-hardware.url = "github:nixos/nixos-hardware";
+    emacs-pin-nixpkgs.url = "nixpkgs/f72123158996b8d4449de481897d855bc47c7bf6";
+    nix-doom-emacs = {
+      url = "github:nix-community/nix-doom-emacs";
+      inputs.nixpkgs.follows = "emacs-pin-nixpkgs";
+    };
 
   };
 

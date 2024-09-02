@@ -1,5 +1,7 @@
 { pkgs, ... }: {
-  imports = [ ./modules/home-manager/default.nix ]; # IDEA maybe have a list like an init.el instead of this?
+  imports = [
+    ./modules/home-manager/default.nix
+  ]; # IDEA maybe have a list like an init.el instead of this?
   home = {
     # Home Manager needs a bit of information about you and the paths it should
     # manage.
@@ -112,19 +114,6 @@
       DOTFILES_HOME = "$XDG_CONFIG_HOME/dogfiles";
       STEAM_EXTRA_COMPAT_TOOLS_PATHS =
         "\\\${HOME}/.steam/root/compatibilitytools.d";
-    };
-
-    shellAliases = {
-      g = "git";
-      ga = "git add .";
-      gc = "git commit -m";
-
-      "..." = "cd ../..";
-      "...." = "cd ../../..";
-
-      "chu-sync" =
-        " sudo nixos-rebuild switch --flake ~/.config/dogfiles/#$HOST";
-
     };
   };
 
