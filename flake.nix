@@ -25,10 +25,10 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    blender-bin = {
-      url = "github:edolstra/nix-warez?dir=blender";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    # blender-bin = {
+    #   url = "github:edolstra/nix-warez?dir=blender";
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # };
 
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
