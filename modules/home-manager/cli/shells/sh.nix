@@ -15,7 +15,7 @@ in {
   programs = {
     zsh = {
       enable = true;
-      enableAutosuggestions = true;
+      autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       enableCompletion = true;
       shellAliases = aliases;
@@ -50,7 +50,6 @@ in {
     direnv
     nix-direnv
     tldr
-    btm
 
   ];
 }

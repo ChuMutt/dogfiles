@@ -7,6 +7,7 @@
 
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "nixpkgs/nixos-24.05";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -30,6 +31,10 @@
     #   inputs.nixpkgs.follows = "nixpkgs-unstable";
     # };
 
+
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+
+    # emacs bs
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       inputs = {
@@ -37,21 +42,34 @@
         nixpkgs-stable.follows = "nixpkgs";
       };
     };
+    emacs-pin-nixpkgs.url = "nixpkgs/f72123158996b8d4449de481897d855bc47c7bf6";
+    nix-doom-emacs = {
+      url = "github:nix-community/nix-doom-emacs";
+      inputs.nixpkgs.follows = "emacs-pin-nixpkgs";
+    };
 
-    nixos-hardware.url = "github:nixos/nixos-hardware";
 
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       lib = nixpkgs.lib;
-    in {
+    in
+    {
       nixosConfigurations = {
 
         chunix = lib.nixosSystem {
-          specialArgs = { inherit inputs; };
+          specialArgs = {
+            inherit inputs;
+          };
           modules = [
             ./hosts/chunix/configuration.nix
             inputs.home-manager.nixosModules.default
@@ -59,7 +77,9 @@
         };
 
         chunixos-vm = lib.nixosSystem {
-          specialArgs = { inherit inputs; };
+          specialArgs = {
+            inherit inputs;
+          };
           modules = [
             ./hosts/chunixos-vm/configuration.nix
             inputs.home-manager.nixosModules.default
@@ -67,7 +87,9 @@
         };
 
         dogleash = lib.nixosSystem {
-          specialArgs = { inherit inputs; };
+          specialArgs = {
+            inherit inputs;
+          };
           modules = [
             ./hosts/dogleash/configuration.nix
             inputs.home-manager.nixosModules.default
