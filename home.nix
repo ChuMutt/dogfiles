@@ -114,20 +114,6 @@
         "\\\${HOME}/.steam/root/compatibilitytools.d";
     };
 
-    shellAliases = {
-      g = "git";
-      ga = "git add .";
-      gc = "git commit -m";
-
-      "..." = "cd ../..";
-      "...." = "cd ../../..";
-
-      "chu-sync" =
-        " sudo nixos-rebuild switch --flake ~/.config/dogfiles/#$HOST";
-
-    };
-  };
-
   ## User programs settings
   programs = {
     # Let Home Manager install and manage itself.
