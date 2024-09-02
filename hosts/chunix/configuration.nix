@@ -21,8 +21,11 @@
 
   ];
 
-  chu.enable = true;
-  chu.userName = "chu";
+  # Enable user module
+  chu = {
+    enable = true;
+    userName = "chu";
+  };
 
   # Bootloader.
   boot = {

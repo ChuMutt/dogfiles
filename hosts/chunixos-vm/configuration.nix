@@ -21,8 +21,11 @@
 
   ];
 
-  chu.enable = true;
-  chu.userName = "chu";
+  # Enable user module
+  chu = {
+    enable = true;
+    userName = "chu";
+  };
 
   # Bootloader.
   boot = {
@@ -65,11 +68,29 @@
   };
 
   # Enable the X11 windowing system.
+  # You can disable this if you're only using the Wayland session.
   services.xserver = {
     enable = true;
-    windowManager.dwm.enable = true;
+
+    # Enable the KDE Plasma Desktop Environment.
+    displayManager.sddm.enable = true;
+    desktopManager.plasma6.enable = true;
+
+    # Enable the GNOME Desktop Environment.
+    # displayManager.gdm.enable = true;
+    # desktopManager.gnome.enable = true;
+
+    # Enable the suckless dynamic window manager.
+    # windowManager.dwm.enable = true;
+
+    # Enable Emacs X Window Manager (EXWM)
+    # windowManager.exwm.enable = true;
+
     # Configure keymap in X11
-    xkb.layout = "us";
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
   };
 
   # Enable CUPS to print documents.
