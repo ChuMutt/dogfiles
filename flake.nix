@@ -33,7 +33,7 @@
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
-    # emacs bs
+    # Emacs
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       inputs = {
