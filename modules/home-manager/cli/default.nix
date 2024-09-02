@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{ ... }: {
   imports = [
     ./git/git.nix
     ./st/st.nix

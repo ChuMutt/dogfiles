@@ -2,23 +2,23 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}:
+{ pkgs, inputs, ... }:
 
 {
   imports = [
+
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    # Include user module
-    ./chu.nix
-    # Include user home configuration
-    inputs.home-manager.nixosModules.default
+
     # Include system modules
     ../../modules/nixos/default.nix
+
+    # Include user module
+    ../../modules/profiles/default.nix
+
+    # Include user home configuration
+    inputs.home-manager.nixosModules.default
+
   ];
 
   chu.enable = true;
@@ -31,7 +31,8 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    initrd.luks.devices."luks-c233bfdc-56f5-4381-982a-3e17a746e0da".device = "/dev/disk/by-uuid/c233bfdc-56f5-4381-982a-3e17a746e0da";
+    initrd.luks.devices."luks-c233bfdc-56f5-4381-982a-3e17a746e0da".device =
+      "/dev/disk/by-uuid/c233bfdc-56f5-4381-982a-3e17a746e0da";
   };
 
   networking = {
@@ -72,9 +73,6 @@
   # Enable bluetooth.
   hardware.bluetooth.enable = true;
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment = {
@@ -86,7 +84,8 @@
     ];
 
     sessionVariables = {
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+        "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
     };
     shells = with pkgs; [ zsh ];
   };
@@ -101,7 +100,8 @@
   ## editor(s)
   #neovim.enable = true;
   ## display manager(s) (login screens)
-  startx.enable = true; # otherwise defaults to lightdm gtk greeter when you log in
+  startx.enable =
+    true; # otherwise defaults to lightdm gtk greeter when you log in
   ## terminal emulators
   # st.enable = true;
   ## file manager(s)
@@ -110,9 +110,7 @@
   #firefox.enable = true;
 
   security = {
-    sudo = {
-      enable = true;
-    };
+    sudo = { enable = true; };
     rtkit.enable = true;
   };
 
@@ -129,7 +127,9 @@
     gamemode.enable = true;
 
     zsh.enable = true;
+
   };
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
@@ -149,13 +149,12 @@
 
   home-manager = {
     # also pass inputs to home-manager modules
-    extraSpecialArgs = {
-      inherit inputs;
-    };
-    users = {
-      "chu" = import ../../home.nix;
-    };
+    extraSpecialArgs = { inherit inputs; };
+    users = { "chu" = import ../../home.nix; };
   };
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
   system.stateVersion = "24.11"; # Do not change.
 

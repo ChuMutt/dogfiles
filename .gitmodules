@@ -1,12 +1,3 @@
-[submodule "src/dmenu"]
-	path = src/dmenu
-	url = git@github.com:chumutt/dmenu
-[submodule "src/dwm"]
-	path = src/dwm
-	url = git@github.com:chumutt/dwm
-[submodule "src/dwmblocks"]
-	path = src/dwmblocks
-	url = git@github.com:chumutt/dwmblocks
-[submodule "src/st"]
-	path = src/st
-	url = git@github.com:chumutt/st
+[submodule "modules/home-manager/gui/doom"]
+	path = modules/home-manager/gui/doom
+	url = git@github.com:chumutt/doom
