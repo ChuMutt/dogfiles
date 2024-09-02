@@ -49,6 +49,7 @@ in {
     bc
     direnv
     nix-direnv
+    tldr
 
   ];
 }
