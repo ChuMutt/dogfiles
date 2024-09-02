@@ -21,8 +21,11 @@
 
   ];
 
-  chu.enable = true;
-  chu.userName = "chu";
+  # Enable user module
+  chu = {
+    enable = true;
+    userName = "chu";
+  };
 
   # Bootloader.
   boot = {
@@ -38,6 +41,11 @@
   networking = {
     hostName = "dogleash"; # Define your hostname.
     networkmanager.enable = true; # Enable networking
+    # Enables wireless support via wpa_supplicant.
+    # wireless.enable = true; # Incompatible with NetworkManager.
+    # Configure network proxy if necessary
+    # proxy.default = "http://user:password@proxy:port/";
+    # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   };
 
   # Set your time zone.
