@@ -50,6 +50,7 @@ in {
     direnv
     nix-direnv
     tldr
+    btm
 
   ];
 }
