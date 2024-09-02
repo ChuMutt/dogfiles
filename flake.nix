@@ -23,18 +23,36 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      lib = nixpkgs.lib;
     in
     {
       nixosConfigurations = {
-        default = nixpkgs.lib.nixosSystem {
+        chunixos-vm = lib.nixosSystem {
           specialArgs = {
             inherit inputs;
           };
           modules = [
-            ./hosts/default/configuration.nix
+            ./hosts/chunixos-vm/configuration.nix
+            inputs.home-manager.nixosModules.default
+          ];
+        };
+        dogleash = lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [
+            ./hosts/dogleash/configuration.nix
             inputs.home-manager.nixosModules.default
           ];
         };
       };
+      homeConfigurations = {
+        chu = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./home.nix ];
+        };
+      };
+
+
     };
 }

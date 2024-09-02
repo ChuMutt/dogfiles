@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
-
 {
+  imports=[./modules/home-manager/default.nix];
   home = {
     # Home Manager needs a bit of information about you and the paths it should
     # manage.
@@ -38,34 +38,37 @@
     # ];
 
     packages = with pkgs; [
+      # cli
       zsh
+      bash
+      neovim
+      git
+      git-crypt
       tldr
-      # st
-      lukesmithxyz-st
-      xclip # copy and paste
-      unclutter # hides inactive mice
-      maim # screenshots
-      pulsemixer # audio controller
       w3m # terminal web browser
-      mediainfo # provides audio/video file info
-      redshift # f.lux for x11
-      slock
       roswell
+      xclip # terminal copy and paste
+      pulsemixer # audio controller
       ispell
       aspell
       hunspell
       lf
-      git
-      git-crypt
-      neovim
+      mediainfo # provides audio/video file info
       nixfmt-rfc-style
+      gnupg
+      pinentry
+
+      # gui/X11
+      dwm
+      st
+      unclutter # hides inactive mice
+      maim # screenshots
+      redshift # f.lux for x11
+      slock
       firefox
       nextcloud-client
       keepassxc
-      gnupg
-      pinentry
       arandr
-
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -104,9 +107,9 @@
 
     sessionVariables = {
       EDITOR = "neovim";
+      # VISUAL= "emacs";
       DOTFILES_HOME = "$XDG_CONFIG_HOME/dogfiles";
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-        "\\\${HOME}/.steam/root/compatibilitytools.d";
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\\\${HOME}/.steam/root/compatibilitytools.d";
     };
 
     shellAliases = {
@@ -117,18 +120,15 @@
       "..." = "cd ../..";
       "...." = "cd ../../..";
 
-      "chu-sync" =
-        " sudo nixos-rebuild switch --flake ~/.config/dogfiles/#default";
+      "chu-sync" = " sudo nixos-rebuild switch --flake ~/.config/dogfiles/#$HOST";
 
     };
   };
 
   ## User programs settings
   programs = {
-
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
-
     # Git
     git = {
       enable = true;
@@ -139,23 +139,30 @@
         co = "checkout";
         s = "status";
       };
-      extraConfig = { push = { autoSetupRemote = true; }; };
+      extraConfig = {
+        push = {
+          autoSetupRemote = true;
+        };
+      };
     };
-
+    ssh.enable = true;
+    ssh.controlMaster="yes";
+    ssh.forwardAgent = true;
     # GnuPG
     gpg.enable = true;
-
     # Z-Shell (zsh)
     zsh = {
       enable = true;
       autosuggestion.enable = true;
       autocd = true;
     };
-
+    bash.enable = true;
     firefox.profiles.chu = {
       name = "chu";
       path = "chu";
-      search = { default = "DuckDuckGo"; };
+      search = {
+        default = "DuckDuckGo";
+      };
     };
   };
 }
