@@ -98,11 +98,33 @@
     };
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.chu = {
+    isNormalUser = true;
+    description = "chu";
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [
+      kdePackages.kate
+      thunderbird
 
-  # Enable bluetooth.
-  hardware.bluetooth.enable = true;
+      tldr
+      neovim
+      wget
+      git
+
+      # custom scripts
+      # TODO fix this script because it doesn't work
+      (writeShellScriptBin "chu-install-home-manager-unstable" ''
+              # doesn't work currently
+                # home-manager is recommended for this setup
+                # this installs the standalone version (recommended)
+                nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager &&
+                nix-channel --update &&
+                nix-shell '<home-manager>' -A install
+        	# then run home-manager switch --flake ~/.config/dogfiles/#chunix
+      '')
+    ];
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -150,24 +172,21 @@
   };
 
   # List services that you want to enable:
+  services = {
+    # Enable CUPS to print documents.
+    printing.enable = true;
+    # Enable the OpenSSH daemon.
+    openssh.enable = true;
+    # Enable touchpad support (enabled default in most desktopManager).
+    xserver.libinput.enable = true;
+  };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable bluetooth.
-  hardware.bluetooth.enable = true;
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
-
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  hardware = {
+    # Enable bluetooth.
+    bluetooth.enable = true;
+    # Enable sound with pipewire.
+    pulseaudio.enable = false;
+  };
 
   services.pipewire = {
     enable = true;
