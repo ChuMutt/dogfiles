@@ -72,11 +72,8 @@
     };
   };
 
-  # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
-  services.xserver = {
-    enable = true;
-
+  services = {
     # Enable the KDE Plasma Desktop Environment.
     displayManager.sddm.enable = true;
     desktopManager.plasma6.enable = true;
@@ -91,11 +88,17 @@
     # Enable Emacs X Window Manager (EXWM)
     # windowManager.exwm.enable = true;
 
-    # Configure keymap in X11
-    xkb = {
-      layout = "us";
-      variant = "";
+    xserver = {
+      enable = true; # Enable the X11 windowing system.
+      xkb = { # Configure keymap in X11
+        layout = "us";
+        variant = "";
+      };
     };
+
+    # Enable touchpad support (enabled default in most desktopManager).
+    libinput.enable = true;
+
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -177,8 +180,6 @@
     printing.enable = true;
     # Enable the OpenSSH daemon.
     openssh.enable = true;
-    # Enable touchpad support (enabled default in most desktopManager).
-    xserver.libinput.enable = true;
   };
 
   hardware = {
