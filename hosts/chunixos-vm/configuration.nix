@@ -126,11 +126,11 @@
                 nix-shell '<home-manager>' -A install
         	# then run home-manager switch --flake ~/.config/dogfiles/#chunix
       '')
-#       (writeShellScriptBin "chu-install-doom-emacs" ''
-#       git clone https://github.com/chumutt/doom ~/.config/doom
-#       git clone https://github.com/doomemacs/doomemacs --depth 1 ~/.config/emacs
-#       ./.config/emacs/bin/doom install
-#       '')
+      (writeShellScriptBin "chu-install-doom-emacs" ''
+      git clone https://github.com/chumutt/doom ~/.config/doom
+      git clone https://github.com/doomemacs/doomemacs --depth 1 ~/.config/emacs
+      ./.config/emacs/bin/doom install
+      '')
       emacs-gtk
     ];
   };
