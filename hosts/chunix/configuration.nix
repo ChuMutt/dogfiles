@@ -203,7 +203,7 @@
   };
 
   home-manager = {
-    # also pass inputs to home-manager modules
+    # Pass inputs to home-manager modules.
     extraSpecialArgs = { inherit inputs; };
     users = { "chu" = import ../../home.nix; };
   };
