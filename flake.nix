@@ -49,16 +49,25 @@
 
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       lib = nixpkgs.lib;
-    in {
+    in
+    {
       nixosConfigurations = {
 
         chunix = lib.nixosSystem {
-          specialArgs = { inherit inputs; };
+          specialArgs = {
+            inherit inputs;
+          };
           modules = [
             ./hosts/chunix/configuration.nix
             inputs.home-manager.nixosModules.default
@@ -66,7 +75,9 @@
         };
 
         chunixos-vm = lib.nixosSystem {
-          specialArgs = { inherit inputs; };
+          specialArgs = {
+            inherit inputs;
+          };
           modules = [
             ./hosts/chunixos-vm/configuration.nix
             inputs.home-manager.nixosModules.default
@@ -74,7 +85,9 @@
         };
 
         dogleash = lib.nixosSystem {
-          specialArgs = { inherit inputs; };
+          specialArgs = {
+            inherit inputs;
+          };
           modules = [
             ./hosts/dogleash/configuration.nix
             inputs.home-manager.nixosModules.default

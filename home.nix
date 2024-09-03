@@ -109,7 +109,7 @@
     #
 
     sessionVariables = {
-      EDITOR = "neovim";
+      EDITOR = "nvim";
       # VISUAL= "emacs";
       DOTFILES_HOME = "$XDG_CONFIG_HOME/dogfiles";
       STEAM_EXTRA_COMPAT_TOOLS_PATHS =
