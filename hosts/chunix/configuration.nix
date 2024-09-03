@@ -46,6 +46,11 @@
     # Configure network proxy if necessary
     # proxy.default = "http://user:password@proxy:port/";
     # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+    # Open ports in the firewall.
+    # firewall.allowedTCPPorts = [ ... ];
+    # firewall.allowedUDPPorts = [ ... ];
+    # Or disable the firewall altogether.
+    # firewall.enable = false;
   };
 
   # Set your time zone.
@@ -92,6 +97,9 @@
       variant = "";
     };
   };
+
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
 
   # Enable bluetooth.
   hardware.bluetooth.enable = true;
@@ -200,15 +208,6 @@
     users = { "chu" = import ../../home.nix; };
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
@@ -216,6 +215,9 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
+
+  # Allow unfree packages. Sorry, rms.
+  nixpkgs.config.allowUnfree = true;
 
   nix.settings.experimental-features = "nix-command flakes";
 
