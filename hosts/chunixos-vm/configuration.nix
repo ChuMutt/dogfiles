@@ -121,50 +121,47 @@
     shells = with pkgs; [ zsh ];
   };
 
-  # system modules
-  ## shells
-  # zsh.enable = true;
-  # users.defaultUserShell=pkgs.zsh;
-
-  ## version control (vc)
-  # git.enable = true;
-  ## editor(s)
-  #neovim.enable = true;
-  ## display manager(s) (login screens)
   startx.enable =
     true; # otherwise defaults to lightdm gtk greeter when you log in
-  ## terminal emulators
-  # st.enable = true;
-  ## file manager(s)
-  # lf.enable = true;
-  ## browser(s)
-  #firefox.enable = true;
 
   security = {
     sudo = { enable = true; };
     rtkit.enable = true;
   };
 
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
   programs = {
-    # Some programs need SUID wrappers, can be configured further or are
-    # started in user sessions.
     mtr.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
     };
 
+    zsh.enable = true;
+    nh.enable = true;
+    firefox.enable = true;
     steam.enable = true;
     gamemode.enable = true;
-
-    zsh.enable = true;
 
   };
 
   # List services that you want to enable:
 
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Enable bluetooth.
+  hardware.bluetooth.enable = true;
+
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  services.xserver.libinput.enable = true;
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;

@@ -98,12 +98,6 @@
     };
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable bluetooth.
-  hardware.bluetooth.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.chu = {
     isNormalUser = true;
@@ -177,6 +171,12 @@
 
   # List services that you want to enable:
 
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Enable bluetooth.
+  hardware.bluetooth.enable = true;
+
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
@@ -184,7 +184,7 @@
   services.printing.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  services.xserver.libinput.enable = true;
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
