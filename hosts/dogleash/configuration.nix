@@ -114,7 +114,9 @@
       STEAM_EXTRA_COMPAT_TOOLS_PATHS =
         "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
     };
+
     shells = with pkgs; [ zsh ];
+
   };
 
   startx.enable =
