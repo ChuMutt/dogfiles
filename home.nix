@@ -59,6 +59,7 @@
       nixfmt-rfc-style
       gnupg
       pinentry
+      direnv
 
       # gui/X11
       dwm

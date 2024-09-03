@@ -19,11 +19,17 @@ in {
       syntaxHighlighting.enable = true;
       enableCompletion = true;
       shellAliases = aliases;
+
       initExtra = ''
         PROMPT=" ◉ %U%F{magenta}%n%f%u@%U%F{blue}%m%f%u:%F{yellow}%~%f
-         %F{green}→%f "
-        RPROMPT="%F{red}▂%f%F{yellow}▄%f%F{green}▆%f%F{cyan}█%f%F{blue}▆%f%F{magenta}▄%f%F{white}▂%f"
-        [ $TERM = "dumb" ] && unsetopt zle && PS1='$ '
+        %F{green}→%f "
+        # Disable some features to support TRAMP.
+        if [ "$TERM" = dumb ]; then
+          unsetopt zle prompt_cr prompt_subst
+          unset RPS1 RPROMPT
+          PS1='$ '
+          PROMPT='$ '
+        fi
       '';
     };
     bash = {
