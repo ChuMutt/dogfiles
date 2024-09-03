@@ -135,13 +135,16 @@
       wget
       home-manager
       protonup # imperative bootstrap for proton-ge
+      nixfmt-rfc-style
     ];
 
     sessionVariables = {
       STEAM_EXTRA_COMPAT_TOOLS_PATHS =
         "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
     };
+
     shells = with pkgs; [ zsh ];
+
   };
 
   startx.enable =
