@@ -110,8 +110,6 @@
 
     sessionVariables = {
       EDITOR = "nvim";
-      # VISUAL= "emacs";
-      DOTFILES_HOME = "$XDG_CONFIG_HOME/dogfiles";
       STEAM_EXTRA_COMPAT_TOOLS_PATHS =
         "\\\${HOME}/.steam/root/compatibilitytools.d";
     };
@@ -132,20 +130,16 @@
       };
       extraConfig = { push = { autoSetupRemote = true; }; };
     };
+
     ssh.enable = true;
-    ssh.controlMaster = "yes";
-    ssh.forwardAgent = true;
+
     gpg.enable = true;
-    zsh = {
-      enable = true;
-      autosuggestion.enable = true;
-      autocd = true;
-    };
-    bash.enable = true;
+
     firefox.profiles.chu = {
       name = "chu";
       path = "chu";
       search = { default = "DuckDuckGo"; };
     };
+
   };
 }
