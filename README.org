@@ -1,2 +1,0 @@
-* TODO mv chu-install-doom-emacs function from dogleash->chunix
-* TODO write readme
