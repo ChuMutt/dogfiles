@@ -129,7 +129,9 @@
       (writeShellScriptBin "chu-install-doom-emacs" ''
       git clone https://github.com/chumutt/doom ~/.config/doom
       git clone https://github.com/doomemacs/doomemacs --depth 1 ~/.config/emacs
-      ./.config/emacs/bin/doom install
+      pushd ~/.config/emacs/bin
+      ./doom install
+      popd
       '')
       emacs-gtk
     ];
