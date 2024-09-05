@@ -1,0 +1,3 @@
+#+title: chunixos
+* TODO doom install script
+* TODO roswell install script
