@@ -2,7 +2,11 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, inputs, ... }:
+{
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [
@@ -34,8 +38,7 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    initrd.luks.devices."luks-5e6afb19-ccc8-4bca-89ab-6b52892435b5".device =
-      "/dev/disk/by-uuid/5e6afb19-ccc8-4bca-89ab-6b52892435b5";
+    initrd.luks.devices."luks-5e6afb19-ccc8-4bca-89ab-6b52892435b5".device = "/dev/disk/by-uuid/5e6afb19-ccc8-4bca-89ab-6b52892435b5";
   };
 
   networking = {
@@ -90,7 +93,8 @@
     xserver = {
       enable = true; # Enable the X11 windowing system.
       # You can disable this if you're only using the Wayland session.
-      xkb = { # Configure keymap in X11
+      xkb = {
+        # Configure keymap in X11
         layout = "us";
         variant = "";
       };
@@ -105,7 +109,10 @@
   users.users.chu = {
     isNormalUser = true;
     description = "chu";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
       kdePackages.kate
       thunderbird
@@ -114,6 +121,8 @@
       neovim
       wget
       git
+
+      discord
 
       # custom scripts
       # TODO fix this script because it doesn't work
@@ -127,11 +136,10 @@
         	# then run home-manager switch --flake ~/.config/dogfiles/#dogleash
       '')
       (writeShellScriptBin "chu-install-doom-emacs" ''
-      git clone https://github.com/chumutt/doom ~/.config/doom
-      git clone https://github.com/doomemacs/doomemacs --depth 1 ~/.config/emacs
-      ./.config/emacs/bin/doom install
+        git clone https://github.com/chumutt/doom ~/.config/doom
+        git clone https://github.com/doomemacs/doomemacs --depth 1 ~/.config/emacs
+        ./.config/emacs/bin/doom install
       '')
-      emacs-gtk
     ];
   };
 
@@ -141,25 +149,30 @@
     systemPackages = with pkgs; [
       # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       wget
+      htop
+      ((emacsPackagesFor emacs-gtk).emacsWithPackages (epkgs: [ epkgs.vterm ]))
       home-manager
       protonup # imperative bootstrap for proton-ge
       nixfmt-rfc-style
+      cmake
+      gnumake
+      gcc
     ];
 
     sessionVariables = {
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-        "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
     };
 
     shells = with pkgs; [ zsh ];
 
   };
 
-  startx.enable =
-    true; # otherwise defaults to lightdm gtk greeter when you log in
+  startx.enable = true; # otherwise defaults to lightdm gtk greeter when you log in
 
   security = {
-    sudo = { enable = true; };
+    sudo = {
+      enable = true;
+    };
     rtkit.enable = true;
   };
 
@@ -186,6 +199,10 @@
     printing.enable = true;
     # Enable the OpenSSH daemon.
     openssh.enable = true;
+    # Make Emacs packages available to the Emacs Daemon (emacsclient).
+    emacs.package =
+      with pkgs;
+      ((emacsPackagesFor emacs-gtk).emacsWithPackages (epkgs: [ epkgs."vterm" ]));
   };
 
   hardware = {
@@ -210,8 +227,12 @@
 
   home-manager = {
     # Pass inputs to home-manager modules.
-    extraSpecialArgs = { inherit inputs; };
-    users = { "chu" = import ../../home.nix; };
+    extraSpecialArgs = {
+      inherit inputs;
+    };
+    users = {
+      "chu" = import ../../home.nix;
+    };
   };
 
   # This value determines the NixOS release from which the default
@@ -224,6 +245,9 @@
 
   # Allow unfree packages. Sorry, rms.
   nixpkgs.config.allowUnfree = true;
+
+  # Add emacs overlay
+  nixpkgs.overlays = [ (import inputs.emacs-overlay) ];
 
   nix.settings.experimental-features = "nix-command flakes";
 

@@ -39,7 +39,6 @@
     # ];
 
     packages = with pkgs; [
-
       # cli
       zsh
       bash
@@ -72,7 +71,6 @@
       nextcloud-client
       keepassxc
       arandr
-
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage

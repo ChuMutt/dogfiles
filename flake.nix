@@ -41,11 +41,6 @@
         nixpkgs-stable.follows = "nixpkgs";
       };
     };
-    emacs-pin-nixpkgs.url = "nixpkgs/f72123158996b8d4449de481897d855bc47c7bf6";
-    nix-doom-emacs = {
-      url = "github:nix-community/nix-doom-emacs";
-      inputs.nixpkgs.follows = "emacs-pin-nixpkgs";
-    };
 
   };
 
