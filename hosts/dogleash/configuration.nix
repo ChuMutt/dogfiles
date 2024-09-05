@@ -116,13 +116,11 @@
     packages = with pkgs; [
       kdePackages.kate
       thunderbird
-
       tldr
       neovim
-      wget
       git
-
       discord
+      roswell
 
       # custom scripts
       # TODO fix this script because it doesn't work
