@@ -1,3 +1,5 @@
 #+title: chunixos
 * TODO doom install script
+* TODO doom path added to path
 * TODO roswell install script
+* TODO wallpaper
