@@ -64,6 +64,7 @@
             inherit inputs;
           };
           modules = [
+            ./hosts/defaults.nix
             ./hosts/chunix/configuration.nix
             inputs.home-manager.nixosModules.default
           ];
@@ -74,6 +75,7 @@
             inherit inputs;
           };
           modules = [
+            ./hosts/defaults.nix
             ./hosts/chunixos-vm/configuration.nix
             inputs.home-manager.nixosModules.default
           ];
@@ -84,6 +86,7 @@
             inherit inputs;
           };
           modules = [
+            ./hosts/defaults.nix
             ./hosts/dogleash/configuration.nix
             inputs.home-manager.nixosModules.default
           ];
