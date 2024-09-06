@@ -1,4 +1,7 @@
 #+title: chunixos
+* TODO better modularization / system profiles that don't repeat themselves
+* TODO telegram
+* TODO emacs email dependencies added and configured
 * TODO doom install script with my dotfiles
 * TODO doom path added to path
 * TODO roswell install script
