@@ -49,6 +49,7 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       lib = nixpkgs.lib;
+
       systemSettings = {
         system = "x86_64-linux";
         pkgs = nixpkgs.legacyPackages.${system};
@@ -64,6 +65,7 @@
           ""; # device identifier for grub; only used for legacy (bios) boot mode
         gpuType = "amd";
       };
+
       userSettings = rec {
         username = "chu";
         name = "Chu the Pup";
@@ -77,7 +79,6 @@
         font = "Noto Sans";
         fontPkg = pkgs.noto-fonts;
         editor = "nvim";
-        visual = "emacsclient";
         spawnEditor = if (editor == "emacsclient") then
           "emacsclient -c -a 'emacs'"
         else
