@@ -105,15 +105,18 @@
   users.users.chu = {
     isNormalUser = true;
     description = "chu";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
       kdePackages.kate
       thunderbird
-
       tldr
       neovim
-      wget
       git
+      discord
+      roswell
 
       # custom scripts
       # TODO fix this script because it doesn't work
@@ -124,16 +127,13 @@
                 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager &&
                 nix-channel --update &&
                 nix-shell '<home-manager>' -A install
-        	# then run home-manager switch --flake ~/.config/dogfiles/#chunix
+        	# then run home-manager switch --flake ~/.config/dogfiles/#dogleash
       '')
       (writeShellScriptBin "chu-install-doom-emacs" ''
-      git clone https://github.com/chumutt/doom ~/.config/doom
-      git clone https://github.com/doomemacs/doomemacs --depth 1 ~/.config/emacs
-      pushd ~/.config/emacs/bin
-      ./doom install
-      popd
+        git clone https://github.com/chumutt/doom ~/.config/doom
+        git clone https://github.com/doomemacs/doomemacs --depth 1 ~/.config/emacs
+        ./.config/emacs/bin/doom install
       '')
-      emacs-gtk
     ];
   };
 
@@ -143,14 +143,18 @@
     systemPackages = with pkgs; [
       # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       wget
+      htop
+      ((emacsPackagesFor emacs-gtk).emacsWithPackages (epkgs: [ epkgs.vterm ]))
       home-manager
       protonup # imperative bootstrap for proton-ge
       nixfmt-rfc-style
+      cmake
+      gnumake
+      gcc
     ];
 
     sessionVariables = {
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-        "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
     };
 
     shells = with pkgs; [ zsh ];
@@ -188,6 +192,10 @@
     printing.enable = true;
     # Enable the OpenSSH daemon.
     openssh.enable = true;
+    # Make Emacs packages available to the Emacs Daemon (emacsclient).
+    emacs.package =
+      with pkgs;
+      ((emacsPackagesFor emacs-gtk).emacsWithPackages (epkgs: [ epkgs."vterm" ]));
   };
 
   hardware = {
@@ -212,8 +220,12 @@
 
   home-manager = {
     # Pass inputs to home-manager modules.
-    extraSpecialArgs = { inherit inputs; };
-    users = { "chu" = import ../../home.nix; };
+    extraSpecialArgs = {
+      inherit inputs;
+    };
+    users = {
+      "chu" = import ../../home.nix;
+    };
   };
 
   # This value determines the NixOS release from which the default
@@ -226,6 +238,9 @@
 
   # Allow unfree packages. Sorry, rms.
   nixpkgs.config.allowUnfree = true;
+
+  # Add emacs overlay
+  nixpkgs.overlays = [ (import inputs.emacs-overlay) ];
 
   nix.settings.experimental-features = "nix-command flakes";
 

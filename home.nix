@@ -112,6 +112,7 @@
       STEAM_EXTRA_COMPAT_TOOLS_PATHS =
         "\\\${HOME}/.steam/root/compatibilitytools.d";
     };
+
   };
 
   ## User programs settings
@@ -129,6 +130,9 @@
       };
       extraConfig = { push = { autoSetupRemote = true; }; };
     };
+
+
+    zsh.enable = true;
 
     ssh.enable = true;
 
