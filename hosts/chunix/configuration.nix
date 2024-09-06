@@ -112,10 +112,27 @@
     packages = with pkgs; [
       kdePackages.kate
       thunderbird
+      discord
+    ];
+  };
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment = {
+    systemPackages = with pkgs; [
+      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      wget
       tldr
       neovim
       git
-      discord
+      htop
+      ((emacsPackagesFor emacs-gtk).emacsWithPackages (epkgs: [ epkgs.vterm ]))
+      home-manager
+      protonup # imperative bootstrap for proton-ge
+      nixfmt-rfc-style
+      cmake
+      gnumake
+      gcc
       roswell
 
       # custom scripts
@@ -127,30 +144,13 @@
                 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager &&
                 nix-channel --update &&
                 nix-shell '<home-manager>' -A install
-        	# then run home-manager switch --flake ~/.config/dogfiles/#dogleash
+        	# then run home-manager switch --flake ~/.config/dogfiles/#$PROFILE
       '')
       (writeShellScriptBin "chu-install-doom-emacs" ''
-        git clone https://github.com/chumutt/doom ~/.config/doom
-        git clone https://github.com/doomemacs/doomemacs --depth 1 ~/.config/emacs
+        git clone https://github.com/chumutt/doom ~/.config/doom &&
+        git clone https://github.com/doomemacs/doomemacs --depth 1 ~/.config/emacs &&
         ./.config/emacs/bin/doom install
       '')
-    ];
-  };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment = {
-    systemPackages = with pkgs; [
-      # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      wget
-      htop
-      ((emacsPackagesFor emacs-gtk).emacsWithPackages (epkgs: [ epkgs.vterm ]))
-      home-manager
-      protonup # imperative bootstrap for proton-ge
-      nixfmt-rfc-style
-      cmake
-      gnumake
-      gcc
     ];
 
     sessionVariables = {
