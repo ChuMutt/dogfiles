@@ -185,5 +185,10 @@
         nixpkgs-stable.follows = "nixpkgs";
       };
     };
+    # Ad blocker
+    blocklist-hosts = {
+      url = "github:StevenBlack/hosts";
+      flake = false;
+    };
   };
 }
