@@ -20,8 +20,8 @@
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-      lib = nixpkgs.lib;
+      # pkgs = nixpkgs.legacyPackages.${system};
+      # lib = nixpkgs.lib;
       systemSettings = {
         system = "x86_64-linux";
         hostname = "chunixos-vm";
@@ -62,15 +62,79 @@
             editor);
       };
       # create patched nixpkgs
-      # nixpkgs-patched = (import inputs.nixpkgs {
-      #   system = systemSettings.system;
-      #   rocmSupport = (if systemSettings.gpu == "amd" then true else false);
-      # }).applyPatches {
-      #   name = "nixpkgs-patched";
-      #   src = inputs.nixpkgs;
-      # patches = [ ./patches/example.patch ];
-      # };
+      nixpkgs-patched = (import inputs.nixpkgs {
+        system = systemSettings.system;
+        rocmSupport = (if systemSettings.gpu == "amd" then true else false);
+      }).applyPatches {
+        name = "nixpkgs-patched";
+        src = inputs.nixpkgs;
+        # patches = [ ./patches/example.patch ];
+      };
+      # configure pkgs
+      # use nixpkgs if running a server (homelab or worklab profile)
+      # otherwise use patched nixos-unstable nixpkgs
+      pkgs = (if ((systemSettings.profile == "homelab")
+        || (systemSettings.profile == "worklab")) then
+        pkgs-stable
+      else
+        (import nixpkgs-patched {
+          system = systemSettings.system;
+          config = {
+            allowUnfree = true;
+            allowUnfreePredicate = (_: true);
+          };
+          # overlays = [ inputs.rust-overlay.overlays.default ];
+        }));
 
+      pkgs-stable = import inputs.nixpkgs-stable {
+        system = systemSettings.system;
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = (_: true);
+        };
+      };
+
+      pkgs-unstable = import inputs.nixpkgs-patched {
+        system = systemSettings.system;
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = (_: true);
+        };
+        # overlays = [ inputs.rust-overlay.overlays.default ];
+      };
+
+      # pkgs-emacs =
+      #   import inputs.emacs-pin-nixpkgs { system = systemSettings.system; };
+
+      # pkgs-kdenlive =
+      #   import inputs.kdenlive-pin-nixpkgs { system = systemSettings.system; };
+
+      # configure lib
+      # use nixpkgs if running a server (homelab or worklab profile)
+      # otherwise use patched nixos-unstable nixpkgs
+      lib = (if ((systemSettings.profile == "homelab")
+        || (systemSettings.profile == "worklab")) then
+        inputs.nixpkgs-stable.lib
+      else
+        inputs.nixpkgs.lib);
+
+      # use home-manager-stable if running a server (homelab or worklab profile)
+      # otherwise use home-manager-unstable
+      home-manager = (if ((systemSettings.profile == "homelab")
+        || (systemSettings.profile == "worklab")) then
+        inputs.home-manager-stable
+      else
+        inputs.home-manager-unstable);
+
+      # Systems that can run tests:
+      supportedSystems = [ "aarch64-linux" "i686-linux" "x86_64-linux" ];
+
+      # Function to generate a set based on supported systems:
+      forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
+
+      # Attribute set of nixpkgs for each system:
+      nixpkgsFor =
+        forAllSystems (system: import inputs.nixpkgs { inherit system; });
     in {
       homeConfigurations = {
         chu = home-manager.lib.homeManagerConfiguration {
