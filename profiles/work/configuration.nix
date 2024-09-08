@@ -8,7 +8,8 @@
   imports = [
 
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    # ./hardware-configuration.nix
+    ../../system/hardware-configuration.nix
 
     # Include system modules
     ../../modules/nixos/default.nix
@@ -227,7 +228,8 @@
       inherit inputs;
     };
     users = {
-      "chu" = import ../../home.nix;
+      # "chu" = import ../../home.nix;
+      "chu" = import ./home.nix;
     };
   };
 

@@ -26,7 +26,8 @@
       homeConfigurations = {
         chu = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./home.nix ];
+          # modules = [ ./home.nix ];
+          modules = [ ./profiles/work/home.nix ];
         };
       };
       nixosConfigurations = {
@@ -40,7 +41,8 @@
         chunixos-vm = lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
-            ./hosts/chunixos-vm/configuration.nix
+            # ./hosts/chunixos-vm/configuration.nix
+            ./profiles/work/configuration.nix
             inputs.home-manager.nixosModules.default
           ];
         };
