@@ -1,18 +1,19 @@
 #+title: chunixos
-* TODO better modularization / system profiles that don't repeat themselves
-* TODO telegram
-* TODO emacs email dependencies added and configured
-* TODO doom install script with my dotfiles
-* TODO doom path added to path
-* TODO roswell install script
-* TODO wallpaper
-* TODO opentabletdriver
-* TODO ardour / plugins / music
-* TODO zfs server / nfs connections
-* TODO agenix
-* TODO blender
-* TODO hard drives / fstab
-* TODO impermanence
+* TODO
+** TODO better modularization / system profiles that don't repeat themselves
+** TODO telegram
+** TODO emacs email dependencies added and configured
+** TODO doom install script with my dotfiles
+** TODO doom path added to path
+** TODO roswell install script
+** TODO wallpaper
+** TODO opentabletdriver
+** TODO ardour / plugins / music
+** TODO zfs server / nfs connections
+** TODO agenix
+** TODO blender
+** TODO hard drives / fstab
+** TODO impermanence
 * TODO References / Credits
 - [[https://www.youtube.com/@wilfridtaylor][Wil T]]
 - [[https://github.com/librephoenix/nixos-config][librephoenix/nixos-config]]
