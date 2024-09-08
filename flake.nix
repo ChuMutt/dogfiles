@@ -31,7 +31,7 @@
         bootMode = "uefi"; #uefi or bios
         bootMountPath = "/boot"; # mount path for efi boot partition; only used for uefi boot mode
         grubDevice = ""; # device identifier for grub; only used for legacy (bios) boot mode
-        # gpuType = "amd"; # amd, intel or nvidia; only makes some slight mods for amd at the moment
+        gpuType = "virt"; # amd, intel, nvidia, or virt; only makes some slight mods for amd at the moment
       };
       userSettings = rec {
         username = "chu";
