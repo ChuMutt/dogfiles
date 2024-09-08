@@ -4,12 +4,8 @@ let
     g = "git";
     ga = "git add .";
     gc = "git commit -m";
-
     "..." = "cd ../..";
     "...." = "cd ../../..";
-
-    "chu-sync" = " sudo nixos-rebuild switch --flake ~/.config/dogfiles/#$HOST";
-
   };
 in {
   programs = {
@@ -19,7 +15,6 @@ in {
       syntaxHighlighting.enable = true;
       enableCompletion = true;
       shellAliases = aliases;
-
       initExtra = ''
         PROMPT=" ◉ %U%F{magenta}%n%f%u@%U%F{blue}%m%f%u:%F{yellow}%~%f
         %F{green}→%f "
@@ -44,7 +39,6 @@ in {
     };
   };
   home.packages = with pkgs; [
-
     sl
     cowsay
     ponysay
@@ -56,6 +50,5 @@ in {
     direnv
     nix-direnv
     tldr
-
   ];
 }
