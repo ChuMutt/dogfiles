@@ -13,3 +13,7 @@
 * TODO blender
 * TODO hard drives / fstab
 * TODO impermanence
+* TODO References / Credits
+- [[https://www.youtube.com/@wilfridtaylor][Wil T]]
+- [[https://github.com/librephoenix/nixos-config][librephoenix/nixos-config]]
+- [[https://github.com/hlissner/dotfiles][hlissner/dotfiles]]
