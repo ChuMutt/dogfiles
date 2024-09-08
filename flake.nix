@@ -68,7 +68,6 @@
       }).applyPatches {
         name = "nixpkgs-patched";
         src = inputs.nixpkgs;
-        # patches = [ ./patches/example.patch ];
       };
       # configure pkgs
       # use nixpkgs if running a server (homelab or worklab profile)
@@ -83,7 +82,6 @@
             allowUnfree = true;
             allowUnfreePredicate = (_: true);
           };
-          # overlays = [ inputs.rust-overlay.overlays.default ];
         }));
 
       pkgs-stable = import inputs.nixpkgs-stable {
@@ -100,14 +98,7 @@
           allowUnfree = true;
           allowUnfreePredicate = (_: true);
         };
-        # overlays = [ inputs.rust-overlay.overlays.default ];
       };
-
-      # pkgs-emacs =
-      #   import inputs.emacs-pin-nixpkgs { system = systemSettings.system; };
-
-      # pkgs-kdenlive =
-      #   import inputs.kdenlive-pin-nixpkgs { system = systemSettings.system; };
 
       # configure lib
       # use nixpkgs if running a server (homelab or worklab profile)
@@ -137,18 +128,40 @@
         forAllSystems (system: import inputs.nixpkgs { inherit system; });
     in {
       homeConfigurations = {
-        chu = home-manager.lib.homeManagerConfiguration {
+        user = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./profiles/work/home.nix ];
+          modules = [
+            (./. + "/profiles" + ("/" + systemSettings.profile)
+              + "/home.nix") # load home.nix from selected PROFILE
+          ];
+          extraSpecialArgs = {
+            # pass config variables from above
+            inherit pkgs-stable;
+            # inherit pkgs-emacs;
+            # inherit pkgs-kdenlive;
+            # inherit pkgs-nwg-dock-hyprland;
+            inherit systemSettings;
+            inherit userSettings;
+            inherit inputs;
+          };
         };
       };
       nixosConfigurations = {
-        chunixos-vm = lib.nixosSystem {
-          specialArgs = { inherit inputs; };
+        system = lib.nixosSystem {
+          system = systemSettings.system;
           modules = [
-            ./profiles/work/configuration.nix
-            inputs.home-manager.nixosModules.default
-          ];
+            (./. + "/profiles" + ("/" + systemSettings.profile)
+              + "/configuration.nix")
+            # inputs.lix-module.nixosModules.default
+            # ./system/bin/phoenix.nix
+          ]; # load configuration.nix from selected PROFILE
+          specialArgs = {
+            # pass config variables from above
+            inherit pkgs-stable;
+            inherit systemSettings;
+            inherit userSettings;
+            inherit inputs;
+          };
         };
       };
     };
