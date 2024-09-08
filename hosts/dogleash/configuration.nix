@@ -2,11 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{
-  pkgs,
-  inputs,
-  ...
-}:
+{ pkgs, inputs, ... }:
 
 {
   imports = [
@@ -38,7 +34,7 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    initrd.luks.devices."luks-5e6afb19-ccc8-4bca-89ab-6b52892435b5".device = 
+    initrd.luks.devices."luks-5e6afb19-ccc8-4bca-89ab-6b52892435b5".device =
       "/dev/disk/by-uuid/5e6afb19-ccc8-4bca-89ab-6b52892435b5";
   };
 
@@ -110,10 +106,7 @@
   users.users.chu = {
     isNormalUser = true;
     description = "chu";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
+    extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       kdePackages.kate
       thunderbird
@@ -159,19 +152,19 @@
     ];
 
     sessionVariables = {
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+        "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
     };
 
     shells = with pkgs; [ zsh ];
 
   };
 
-  startx.enable = true; # otherwise defaults to lightdm gtk greeter when you log in
+  startx.enable =
+    true; # otherwise defaults to lightdm gtk greeter when you log in
 
   security = {
-    sudo = {
-      enable = true;
-    };
+    sudo = { enable = true; };
     rtkit.enable = true;
   };
 
@@ -199,9 +192,9 @@
     # Enable the OpenSSH daemon.
     openssh.enable = true;
     # Make Emacs packages available to the Emacs Daemon (emacsclient).
-    emacs.package =
-      with pkgs;
-      ((emacsPackagesFor emacs-gtk).emacsWithPackages (epkgs: [ epkgs."vterm" ]));
+    emacs.package = with pkgs;
+      ((emacsPackagesFor emacs-gtk).emacsWithPackages
+        (epkgs: [ epkgs."vterm" ]));
   };
 
   hardware = {
@@ -226,12 +219,8 @@
 
   home-manager = {
     # Pass inputs to home-manager modules.
-    extraSpecialArgs = {
-      inherit inputs;
-    };
-    users = {
-      "chu" = import ../../home.nix;
-    };
+    extraSpecialArgs = { inherit inputs; };
+    users = { "chu" = import ../../home.nix; };
   };
 
   # This value determines the NixOS release from which the default

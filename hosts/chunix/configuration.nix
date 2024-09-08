@@ -105,15 +105,8 @@
   users.users.chu = {
     isNormalUser = true;
     description = "chu";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
-    packages = with pkgs; [
-      kdePackages.kate
-      thunderbird
-      discord
-    ];
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [ kdePackages.kate thunderbird discord ];
   };
 
   # List packages installed in system profile. To search, run:
@@ -154,7 +147,8 @@
     ];
 
     sessionVariables = {
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+        "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
     };
 
     shells = with pkgs; [ zsh ];
@@ -193,9 +187,9 @@
     # Enable the OpenSSH daemon.
     openssh.enable = true;
     # Make Emacs packages available to the Emacs Daemon (emacsclient).
-    emacs.package =
-      with pkgs;
-      ((emacsPackagesFor emacs-gtk).emacsWithPackages (epkgs: [ epkgs."vterm" ]));
+    emacs.package = with pkgs;
+      ((emacsPackagesFor emacs-gtk).emacsWithPackages
+        (epkgs: [ epkgs."vterm" ]));
   };
 
   hardware = {
@@ -220,12 +214,8 @@
 
   home-manager = {
     # Pass inputs to home-manager modules.
-    extraSpecialArgs = {
-      inherit inputs;
-    };
-    users = {
-      "chu" = import ../../home.nix;
-    };
+    extraSpecialArgs = { inherit inputs; };
+    users = { "chu" = import ../../home.nix; };
   };
 
   # This value determines the NixOS release from which the default
