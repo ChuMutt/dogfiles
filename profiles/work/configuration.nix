@@ -8,7 +8,6 @@
   imports = [
 
     # Include the results of the hardware scan.
-    # ./hardware-configuration.nix
     ../../system/hardware-configuration.nix
 
     # Include system modules
@@ -228,7 +227,6 @@
       inherit inputs;
     };
     users = {
-      # "chu" = import ../../home.nix;
       "chu" = import ./home.nix;
     };
   };
