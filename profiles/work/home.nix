@@ -20,6 +20,7 @@
       aspell
       hunspell
       lf
+      pciutils
       mediainfo
       nixfmt-classic
       gnupg

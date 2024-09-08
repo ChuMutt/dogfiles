@@ -38,10 +38,15 @@
         name = "chu the pup";
         email = "chufilthymutt@gmail.com";
         dotfilesDir = "~/.config/dogfiles";
+        theme = null;
+        wm = null;
+        wmType = "x11";
         browser = "firefox";
-        # term # TODO
+        term = "konsole";
+        font = "Noto Sans";
+        fontPkg = pkgs.noto-fonts;
+        editor = "emacsclient";
       };
-
     in {
       homeConfigurations = {
         chu = home-manager.lib.homeManagerConfiguration {
