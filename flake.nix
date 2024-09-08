@@ -23,8 +23,8 @@
         name = "chu the pup";
         email = "chufilthymutt@gmail.com";
         dotfilesDir = "~/.config/dogfiles";
-        theme = null;
-        wm = null;
+        # theme = null;
+        # wm = null;
         wmType = "x11";
         browser = "firefox";
         term = "konsole";
