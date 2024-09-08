@@ -1,7 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [
     ./modules/home-manager/default.nix
-  ]; # IDEA maybe have a list like an init.el instead of this?
+  ];
   home = {
     # Home Manager needs a bit of information about you and the paths it should
     # manage.
@@ -55,7 +56,8 @@
       hunspell
       lf
       mediainfo
-      nixfmt-rfc-style
+      nixfmt-classic
+      # nixfmt-rfc-style
       gnupg
       pinentry
       direnv
@@ -109,8 +111,7 @@
 
     sessionVariables = {
       EDITOR = "nvim";
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-        "\\\${HOME}/.steam/root/compatibilitytools.d";
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\\\${HOME}/.steam/root/compatibilitytools.d";
     };
 
   };
@@ -128,9 +129,12 @@
         co = "checkout";
         s = "status";
       };
-      extraConfig = { push = { autoSetupRemote = true; }; };
+      extraConfig = {
+        push = {
+          autoSetupRemote = true;
+        };
+      };
     };
-
 
     zsh.enable = true;
 
@@ -141,7 +145,9 @@
     firefox.profiles.chu = {
       name = "chu";
       path = "chu";
-      search = { default = "DuckDuckGo"; };
+      search = {
+        default = "DuckDuckGo";
+      };
     };
 
   };
