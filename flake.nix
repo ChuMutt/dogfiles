@@ -22,6 +22,26 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       lib = nixpkgs.lib;
+      systemSettings = {
+        system = "x86_64-linux";
+        hostname = "chunixos-vm";
+        profile = "work";
+        timezone = "America/Chicago";
+        locale = "en_US.UTF-8";
+        bootMode = "uefi"; #uefi or bios
+        bootMountPath = "/boot"; # mount path for efi boot partition; only used for uefi boot mode
+        grubDevice = ""; # device identifier for grub; only used for legacy (bios) boot mode
+        # gpuType = "amd"; # amd, intel or nvidia; only makes some slight mods for amd at the moment
+      };
+      userSettings = rec {
+        username = "chu";
+        name = "chu the pup";
+        email = "chufilthymutt@gmail.com";
+        dotfilesDir = "~/.config/dogfiles";
+        browser = "firefox";
+        term # TODO
+      };
+
     in {
       homeConfigurations = {
         chu = home-manager.lib.homeManagerConfiguration {
