@@ -30,24 +30,10 @@
         };
       };
       nixosConfigurations = {
-        chunix = lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/chunix/configuration.nix
-            inputs.home-manager.nixosModules.default
-          ];
-        };
         chunixos-vm = lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
             ./profiles/work/configuration.nix
-            inputs.home-manager.nixosModules.default
-          ];
-        };
-        dogleash = lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/dogleash/configuration.nix
             inputs.home-manager.nixosModules.default
           ];
         };
