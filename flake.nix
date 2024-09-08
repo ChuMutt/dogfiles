@@ -1,22 +1,22 @@
 {
   description = "nixOS config flake";
-  inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "nixpkgs/nixos-24.05";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixos-hardware.url = "github:nixos/nixos-hardware";
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
-      inputs = {
-        nixpkgs.follows = "nixpkgs-unstable";
-        nixpkgs-stable.follows = "nixpkgs";
-      };
-    };
-  };
+  # inputs = {
+  #   nixpkgs.url = "nixpkgs/nixos-unstable";
+  #   nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+  #   nixpkgs-stable.url = "nixpkgs/nixos-24.05";
+  #   home-manager = {
+  #     url = "github:nix-community/home-manager";
+  #     inputs.nixpkgs.follows = "nixpkgs";
+  #   };
+  #   nixos-hardware.url = "github:nixos/nixos-hardware";
+  #   emacs-overlay = {
+  #     url = "github:nix-community/emacs-overlay";
+  #     inputs = {
+  #       nixpkgs.follows = "nixpkgs-unstable";
+  #       nixpkgs-stable.follows = "nixpkgs";
+  #     };
+  #   };
+  # };
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
@@ -157,5 +157,33 @@
           };
         };
       };
+
+      # apps = forAllSystems (system: {
+      #   default = self.apps.${system}.install;
+      #   install = {
+      #     type = "app";
+      #     program = "${self.packages.${system}.install}/bin/install";
+      #   };
+      # });
+
     };
+  inputs = {
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "nixpkgs/nixos-24.05";
+
+    home-manager-unstable.url = "github:nix-community/home-manager/master";
+    home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs";
+
+    home-manager-stable.url = "github:nix-community/home-manager/release-24.05";
+    home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-stable";
+
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs = {
+        nixpkgs.follows = "nixpkgs-unstable";
+        nixpkgs-stable.follows = "nixpkgs";
+      };
+    };
+  };
 }
