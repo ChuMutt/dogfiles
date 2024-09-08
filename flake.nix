@@ -3,8 +3,6 @@
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
-      # pkgs = nixpkgs.legacyPackages.${system};
-      # lib = nixpkgs.lib;
       systemSettings = {
         system = "x86_64-linux";
         hostname = "chunixos-vm";
