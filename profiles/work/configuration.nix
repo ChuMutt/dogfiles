@@ -34,7 +34,8 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    initrd.luks.devices."luks-c233bfdc-56f5-4381-982a-3e17a746e0da".device = "/dev/disk/by-uuid/c233bfdc-56f5-4381-982a-3e17a746e0da";
+    initrd.luks.devices."luks-c233bfdc-56f5-4381-982a-3e17a746e0da".device =
+      "/dev/disk/by-uuid/c233bfdc-56f5-4381-982a-3e17a746e0da";
   };
 
   networking = {
@@ -89,8 +90,7 @@
     xserver = {
       enable = true; # Enable the X11 windowing system.
       # You can disable this if you're only using the Wayland session.
-      xkb = {
-        # Configure keymap in X11
+      xkb = { # Configure keymap in X11
         layout = "us";
         variant = "";
       };
@@ -164,12 +164,11 @@
 
   };
 
-  startx.enable = true; # otherwise defaults to lightdm gtk greeter when you log in
+  startx.enable =
+    true; # otherwise defaults to lightdm gtk greeter when you log in
 
   security = {
-    sudo = {
-      enable = true;
-    };
+    sudo = { enable = true; };
     rtkit.enable = true;
   };
 
