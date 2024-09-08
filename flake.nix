@@ -135,11 +135,7 @@
               + "/home.nix") # load home.nix from selected PROFILE
           ];
           extraSpecialArgs = {
-            # pass config variables from above
             inherit pkgs-stable;
-            # inherit pkgs-emacs;
-            # inherit pkgs-kdenlive;
-            # inherit pkgs-nwg-dock-hyprland;
             inherit systemSettings;
             inherit userSettings;
             inherit inputs;
@@ -152,11 +148,8 @@
           modules = [
             (./. + "/profiles" + ("/" + systemSettings.profile)
               + "/configuration.nix")
-            # inputs.lix-module.nixosModules.default
-            # ./system/bin/phoenix.nix
           ]; # load configuration.nix from selected PROFILE
           specialArgs = {
-            # pass config variables from above
             inherit pkgs-stable;
             inherit systemSettings;
             inherit userSettings;
