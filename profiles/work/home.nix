@@ -1,6 +1,5 @@
 { pkgs, ... }: {
-  imports =
-    [ ../../modules/home-manager/default.nix ];
+  imports = [ ../../modules/home-manager/default.nix ];
   home = {
     username = "chu";
     homeDirectory = "/home/chu";
@@ -13,7 +12,6 @@
       git-crypt
       tldr
       w3m
-      roswell
       xclip
       pulsemixer
       ispell
@@ -23,7 +21,6 @@
       pciutils
       mediainfo
       nixfmt-classic
-      gnupg
       pinentry
       direnv
       dwm
@@ -37,12 +34,8 @@
       keepassxc
       arandr
     ];
-    file = { ".xinitrc".text = "dwm"; };
-    sessionVariables = {
-      EDITOR = "nvim";
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-        "\\\${HOME}/.steam/root/compatibilitytools.d";
-    };
+    # file = { ".xinitrc".text = "dwm"; };
+    # sessionVariables = { EDITOR = "nvim"; };
   };
   programs = {
     home-manager.enable = true;

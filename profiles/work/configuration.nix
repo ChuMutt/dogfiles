@@ -83,11 +83,11 @@
       ((emacsPackagesFor emacs-gtk).emacsWithPackages (epkgs: [ epkgs.vterm ]))
       home-manager
       protonup # imperative bootstrap for proton-ge
-      nixfmt-rfc-style
-      cmake
-      gnumake
-      gcc
-      roswell # imperative setup
+      # nixfmt-rfc-style
+      # cmake
+      # gnumake
+      # gcc
+      # roswell # imperative setup
 
       # custom scripts
       # TODO fix this script because it doesn't work
