@@ -107,11 +107,6 @@
       '')
     ];
 
-    sessionVariables = {
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-        "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
-    };
-
     shells = with pkgs; [ zsh ];
 
   };
@@ -125,8 +120,6 @@
     zsh.enable = true;
     nh.enable = true;
     firefox.enable = true;
-    steam.enable = true;
-    gamemode.enable = true;
   };
 
   # List services that you want to enable:
