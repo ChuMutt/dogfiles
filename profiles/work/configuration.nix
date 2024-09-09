@@ -70,51 +70,12 @@
     };
   };
 
-  services = {
-    # Enable the KDE Plasma Desktop Environment.
-    displayManager.sddm.enable = true;
-    desktopManager.plasma6.enable = true;
-
-    # Enable the GNOME Desktop Environment.
-    # displayManager.gdm.enable = true;
-    # desktopManager.gnome.enable = true;
-
-    # Enable the suckless dynamic window manager.
-    # windowManager.dwm.enable = true;
-
-    # Enable Emacs X Window Manager (EXWM)
-    # windowManager.exwm.enable = true;
-
-    xserver = {
-      enable = true; # Enable the X11 windowing system.
-      # You can disable this if you're only using the Wayland session.
-      xkb = { # Configure keymap in X11
-        layout = "us";
-        variant = "";
-      };
-    };
-
-    # Enable touchpad support (enabled default in most desktopManager).
-    libinput.enable = true;
-
-    # For virtual machine guests to enable a daemon allowing for clipboard (copy/paste) sharing.
-    spice-vdagentd.enable = true;
-
-  };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.chu = {
     isNormalUser = true;
     description = "chu";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
-    packages = with pkgs; [
-      kdePackages.kate
-      thunderbird
-      discord
-    ];
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [ kdePackages.kate thunderbird discord ];
   };
 
   # List packages installed in system profile. To search, run:
@@ -155,7 +116,8 @@
     ];
 
     sessionVariables = {
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+        "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
     };
 
     shells = with pkgs; [ zsh ];
@@ -194,9 +156,9 @@
     # Enable the OpenSSH daemon.
     openssh.enable = true;
     # Make Emacs packages available to the Emacs Daemon (emacsclient).
-    emacs.package =
-      with pkgs;
-      ((emacsPackagesFor emacs-gtk).emacsWithPackages (epkgs: [ epkgs."vterm" ]));
+    emacs.package = with pkgs;
+      ((emacsPackagesFor emacs-gtk).emacsWithPackages
+        (epkgs: [ epkgs."vterm" ]));
   };
 
   hardware = {
@@ -221,12 +183,8 @@
 
   home-manager = {
     # Pass inputs to home-manager modules.
-    extraSpecialArgs = {
-      inherit inputs;
-    };
-    users = {
-      "chu" = import ./home.nix;
-    };
+    extraSpecialArgs = { inherit inputs; };
+    users = { "chu" = import ./home.nix; };
   };
 
   # This value determines the NixOS release from which the default
