@@ -161,12 +161,12 @@
         (epkgs: [ epkgs."vterm" ]));
   };
 
-  hardware = {
+  # hardware = {
     # Enable bluetooth.
-    bluetooth.enable = true;
+    # bluetooth.enable = true;
     # Enable sound with pipewire.
-    pulseaudio.enable = false;
-  };
+    # pulseaudio.enable = false;
+  # };
 
   # services.pipewire = {
   #   enable = true;
