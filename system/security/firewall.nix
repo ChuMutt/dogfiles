@@ -1,11 +1,11 @@
 { ... }:
 
 {
-  networking = {
+  networking.firewall = {
     # Open ports in the firewall.
-    # firewall.allowedTCPPorts = [ ... ];
-    # firewall.allowedUDPPorts = [ ... ];
+    # allowedTCPPorts = [ ... ];
+    # allowedUDPPorts = [ ... ];
     # Or disable the firewall altogether.
-    # firewall.enable = false;
+    # enable = false;
   };
 }
