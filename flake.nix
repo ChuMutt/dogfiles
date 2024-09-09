@@ -22,8 +22,8 @@
         email = "chufilthymutt@gmail.com";
         dotfilesDir = "~/.config/dogfiles";
         # theme = null;
-        # wm = null;
-        wmType = "x11";
+        # wm = null; #./system/wm/example.nix; ./user/wm/example.nix
+        wmType = "x11"; #./system/wm/example.nix, e.g. ./system/wm/x11.nix
         browser = "firefox";
         term = "konsole";
         font = "Noto Sans";
