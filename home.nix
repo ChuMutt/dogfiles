@@ -59,6 +59,7 @@
       gnupg
       pinentry
       direnv
+      powerdevil #screen brightness p50
 
       # gui/X11
       dwm
