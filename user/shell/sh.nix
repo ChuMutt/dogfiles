@@ -50,5 +50,8 @@ in {
     direnv
     nix-direnv
     tldr
+    killall
+    w3m
+    lynx
   ];
 }
