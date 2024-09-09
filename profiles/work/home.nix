@@ -1,38 +1,39 @@
 { pkgs, ... }: {
-  imports = [ ../../modules/home-manager/default.nix ];
+  # imports = [ ../../modules/home-manager/default.nix ];
   home = {
     username = "chu";
     homeDirectory = "/home/chu";
     stateVersion = "24.05";
     packages = with pkgs; [
+      # core
       zsh
-      bash
-      neovim
-      git
-      git-crypt
-      tldr
-      w3m
-      xclip
-      pulsemixer
-      ispell
-      aspell
-      hunspell
-      lf
-      pciutils
-      mediainfo
-      nixfmt-classic
-      pinentry
-      direnv
-      dwm
-      st
-      unclutter
-      maim
-      redshift
-      slock
+      konsole
       firefox
+      git
+
+      # office
       nextcloud-client
       keepassxc
-      arandr
+      xournalpp
+
+      #media
+      gimp
+      krita
+      pinta
+      inkscape
+      mpv
+      yt-dlp
+      gallery-dl
+      libresprite
+      openscad
+      obs-studio
+      ffmpeg
+          (pkgs.writeScriptBin "kdenlive-accel" ''
+      #!/bin/sh
+      DRI_PRIME=0 kdenlive "$1"
+    '')
+
+
     ];
   };
   programs = {
