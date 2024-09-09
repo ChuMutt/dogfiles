@@ -141,11 +141,6 @@
         (epkgs: [ epkgs."vterm" ]));
   };
 
-  # hardware = {
-  # Enable sound with pipewire.
-  # pulseaudio.enable = false;
-  # };
-
   home-manager = {
     # Pass inputs to home-manager modules.
     extraSpecialArgs = { inherit inputs; };
