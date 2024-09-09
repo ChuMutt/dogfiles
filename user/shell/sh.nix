@@ -39,21 +39,23 @@ in {
     };
   };
   home.packages = with pkgs; [
-    vim
-    neovim
     hyfetch
     lolcat
     cowsay
     sl
     starfetch
     cava
+    asciiquarium-transparent
+    cmatrix
+    ponysay
+    terminal-parrot
+    vim
+    neovim
     killall
     libnotify
     timer
     brightnessctl
     gnugrep
-    ponysay
-    terminal-parrot
     bat
     fd
     eza
