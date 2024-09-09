@@ -28,11 +28,28 @@
       openscad
       obs-studio
       ffmpeg
-          (pkgs.writeScriptBin "kdenlive-accel" ''
-      #!/bin/sh
-      DRI_PRIME=0 kdenlive "$1"
-    '')
+      (pkgs.writeScriptBin "kdenlive-accel" ''
+        #!/bin/sh
+        DRI_PRIME=0 kdenlive "$1"
+      '')
+      mediainfo
+      libmediainfo
+      audio-recorder
+      gnome.cheese
+      raysession
+      ardour
+      rosegarden
+      tenacity
+      calf
 
+      # Various dev packages
+      sshfs
+      texinfo
+      libffi
+      zlib
+      # nodePackages.ungit
+      ventoy
+      kdePackages.kdenlive
 
     ];
   };
@@ -56,6 +73,20 @@
       name = "chu";
       path = "chu";
       search = { default = "DuckDuckGo"; };
+    };
+  };
+  services = {
+    nextcloud-client = {
+      enable = true;
+      startInBackground = true;
+    };
+  };
+  xdg = {
+    enable = true;
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+      # TODO
     };
   };
 }
