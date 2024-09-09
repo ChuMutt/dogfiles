@@ -124,8 +124,6 @@
 
   # List services that you want to enable:
   services = {
-    # Enable CUPS to print documents.
-    printing.enable = true;
     # Enable the OpenSSH daemon.
     openssh.enable = true;
     # Make Emacs packages available to the Emacs Daemon (emacsclient).
