@@ -34,8 +34,6 @@
       keepassxc
       arandr
     ];
-    # file = { ".xinitrc".text = "dwm"; };
-    # sessionVariables = { EDITOR = "nvim"; };
   };
   programs = {
     home-manager.enable = true;
