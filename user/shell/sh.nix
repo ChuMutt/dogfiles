@@ -45,6 +45,8 @@ in {
     lolcat
     cowsay
     sl
+    starfetch
+    cava
     killall
     libnotify
     timer
@@ -54,8 +56,8 @@ in {
     terminal-parrot
     bat
     fd
-    # eza
-    # bottom
+    eza
+    bottom
     ripgrep
     rsync
     unzip
