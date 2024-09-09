@@ -64,7 +64,6 @@
             allowUnfreePredicate = (_: true);
           };
         }));
-
       pkgs-stable = import inputs.nixpkgs-stable {
         system = systemSettings.system;
         config = {
@@ -72,7 +71,6 @@
           allowUnfreePredicate = (_: true);
         };
       };
-
       pkgs-unstable = import inputs.nixpkgs-patched {
         system = systemSettings.system;
         config = {
@@ -80,7 +78,6 @@
           allowUnfreePredicate = (_: true);
         };
       };
-
       # configure lib
       # use nixpkgs if running a server (homelab or worklab profile)
       # otherwise use patched nixos-unstable nixpkgs
@@ -89,7 +86,6 @@
         inputs.nixpkgs-stable.lib
       else
         inputs.nixpkgs.lib);
-
       # use home-manager-stable if running a server (homelab or worklab profile)
       # otherwise use home-manager-unstable
       home-manager = (if ((systemSettings.profile == "homelab")
@@ -97,13 +93,10 @@
         inputs.home-manager-stable
       else
         inputs.home-manager-unstable);
-
       # Systems that can run tests:
       supportedSystems = [ "aarch64-linux" "i686-linux" "x86_64-linux" ];
-
       # Function to generate a set based on supported systems:
       forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
-
       # Attribute set of nixpkgs for each system:
       nixpkgsFor =
         forAllSystems (system: import inputs.nixpkgs { inherit system; });
@@ -138,7 +131,6 @@
           };
         };
       };
-
       # apps = forAllSystems (system: {
       #   default = self.apps.${system}.install;
       #   install = {
@@ -146,18 +138,14 @@
       #     program = "${self.packages.${system}.install}/bin/install";
       #   };
       # });
-
     };
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-24.05";
-
     home-manager-unstable.url = "github:nix-community/home-manager/master";
     home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs";
-
     home-manager-stable.url = "github:nix-community/home-manager/release-24.05";
     home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-stable";
-
     nixos-hardware.url = "github:nixos/nixos-hardware";
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";

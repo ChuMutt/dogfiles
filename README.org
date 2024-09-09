@@ -3,7 +3,6 @@
 - [[https://www.youtube.com/@wilfridtaylor][Wil T]]
 - [[https://github.com/librephoenix/nixos-config][librephoenix/nixos-config]]
 - [[https://github.com/hlissner/dotfiles][hlissner/dotfiles]]
-
 * TODO
 ** TODO better modularization / system profiles that don't repeat themselves
 ** TODO telegram
