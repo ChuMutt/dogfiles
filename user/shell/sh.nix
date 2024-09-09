@@ -39,19 +39,43 @@ in {
     };
   };
   home.packages = with pkgs; [
-    sl
-    cowsay
-    ponysay
+    vim
+    neovim
+    hyfetch
     lolcat
+    cowsay
+    sl
+    killall
+    libnotify
+    timer
+    brightnessctl
+    gnugrep
+    ponysay
     terminal-parrot
     bat
     fd
+    # eza
+    # bottom
+    ripgrep
+    rsync
+    unzip
     bc
     direnv
     nix-direnv
     tldr
-    killall
     w3m
-    lynx
+    pandoc
+    hwinfo
+    pciutils
+    (pkgs.writeShellScriptBin "airplane-mode" ''
+      #!/bin/sh
+      connectivity="$(nmcli n connectivity)"
+      if [ "$connectivity" == "full" ]
+      then
+          nmcli n off
+      else
+          nmcli n on
+      fi
+    '')
   ];
 }
