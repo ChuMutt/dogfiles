@@ -1,7 +1,6 @@
 { ... }:
 
 {
-  # Firewall
   networking = {
     # Open ports in the firewall.
     # firewall.allowedTCPPorts = [ ... ];
