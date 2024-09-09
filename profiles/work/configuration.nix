@@ -124,8 +124,6 @@
 
   # List services that you want to enable:
   services = {
-    # Enable the OpenSSH daemon.
-    openssh.enable = true;
     # Make Emacs packages available to the Emacs Daemon (emacsclient).
     emacs.package = with pkgs;
       ((emacsPackagesFor emacs-gtk).emacsWithPackages
