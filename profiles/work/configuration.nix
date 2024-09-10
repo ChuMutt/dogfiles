@@ -11,10 +11,10 @@
     ../../system/hardware-configuration.nix
 
     # Include system modules
-    ../../modules/nixos/default.nix
+    # ../../modules/nixos/default.nix
 
     # Include user module
-    ../../modules/profiles/default.nix
+    # ../../modules/profiles/default.nix
 
     # Include user home configuration
     inputs.home-manager.nixosModules.default
