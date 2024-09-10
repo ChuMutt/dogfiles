@@ -57,6 +57,7 @@
       grub.device =
         systemSettings.grubDevice; # does nothing if running uefi rather than bios
     };
+    kernelModules = [ "i2c-dev" "i2c-piix4" "cpufreq_powersave" ];
     initrd.luks.devices."luks-c233bfdc-56f5-4381-982a-3e17a746e0da".device =
       "/dev/disk/by-uuid/c233bfdc-56f5-4381-982a-3e17a746e0da"; # TODO
   };
