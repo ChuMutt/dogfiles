@@ -18,7 +18,7 @@
   home = {
     username = userSettings.username;
     homeDirectory = "/home/" + userSettings.username;
-    stateVersion = "24.05";
+    stateVersion = "24.05"; # Do not modify.
     packages = with pkgs; [
       # core
       zsh
