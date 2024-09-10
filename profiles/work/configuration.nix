@@ -100,9 +100,28 @@
     systemPackages = with pkgs; [
       vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       wget
+      zsh
+      git
+      cryptsetup
+      home-manager
+      wpa_supplicant
+
+      # scripts
+      (pkgs.writeScriptBin "comma" ''
+        if [ "$#" = 0 ]; then
+          echo "usage: comma PKGNAME... [EXECUTABLE]";
+        elif [ "$#" = 1 ]; then
+          nix-shell -p $1 --run $1;
+        elif [ "$#" = 2 ]; then
+          nix-shell -p $1 --run $2;
+        else
+          echo "error: too many arguments";
+          echo "usage: comma PKGNAME... [EXECUTABLE]";
+        fi
+      '') # by librephoenix
+
       tldr
       neovim
-      git
       htop
       ((emacsPackagesFor emacs-gtk).emacsWithPackages (epkgs: [ epkgs.vterm ]))
       protonup # imperative bootstrap for proton-ge
