@@ -22,10 +22,10 @@
   ];
 
   # Enable user module
-  chu = {
-    enable = true;
-    userName = "chu";
-  };
+  # chu = {
+  #   enable = true;
+  #   userName = "chu";
+  # };
 
   # Bootloader.
   boot = {
@@ -81,7 +81,7 @@
       git
       htop
       ((emacsPackagesFor emacs-gtk).emacsWithPackages (epkgs: [ epkgs.vterm ]))
-      home-manager
+      # home-manager
       protonup # imperative bootstrap for proton-ge
       # nixfmt-rfc-style
       # cmake
