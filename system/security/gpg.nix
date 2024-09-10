@@ -5,7 +5,7 @@
   # started in user sessions.
   programs = {
     mtr.enable = true;
-    programs.gnupg.agent = {
+    gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
     };
