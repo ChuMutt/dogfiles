@@ -11,24 +11,24 @@
         variant = "";
         options = "caps:escape";
       };
-    };
 
-    services.displayManager = {
-      sddm.enable = true; # KDE
-      # gdm.enable = true; # GNOME
-      # lightdm.enable = true; # Canonical
-      # startx.enable = true; # none
-      sessionCommands = ''
-        xset b off
-        xset -dpms
-        xset r rate 350 50
-      '';
-    };
+      displayManager = {
+        sddm.enable = true; # KDE
+        # gdm.enable = true; # GNOME
+        # lightdm.enable = true; # Canonical
+        # startx.enable = true; # none
+        sessionCommands = ''
+          xset b off
+          xset -dpms
+          xset r rate 350 50
+        '';
+      };
 
-    desktopManager = {
-      # Enable the KDE Plasma Desktop Environment.
-      plasma6.enable = true; # KDE
-      # gnome.enable = true; # GNOME
+      desktopManager = {
+        # Enable the KDE Plasma Desktop Environment.
+        plasma6.enable = true; # KDE
+        # gnome.enable = true; # GNOME
+      };
     };
 
     # windowManager = {
