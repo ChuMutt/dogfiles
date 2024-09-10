@@ -11,17 +11,17 @@
         variant = "";
         options = "caps:escape";
       };
-      sessionCommands = ''
-        xset b off
-        xset -dpms
-        xset r rate 350 50
-      '';
-    };
-    displayManager = {
-      sddm.enable = true; # KDE
-      # gdm.enable = true; # GNOME
-      # lightdm.enable = true; # Canonical
-      # startx.enable = true; # none
+      displayManager = {
+        sddm.enable = true; # KDE
+        # gdm.enable = true; # GNOME
+        # lightdm.enable = true; # Canonical
+        # startx.enable = true; # none
+        sessionCommands = ''
+          xset b off
+          xset -dpms
+          xset r rate 350 50
+        '';
+      };
     };
 
     desktopManager = {
