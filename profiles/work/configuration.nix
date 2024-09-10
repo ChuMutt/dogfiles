@@ -168,11 +168,9 @@
         (epkgs: [ epkgs."vterm" ]));
   };
 
-  # home-manager = {
-  #   # Pass inputs to home-manager modules.
-  #   extraSpecialArgs = { inherit inputs; };
-  #   users = { "chu" = import ./home.nix; };
-  # };
+  # Add emacs overlay
+  nixpkgs.overlays = [ (import inputs.emacs-overlay) ];
+  # TODO Move?
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -181,9 +179,5 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
-  # Add emacs overlay
-  nixpkgs.overlays = [ (import inputs.emacs-overlay) ];
-  # TODO Move?
 
 }
