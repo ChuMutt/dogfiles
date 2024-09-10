@@ -32,6 +32,18 @@
     "/nix/var/nix/profiles/per-user/root/channels"
   ];
 
+  # Ensure nix flakes are enabled
+  nix.package = pkgs.nixFlakes;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+
+  # wheel group gets trusted access to nix daemon
+  nix.settings.trusted-users = [ "@wheel" ];
+
+  # Allow unfree packages. Sorry, rms.
+  nixpkgs.config.allowUnfree = true;
+
   # Bootloader
   boot = {
     loader = {
@@ -147,9 +159,6 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
-  # Allow unfree packages. Sorry, rms.
-  nixpkgs.config.allowUnfree = true;
 
   # Add emacs overlay
   nixpkgs.overlays = [ (import inputs.emacs-overlay) ];
