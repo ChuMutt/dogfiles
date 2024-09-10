@@ -111,8 +111,8 @@
 
   };
 
-  startx.enable =
-    true; # otherwise defaults to lightdm gtk greeter when you log in
+  # startx.enable =
+  #   true; # otherwise defaults to lightdm gtk greeter when you log in
 
   security = { sudo = { enable = true; }; };
 
@@ -130,11 +130,11 @@
         (epkgs: [ epkgs."vterm" ]));
   };
 
-  home-manager = {
-    # Pass inputs to home-manager modules.
-    extraSpecialArgs = { inherit inputs; };
-    users = { "chu" = import ./home.nix; };
-  };
+  # home-manager = {
+  #   # Pass inputs to home-manager modules.
+  #   extraSpecialArgs = { inherit inputs; };
+  #   users = { "chu" = import ./home.nix; };
+  # };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
