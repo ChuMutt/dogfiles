@@ -64,7 +64,7 @@
   };
 
   networking = {
-    hostName = userSettings.hostname; # Define your hostname.
+    hostName = systemSettings.hostname; # Define your hostname.
     networkmanager.enable = true; # Enable networking
   };
 
