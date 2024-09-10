@@ -1,5 +1,5 @@
 { pkgs, ... }:
-
+# TODO be able to pick between kde/gnome/suckless & be able to extend
 {
   imports = [ ./pipewire.nix ./dbus.nix ./gnome-keyring.nix ];
 
