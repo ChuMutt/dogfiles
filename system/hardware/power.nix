@@ -45,5 +45,4 @@
       INTEL_GPU_MIN_FREQ_ON_BAT = 250;
     };
   };
-
 }
