@@ -1,6 +1,5 @@
 {
   description = "nixOS config flake";
-  # outputs = inputs@{ self, nixpkgs, home-manager, ... }:
   outputs = inputs@{ self, ... }:
     let
       system = "x86_64-linux";
