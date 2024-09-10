@@ -2,44 +2,43 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, inputs, systemSettings, userSettings, ... }:
+{ pkgs, lib, systemSettings, userSettings, ... }:
 
 {
   imports = [
-
     # Include the results of the hardware scan.
     ../../system/hardware-configuration.nix
-
-    # Include system modules
-    # ../../modules/nixos/default.nix
-
-    # Include user module
-    # ../../modules/profiles/default.nix
-
-    # Include user home configuration
-    # inputs.home-manager.nixosModules.default
+    ../../system/hardware/systemd.nix
+    ../../system/hardware/time.nix
+    ../../system/hardware/kernel.nix
+    ../../system/hardware/power.nix
+    ../../system/hardware/opengl.nix
+    ../../system/hardware/printing.nix
+    ../../system/hardware/bluetooth.nix
+    (./. + "../../../system/wm" + ("/" + userSettings.wm)
+      + ".nix")
+    ../../system/app/vm.nix
 
   ];
 
-  # Enable user module
-  # chu = {
-  #   enable = true;
-  #   userName = "chu";
-  # };
-
-  # Bootloader.
+  # Bootloader
   boot = {
     loader = {
-      # systemd-boot (UEFI)
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
+      systemd-boot.enable =
+        if (systemSettings.bootMode == "uefi") then true else false;
+      efi.canTouchEfiVariables =
+        if (systemSettings.bootMode == "uefi") then true else false;
+      efi.efiSysMountPoint =
+        systemSettings.bootMountPath; # does nothing if running bios rather than uefi
+      grub.enable = if (systemSettings.bootMode == "uefi") then false else true;
+      grub.device =
+        systemSettings.grubDevice; # does nothing if running uefi rather than bios
     };
     initrd.luks.devices."luks-c233bfdc-56f5-4381-982a-3e17a746e0da".device =
-      "/dev/disk/by-uuid/c233bfdc-56f5-4381-982a-3e17a746e0da";
+      "/dev/disk/by-uuid/c233bfdc-56f5-4381-982a-3e17a746e0da"; # TODO
   };
 
   networking = {
-    # hostName = "chunixos-vm"; # Define your hostname.
     hostName = userSettings.hostname; # Define your hostname.
     networkmanager.enable = true; # Enable networking
   };
@@ -59,12 +58,14 @@
     LC_TIME = systemSettings.locale;
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.chu = {
+  # User account
+  users.users.${userSettings.username} = {
     isNormalUser = true;
-    description = "chu";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ kdePackages.kate thunderbird discord ];
+    description = userSettings.name;
+    extraGroups =
+      [ "networkmanager" "wheel" "input" "dialout" "video" "render" ];
+    packages = [ ];
+    uid = 1000;
   };
 
   # List packages installed in system profile. To search, run:
@@ -78,13 +79,7 @@
       git
       htop
       ((emacsPackagesFor emacs-gtk).emacsWithPackages (epkgs: [ epkgs.vterm ]))
-      # home-manager
       protonup # imperative bootstrap for proton-ge
-      # nixfmt-rfc-style
-      # cmake
-      # gnumake
-      # gcc
-      # roswell # imperative setup
 
       # custom scripts
       # TODO fix this script because it doesn't work
@@ -108,15 +103,16 @@
 
   };
 
-  # startx.enable =
-  #   true; # otherwise defaults to lightdm gtk greeter when you log in
-
   security = { sudo = { enable = true; }; };
 
   programs = {
     zsh.enable = true;
     nh.enable = true;
-    firefox.enable = true;
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal xdg-desktop-portal-gtk ];
   };
 
   # List services that you want to enable:
