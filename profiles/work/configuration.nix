@@ -18,6 +18,11 @@
     (./. + "../../../system/wm" + ("/" + userSettings.wm)
       + ".nix")
     ../../system/app/vm.nix
+    ../../system/app/nh.nix
+    ../../system/security/gpg.nix
+    ../../system/security/sshd.nix
+    ../../system/security/proxy.nix
+    ../../system/security/firewall.nix
 
   ];
 
