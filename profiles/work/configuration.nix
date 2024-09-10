@@ -17,7 +17,7 @@
     # ../../modules/profiles/default.nix
 
     # Include user home configuration
-    inputs.home-manager.nixosModules.default
+    # inputs.home-manager.nixosModules.default
 
   ];
 
