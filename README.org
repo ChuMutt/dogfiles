@@ -1,5 +1,5 @@
 #+title: chunixos
-* To-do
+* To-Do
 ** TODO better modularization / system profiles that don't repeat themselves
 ** TODO lf declarative rather than tangling in luke lf config
 ** TODO telegram
