@@ -1,22 +1,39 @@
-{ pkgs, ... }: {
-  # imports = [ ../../modules/home-manager/default.nix ];
+{ config, pkgs, userSettings, ... }: {
+  imports = [
+    # (./. + "../../../user/wm" + ("/" + userSettings.wm + "/" + userSettings.wm)
+    #   + ".nix") # My window manager selected from flake.nix TODO
+    ../../user/shell/sh.nix
+    ../../user/app/lf/lf.nix
+    ../../user/app/git/git.nix
+    ../../user/app/vm/vm.nix
+    (./. + "../../../user/app/browser" + ("/" + userSettings.browser)
+      + ".nix") # My default browser selected from flake.nix
+    ../../user/lang/cc/cc.nix
+    ../../user/lang/lisp/lisp.nix
+    ../../user/lang/rust/rust.nix
+    ../../user/hardware/bluetooth.nix
+    ../../user/app/keepass/keepass.nix
+
+  ];
   home = {
-    username = "chu";
-    homeDirectory = "/home/chu";
+    username = userSettings.username;
+    homeDirectory = "/home/" + userSettings.username;
     stateVersion = "24.05";
     packages = with pkgs; [
       # core
       zsh
       konsole
-      firefox
+      librewolf
       git
 
       # office
       nextcloud-client
+      libreoffice-fresh
       keepassxc
       xournalpp
+      kdePackages.kate
 
-      #media
+      # media
       gimp
       krita
       pinta
@@ -50,15 +67,14 @@
       # nodePackages.ungit
       ventoy
       kdePackages.kdenlive
-
     ];
   };
   programs = {
     home-manager.enable = true;
     git = {
       enable = true;
-      userEmail = "chufilthymutt@gmail.com";
-      userName = "chumutt";
+      userEmail = userSettings.email;
+      userName = userSettings.name;
       aliases = {
         ci = "commit";
         co = "checkout";
@@ -70,8 +86,8 @@
     ssh.enable = true;
     gpg.enable = true;
     firefox.profiles.chu = {
-      name = "chu";
-      path = "chu";
+      name = userSettings.username;
+      path = userSettings.username;
       search = { default = "DuckDuckGo"; };
     };
   };
@@ -81,12 +97,12 @@
       startInBackground = true;
     };
   };
-  xdg = {
-    enable = true;
-    userDirs = {
-      enable = true;
-      createDirectories = true;
-      # TODO
-    };
-  };
+  # xdg = {
+  #   enable = true;
+  #   userDirs = {
+  #     enable = true;
+  #     createDirectories = true;
+  #     # TODO
+  #   };
+  # };
 }
