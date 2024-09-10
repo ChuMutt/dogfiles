@@ -21,8 +21,8 @@
         name = "chu the pup";
         email = "chufilthymutt@gmail.com";
         dotfilesDir = "~/.config/dogfiles";
-        # theme = null;
-        # wm = null; #./system/wm/example.nix; ./user/wm/example.nix
+        # theme = null; TODO
+        # wm = null; #./system/wm/example.nix; ./user/wm/example.nix TODO
         wmType = "x11"; #./system/wm/example.nix, e.g. ./system/wm/x11.nix
         browser = "firefox";
         term = "konsole";
