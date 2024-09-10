@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  boot = {
-    kernelPackages = pkgs.linux;
-    consoleLogLevel = 0;
-  };
+  # boot = {
+  #   kernelPackages = pkgs.linux;
+  #   consoleLogLevel = 0;
+  # };
 }
