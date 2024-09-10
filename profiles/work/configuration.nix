@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, lib, systemSettings, userSettings, ... }:
+{ pkgs, lib, inputs, systemSettings, userSettings, ... }:
 
 {
   imports = [
@@ -148,12 +148,12 @@
 
   };
 
-  security = { sudo = { enable = true; }; };
-
   programs = {
     zsh.enable = true;
     nh.enable = true;
   };
+
+  fonts.fontDir.enable = true;
 
   xdg.portal = {
     enable = true;
@@ -184,7 +184,6 @@
 
   # Add emacs overlay
   nixpkgs.overlays = [ (import inputs.emacs-overlay) ];
-
-  nix.settings.experimental-features = "nix-command flakes";
+  # TODO Move?
 
 }
