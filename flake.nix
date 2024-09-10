@@ -24,9 +24,10 @@
         dotfilesDir = "~/.config/dogfiles";
         # theme = null; TODO
         # wm = null; #./system/wm/example.nix; ./user/wm/example.nix TODO
-        wm = ./system/wm/x11.nix; # TODO temporary
-        wmType = "x11"; #./system/wm/example.nix, e.g. ./system/wm/x11.nix
-        browser = "firefox";
+        wm = ./system/wm/x11.nix; # TODO temporary, installs plasma 6
+        # wmType = "x11"; #./system/wm/example.nix, e.g. ./system/wm/x11.nix
+        wmType = ./system/wm/x11.nix; # TODO temporary, installs plasma 6
+        browser = "librewolf";
         term = "konsole";
         font = "Noto Sans";
         fontPkg = pkgs.noto-fonts;
