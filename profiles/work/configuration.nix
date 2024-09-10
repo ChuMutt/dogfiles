@@ -16,7 +16,7 @@
     ../../system/hardware/printing.nix
     ../../system/hardware/bluetooth.nix
     # (./. + "../../../system/wm" + ("/" + userSettings.wm) + ".nix")
-    ../../system/wm/x11.nix
+    ../../system/wm/x11.nix # TODO fix
     ../../system/app/vm.nix
     ../../system/app/nh.nix
     ../../system/security/gpg.nix
