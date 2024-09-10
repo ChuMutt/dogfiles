@@ -1,5 +1,5 @@
 #+title: chunixos
-* TODO
+* To-do
 ** TODO better modularization / system profiles that don't repeat themselves
 ** TODO lf declarative rather than tangling in luke lf config
 ** TODO telegram
@@ -17,7 +17,7 @@
 ** TODO impermanence
 ** TODO literate
 ** TODO random-splash-image emacs
-* TODO References / Credits
+* References / Credits
 - [[https://www.youtube.com/@wilfridtaylor][Wil T]]
 - [[https://github.com/librephoenix/nixos-config][librephoenix/nixos-config]]
 - [[https://github.com/hlissner/dotfiles][hlissner/dotfiles]]
@@ -190,7 +190,7 @@
 }
 
 #+end_src
-* TODO profiles/
+* profiles/
 ** work/
 *** configuration.nix
 #+begin_src nix :mkdirp yes :tangle ./profiles/work/configuration.nix
@@ -490,7 +490,7 @@
   # };
 }
 #+end_src
-* TODO system/
+* system/
 ** app/
 *** gamemode.nix
 #+begin_src nix :mkdirp yes :tangle ./system/app/gamemode.nix
@@ -820,7 +820,7 @@
   };
 }
 #+end_src
-* TODO user/
+* user/
 ** app/
 *** browser/
 **** librewolf.nix
