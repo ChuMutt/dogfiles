@@ -1404,7 +1404,7 @@ exit 1
 #+end_src
 ** lang/
 *** cc/cc.nix
-#+begin_src :mkdirp yes :tangle ./user/lang/cc/cc.nix
+#+begin_src nix :mkdirp yes :tangle ./user/lang/cc/cc.nix
 { pkgs, ... }:
 
 {
@@ -1419,7 +1419,7 @@ exit 1
 }
 #+end_src
 *** lisp/lisp.nix
-#+begin_src :mkdirp yes :tangle ./user/lang/lisp/lisp.nix
+#+begin_src nix :mkdirp yes :tangle ./user/lang/lisp/lisp.nix
 { pkgs, ... }:
 
 {
@@ -1437,7 +1437,7 @@ exit 1
 }
 #+end_src
 *** rust/rust.nix
-#+begin_src :mkdirp yes :tangle ./user/lang/rust/rust.nix
+#+begin_src nix :mkdirp yes :tangle ./user/lang/rust/rust.nix
 { pkgs, ... }:
 
 {
