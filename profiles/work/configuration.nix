@@ -15,8 +15,7 @@
     ../../system/hardware/opengl.nix
     ../../system/hardware/printing.nix
     ../../system/hardware/bluetooth.nix
-    (./. + "../../../system/wm" + ("/" + userSettings.wm)
-      + ".nix")
+    (./. + "../../../system/wm" + ("/" + userSettings.wm) + ".nix")
     ../../system/app/vm.nix
     ../../system/app/nh.nix
     ../../system/security/gpg.nix
@@ -24,7 +23,13 @@
     ../../system/security/proxy.nix
     ../../system/security/firewall.nix
     # TODO ../../system/security/automount.nix
+  ];
 
+  # Fix nix path
+  nix.nixPath = [
+    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    ("nixos-config=" + userSettings.dotfilesDir + "/system/configuration.nix")
+    "/nix/var/nix/profiles/per-user/root/channels"
   ];
 
   # Bootloader
