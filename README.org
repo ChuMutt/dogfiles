@@ -68,7 +68,7 @@ Set permissions for files that should be owned by root:
 
 #+name: install-harden-core-configuration
 #+begin_src sh
-sudo $SCRIPT_DIR/harden $SCRIPT_DIR;
+# sudo $SCRIPT_DIR/harden $SCRIPT_DIR;
 #+end_src
 
 Rebuild system:
