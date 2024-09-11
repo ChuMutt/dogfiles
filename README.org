@@ -2,7 +2,7 @@
 * To-Do
 ** TODO better modularization / system profiles that don't repeat themselves
 ** TODO actual profiles that aren't just everything you need thrown into /work profile
-** TODO lf declarative rather than tangling in luke lf config
+** TODO lf declarative rather than tangling in luke lf config raw via org babel
 ** TODO telegram
 ** TODO emacs email dependencies added and configured
 ** TODO doom install script with my dotfiles
@@ -23,9 +23,13 @@
 - [[https://github.com/librephoenix/nixos-config][librephoenix/nixos-config]]
 - [[https://github.com/hlissner/dotfiles][hlissner/dotfiles]]
 * Install script
+
 Credits to LibrePhoenix.
-#+begin_src sh :shebang #!/bin/sh :tangle ./install
-# Clone dotfiles
+
+Clone dotfiles.
+
+#+name: clone-dotfiles
+#+begin_src sh :shebang #!/bin/sh
 if [ $# -gt 0 ]
   then
     SCRIPT_DIR=$1
@@ -33,11 +37,19 @@ if [ $# -gt 0 ]
     SCRIPT_DIR=~/.config/dogfiles
 fi
 nix-shell -p git --command "git clone https://github.com/chumutt/dogfiles $SCRIPT_DIR"
+#+end_src
 
-# Generate hardware config for new system
+Generate hardware configuration for the system.
+
+#+name: generate-hardware-config
+#+begin_src sh
 sudo nixos-generate-config --show-hardware-config > $SCRIPT_DIR/system/hardware-configuration.nix
+#+end_src
 
-# Check if uefi or bios
+Check if the system is running UEFI or BIOS.
+
+#+name: uefi-or-bios-check
+#+begin_src sh
 if [ -d /sys/firmware/efi/efivars ]; then
     sed -i "0,/bootMode.*=.*\".*\";/s//bootMode = \"uefi\";/" $SCRIPT_DIR/flake.nix
 else
@@ -45,29 +57,60 @@ else
     grubDevice=$(findmnt / | awk -F' ' '{ print $2 }' | sed 's/\[.*\]//g' | tail -n 1 | lsblk -no pkname | tail -n 1 )
     sed -i "0,/grubDevice.*=.*\".*\";/s//grubDevice = \"\/dev\/$grubDevice\";/" $SCRIPT_DIR/flake.nix
 fi
+#+end_src
 
-# Patch flake.nix with different username/name and remove email by default
+Patch flake.nix with different username/name and remove email by default.
+
+#+name: patch-flake-and-attune-to-user
+#+begin_src sh
 sed -i "0,/chu/s//$(whoami)/" $SCRIPT_DIR/flake.nix
 sed -i "0,/Chu/s//$(getent passwd $(whoami) | cut -d ':' -f 5 | cut -d ',' -f 1)/" $SCRIPT_DIR/flake.nix
 sed -i "s/chufilthymutt@gmail.com//" $SCRIPT_DIR/flake.nix
 sed -i "s+~/.config/dogfiles+$SCRIPT_DIR+g" $SCRIPT_DIR/flake.nix
+#+end_src
 
-# Open up editor to manually edit flake.nix before install
+Open up editor to manually edit flake.nix before install.
+
+#+name: edit-flake-prompt
+#+begin_src sh
 if [ -z "$EDITOR" ]; then
     EDITOR=nano;
 fi
 $EDITOR $SCRIPT_DIR/flake.nix;
-
-# Set permissions for files that should be owned by root
-# sudo $SCRIPT_DIR/harden.sh $SCRIPT_DIR; # TODO Current no harden.sh
-
-# Rebuild system
-sudo nixos-rebuild switch --flake $SCRIPT_DIR#system;
-
-# Install and build home-manager configuration
-nix run home-manager/master --extra-experimental-features nix-command --extra-experimental-features flakes -- switch --flake $SCRIPT_DIR#user;
-
 #+end_src
+
+Set permissions for files that should be owned by root.
+
+#+name: harden-core-configuration
+#+begin_src sh
+sudo $SCRIPT_DIR/harden.sh $SCRIPT_DIR; # TODO Currently no harden.sh
+#+end_src
+
+Rebuild system.
+
+#+name: nixos-rebuild-system-with-flake
+#+begin_src sh
+sudo nixos-rebuild switch --flake $SCRIPT_DIR#system;
+#+end_src
+
+Install and build home-manager configuration.
+
+#+name: install-and-build-home-manager-config
+#+begin_src sh
+nix run home-manager/master --extra-experimental-features nix-command --extra-experimental-features flakes -- switch --flake $SCRIPT_DIR#user;
+#+end_src
+
+#+begin_src sh :noweb yes :eval no :tangle ./install
+<<clone-dotfiles>>
+<<generate-hardware-config>>
+<<uefi-or-bios-check>>
+<<patch-flake-and-attune-to-user>>
+<<edit-flake-prompt>>
+<<harden-core-configuration>>
+<<nixos-rebuild-system-with-flake>>
+<<install-and-build-home-manager-config>>
+#+end_src
+
 * flake.nix
 #+begin_src nix :tangle ./flake.nix
 {
