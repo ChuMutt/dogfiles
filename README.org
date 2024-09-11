@@ -256,7 +256,6 @@ Script to synchronize system state with configuration files for nixos system and
 #+end_quote
 
 #+begin_src sh :shebang #!/bin/sh :tangle ./sync-system
-
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # Rebuild system
