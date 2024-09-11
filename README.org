@@ -332,7 +332,7 @@ Note: Disabled.
       };
       userSettings = rec {
         username = "chu";
-        name = "chudawg";
+        name = "chumutt";
         email = "chufilthymutt@gmail.com";
         dotfilesDir = "~/.config/dogfiles";
         # theme = null; TODO
