@@ -1,27 +1,4 @@
 #+title: chunixos
-* To-Do
-** TODO better modularization / system profiles that don't repeat themselves
-** TODO actual profiles that aren't just everything you need thrown into /work profile
-** TODO lf declarative rather than tangling in luke lf config raw via org babel
-** TODO telegram
-** TODO emacs email dependencies added and configured
-** TODO doom install script with my dotfiles
-** TODO doom path added to path
-** TODO roswell install script
-** TODO wallpaper
-** TODO opentabletdriver
-** TODO ardour / plugins / music
-** TODO zfs server / nfs connections
-** TODO agenix
-** TODO blender
-** TODO hard drives / fstab
-** TODO impermanence
-** TODO literate
-** TODO random-splash-image emacs
-* References / Credits
-- [[https://www.youtube.com/@wilfridtaylor][Wil T]]
-- [[https://github.com/librephoenix/nixos-config][librephoenix/nixos-config]]
-- [[https://github.com/hlissner/dotfiles][hlissner/dotfiles]]
 * Installation
 To install, run =install=:
 
@@ -1685,3 +1662,26 @@ in {
 
 #+end_src
 ** TODO wm/
+* To-Do
+** TODO better modularization / system profiles that don't repeat themselves
+** TODO actual profiles that aren't just everything you need thrown into /work profile
+** TODO lf declarative rather than tangling in luke lf config raw via org babel
+** TODO telegram
+** TODO emacs email dependencies added and configured
+** TODO doom install script with my dotfiles
+** TODO doom path added to path
+** TODO roswell install script
+** TODO wallpaper
+** TODO opentabletdriver
+** TODO ardour / plugins / music
+** TODO zfs server / nfs connections
+** TODO agenix
+** TODO blender
+** TODO hard drives / fstab
+** TODO impermanence
+** TODO literate
+** TODO random-splash-image emacs
+* References / Credits
+- [[https://www.youtube.com/@wilfridtaylor][Wil T]]
+- [[https://github.com/librephoenix/nixos-config][librephoenix/nixos-config]]
+- [[https://github.com/hlissner/dotfiles][hlissner/dotfiles]]
