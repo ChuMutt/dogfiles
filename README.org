@@ -4,7 +4,7 @@ To install, run =install=:
 
 #+name: run-install-script-example
 #+begin_src sh :results none :tangle no
-./install
+./bin/install
 #+end_src
 
 which will run the following two scripts (credits to LibrePhoenix):
