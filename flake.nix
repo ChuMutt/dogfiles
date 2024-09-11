@@ -18,7 +18,7 @@
       };
       userSettings = rec {
         username = "chu";
-        name = "chu the pup";
+        name = "chumutt";
         email = "chufilthymutt@gmail.com";
         dotfilesDir = "~/.config/dogfiles";
         # theme = null; TODO
