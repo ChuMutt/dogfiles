@@ -1,9 +1,0 @@
-#!/bin/sh
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-sudo $SCRIPT_DIR/soften $SCRIPT_DIR;
-pushd $SCRIPT_DIR &> /dev/null;
-git stash;
-git pull;
-git stash apply;
-popd &> /dev/null;
-sudo $SCRIPT_DIR/harden.sh $SCRIPT_DIR;
