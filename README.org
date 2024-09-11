@@ -9,7 +9,7 @@ To install, run =install=:
 
 which will run the following two scripts (credits to LibrePhoenix):
 
-** The install script
+** Install script
 
 Clone dotfiles:
 
@@ -96,7 +96,7 @@ nix run home-manager/master --extra-experimental-features nix-command --extra-ex
 <<install-and-build-home-manager-config>>
 #+end_src
 
-** The security hardening script
+** Security hardening script
 
 #+begin_quote
 This will harden the security of [your configuration], preventing unprivileged users from editing the system-level ("root" configuration) files maliciously.
@@ -163,7 +163,7 @@ Relax permissions temporarily so git can work:
 
 #+name: pull-temporary-softener
 #+begin_src sh
-sudo $SCRIPT_DIR/soften.sh $SCRIPT_DIR;
+sudo $SCRIPT_DIR/soften $SCRIPT_DIR;
 #+end_src
 
 Stash local edits, pull changes, and re-apply local edits:
@@ -189,6 +189,30 @@ sudo $SCRIPT_DIR/harden.sh $SCRIPT_DIR;
 <<pull-temporary-softener>>
 <<pull-stash-pull-apply>>
 <<pull-set-perms>>
+#+end_src
+* Soften script
+
+This will soften the security of these dotfiles, allowing the default unpriveleged user with UID/GID of 1000 to edit ALL FILES in the dotfiles directory.
+
+This mainly is just here to be used by some scripts.
+
+Run this inside of [~/.config/dogfiles] (or whatever directory you installed the dotfiles to).
+
+Run this as root!
+
+BTW, this assumes your user account has a UID/GID of 1000.
+
+After running this, *[unprivileged users] can make edits to important system files which may compromise the system after running* =nixos-rebuild switch=. This script can be undone by running its inverse, =harden=.
+
+#+begin_src sh :shebang #!/bin/sh :tangle ./soften
+if [ "$#" = 1 ]; then
+    SCRIPT_DIR=$1;
+else
+    SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+fi
+pushd $SCRIPT_DIR &> /dev/null;
+sudo chown -R 1000:users .;
+popd &> /dev/null;
 #+end_src
 
 * flake.nix
