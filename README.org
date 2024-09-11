@@ -11,7 +11,7 @@ which will run the following two scripts (credits to LibrePhoenix):
 
 ** The install script
 
-Clone dotfiles.
+Clone dotfiles:
 
 #+name: install-clone-dotfiles
 #+begin_src sh
@@ -24,14 +24,14 @@ fi
 nix-shell -p git --command "git clone https://github.com/chumutt/dogfiles $SCRIPT_DIR"
 #+end_src
 
-Generate hardware configuration for the system.
+Generate hardware configuration for the system:
 
 #+name: install-generate-hardware-config
 #+begin_src sh
 sudo nixos-generate-config --show-hardware-config > $SCRIPT_DIR/system/hardware-configuration.nix
 #+end_src
 
-Check if the system is running UEFI or BIOS.
+Check if the system is running UEFI or BIOS:
 
 #+name: install-uefi-or-bios-check
 #+begin_src sh
@@ -44,7 +44,7 @@ else
 fi
 #+end_src
 
-Patch flake.nix with different username/name and remove email by default.
+Patch flake.nix with different username/name and remove email by default:
 
 #+name: install-patch-flake-and-attune-to-user
 #+begin_src sh
@@ -54,7 +54,7 @@ sed -i "s/chufilthymutt@gmail.com//" $SCRIPT_DIR/flake.nix
 sed -i "s+~/.config/dogfiles+$SCRIPT_DIR+g" $SCRIPT_DIR/flake.nix
 #+end_src
 
-Open up editor to manually edit flake.nix before install.
+Open up editor to manually edit flake.nix before install:
 
 #+name: install-edit-flake-prompt
 #+begin_src sh
@@ -64,21 +64,21 @@ fi
 $EDITOR $SCRIPT_DIR/flake.nix;
 #+end_src
 
-Set permissions for files that should be owned by root.
+Set permissions for files that should be owned by root:
 
 #+name: install-harden-core-configuration
 #+begin_src sh
 sudo $SCRIPT_DIR/harden $SCRIPT_DIR;
 #+end_src
 
-Rebuild system.
+Rebuild system:
 
 #+name: install-nixos-rebuild-system-with-flake
 #+begin_src sh
 sudo nixos-rebuild switch --flake $SCRIPT_DIR#system;
 #+end_src
 
-Install and build home-manager configuration.
+Install and build the home-manager configuration:
 
 #+name: install-and-build-home-manager-config
 #+begin_src sh
@@ -121,6 +121,8 @@ else
 fi
 #+end_src
 
+Enter the script's directory, set ownership(s), and then leave:
+
 #+name: harden-enter-harden-and-exit
 #+begin_src sh
 pushd $SCRIPT_DIR &> /dev/null;
@@ -144,6 +146,49 @@ popd &> /dev/null;
 #+begin_src sh :noweb yes :eval no :shebang #!/bin/sh :tangle ./harden
 <<harden-check-pwd>>
 <<harden-enter-harden-and-exit>>
+#+end_src
+
+* Pull script
+
+#+begin_quote
+Automated script to update my non-primary system's configuration to be in sync with [the] upstream git [repository] while preserving local edits to [the configuration via a =git stash= command].
+#+end_quote
+
+#+name: pull-set-enter-script-dir
+#+begin_src sh
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+#+end_src
+
+Relax permissions temporarily so git can work:
+
+#+name: pull-temporary-softener
+#+begin_src sh
+sudo $SCRIPT_DIR/soften.sh $SCRIPT_DIR;
+#+end_src
+
+Stash local edits, pull changes, and re-apply local edits:
+
+#+name: pull-stash-pull-apply
+#+begin_src sh
+pushd $SCRIPT_DIR &> /dev/null;
+git stash;
+git pull;
+git stash apply;
+popd &> /dev/null;
+#+end_src
+
+Set permissions for files that should be owned by root:
+
+#+name: pull-set-perms
+#+begin_src sh
+sudo $SCRIPT_DIR/harden.sh $SCRIPT_DIR;
+#+end_src
+
+#+begin_src sh :noweb yes :eval no :shebang #!/bin/sh :tangle ./pull
+<<pull-set-enter-script-dir>>
+<<pull-temporary-softener>>
+<<pull-stash-pull-apply>>
+<<pull-set-perms>>
 #+end_src
 
 * flake.nix
