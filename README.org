@@ -7,7 +7,7 @@ To install, run =install=:
 ./bin/install
 #+end_src
 
-which will run the following two scripts (credits to LibrePhoenix):
+which will run a number of installation scripts, which are detailed below. Credits to LibrePhoenix for the bulk of the core of this setup.
 
 ** Install script
 
@@ -110,7 +110,7 @@ BTW, this assumes your user account has a PID/GID of 1000.
 After running this, the command `nix flake update` will require root.
 #+end_quote
 
-Note: Additionally, this script is executed whenever the =install= script is executed.
+Note: Additionally, this script is executed whenever the =install= script is executed. This script can be undone by running its inverse, =soften=, and vice versa.
 
 #+name: harden-check-pwd
 #+begin_src sh
@@ -203,7 +203,7 @@ Run this as root!
 
 BTW, this assumes your user account has a UID/GID of 1000.
 
-After running this, *[unprivileged users] can make edits to important system files which may compromise the system after running* =nixos-rebuild switch=. This script can be undone by running its inverse, =harden=.
+After running this, *[unprivileged users] can make edits to important system files which may compromise the system after running* =nixos-rebuild switch=. This script can be undone by running its inverse, =harden=, and vice versa.
 
 #+begin_src sh :shebang #!/bin/sh :tangle ./bin/soften
 if [ "$#" = 1 ]; then
