@@ -215,8 +215,6 @@ sudo chown -R 1000:users .;
 popd &> /dev/null;
 #+end_src
 
-#+RESULTS:
-
 * Update script
 
 #+begin_quote
