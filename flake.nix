@@ -19,8 +19,8 @@
       userSettings = rec {
         username = "chu";
         name = "chu the pup";
-        email = "chufilthymutt@gmail.com";
-        dotfilesDir = "~/.config/dogfiles";
+        email = "";
+        dotfilesDir = "/home/chu/.config/dogfiles";
         # theme = null; TODO
         # wm = null; #./system/wm/example.nix; ./user/wm/example.nix TODO
         wm = ./system/wm/x11.nix; # TODO temporary, installs plasma 6
