@@ -1,6 +1,0 @@
-[submodule "modules/home-manager/gui/doom"]
-	path = modules/home-manager/gui/doom
-	url = git@github.com:chumutt/doom
-[submodule "modules/home-manager/gui/doom-emacs"]
-	path = modules/home-manager/gui/doom-emacs
-	url = git@github.com:chumutt/doom
