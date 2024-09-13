@@ -1,4 +1,7 @@
 #+title: chunixos
+
+*These are unstable configuration files (dotfiles): the installer does not work. Do not install. This is a work in progress, there is no warranty here, you have been warned!*
+
 * Installation
 To install, run =install=:
 
