@@ -2,7 +2,6 @@
   description = "nixOS config flake";
   outputs = inputs@{ self, ... }:
     let
-      system = "x86_64-linux";
       systemSettings = {
         system = "x86_64-linux";
         hostname = "chunixos-vm";
