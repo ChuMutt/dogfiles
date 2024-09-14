@@ -52,6 +52,7 @@
       #   src = inputs.nixpkgs;
       # };
       # configure pkgs
+      pkgs = pkgs-unstable;
       # use nixpkgs if running a server (homelab or worklab profile)
       # otherwise use patched nixos-unstable nixpkgs
       # pkgs = (if ((systemSettings.profile == "homelab")
