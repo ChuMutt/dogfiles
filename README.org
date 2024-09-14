@@ -75,7 +75,7 @@ Set permissions for files that should be owned by root:
 
 #+name: install-harden-core-configuration
 #+begin_src sh
-sudo $SCRIPT_DIR/bin/harden $SCRIPT_DIR;
+# sudo $SCRIPT_DIR/bin/harden $SCRIPT_DIR;
 #+end_src
 
 Rebuild system:
@@ -116,8 +116,6 @@ BTW, this assumes your user account has a PID/GID of 1000.
 
 After running this, the command `nix flake update` will require root.
 #+end_quote
-
-Note: Additionally, this script is executed whenever the =install= script is executed. This script can be undone by running its inverse, =soften=, and vice versa.
 
 #+name: harden-check-pwd
 #+begin_src sh
