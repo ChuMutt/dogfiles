@@ -72,6 +72,15 @@
           allowUnfreePredicate = (_: true);
         };
       };
+
+      pkgs-unstable = import inputs.nixpkgs-patched {
+        system = systemSettings.system;
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = (_: true);
+        };
+        overlays = [ inputs.rust-overlay.overlays.default ];
+      };
       # configure lib
       # use nixpkgs if running a server (homelab or worklab profile)
       # otherwise use patched nixos-unstable nixpkgs
@@ -138,7 +147,8 @@
               name = "install";
               runtimeInputs = with pkgs;
                 [ git ]; # I could make this fancier by adding other deps
-              text = ''${./install} "$@"'';
+              # text = ''${./install} "$@"'';
+              text = ''${./bin/install} "$@"'';
             };
           });
 
