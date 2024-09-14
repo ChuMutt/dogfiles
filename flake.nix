@@ -43,76 +43,6 @@
           else
             editor);
       };
-      # create patched nixpkgs
-      # nixpkgs-patched = (import inputs.nixpkgs {
-      #   system = systemSettings.system;
-      #   rocmSupport = (if systemSettings.gpu == "amd" then true else false);
-      # }).applyPatches {
-      #   name = "nixpkgs-patched";
-      #   src = inputs.nixpkgs;
-      # };
-      # configure pkgs
-      pkgs = pkgs-unstable;
-      # use nixpkgs if running a server (homelab or worklab profile)
-      # otherwise use patched nixos-unstable nixpkgs
-      # pkgs = (if ((systemSettings.profile == "homelab")
-      #   || (systemSettings.profile == "worklab")) then
-      #   pkgs-stable
-      # else
-      # (import nixpkgs-patched {
-      #   system = systemSettings.system;
-      #   config = {
-      #     allowUnfree = true;
-      #     allowUnfreePredicate = (_: true);
-      #   };
-      # })
-      # pkgs-unstable);
-
-      # pkgs-stable = import inputs.nixpkgs-stable {
-      #   system = systemSettings.system;
-      #   config = {
-      #     allowUnfree = true;
-      #     allowUnfreePredicate = (_: true);
-      #   };
-      # };
-
-      # # pkgs-unstable = import inputs.nixpkgs-patched {
-      # pkgs-unstable = import inputs.nixpkgs {
-      #   system = systemSettings.system;
-      #   config = {
-      #     allowUnfree = true;
-      #     allowUnfreePredicate = (_: true);
-      #   };
-      # };
-
-      # configure lib
-      # use nixpkgs if running a server (homelab or worklab profile)
-      # otherwise use patched nixos-unstable nixpkgs
-      # lib = (if ((systemSettings.profile == "homelab")
-      #   || (systemSettings.profile == "worklab")) then
-      #   inputs.nixpkgs-stable.lib
-      # else
-      #   inputs.nixpkgs.lib);
-      # lib = inputs.nixpkgs;
-
-      # use home-manager-stable if running a server (homelab or worklab profile)
-      # otherwise use home-manager-unstable
-      # home-manager = (if ((systemSettings.profile == "homelab")
-      #   || (systemSettings.profile == "worklab")) then
-      #   inputs.home-manager-stable
-      # else
-      #   inputs.home-manager-unstable);
-
-      # Systems that can run tests:
-      supportedSystems = [ "aarch64-linux" "i686-linux" "x86_64-linux" ];
-
-      # Function to generate a set based on supported systems:
-      forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
-
-      # Attribute set of nixpkgs for each system:
-      nixpkgsFor =
-        forAllSystems (system: import inputs.nixpkgs { inherit system; });
-
     in {
       homeConfigurations = {
         user = home-manager.lib.homeManagerConfiguration {
@@ -137,6 +67,7 @@
               + "/configuration.nix")
           ]; # load configuration.nix from selected PROFILE
           specialArgs = {
+            inherit pkgs;
             inherit pkgs-stable;
             inherit systemSettings;
             inherit userSettings;
@@ -160,7 +91,6 @@
 
         apps = forAllSystems (system: {
           default = self.apps.${system}.install;
-
           install = {
             type = "app";
             program = "${self.packages.${system}.install}/bin/install";

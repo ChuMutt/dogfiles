@@ -386,6 +386,7 @@ Note: Disabled.
               + "/configuration.nix")
           ]; # load configuration.nix from selected PROFILE
           specialArgs = {
+            inherit pkgs;
             inherit pkgs-stable;
             inherit systemSettings;
             inherit userSettings;
@@ -409,7 +410,6 @@ Note: Disabled.
 
         apps = forAllSystems (system: {
           default = self.apps.${system}.install;
-
           install = {
             type = "app";
             program = "${self.packages.${system}.install}/bin/install";
