@@ -1706,14 +1706,7 @@ exit 1
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    gcc
-    gnumake
-    cmake
-    autoconf
-    automake
-    libtool
-  ];
+  home.packages = with pkgs; [ gcc gnumake cmake autoconf automake libtool ];
 }
 #+end_src
 *** lisp/lisp.nix
