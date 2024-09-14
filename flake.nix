@@ -117,18 +117,6 @@
             inherit inputs;
           };
         };
-        default = lib.nixosSystem {
-          system = systemSettings.system;
-          modules = [
-            ./profiles/iso/configuration.nix # pulls in from work config # TODO separate
-          ];
-        };
-        iso = lib.nixosSystem {
-          system = systemSettings.system;
-          modules = [
-            ./profiles/iso/configuration.nix # pulls in from work config
-          ];
-        };
       };
       inputs = {
         nixpkgs.url = "nixpkgs/nixos-unstable";
