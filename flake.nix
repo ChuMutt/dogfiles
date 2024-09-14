@@ -2,6 +2,7 @@
   description = "nixOS config flake";
   outputs = inputs@{ self, ... }:
     let
+      system = "x86_64-linux";
       systemSettings = {
         system = "x86_64-linux";
         hostname = "chunixos-vm";
@@ -18,8 +19,8 @@
       userSettings = rec {
         username = "chu";
         name = "chumutt";
-        email = "";
-        dotfilesDir = "/home/chu/.config/dogfiles";
+        email = "chufilthymutt@gmail.com";
+        dotfilesDir = "~/.config/dogfiles";
         # theme = null; TODO
         # wm = null; #./system/wm/example.nix; ./user/wm/example.nix TODO
         wm = ./system/wm/x11.nix; # TODO temporary, installs plasma 6
