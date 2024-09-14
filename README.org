@@ -1846,7 +1846,7 @@ in {
 ** TODO random-splash-image emacs
 ** TODO make nixos install image
 ** TODO install working
-#+begin_src sh
+#+begin_src sh :noeval yes :shebang #!/bin/sh :tangle ./bin/install-unstable
 nix-shell -p git --command "nix run --experimental-features 'nix-command flakes' github:chumutt/dogfiles -- ~/.config/dogfiles"
 #+end_src
 * References / Credits
