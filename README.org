@@ -373,10 +373,10 @@ Note: Disabled.
       # configure pkgs
       # use nixpkgs if running a server (homelab or worklab profile)
       # otherwise use patched nixos-unstable nixpkgs
-      pkgs = (if ((systemSettings.profile == "homelab")
-        || (systemSettings.profile == "worklab")) then
-        pkgs-stable
-      else
+      # pkgs = (if ((systemSettings.profile == "homelab")
+      #   || (systemSettings.profile == "worklab")) then
+      #   pkgs-stable
+      # else
       # (import nixpkgs-patched {
       #   system = systemSettings.system;
       #   config = {
@@ -384,42 +384,42 @@ Note: Disabled.
       #     allowUnfreePredicate = (_: true);
       #   };
       # })
-        pkgs-unstable);
+      # pkgs-unstable);
 
-      pkgs-stable = import inputs.nixpkgs-stable {
-        system = systemSettings.system;
-        config = {
-          allowUnfree = true;
-          allowUnfreePredicate = (_: true);
-        };
-      };
+      # pkgs-stable = import inputs.nixpkgs-stable {
+      #   system = systemSettings.system;
+      #   config = {
+      #     allowUnfree = true;
+      #     allowUnfreePredicate = (_: true);
+      #   };
+      # };
 
-      # pkgs-unstable = import inputs.nixpkgs-patched {
-      pkgs-unstable = import inputs.nixpkgs {
-        system = systemSettings.system;
-        config = {
-          allowUnfree = true;
-          allowUnfreePredicate = (_: true);
-        };
-      };
+      # # pkgs-unstable = import inputs.nixpkgs-patched {
+      # pkgs-unstable = import inputs.nixpkgs {
+      #   system = systemSettings.system;
+      #   config = {
+      #     allowUnfree = true;
+      #     allowUnfreePredicate = (_: true);
+      #   };
+      # };
 
       # configure lib
       # use nixpkgs if running a server (homelab or worklab profile)
       # otherwise use patched nixos-unstable nixpkgs
-      lib = (if ((systemSettings.profile == "homelab")
-        || (systemSettings.profile == "worklab")) then
-        inputs.nixpkgs-stable.lib
-      else
-        inputs.nixpkgs.lib);
+      # lib = (if ((systemSettings.profile == "homelab")
+      #   || (systemSettings.profile == "worklab")) then
+      #   inputs.nixpkgs-stable.lib
+      # else
+      #   inputs.nixpkgs.lib);
       # lib = inputs.nixpkgs;
 
       # use home-manager-stable if running a server (homelab or worklab profile)
       # otherwise use home-manager-unstable
-      home-manager = (if ((systemSettings.profile == "homelab")
-        || (systemSettings.profile == "worklab")) then
-        inputs.home-manager-stable
-      else
-        inputs.home-manager-unstable);
+      # home-manager = (if ((systemSettings.profile == "homelab")
+      #   || (systemSettings.profile == "worklab")) then
+      #   inputs.home-manager-stable
+      # else
+      #   inputs.home-manager-unstable);
 
       # Systems that can run tests:
       supportedSystems = [ "aarch64-linux" "i686-linux" "x86_64-linux" ];
