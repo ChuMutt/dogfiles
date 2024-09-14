@@ -1852,6 +1852,7 @@ in {
 ** TODO impermanence
 ** TODO literate
 ** TODO random-splash-image emacs
+** TODO make nixos install image
 * References / Credits
 - [[https://www.youtube.com/@wilfridtaylor][Wil T]]
 - [[https://github.com/librephoenix/nixos-config][librephoenix/nixos-config]]
