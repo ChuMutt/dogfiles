@@ -56,7 +56,7 @@ Patch flake.nix with different username/name and remove email by default:
 #+name: install-patch-flake-and-attune-to-user
 #+begin_src sh
 sed -i "0,/chu/s//$(whoami)/" $SCRIPT_DIR/flake.nix
-sed -i "0,/Chu/s//$(getent passwd $(whoami) | cut -d ':' -f 5 | cut -d ',' -f 1)/" $SCRIPT_DIR/flake.nix
+sed -i "0,/chu/s//$(getent passwd $(whoami) | cut -d ':' -f 5 | cut -d ',' -f 1)/" $SCRIPT_DIR/flake.nix
 sed -i "s/chufilthymutt@gmail.com//" $SCRIPT_DIR/flake.nix
 sed -i "s+~/.config/dogfiles+$SCRIPT_DIR+g" $SCRIPT_DIR/flake.nix
 #+end_src
