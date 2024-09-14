@@ -124,14 +124,6 @@
           ];
         };
       };
-      # apps = forAllSystems (system: {
-      #   default = self.apps.${system}.install;
-      #   install = {
-      #     type = "app";
-      #     program = "${self.packages.${system}.install}/bin/install";
-      #   };
-      # });
-    };
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-24.05";
