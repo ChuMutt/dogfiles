@@ -13,7 +13,7 @@
           "/boot"; # mount path for efi boot partition; only used for uefi boot mode
         grubDevice =
           ""; # device identifier for grub; only used for legacy (bios) boot mode
-        gpuType = "vm"; # amd, intel, nvidia, or vm.
+        # gpuType = "vm"; # amd, intel, nvidia, or vm.
       };
       userSettings = rec {
         username = "chu";
