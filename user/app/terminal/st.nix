@@ -4,7 +4,5 @@
   home.packages = with pkgs; [ st ];
   programs.st = {
     enable = true;
-    # settings = {
-    # };
   };
 }
