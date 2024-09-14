@@ -8,10 +8,8 @@
     userEmail = userSettings.email;
     extraConfig = {
       init.defaultBranch = "main";
-      safe.directory = [
-        (userSettings.dotfilesDir)
-        (userSettings.dotfilesDir + "/.git")
-      ];
+      safe.directory =
+        [ (userSettings.dotfilesDir) (userSettings.dotfilesDir + "/.git") ];
     };
   };
 }
