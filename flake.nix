@@ -72,15 +72,14 @@
           allowUnfreePredicate = (_: true);
         };
       };
-
-      pkgs-unstable = import inputs.nixpkgs-patched {
-        system = systemSettings.system;
-        config = {
-          allowUnfree = true;
-          allowUnfreePredicate = (_: true);
-        };
-        overlays = [ inputs.rust-overlay.overlays.default ];
-      };
+      # pkgs-unstable = import inputs.nixpkgs-patched {
+      #   system = systemSettings.system;
+      #   config = {
+      #     allowUnfree = true;
+      #     allowUnfreePredicate = (_: true);
+      #   };
+      #   overlays = [ inputs.rust-overlay.overlays.default ];
+      # };
       # configure lib
       # use nixpkgs if running a server (homelab or worklab profile)
       # otherwise use patched nixos-unstable nixpkgs
