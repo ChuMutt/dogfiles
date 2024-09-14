@@ -1248,10 +1248,8 @@ in {
     userEmail = userSettings.email;
     extraConfig = {
       init.defaultBranch = "main";
-      safe.directory = [
-        (userSettings.dotfilesDir)
-        (userSettings.dotfilesDir + "/.git")
-      ];
+      safe.directory =
+        [ (userSettings.dotfilesDir) (userSettings.dotfilesDir + "/.git") ];
     };
   };
 }
@@ -1662,8 +1660,6 @@ exit 1
   home.packages = with pkgs; [ st ];
   programs.st = {
     enable = true;
-    # settings = {
-    # };
   };
 }
 
