@@ -44,13 +44,13 @@
             editor);
       };
       # create patched nixpkgs
-      nixpkgs-patched = (import inputs.nixpkgs {
-        system = systemSettings.system;
-        rocmSupport = (if systemSettings.gpu == "amd" then true else false);
-      }).applyPatches {
-        name = "nixpkgs-patched";
-        src = inputs.nixpkgs;
-      };
+      # nixpkgs-patched = (import inputs.nixpkgs {
+      #   system = systemSettings.system;
+      #   rocmSupport = (if systemSettings.gpu == "amd" then true else false);
+      # }).applyPatches {
+      #   name = "nixpkgs-patched";
+      #   src = inputs.nixpkgs;
+      # };
       # configure pkgs
       # use nixpkgs if running a server (homelab or worklab profile)
       # otherwise use patched nixos-unstable nixpkgs
@@ -65,6 +65,7 @@
             allowUnfreePredicate = (_: true);
           };
         }));
+
       pkgs-stable = import inputs.nixpkgs-stable {
         system = systemSettings.system;
         config = {
@@ -73,7 +74,8 @@
         };
       };
 
-      pkgs-unstable = import inputs.nixpkgs-patched {
+      # pkgs-unstable = import inputs.nixpkgs-patched {
+      pkgs-unstable = import inputs.nixpkgs {
         system = systemSettings.system;
         config = {
           allowUnfree = true;
@@ -84,11 +86,11 @@
       # configure lib
       # use nixpkgs if running a server (homelab or worklab profile)
       # otherwise use patched nixos-unstable nixpkgs
-      # lib = (if ((systemSettings.profile == "homelab")
-      #   || (systemSettings.profile == "worklab")) then
-      #   inputs.nixpkgs-stable.lib
-      # else
-      #   inputs.nixpkgs.lib); #TODO
+      lib = (if ((systemSettings.profile == "homelab")
+        || (systemSettings.profile == "worklab")) then
+        inputs.nixpkgs-stable.lib
+      else
+        inputs.nixpkgs.lib);
       # lib = inputs.nixpkgs;
 
       # use home-manager-stable if running a server (homelab or worklab profile)
