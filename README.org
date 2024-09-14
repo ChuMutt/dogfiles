@@ -393,15 +393,14 @@ Note: Disabled.
           allowUnfreePredicate = (_: true);
         };
       };
-
-      pkgs-unstable = import inputs.nixpkgs-patched {
-        system = systemSettings.system;
-        config = {
-          allowUnfree = true;
-          allowUnfreePredicate = (_: true);
-        };
-        overlays = [ inputs.rust-overlay.overlays.default ];
-      };
+      # pkgs-unstable = import inputs.nixpkgs-patched {
+      #   system = systemSettings.system;
+      #   config = {
+      #     allowUnfree = true;
+      #     allowUnfreePredicate = (_: true);
+      #   };
+      #   overlays = [ inputs.rust-overlay.overlays.default ];
+      # };
       # configure lib
       # use nixpkgs if running a server (homelab or worklab profile)
       # otherwise use patched nixos-unstable nixpkgs
@@ -1862,13 +1861,6 @@ in {
 ** TODO random-splash-image emacs
 ** TODO make nixos install image
 ** TODO install working
-#+begin_src sh :noeval yes :shebang #!/bin/sh :tangle ./bin/install-unstable
-sudo nixos-rebuild switch;
-nix-shell -p git --command "nix run \
-    --experimental-features 'nix-command flakes' \
-github:chumutt/dogfiles \
--- ~/.config/dogfiles"
-#+end_src
 * References / Credits
 - [[https://www.youtube.com/@wilfridtaylor][Wil T]]
 - [[https://github.com/librephoenix/nixos-config][librephoenix/nixos-config]]
