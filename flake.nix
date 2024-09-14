@@ -132,6 +132,12 @@
             inherit inputs;
           };
         };
+        iso = lib.nixosSystem {
+          system = systemSettings.system;
+          modules = [
+            ./profiles/iso/configuration.nix # pulls in from work config
+          ];
+        }
       };
       # apps = forAllSystems (system: {
       #   default = self.apps.${system}.install;
