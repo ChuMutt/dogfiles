@@ -2,7 +2,7 @@
 if [ "$#" = 1 ]; then
     SCRIPT_DIR=$1;
 else
-    SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+    SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}"/.. )" &> /dev/null && pwd )
 fi
 pushd $SCRIPT_DIR &> /dev/null;
 sudo chown 0:0 .;

@@ -1,2 +1,6 @@
 #!/bin/sh
-nix-shell -p git --command "nix run --experimental-features 'nix-command flakes' github:chumutt/dogfiles -- ~/.config/dogfiles"
+sudo nixos-rebuild switch;
+nix-shell -p git --command "nix run \
+    --experimental-features 'nix-command flakes' \
+github:chumutt/dogfiles \
+-- ~/.config/dogfiles"
