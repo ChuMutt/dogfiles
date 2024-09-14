@@ -89,7 +89,7 @@
       #   inputs.nixpkgs-stable.lib
       # else
       #   inputs.nixpkgs.lib); #TODO
-      lib = inputs.nixpkgs.lib;
+      lib = inputs.nixpkgs;
 
       # use home-manager-stable if running a server (homelab or worklab profile)
       # otherwise use home-manager-unstable
