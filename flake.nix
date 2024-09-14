@@ -2,7 +2,6 @@
   description = "nixOS config flake";
   outputs = inputs@{ self, ... }:
     let
-      system = "x86_64-linux";
       systemSettings = {
         system = "x86_64-linux";
         hostname = "chunixos-vm";
@@ -73,13 +72,6 @@
           allowUnfreePredicate = (_: true);
         };
       };
-      pkgs-unstable = import inputs.nixpkgs-patched {
-        system = systemSettings.system;
-        config = {
-          allowUnfree = true;
-          allowUnfreePredicate = (_: true);
-        };
-      };
       # configure lib
       # use nixpkgs if running a server (homelab or worklab profile)
       # otherwise use patched nixos-unstable nixpkgs
@@ -96,12 +88,12 @@
       else
         inputs.home-manager-unstable);
       # Systems that can run tests:
-      supportedSystems = [ "aarch64-linux" "i686-linux" "x86_64-linux" ];
+      # supportedSystems = [ "aarch64-linux" "i686-linux" "x86_64-linux" ];
       # Function to generate a set based on supported systems:
-      forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
+      # forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
       # Attribute set of nixpkgs for each system:
-      nixpkgsFor =
-        forAllSystems (system: import inputs.nixpkgs { inherit system; });
+      # nixpkgsFor =
+      #   forAllSystems (system: import inputs.nixpkgs { inherit system; });
     in {
       homeConfigurations = {
         user = home-manager.lib.homeManagerConfiguration {
@@ -137,7 +129,7 @@
           modules = [
             ./profiles/iso/configuration.nix # pulls in from work config
           ];
-        }
+        };
       };
       # apps = forAllSystems (system: {
       #   default = self.apps.${system}.install;
