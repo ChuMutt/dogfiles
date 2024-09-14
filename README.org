@@ -1845,6 +1845,10 @@ in {
 ** TODO literate
 ** TODO random-splash-image emacs
 ** TODO make nixos install image
+** TODO install working
+#+begin_src sh
+nix-shell -p git --command "nix run --experimental-features 'nix-command flakes' github:chumutt/dogfiles -- ~/.config/dogfiles"
+#+end_src
 * References / Credits
 - [[https://www.youtube.com/@wilfridtaylor][Wil T]]
 - [[https://github.com/librephoenix/nixos-config][librephoenix/nixos-config]]
