@@ -54,18 +54,18 @@
       # configure pkgs
       # use nixpkgs if running a server (homelab or worklab profile)
       # otherwise use patched nixos-unstable nixpkgs
-      pkgs = nixpkgs;
-      # pkgs = (if ((systemSettings.profile == "homelab")
-      #   || (systemSettings.profile == "worklab")) then
-      #   pkgs-stable
-      # else
-      #   (import nixpkgs-patched {
-      #     system = systemSettings.system;
-      #     config = {
-      #       allowUnfree = true;
-      #       allowUnfreePredicate = (_: true);
-      #     };
-      #   }));
+      pkgs = (if ((systemSettings.profile == "homelab")
+        || (systemSettings.profile == "worklab")) then
+        pkgs-stable
+      else
+      # (import nixpkgs-patched {
+      #   system = systemSettings.system;
+      #   config = {
+      #     allowUnfree = true;
+      #     allowUnfreePredicate = (_: true);
+      #   };
+      # })
+        pkgs-unstable);
 
       pkgs-stable = import inputs.nixpkgs-stable {
         system = systemSettings.system;
