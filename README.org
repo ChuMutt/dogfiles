@@ -298,7 +298,7 @@ Post hooks to be called after a configuration sync.
 Mainly just to reload stylix.
 #+end_quote
 
-Note: Disabled.
+Note: Currently disabled as it does not apply to this set up.
 
 #+begin_src sh :shebang #!/bin/sh :tangle ./bin/sync-posthook
 
