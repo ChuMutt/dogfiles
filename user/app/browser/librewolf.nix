@@ -13,11 +13,9 @@
     DEFAULT_BROWSER = "${pkgs.librewolf}/bin/librewolf";
   };
 
-    # ''defaultPref("font.name.serif.x-western","'' + userSettings.font + ''
-    #   ");
-          # pref("font.name.serif.x-western","'' + userSettings.font + ''
   home.file.".librewolf/librewolf.overrides.cfg".text =
-    ''
+    ''defaultPref("font.name.serif.x-western","'' + userSettings.font + ''
+      ");
           defaultPref("font.size.variable.x-western",20);
           defaultPref("browser.toolbars.bookmarks.visibility","always");
           defaultPref("privacy.resisttFingerprinting.letterboxing", true);
@@ -27,7 +25,7 @@
           defaultPref("privacy.clearOnShutdown.cookies",true);
           defaultPref("gfx.webrender.software.opengl",false);
           defaultPref("webgl.disabled",true);
-''
+          pref("font.name.serif.x-western","'' + userSettings.font + ''
         ");
 
             pref("font.size.variable.x-western",20);
