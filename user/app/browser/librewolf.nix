@@ -16,6 +16,7 @@
   home.file.".librewolf/librewolf.overrides.cfg".text =
     ''defaultPref("font.name.serif.x-western","'' + userSettings.font + ''
       ");
+
           defaultPref("font.size.variable.x-western",20);
           defaultPref("browser.toolbars.bookmarks.visibility","always");
           defaultPref("privacy.resisttFingerprinting.letterboxing", true);
@@ -46,5 +47,4 @@
     "x-scheme-handler/about" = "librewolf.desktop";
     "x-scheme-handler/unknown" = "librewolf.desktop";
   };
-
 }
