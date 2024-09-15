@@ -768,6 +768,7 @@ Note: Currently disabled as it does not apply to this set up.
       libffi
       zlib
       nodePackages.ungit
+      nixfmt-rfc-style
       ventoy
       kdePackages.kdenlive
     ];
