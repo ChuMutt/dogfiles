@@ -65,6 +65,7 @@
       libffi
       zlib
       nodePackages.ungit
+      nixfmt-rfc-style
       ventoy
       kdePackages.kdenlive
     ];
