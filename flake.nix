@@ -13,7 +13,6 @@
           "/boot"; # mount path for efi boot partition; only used for uefi boot mode
         grubDevice =
           ""; # device identifier for grub; only used for legacy (bios) boot mode
-        # gpuType = "vm"; # amd, intel, nvidia, or vm.
       };
       userSettings = rec {
         username = "chu";
@@ -24,8 +23,6 @@
         wmType = ./system/wm/x11.nix;
         browser = "librewolf";
         term = "konsole";
-        # font = "Noto Sans";
-        # fontPkg = pkgs.noto-fonts;
         editor = "emacsclient";
         # editor spawning translator
         # generates a command that can be used to spawn editor inside a gui
