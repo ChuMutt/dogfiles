@@ -369,7 +369,6 @@ Note: Currently disabled as it does not apply to this set up.
       }).applyPatches {
         name = "nixpkgs-patched";
         src = inputs.nixpkgs;
-        # patches = [ ./patches/emacs-no-version-check.patch ];
       };
 
       # configure pkgs
@@ -385,7 +384,6 @@ Note: Currently disabled as it does not apply to this set up.
             allowUnfree = true;
             allowUnfreePredicate = (_: true);
           };
-          # overlays = [ inputs.rust-overlay.overlays.default ];
         }));
 
       pkgs-stable = import inputs.nixpkgs-stable {
@@ -402,7 +400,6 @@ Note: Currently disabled as it does not apply to this set up.
           allowUnfree = true;
           allowUnfreePredicate = (_: true);
         };
-        # overlays = [ inputs.rust-overlay.overlays.default ];
       };
 
       pkgs-emacs =
