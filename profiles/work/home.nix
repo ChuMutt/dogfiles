@@ -52,7 +52,7 @@
       mediainfo
       libmediainfo
       audio-recorder
-      gnome.cheese
+      cheese
       raysession
       ardour
       rosegarden
@@ -64,7 +64,7 @@
       texinfo
       libffi
       zlib
-      # nodePackages.ungit
+      nodePackages.ungit
       ventoy
       kdePackages.kdenlive
     ];
@@ -83,6 +83,7 @@
       };
       extraConfig = { push = { autoSetupRemote = true; }; };
     };
+    autorandr.enable = true;
     zsh.enable = true;
     ssh.enable = true;
     gpg.enable = true;
