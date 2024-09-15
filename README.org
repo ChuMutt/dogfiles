@@ -662,9 +662,7 @@ Note: Currently disabled as it does not apply to this set up.
         ./.config/emacs/bin/doom install
       '')
     ];
-
     shells = with pkgs; [ zsh ];
-
   };
 
   programs = {

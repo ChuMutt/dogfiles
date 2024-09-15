@@ -144,9 +144,7 @@
         ./.config/emacs/bin/doom install
       '')
     ];
-
     shells = with pkgs; [ zsh ];
-
   };
 
   programs = {
