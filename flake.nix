@@ -23,6 +23,8 @@
         wmType = ./system/wm/x11.nix;
         browser = "librewolf";
         term = "konsole";
+        font = "Noto Fonts"; # Selected font
+        fontPkg = pkgs.noto-fonts; # Font package
         editor = "emacsclient";
         # editor spawning translator
         # generates a command that can be used to spawn editor inside a gui
