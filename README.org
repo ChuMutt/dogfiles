@@ -71,7 +71,7 @@ fi
 $EDITOR $SCRIPT_DIR/flake.nix;
 #+end_src
 
-Set permissions for files that should be owned by root:
+Set permissions for files that should be owned by root (disabled for now):
 
 #+name: install-harden-core-configuration
 #+begin_src sh
