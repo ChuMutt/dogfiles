@@ -168,7 +168,7 @@ Automated script to update my non-primary system's configuration to be in sync w
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}"/.. )" &> /dev/null && pwd )
 #+end_src
 
-Relax permissions temporarily so git can work:
+Relax permissions temporarily so git can work (not currently needed as the hardening script is disabled):
 
 #+name: pull-temporary-softener
 #+begin_src sh
