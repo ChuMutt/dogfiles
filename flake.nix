@@ -74,7 +74,6 @@
             inherit inputs;
           };
         };
-
       };
       packages = forAllSystems (system:
         let pkgs = nixpkgsFor.${system};
@@ -87,7 +86,6 @@
             text = ''${./bin/install} "$@"'';
           };
         });
-
       apps = forAllSystems (system: {
         default = self.apps.${system}.install;
         install = {
@@ -96,7 +94,6 @@
         };
       });
     };
-
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-24.05";
