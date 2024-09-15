@@ -1,7 +1,7 @@
 { config, pkgs, userSettings, ... }: {
   imports = [
-    # (./. + "../../../user/wm" + ("/" + userSettings.wm + "/" + userSettings.wm)
-    #   + ".nix") # My window manager selected from flake.nix TODO
+    (./. + "../../../user/wm" + ("/" + userSettings.wm + "/" + userSettings.wm)
+      + ".nix") # My window manager selected from flake.nix
     ../../user/shell/sh.nix
     ../../user/app/lf/lf.nix
     ../../user/app/git/git.nix
@@ -13,8 +13,8 @@
     ../../user/lang/rust/rust.nix
     ../../user/hardware/bluetooth.nix
     ../../user/app/keepass/keepass.nix
-
   ];
+
   home = {
     username = userSettings.username;
     homeDirectory = "/home/" + userSettings.username;
@@ -69,6 +69,7 @@
       kdePackages.kdenlive
     ];
   };
+
   programs = {
     home-manager.enable = true;
     git = {
@@ -91,12 +92,14 @@
       search = { default = "DuckDuckGo"; };
     };
   };
+
   services = {
     nextcloud-client = {
       enable = true;
       startInBackground = true;
     };
   };
+
   # xdg = {
   #   enable = true;
   #   userDirs = {
