@@ -116,6 +116,7 @@
       # Attribute set of nixpkgs for each system:
       nixpkgsFor =
         forAllSystems (system: import inputs.nixpkgs { inherit system; });
+
     in {
       homeConfigurations = {
         user = home-manager.lib.homeManagerConfiguration {
@@ -140,7 +141,6 @@
               + "/configuration.nix")
           ]; # load configuration.nix from selected PROFILE
           specialArgs = {
-            inherit pkgs;
             inherit pkgs-stable;
             inherit systemSettings;
             inherit userSettings;
