@@ -576,8 +576,8 @@ Note: Disabled.
         systemSettings.grubDevice; # does nothing if running uefi rather than bios
     };
     kernelModules = [ "i2c-dev" "i2c-piix4" "cpufreq_powersave" ];
-    initrd.luks.devices."luks-c233bfdc-56f5-4381-982a-3e17a746e0da".device =
-      "/dev/disk/by-uuid/c233bfdc-56f5-4381-982a-3e17a746e0da"; # TODO
+    # initrd.luks.devices."luks-c233bfdc-56f5-4381-982a-3e17a746e0da".device =
+    #   "/dev/disk/by-uuid/c233bfdc-56f5-4381-982a-3e17a746e0da"; # TODO
   };
 
   networking = {
@@ -1162,8 +1162,10 @@ Note: Disabled.
   };
 
   home.file.".librewolf/librewolf.overrides.cfg".text =
-    ''defaultPref("font.name.serif.x-western","'' + userSettings.font + ''
-      ");
+    ''
+    # defaultPref("font.name.serif.x-western","
+    # '' + userSettings.font + ''
+    #   ");
 
           defaultPref("font.size.variable.x-western",20);
           defaultPref("browser.toolbars.bookmarks.visibility","always");
@@ -1174,8 +1176,9 @@ Note: Disabled.
           defaultPref("privacy.clearOnShutdown.cookies",true);
           defaultPref("gfx.webrender.software.opengl",false);
           defaultPref("webgl.disabled",true);
-          pref("font.name.serif.x-western","'' + userSettings.font + ''
-        ");
+        #   pref("font.name.serif.x-western","
+        #   '' + userSettings.font + ''
+        # ");
 
             pref("font.size.variable.x-western",20);
             pref("browser.toolbars.bookmarks.visibility","always");
