@@ -755,7 +755,7 @@ Note: Currently disabled as it does not apply to this set up.
       mediainfo
       libmediainfo
       audio-recorder
-      gnome.cheese
+      cheese
       raysession
       ardour
       rosegarden
@@ -767,7 +767,7 @@ Note: Currently disabled as it does not apply to this set up.
       texinfo
       libffi
       zlib
-      # nodePackages.ungit
+      nodePackages.ungit
       ventoy
       kdePackages.kdenlive
     ];
@@ -786,6 +786,7 @@ Note: Currently disabled as it does not apply to this set up.
       };
       extraConfig = { push = { autoSetupRemote = true; }; };
     };
+    autorandr.enable = true;
     zsh.enable = true;
     ssh.enable = true;
     gpg.enable = true;
