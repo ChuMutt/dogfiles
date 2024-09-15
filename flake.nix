@@ -44,7 +44,7 @@
       }).applyPatches {
         name = "nixpkgs-patched";
         src = inputs.nixpkgs;
-        patches = [ ./patches/emacs-no-version-check.patch ];
+        # patches = [ ./patches/emacs-no-version-check.patch ];
       };
 
       # configure pkgs
@@ -60,7 +60,7 @@
             allowUnfree = true;
             allowUnfreePredicate = (_: true);
           };
-          overlays = [ inputs.rust-overlay.overlays.default ];
+          # overlays = [ inputs.rust-overlay.overlays.default ];
         }));
 
       pkgs-stable = import inputs.nixpkgs-stable {
@@ -77,7 +77,7 @@
           allowUnfree = true;
           allowUnfreePredicate = (_: true);
         };
-        overlays = [ inputs.rust-overlay.overlays.default ];
+        # overlays = [ inputs.rust-overlay.overlays.default ];
       };
 
       pkgs-emacs =
