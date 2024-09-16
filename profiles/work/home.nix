@@ -1,7 +1,7 @@
 { config, pkgs, userSettings, ... }: {
   imports = [
-    (./. + "../../../user/wm" + ("/" + userSettings.wm + "/" + userSettings.wm)
-      + ".nix") # My window manager selected from flake.nix
+    # (./. + "../../../user/wm" + ("/" + userSettings.wm + "/" + userSettings.wm)
+    #   + ".nix") # My window manager selected from flake.nix
     ../../user/shell/sh.nix
     ../../user/app/lf/lf.nix
     ../../user/app/git/git.nix
