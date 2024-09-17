@@ -23,7 +23,7 @@
         name = "chu";
         email = "chufilthymutt@gmail.com";
         dotfilesDir = "~/.config/dogfiles";
-        # theme = "io"; # selcted theme from my themes directory (./themes/)
+        theme = "solarized-dark"; # selcted theme from the LibrePhoenix themes directory (./themes/)
         # wm = "hyprland"; # Selected window manager or desktop environment; must select one in both ./user/wm/ and ./system/wm/
         wm = ./system/wm/x11.nix; # TODO
         # window manager type (hyprland or x11) translator

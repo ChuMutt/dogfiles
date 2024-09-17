@@ -347,7 +347,7 @@ Note: Currently disabled as it does not apply to this set up.
         name = "chu";
         email = "chufilthymutt@gmail.com";
         dotfilesDir = "~/.config/dogfiles";
-        # theme = "io"; # selcted theme from my themes directory (./themes/)
+        theme = "solarized-dark"; # selcted theme from the LibrePhoenix themes directory (./themes/)
         # wm = "hyprland"; # Selected window manager or desktop environment; must select one in both ./user/wm/ and ./system/wm/
         wm = ./system/wm/x11.nix; # TODO
         # window manager type (hyprland or x11) translator
@@ -1872,6 +1872,10 @@ in {
 
 #+end_src
 ** TODO wm/
+* themes/
+
+The author of all themes is LibrePhoenix.
+
 * To-Do
 ** TODO better modularization / system profiles that don't repeat themselves
 ** TODO actual profiles that aren't just everything you need thrown into /work profile
