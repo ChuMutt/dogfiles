@@ -143,6 +143,7 @@
         git clone https://github.com/doomemacs/doomemacs --depth 1 ~/.config/emacs
         ./.config/emacs/bin/doom install
       '')
+      xdragon
     ];
     shells = with pkgs; [ zsh ];
   };
