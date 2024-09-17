@@ -1324,9 +1324,11 @@ in {
 #+end_src
 **** cleaner
 #+begin_src sh :tangle ./user/app/lf/cleaner :shebang #!/bin/sh
+#!/bin/sh
 if [ -n "$FIFO_UEBERZUG" ]; then
 	printf '{"action": "remove", "identifier": "PREVIEW"}\n' > "$FIFO_UEBERZUG"
 fi
+
 #+end_src
 **** icons
 #+begin_src conf :tangle ./user/app/lf/icons
@@ -1594,6 +1596,7 @@ source "~/.config/lf/shortcutrc"
 #+end_src
 **** scope
 #+begin_src sh :tangle ./user/app/lf/scope :shebang #!/bin/sh
+#!/bin/sh
 # File preview handler for lf.
 
 set -C -f
@@ -1639,18 +1642,18 @@ image/svg+xml)
 		[ ! -f "$CACHE" ] && ffmpegthumbnailer -i "$1" -o "$CACHE" -s 0
 		image "$CACHE" "$2" "$3" "$4" "$5" "$1"
 		;;
-	*/pdf)
+	,*/pdf)
 		CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/lf/thumb.$(stat --printf '%n\0%i\0%F\0%s\0%W\0%Y' -- "$(readlink -f "$1")" | sha256sum | cut -d' ' -f1)"
 		[ ! -f "$CACHE.jpg" ] && pdftoppm -jpeg -f 1 -singlefile "$1" "$CACHE"
 		image "$CACHE.jpg" "$2" "$3" "$4" "$5" "$1"
 		;;
-	*/epub+zip|*/mobi*)
+	,*/epub+zip|*/mobi*)
 		CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/lf/thumb.$(stat --printf '%n\0%i\0%F\0%s\0%W\0%Y' -- "$(readlink -f "$1")" | sha256sum | cut -d' ' -f1)"
 		[ ! -f "$CACHE.jpg" ] && gnome-epub-thumbnailer "$1" "$CACHE.jpg"
 		image "$CACHE.jpg" "$2" "$3" "$4" "$5" "$1"
 		;;
 	application/*zip) atool --list -- "$1" ;;
-	*opendocument*) odt2txt "$1" ;;
+	,*opendocument*) odt2txt "$1" ;;
 	application/pgp-encrypted) gpg -d -- "$1" ;;
 esac
 exit 1
