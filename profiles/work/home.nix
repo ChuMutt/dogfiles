@@ -50,6 +50,7 @@
         DRI_PRIME=0 kdenlive "$1"
       '')
       mediainfo
+      dragon-drop
       libmediainfo
       audio-recorder
       cheese
