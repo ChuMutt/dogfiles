@@ -1596,7 +1596,6 @@ source "~/.config/lf/shortcutrc"
 #+end_src
 **** scope
 #+begin_src sh :tangle ./user/app/lf/scope :shebang #!/bin/sh
-#!/bin/sh
 # File preview handler for lf.
 
 set -C -f
