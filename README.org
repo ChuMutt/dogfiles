@@ -682,6 +682,7 @@ Note: Currently disabled as it does not apply to this set up.
         git clone https://github.com/doomemacs/doomemacs --depth 1 ~/.config/emacs
         ./.config/emacs/bin/doom install
       '')
+      dragon-drop
     ];
     shells = with pkgs; [ zsh ];
   };
@@ -776,7 +777,6 @@ Note: Currently disabled as it does not apply to this set up.
         DRI_PRIME=0 kdenlive "$1"
       '')
       mediainfo
-      dragon-drop
       libmediainfo
       audio-recorder
       cheese
