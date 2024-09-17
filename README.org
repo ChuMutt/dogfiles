@@ -685,6 +685,8 @@ Note: Currently disabled as it does not apply to this set up.
     shells = with pkgs; [ zsh ];
   };
 
+  users.defaultUserShell = pkgs.zsh;
+
   programs = {
     zsh.enable = true;
     nh.enable = true;
@@ -1809,7 +1811,7 @@ in {
       '';
     };
     bash = {
-      # enable = true;
+      enable = true;
       enableCompletion = true;
       shellAliases = aliases;
     };
