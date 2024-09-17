@@ -1879,7 +1879,6 @@ in {
 ** TODO emacs email dependencies added and configured
 ** TODO doom install script with my dotfiles
 ** TODO doom path added to path
-** TODO roswell install script
 ** TODO wallpaper
 ** TODO opentabletdriver
 ** TODO ardour / plugins / music
@@ -1893,6 +1892,7 @@ in {
 ** TODO make nixos install image
 ** TODO install working
 had to add git and enable extra experimental features nix-command and flakes in order to get the cogs turning; may need to update the flake.lock in order for the way it's supposed to be installed to work.
+** TODO roswell install script
 ** TODO Error caused by user's config or system: doom/config.el, (file-missing Cannot open load file No such file or directory /home/chu/.local/share/roswell/helper.el)
 * References / Credits
 - [[https://www.youtube.com/@wilfridtaylor][Wil T]]

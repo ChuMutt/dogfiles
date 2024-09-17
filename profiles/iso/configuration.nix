@@ -1,5 +1,0 @@
-{ ... }:
-
-{
-  imports = [ ../work/configuration.nix ];
-}
