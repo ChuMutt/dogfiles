@@ -1899,9 +1899,7 @@ The author of all themes is LibrePhoenix.
 had to add git and enable extra experimental features nix-command and flakes in order to get the cogs turning; may need to update the flake.lock in order for the way it's supposed to be installed to work.
 ** TODO roswell install script
 ** TODO Error caused by user's config or system: doom/config.el, (file-missing Cannot open load file No such file or directory /home/chu/.local/share/roswell/helper.el)
-<<<<<<< HEAD
 ** TODO rustdesk
-=======
 ** TODO librewolf addons
 *** TODO imagus
 *** TODO tridactyl
@@ -1909,7 +1907,6 @@ had to add git and enable extra experimental features nix-command and flakes in 
 *** TODO greasemonkey or whatever is in vogue atm
 ** TODO dragon-drop
 ** TODO zsh as default shell
->>>>>>> 69f86f7 (add dragon drop + todos)
 * References / Credits
 - [[https://www.youtube.com/@wilfridtaylor][Wil T]]
 - [[https://github.com/librephoenix/nixos-config][librephoenix/nixos-config]]
