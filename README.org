@@ -1,4 +1,5 @@
 #+title: chunixos
+#+auto_tangle: t
 
 *These are unstable configuration files (dotfiles): the installer does not work.*
 
