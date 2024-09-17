@@ -682,7 +682,7 @@ Note: Currently disabled as it does not apply to this set up.
         git clone https://github.com/doomemacs/doomemacs --depth 1 ~/.config/emacs
         ./.config/emacs/bin/doom install
       '')
-      dragon-drop
+      xdragon
     ];
     shells = with pkgs; [ zsh ];
   };
