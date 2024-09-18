@@ -25,14 +25,13 @@
       konsole
       librewolf
       git
-
       # office
       nextcloud-client
       libreoffice-fresh
       keepassxc
       xournalpp
       kdePackages.kate
-
+      rustdesk
       # media
       gimp
       krita
@@ -58,7 +57,6 @@
       rosegarden
       tenacity
       calf
-
       # Various dev packages
       sshfs
       texinfo
