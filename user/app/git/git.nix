@@ -1,6 +1,4 @@
-{ config, pkgs, userSettings, ... }:
-
-{
+{ config, pkgs, userSettings, ... }: {
   home.packages = [ pkgs.git ];
   programs.git = {
     enable = true;

@@ -1,8 +1,5 @@
-{ pkgs, ... }:
-# TODO be able to pick between kde/gnome/suckless & be able to extend
-{
+{ pkgs, ... }: {
   imports = [ ./pipewire.nix ./dbus.nix ./gnome-keyring.nix ];
-
   services = {
     xserver = {
       enable = true; # Enable the X11 windowing system.
@@ -28,15 +25,12 @@
       plasma6.enable = true; # KDE
       # gnome.enable = true; # GNOME
     };
-
     # windowManager = {
     # dwm.enable = true; # suckless
     # exwm.enable = true; # emacs
     # };
-
     # For virtual machine guests to enable a daemon allowing for clipboard (copy/paste) sharing.
     spice-vdagentd.enable = true; # TODO VM flag
-
     libinput = {
       enable =
         true; # Enable touchpad support (enabled default in most desktopManager).

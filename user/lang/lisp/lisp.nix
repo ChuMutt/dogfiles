@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{ pkgs, ... }: {
   home.packages = with pkgs; [
     rlwrap
     roswell

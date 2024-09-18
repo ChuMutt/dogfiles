@@ -1,10 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ pkgs, lib, inputs, systemSettings, userSettings, ... }:
-
-{
+{ pkgs, lib, inputs, systemSettings, userSettings, ... }: {
   imports = [
     # Include the results of the hardware scan.
     ../../system/hardware-configuration.nix
@@ -59,8 +56,6 @@
         systemSettings.grubDevice; # does nothing if running uefi rather than bios
     };
     kernelModules = [ "i2c-dev" "i2c-piix4" "cpufreq_powersave" ];
-    # initrd.luks.devices."luks-c233bfdc-56f5-4381-982a-3e17a746e0da".device =
-    #   "/dev/disk/by-uuid/c233bfdc-56f5-4381-982a-3e17a746e0da"; # TODO
   };
 
   networking = {
@@ -88,7 +83,7 @@
     isNormalUser = true;
     description = userSettings.name;
     extraGroups =
-      [ "networkmanager" "wheel" "input" "dialout" "video" "render" ];
+      [ "networkmanager" "wheel" "input" "dialout" "video" "audio" "render" ];
     packages = [ ];
     uid = 1000;
   };

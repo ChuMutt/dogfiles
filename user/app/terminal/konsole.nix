@@ -1,6 +1,4 @@
-{ pkgs, lib, ... }:
-
-{
+{ pkgs, lib, ... }: {
   home.packages = with pkgs; [ kdePackages.konsole ];
   programs.kdePackages.konsole.enable = true;
   programs.kdePackages.konsole.settings = {

@@ -1,17 +1,16 @@
 #!/bin/sh
-if [ $# -gt 0 ] # if no arguments are passed to the script, then
-  then
-    SCRIPT_DIR=$1 # arguments were passed
-  else
+if [ $# -gt 0 ]; then # if no arguments are passed to the script, then
+    SCRIPT_DIR=$1     # arguments were passed
+else
     SCRIPT_DIR=~/.config/dogfiles # arguments were not passed
 fi
 nix-shell -p git --command "git clone https://github.com/chumutt/dogfiles $SCRIPT_DIR"
-sudo nixos-generate-config --show-hardware-config > $SCRIPT_DIR/system/hardware-configuration.nix
+sudo nixos-generate-config --show-hardware-config >$SCRIPT_DIR/system/hardware-configuration.nix
 if [ -d /sys/firmware/efi/efivars ]; then
     sed -i "0,/bootMode.*=.*\".*\";/s//bootMode = \"uefi\";/" $SCRIPT_DIR/flake.nix
 else
     sed -i "0,/bootMode.*=.*\".*\";/s//bootMode = \"bios\";/" $SCRIPT_DIR/flake.nix
-    grubDevice=$(findmnt / | awk -F' ' '{ print $2 }' | sed 's/\[.*\]//g' | tail -n 1 | lsblk -no pkname | tail -n 1 )
+    grubDevice=$(findmnt / | awk -F' ' '{ print $2 }' | sed 's/\[.*\]//g' | tail -n 1 | lsblk -no pkname | tail -n 1)
     sed -i "0,/grubDevice.*=.*\".*\";/s//grubDevice = \"\/dev\/$grubDevice\";/" $SCRIPT_DIR/flake.nix
 fi
 sed -i "0,/chu/s//$(whoami)/" $SCRIPT_DIR/flake.nix
@@ -19,13 +18,13 @@ sed -i "0,/chu/s//$(getent passwd $(whoami) | cut -d ':' -f 5 | cut -d ',' -f 1)
 sed -i "s/chufilthymutt@gmail.com//" $SCRIPT_DIR/flake.nix
 sed -i "s+~/.config/dogfiles+$SCRIPT_DIR+g" $SCRIPT_DIR/flake.nix
 if [ -z "$EDITOR" ]; then
-    EDITOR=nano;
+    EDITOR=nano
 fi
-$EDITOR $SCRIPT_DIR/flake.nix;
-# sudo $SCRIPT_DIR/bin/harden $SCRIPT_DIR;
-sudo nixos-rebuild switch --flake $SCRIPT_DIR#system;
+$EDITOR $SCRIPT_DIR/flake.nix
+# sudo $SCRIPT_DIR/bin/harden $SCRIPT_DIR
+sudo nixos-rebuild switch --flake $SCRIPT_DIR#system
 nix run home-manager/master \
     --extra-experimental-features nix-command \
     --extra-experimental-features flakes \
     -- switch \
-    --flake $SCRIPT_DIR#user;
+    --flake $SCRIPT_DIR#user

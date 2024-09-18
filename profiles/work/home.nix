@@ -19,6 +19,11 @@
     username = userSettings.username;
     homeDirectory = "/home/" + userSettings.username;
     stateVersion = "24.05"; # Do not modify.
+    sessionVariables = { # Add Doom Emacs binaries to $PATH.
+      PATH = "${config.home.homeDirectory}/.config/emacs/bin/:${
+          pkgs.lib.getEnv "PATH"
+        }";
+    };
     packages = with pkgs; [
       # core
       zsh
@@ -82,7 +87,6 @@
       };
       extraConfig = { push = { autoSetupRemote = true; }; };
     };
-    autorandr.enable = true;
     zsh.enable = true;
     ssh.enable = true;
     gpg.enable = true;

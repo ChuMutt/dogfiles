@@ -1,5 +1,1 @@
-{ config, pkgs, ... }:
-
-{
-  home.packages = with pkgs; [ keepassxc keepmenu ];
-}
+{ config, pkgs, ... }: { home.packages = with pkgs; [ keepassxc keepmenu ]; }

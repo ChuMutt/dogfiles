@@ -1,6 +1,4 @@
-{ config, pkgs, ... }:
-
-{
+{ config, pkgs, ... }: {
   # Various packages related to virtualization, compatibility and sandboxing.
   home.packages = with pkgs; [
     # Virtual Machines and wine
@@ -11,13 +9,10 @@
     lxc
     swtpm
     bottles
-
     # Filesystems
     dosfstools
   ];
-
   home.file.".config/libvirt/qemu.conf".text = ''
     nvram = ["/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd"]
   '';
-
 }

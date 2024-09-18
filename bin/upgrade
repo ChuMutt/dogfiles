@@ -1,8 +1,8 @@
 #!/bin/sh
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}"/.. )" &> /dev/null && pwd )
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}"/..)" &>/dev/null && pwd)
 
 # Update flake
-$SCRIPT_DIR/bin/update;
+$SCRIPT_DIR/bin/update
 
 # Synchronize system
-$SCRIPT_DIR/bin/sync;
+$SCRIPT_DIR/bin/sync

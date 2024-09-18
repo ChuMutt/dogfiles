@@ -1,6 +1,4 @@
-{ userSettings, ... }:
-
-{
+{ userSettings, ... }: {
   # Enable incoming ssh
   services.openssh = {
     enable = true;

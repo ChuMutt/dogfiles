@@ -1,6 +1,4 @@
-{ ... }:
-
-{ # systemd journal garbage collection/refusal
+{ ... }: { # systemd journal garbage collection/refusal
   services.journald = {
     extraConfig = ''
       SystemMaxUse=50M
