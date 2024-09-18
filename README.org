@@ -752,14 +752,13 @@ Note: Currently disabled as it does not apply to this set up.
       konsole
       librewolf
       git
-
       # office
       nextcloud-client
       libreoffice-fresh
       keepassxc
       xournalpp
       kdePackages.kate
-
+      rustdesk
       # media
       gimp
       krita
