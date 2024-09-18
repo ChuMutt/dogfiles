@@ -1,5 +1,4 @@
 #+title: chunixos
-#+auto_tangle: t
 
 *These are unstable configuration files (dotfiles): the installer does not work.*
 
@@ -784,7 +783,6 @@ Note: Currently disabled as it does not apply to this set up.
       rosegarden
       tenacity
       calf
-
       # Various dev packages
       sshfs
       texinfo
@@ -1872,7 +1870,6 @@ in {
     '')
   ];
 }
-
 #+end_src
 ** TODO wm/
 * themes/
