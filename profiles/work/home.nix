@@ -20,8 +20,9 @@
     homeDirectory = "/home/" + userSettings.username;
     stateVersion = "24.05"; # Do not modify.
     sessionVariables = { # Add Doom Emacs binaries to $PATH.
-      PATH =
-        "${config.home.homeDirectory}/.config/emacs/bin/:${getEnv "PATH"}";
+      PATH = "${config.home.homeDirectory}/.config/emacs/bin/:${
+          pkgs.lib.getEnv "PATH"
+        }";
     };
     packages = with pkgs; [
       # core
