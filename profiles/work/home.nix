@@ -31,7 +31,6 @@
       keepassxc
       xournalpp
       kdePackages.kate
-      rustdesk
       # media
       gimp
       krita

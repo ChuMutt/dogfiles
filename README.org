@@ -738,7 +738,6 @@ Note: Currently disabled as it does not apply to this set up.
       keepassxc
       xournalpp
       kdePackages.kate
-      rustdesk
       # media
       gimp
       krita
