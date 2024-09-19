@@ -231,7 +231,7 @@ Script to update my flake without synchronizing configuration.
 #+end_quote
 
 #+begin_src sh :shebang #!/bin/sh :tangle ./bin/update
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}"/..)" &>/dev/null && pwd)
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 # Update flake
 pushd $SCRIPT_DIR &>/dev/null
@@ -248,7 +248,7 @@ Script to update system and sync. Does not pull changes from git.
 #+end_quote
 
 #+begin_src sh :shebang #!/bin/sh :tangle ./bin/upgrade
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}"/..)" &>/dev/null && pwd)
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 # Update flake
 $SCRIPT_DIR/bin/update
@@ -265,7 +265,7 @@ Script to synchronize system state with configuration files for nixos system and
 #+end_quote
 
 #+begin_src sh :shebang #!/bin/sh :tangle ./bin/sync-system
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}"/..)" &>/dev/null && pwd)
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 # Rebuild system
 sudo nixos-rebuild switch --flake $SCRIPT_DIR#system
@@ -278,7 +278,7 @@ Script to synchronize system state with configuration files for nixos system and
 #+end_quote
 
 #+begin_src sh :shebang #!/bin/sh :tangle ./bin/sync-user
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}"/..)" &>/dev/null && pwd)
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 # Fix root-owned sqlite errors
 sudo chown -R 1000:users ~/.cache/nix
@@ -300,7 +300,6 @@ Mainly just to reload stylix.
 Note: Currently disabled as it does not apply to this set up.
 
 #+begin_src sh :shebang #!/bin/sh :tangle ./bin/sync-posthook
-
 # xmonad
 # pgrep xmobar &> /dev/null && echo "Killing old xmobar instances" && echo "Running killall xmobar" && killall xmobar &> /dev/null; # xmonad will restart xmobar
 # pgrep xmonad &> /dev/null && echo "Recompiling xmonad" && echo "Running xmonad --recompile && xmonad --restart" && xmonad --recompile &> /dev/null && xmonad --restart &> /dev/null;
