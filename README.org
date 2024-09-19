@@ -125,7 +125,7 @@ After running this, the command `nix flake update` will require root.
 if [ "$#" = 1 ]; then
     SCRIPT_DIR=$1
 else
-    SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}"/..)" &>/dev/null && pwd)
+    SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 fi
 #+end_src
 
@@ -164,7 +164,7 @@ Automated script to update my non-primary system's configuration to be in sync w
 
 #+name: pull-set-enter-script-dir
 #+begin_src sh
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}"/..)" &>/dev/null && pwd)
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 #+end_src
 
 Relax permissions temporarily so git can work (not currently needed as the hardening script is disabled):
@@ -217,7 +217,7 @@ After running this, *[unprivileged users] can make edits to important system fil
 if [ "$#" = 1 ]; then
     SCRIPT_DIR=$1
 else
-    SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}"/..)" &>/dev/null && pwd)
+    SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 fi
 pushd $SCRIPT_DIR &>/dev/null
 sudo chown -R 1000:users /
@@ -231,7 +231,7 @@ Script to update my flake without synchronizing configuration.
 #+end_quote
 
 #+begin_src sh :shebang #!/bin/sh :tangle ./bin/update
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}"/..)" &>/dev/null && pwd)
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 # Update flake
 pushd $SCRIPT_DIR &>/dev/null
@@ -248,7 +248,7 @@ Script to update system and sync. Does not pull changes from git.
 #+end_quote
 
 #+begin_src sh :shebang #!/bin/sh :tangle ./bin/upgrade
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}"/..)" &>/dev/null && pwd)
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 # Update flake
 $SCRIPT_DIR/bin/update
@@ -265,7 +265,7 @@ Script to synchronize system state with configuration files for nixos system and
 #+end_quote
 
 #+begin_src sh :shebang #!/bin/sh :tangle ./bin/sync-system
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}"/..)" &>/dev/null && pwd)
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 # Rebuild system
 sudo nixos-rebuild switch --flake $SCRIPT_DIR#system
@@ -278,7 +278,7 @@ Script to synchronize system state with configuration files for nixos system and
 #+end_quote
 
 #+begin_src sh :shebang #!/bin/sh :tangle ./bin/sync-user
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}"/..)" &>/dev/null && pwd)
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 # Fix root-owned sqlite errors
 sudo chown -R 1000:users ~/.cache/nix
