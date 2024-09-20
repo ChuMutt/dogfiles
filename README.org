@@ -11,10 +11,13 @@ To install, run =install=:
 
 #+name: run-install-script-example
 #+begin_src sh :results none :tangle no
-./bin/install
+cd ~/.config/dogfiles/bin
+./install
 #+end_src
 
 which will run a number of installation scripts, which are detailed below. Credits to LibrePhoenix for the bulk of the core of this setup.
+
+*Heads up!*: For now, these scripts should be run from /within/ the =bin/= directory. I want to fix that in the future.
 
 ** Install script
 
