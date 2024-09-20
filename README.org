@@ -613,6 +613,7 @@ Note: Currently disabled as it does not apply to this set up.
       [ "networkmanager" "wheel" "input" "dialout" "video" "audio" "render" ];
     packages = [ ];
     uid = 1000;
+    shell = pkgs.zsh;
   };
 
   # List packages installed in system profile. To search, run:
