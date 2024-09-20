@@ -7,7 +7,8 @@ let
     "..." = "cd ../..";
     "...." = "cd ../../..";
   };
-in {
+in
+{
   programs = {
     zsh = {
       enable = true;
