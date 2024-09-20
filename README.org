@@ -251,10 +251,10 @@ Script to update system and sync. Does not pull changes from git.
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 # Update flake
-$SCRIPT_DIR/bin/update
+$SCRIPT_DIR/update
 
 # Synchronize system
-$SCRIPT_DIR/bin/sync
+$SCRIPT_DIR/sync
 #+end_src
 
 * Sync scripts
@@ -286,7 +286,7 @@ sudo chown -R 1000:users ~/.cache/nix
 # Install and build home-manager configuration
 home-manager switch --flake $SCRIPT_DIR#user
 
-$SCRIPT_DIR/bin/sync-posthook
+$SCRIPT_DIR/sync-posthook
 #+end_src
 
 ** Post-hook sync script
@@ -317,7 +317,10 @@ Note: Currently disabled as it does not apply to this set up.
 # emacs
 # pgrep emacs &> /dev/null && echo "Reloading emacs stylix theme" && echo "Running emacsclient --no-wait --eval \"(load-theme 'doom-stylix t nil)\"" && emacsclient --no-wait --eval "(load-theme 'doom-stylix t nil)" &> /dev/null;
 #+end_src
-
+** Sync script
+#+begin_src sh :shebang #!/bin/sh :tangle ./bin/sync
+./sync-system && ./sync-user
+#+end_src
 * flake.nix
 #+begin_src nix :tangle ./flake.nix
 {
@@ -1678,7 +1681,8 @@ let
     "..." = "cd ../..";
     "...." = "cd ../../..";
   };
-in {
+in
+{
   programs = {
     zsh = {
       enable = true;
