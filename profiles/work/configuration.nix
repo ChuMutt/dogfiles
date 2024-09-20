@@ -86,6 +86,7 @@
       [ "networkmanager" "wheel" "input" "dialout" "video" "audio" "render" ];
     packages = [ ];
     uid = 1000;
+    shell = pkgs.zsh;
   };
 
   # List packages installed in system profile. To search, run:
