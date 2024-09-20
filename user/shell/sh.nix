@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  aliases = {
+  myAliases = {
     g = "git";
     ga = "git add .";
     gc = "git commit -m";
@@ -14,7 +14,7 @@ in {
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       enableCompletion = true;
-      shellAliases = aliases;
+      shellAliases = myAliases;
       initExtra = ''
         PROMPT=" ◉ %U%F{magenta}%n%f%u@%U%F{blue}%m%f%u:%F{yellow}%~%f
         %F{green}→%f "
@@ -30,7 +30,7 @@ in {
     bash = {
       enable = true;
       enableCompletion = true;
-      shellAliases = aliases;
+      shellAliases = myAliases;
     };
     direnv = {
       enable = true;
