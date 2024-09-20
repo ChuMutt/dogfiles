@@ -1,5 +1,5 @@
 #+title: chunixos
-
+#+property: header-args :results silent
 *These are unstable configuration files (dotfiles): the installer does not work.*
 
 *Do not install.*
