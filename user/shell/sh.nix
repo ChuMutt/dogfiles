@@ -50,6 +50,7 @@ in
     cmatrix
     ponysay
     terminal-parrot
+    zsh
     vim
     neovim
     killall

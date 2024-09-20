@@ -22,8 +22,8 @@
       userSettings = rec {
         username = "chu";
         name = "chu";
-        email = "";
-        dotfilesDir = "/home/chu/.config/dogfiles";
+        email = "chufilthymutt@gmail.com";
+        dotfilesDir = "~/.config/dogfiles";
         theme =
           "solarized-dark"; # selcted theme from the LibrePhoenix themes directory (./themes/)
         # wm = "hyprland"; # Selected window manager or desktop environment; must select one in both ./user/wm/ and ./system/wm/
