@@ -22,7 +22,7 @@
       userSettings = rec {
         username = "chu";
         name = "chu";
-        email = "chufilthymutt@gmail.com";
+        email = "";
         dotfilesDir = "/home/chu/.config/dogfiles";
         theme =
           "solarized-dark"; # selcted theme from the LibrePhoenix themes directory (./themes/)
