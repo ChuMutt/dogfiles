@@ -140,6 +140,8 @@
         ./.config/emacs/bin/doom install
       '')
       xdragon
+      rustdesk
+      barrier
     ];
     shells = with pkgs; [ zsh ];
   };
