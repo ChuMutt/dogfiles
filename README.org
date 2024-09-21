@@ -670,6 +670,8 @@ Note: Currently disabled as it does not apply to this set up.
         ./.config/emacs/bin/doom install
       '')
       xdragon
+      rustdesk
+      barrier
     ];
     shells = with pkgs; [ zsh ];
   };
