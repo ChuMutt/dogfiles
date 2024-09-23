@@ -28,8 +28,7 @@
           "solarized-dark"; # selcted theme from the LibrePhoenix themes directory (./themes/)
         wm = "plasma";
         # window manager type (hyprland or x11) translator
-        # wmType = ./system/wm/x11.nix;
-        wmType = if (wm == "plasma") then "x11";
+        wmType = "x11";
         browser =
           "librewolf"; # Default browser; must select one from ./user/app/browser/
         defaultRoamDir = "roam"; # Default org roam directory relative to ~/Org
