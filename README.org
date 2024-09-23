@@ -368,10 +368,8 @@ Note: Currently disabled as it does not apply to this set up.
         dotfilesDir = "/home/chu/.config/dogfiles";
         theme =
           "solarized-dark"; # selcted theme from the LibrePhoenix themes directory (./themes/)
-        # wm = "hyprland"; # Selected window manager or desktop environment; must select one in both ./user/wm/ and ./system/wm/
         wm = ./system/wm/x11.nix; # TODO
         # window manager type (hyprland or x11) translator
-        # wmType = if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11";
         wmType = ./system/wm/x11.nix; # TODO
         browser =
           "librewolf"; # Default browser; must select one from ./user/app/browser/
@@ -556,7 +554,6 @@ Note: Currently disabled as it does not apply to this set up.
     ../../system/hardware/opengl.nix
     ../../system/hardware/printing.nix
     ../../system/hardware/bluetooth.nix
-    # (./. + "../../../system/wm" + ("/" + userSettings.wm) + ".nix")
     ../../system/wm/x11.nix
     ../../system/app/vm.nix
     ../../system/app/nh.nix
@@ -564,7 +561,6 @@ Note: Currently disabled as it does not apply to this set up.
     ../../system/security/sshd.nix
     ../../system/security/proxy.nix
     ../../system/security/firewall.nix
-    # TODO ../../system/security/automount.nix
   ];
 
   # Fix nix path
@@ -714,7 +710,6 @@ Note: Currently disabled as it does not apply to this set up.
 
   # Add emacs overlay
   nixpkgs.overlays = [ (import inputs.emacs-overlay) ];
-  # TODO Move?
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -723,22 +718,16 @@ Note: Currently disabled as it does not apply to this set up.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
 }
-
 #+end_src
 *** home.nix
 #+begin_src nix :mkdirp yes :tangle ./profiles/work/home.nix
 { config, pkgs, userSettings, ... }: {
   imports = [
-    # (./. + "../../user/wm" + ("/" + userSettings.wm + "/" + userSettings.wm)
-    #   + ".nix") # My window manager selected from flake.nix
     ../../user/shell/sh.nix
     ../../user/app/lf/lf.nix
     ../../user/app/git/git.nix
     ../../user/app/vm/vm.nix
-    # (./. + "../../user/app/browser" + ("/" + userSettings.browser)
-    #   + ".nix") # My default browser selected from flake.nix
     ../../user/lang/cc/cc.nix
     ../../user/lang/lisp/lisp.nix
     ../../user/lang/rust/rust.nix
@@ -829,16 +818,15 @@ Note: Currently disabled as it does not apply to this set up.
     };
   };
 
-  # xdg = {
-  #   enable = true;
-  #   userDirs = {
-  #     enable = true;
+  xdg = {
+    enable = true;
+    userDirs = {
+      enable = true;
   #     createDirectories = true;
   #     # TODO
-  #   };
-  # };
+    };
+  };
 }
-
 #+end_src
 * system/
 ** app/
