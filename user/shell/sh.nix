@@ -29,7 +29,7 @@ in
       '';
     };
     bash = {
-      # enable = true;
+      enable = true;
       enableCompletion = true;
       shellAliases = myAliases;
     };
@@ -43,45 +43,33 @@ in
     hyfetch
     lolcat
     cowsay
-    sl
     starfetch
-    cava
+    gnugrep
+    gnused
+    bat
+    bottom
+    fd
+    bc
+    direnv
+    nix-direnv
+
     asciiquarium-transparent
     cmatrix
     ponysay
     terminal-parrot
-    zsh
-    vim
-    neovim
+    tldr
+    ripgrep
+    rsync
+    cava
     killall
     libnotify
     timer
-    brightnessctl
-    gnugrep
-    bat
-    fd
     eza
-    bottom
-    ripgrep
-    rsync
     unzip
-    bc
-    direnv
-    nix-direnv
-    tldr
     w3m
-    pandoc
     hwinfo
     pciutils
-    (pkgs.writeShellScriptBin "airplane-mode" ''
-      #!/bin/sh
-      connectivity="$(nmcli n connectivity)"
-      if [ "$connectivity" == "full" ]
-      then
-          nmcli n off
-      else
-          nmcli n on
-      fi
-    '')
+    brightnessctl
+    pandoc
   ];
 }

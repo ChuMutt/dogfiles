@@ -6,8 +6,8 @@
     ../../user/app/lf/lf.nix
     ../../user/app/git/git.nix
     ../../user/app/vm/vm.nix
-    (./. + "../../user/app/browser" + ("/" + userSettings.browser)
-      + ".nix") # My default browser selected from flake.nix
+    # (./. + "../../user/app/browser" + ("/" + userSettings.browser)
+    #   + ".nix") # My default browser selected from flake.nix
     ../../user/lang/cc/cc.nix
     ../../user/lang/lisp/lisp.nix
     ../../user/lang/rust/rust.nix
@@ -89,14 +89,6 @@
       path = userSettings.username;
       search = { default = "DuckDuckGo"; };
     };
-    xsession = {
-      enable = true;
-      windowManager.kde.enable = true;
-      windowManager.kde.extraConfig = ''
-        [Theme]
-        name=BreezeDark
-      '';
-    };
   };
 
   services = {
@@ -106,10 +98,12 @@
     };
   };
 
-  xdg = {
-    enable = true;
-    userDirs = {
-      enable = true;
-    };
-  };
+  # xdg = {
+  #   enable = true;
+  #   userDirs = {
+  #     enable = true;
+  #     createDirectories = true;
+  #     # TODO
+  #   };
+  # };
 }

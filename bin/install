@@ -1,4 +1,3 @@
-#!/bin/sh
 if [ $# -gt 0 ]; then # if no arguments are passed to the script, then
     SCRIPT_DIR=$1     # arguments were passed
 else

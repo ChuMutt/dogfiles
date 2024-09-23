@@ -26,8 +26,10 @@
         dotfilesDir = "/home/chu/.config/dogfiles";
         theme =
           "solarized-dark"; # selcted theme from the LibrePhoenix themes directory (./themes/)
+        # wm = "hyprland"; # Selected window manager or desktop environment; must select one in both ./user/wm/ and ./system/wm/
         wm = ./system/wm/x11.nix; # TODO
         # window manager type (hyprland or x11) translator
+        # wmType = if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11";
         wmType = ./system/wm/x11.nix; # TODO
         browser =
           "librewolf"; # Default browser; must select one from ./user/app/browser/
@@ -89,6 +91,10 @@
 
       pkgs-kdenlive =
         import inputs.kdenlive-pin-nixpkgs { system = systemSettings.system; };
+
+      # pkgs-nwg-dock-hyprland = import inputs.nwg-dock-hyprland-pin-nixpkgs {
+      #   system = systemSettings.system;
+      # };
 
       # configure lib
       # use nixpkgs if running a server (homelab or worklab profile)

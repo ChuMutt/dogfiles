@@ -19,7 +19,6 @@ which will run a number of installation scripts, which are detailed below. Credi
 
 *Heads up!*: For now, these scripts should be run from /within/ the =bin/= directory. I want to fix that in the future.
 
-* Scripts
 ** Install script
 
 Clone dotfiles:
@@ -99,7 +98,7 @@ nix run home-manager/master \
     --flake $SCRIPT_DIR#user
 #+end_src
 
-#+begin_src sh :noweb yes :eval no :shebang #!/bin/sh :mkdirp yes :tangle ./bin/install
+#+begin_src sh :noweb yes :eval no  :mkdirp yes :tangle ./bin/install
 <<install-clone-dotfiles>>
 <<install-generate-hardware-config>>
 <<install-uefi-or-bios-check>>
@@ -155,11 +154,12 @@ sudo chown 1000:users **/README.org
 popd &>/dev/null
 #+end_src
 
-#+begin_src sh :noweb yes :eval no :shebang #!/bin/sh :tangle ./bin/harden
+#+begin_src sh :noweb yes :eval no  :tangle ./bin/harden
 <<harden-check-pwd>>
 <<harden-enter-harden-and-exit>>
 #+end_src
-** Pull script
+
+* Pull script
 
 #+begin_quote
 Automated script to update my non-primary system's configuration to be in sync with [the] upstream git [repository] while preserving local edits to [the configuration via a =git stash= command].
@@ -195,14 +195,14 @@ Set permissions for files that should be owned by root:
 sudo $SCRIPT_DIR/bin/harden $SCRIPT_DIR
 #+end_src
 
-#+begin_src sh :noweb yes :eval no :shebang #!/bin/sh :tangle ./bin/pull
+#+begin_src sh :noweb yes :eval no  :tangle ./bin/pull
 <<pull-set-enter-script-dir>>
 <<pull-temporary-softener>>
 <<pull-stash-pull-apply>>
 <<pull-set-perms>>
 #+end_src
 
-** Soften script
+* Soften script
 
 This will soften the security of these dotfiles, allowing the default unpriveleged user with UID/GID of 1000 to edit ALL FILES in the dotfiles directory.
 
@@ -216,7 +216,8 @@ BTW, this assumes your user account has a UID/GID of 1000.
 
 After running this, *[unprivileged users] can make edits to important system files which may compromise the system after running* =nixos-rebuild switch=. This script can be undone by running its inverse, =harden=, and vice versa.
 
-#+begin_src sh :shebang #!/bin/sh :tangle ./bin/soften
+#+begin_src sh  :tangle ./bin/soften
+#!/bin/sh
 if [ "$#" = 1 ]; then
     SCRIPT_DIR=$1
 else
@@ -225,15 +226,17 @@ fi
 pushd $SCRIPT_DIR &>/dev/null
 sudo chown -R 1000:users /
 popd &>/dev/null
+
 #+end_src
 
-** Update script
+* Update script
 
 #+begin_quote
 Script to update my flake without synchronizing configuration.
 #+end_quote
 
-#+begin_src sh :shebang #!/bin/sh :tangle ./bin/update
+#+begin_src sh  :tangle ./bin/update
+#!/bin/sh
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 # Update flake
@@ -242,15 +245,17 @@ sudo nix flake update
 sudo nix-channel --update
 nix-channel --update
 popd &>/dev/null
+
 #+end_src
 
-** Upgrade script
+* Upgrade script
 
 #+begin_quote
 Script to update system and sync. Does not pull changes from git.
 #+end_quote
 
-#+begin_src sh :shebang #!/bin/sh :tangle ./bin/upgrade
+#+begin_src sh  :tangle ./bin/upgrade
+#!/bin/sh
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 # Update flake
@@ -258,29 +263,33 @@ $SCRIPT_DIR/update
 
 # Synchronize system
 $SCRIPT_DIR/sync
+
 #+end_src
 
-** Sync scripts
-*** System sync script
+* Sync scripts
+** System sync script
 
 #+begin_quote
 Script to synchronize system state with configuration files for nixos system and home-manager.
 #+end_quote
 
-#+begin_src sh :shebang #!/bin/sh :tangle ./bin/sync-system
+#+begin_src sh  :tangle ./bin/sync-system
+#!/bin/sh
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 # Rebuild system
 sudo nixos-rebuild switch --flake $SCRIPT_DIR#system
+
 #+end_src
 
-*** User sync script
+** User sync script
 
 #+begin_quote
 Script to synchronize system state with configuration files for nixos system and home-manager.
 #+end_quote
 
-#+begin_src sh :shebang #!/bin/sh :tangle ./bin/sync-user
+#+begin_src sh  :tangle ./bin/sync-user
+#!/bin/sh
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 # Fix root-owned sqlite errors
@@ -290,9 +299,10 @@ sudo chown -R 1000:users ~/.cache/nix
 home-manager switch --flake $SCRIPT_DIR#user
 
 $SCRIPT_DIR/sync-posthook
+
 #+end_src
 
-*** Post-hook sync script
+** Post-hook sync script
 
 #+begin_quote
 Post hooks to be called after a configuration sync.
@@ -302,8 +312,8 @@ Mainly just to reload stylix.
 
 Note: Currently disabled as it does not apply to this set up.
 
-#+begin_src sh :shebang #!/bin/sh :tangle ./bin/sync-posthook
-
+#+begin_src sh  :tangle ./bin/sync-posthook
+#!/bin/sh
 # xmonad
 # pgrep xmobar &> /dev/null && echo "Killing old xmobar instances" && echo "Running killall xmobar" && killall xmobar &> /dev/null; # xmonad will restart xmobar
 # pgrep xmonad &> /dev/null && echo "Recompiling xmonad" && echo "Running xmonad --recompile && xmonad --restart" && xmonad --recompile &> /dev/null && xmonad --restart &> /dev/null;
@@ -319,10 +329,13 @@ Note: Currently disabled as it does not apply to this set up.
 
 # emacs
 # pgrep emacs &> /dev/null && echo "Reloading emacs stylix theme" && echo "Running emacsclient --no-wait --eval \"(load-theme 'doom-stylix t nil)\"" && emacsclient --no-wait --eval "(load-theme 'doom-stylix t nil)" &> /dev/null;
+
 #+end_src
-*** Sync script
-#+begin_src sh :shebang #!/bin/sh :tangle ./bin/sync
+** Sync script
+#+begin_src sh  :tangle ./bin/sync
+#!/bin/sh
 ./sync-system && ./sync-user
+
 #+end_src
 * flake.nix
 #+begin_src nix :tangle ./flake.nix
@@ -354,8 +367,10 @@ Note: Currently disabled as it does not apply to this set up.
         dotfilesDir = "/home/chu/.config/dogfiles";
         theme =
           "solarized-dark"; # selcted theme from the LibrePhoenix themes directory (./themes/)
+        # wm = "hyprland"; # Selected window manager or desktop environment; must select one in both ./user/wm/ and ./system/wm/
         wm = ./system/wm/x11.nix; # TODO
         # window manager type (hyprland or x11) translator
+        # wmType = if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11";
         wmType = ./system/wm/x11.nix; # TODO
         browser =
           "librewolf"; # Default browser; must select one from ./user/app/browser/
@@ -417,6 +432,10 @@ Note: Currently disabled as it does not apply to this set up.
 
       pkgs-kdenlive =
         import inputs.kdenlive-pin-nixpkgs { system = systemSettings.system; };
+
+      # pkgs-nwg-dock-hyprland = import inputs.nwg-dock-hyprland-pin-nixpkgs {
+      #   system = systemSettings.system;
+      # };
 
       # configure lib
       # use nixpkgs if running a server (homelab or worklab profile)
@@ -544,6 +563,7 @@ Note: Currently disabled as it does not apply to this set up.
     ../../system/security/sshd.nix
     ../../system/security/proxy.nix
     ../../system/security/firewall.nix
+    # TODO ../../system/security/automount.nix
   ];
 
   # Fix nix path
@@ -704,6 +724,7 @@ Note: Currently disabled as it does not apply to this set up.
   system.stateVersion = "24.11"; # Did you read the comment?
 
 }
+
 #+end_src
 *** home.nix
 #+begin_src nix :mkdirp yes :tangle ./profiles/work/home.nix
@@ -715,8 +736,8 @@ Note: Currently disabled as it does not apply to this set up.
     ../../user/app/lf/lf.nix
     ../../user/app/git/git.nix
     ../../user/app/vm/vm.nix
-    (./. + "../../user/app/browser" + ("/" + userSettings.browser)
-      + ".nix") # My default browser selected from flake.nix
+    # (./. + "../../user/app/browser" + ("/" + userSettings.browser)
+    #   + ".nix") # My default browser selected from flake.nix
     ../../user/lang/cc/cc.nix
     ../../user/lang/lisp/lisp.nix
     ../../user/lang/rust/rust.nix
@@ -798,14 +819,6 @@ Note: Currently disabled as it does not apply to this set up.
       path = userSettings.username;
       search = { default = "DuckDuckGo"; };
     };
-    xsession = {
-      enable = true;
-      windowManager.kde.enable = true;
-      windowManager.kde.extraConfig = ''
-        [Theme]
-        name=BreezeDark
-      '';
-    };
   };
 
   services = {
@@ -815,13 +828,16 @@ Note: Currently disabled as it does not apply to this set up.
     };
   };
 
-  xdg = {
-    enable = true;
-    userDirs = {
-      enable = true;
-    };
-  };
+  # xdg = {
+  #   enable = true;
+  #   userDirs = {
+  #     enable = true;
+  #     createDirectories = true;
+  #     # TODO
+  #   };
+  # };
 }
+
 #+end_src
 * system/
 ** app/
@@ -1152,6 +1168,29 @@ Currently insecure.
   };
 }
 #+end_src
+**** firefox.nix
+#+begin_src nix :mkdirp yes :tangle ./user/app/browser/firefox.nix
+{ pkgs, userSettings, ... }:
+{
+  # Module installing librewolf as default browser
+  home.packages =
+    if (userSettings.wmType == "wayland") then [ pkgs.firefox-wayland ] else [ pkgs.firefox ];
+  home.sessionVariables =
+    if (userSettings.wmType == "wayland") then
+      {
+        DEFAULT_BROWSER = "${pkgs.firefox-wayland}/bin/firefox";
+      }
+    else
+      {
+        DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
+      };
+  programs.firefox.enable = true;
+  programs.firefox.profiles.chu.settings.extensions.autoDisableScopes = 0;
+  programs.firefox.profiles.chu.extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+    privacy-badger
+  ];
+}
+#+end_src
 *** games/games.nix
 #+begin_src nix :mkdirp yes :tangle ./user/app/games/games.nix
 { pkgs, pkgs-stable, ... }:
@@ -1245,11 +1284,13 @@ in {
 }
 #+end_src
 **** cleaner
-#+begin_src sh :tangle ./user/app/lf/cleaner :shebang #!/bin/sh
+#+begin_src sh :tangle ./user/app/lf/cleaner
+#!/bin/sh
 #!/bin/sh
 if [ -n "$FIFO_UEBERZUG" ]; then
 	printf '{"action": "remove", "identifier": "PREVIEW"}\n' > "$FIFO_UEBERZUG"
 fi
+
 #+end_src
 **** icons
 #+begin_src conf :tangle ./user/app/lf/icons
@@ -1514,7 +1555,8 @@ map <c-l> unselect
 source "~/.config/lf/shortcutrc"
 #+end_src
 **** scope
-#+begin_src sh :tangle ./user/app/lf/scope :shebang #!/bin/sh
+#+begin_src sh :tangle ./user/app/lf/scope
+#!/bin/sh
 # File preview handler for lf.
 
 set -C -f
@@ -1575,6 +1617,7 @@ image/svg+xml)
 	application/pgp-encrypted) gpg -d -- "$1" ;;
 esac
 exit 1
+
 #+end_src
 *** terminal/
 **** alacritty.nix
@@ -1708,7 +1751,7 @@ in
       '';
     };
     bash = {
-      # enable = true;
+      enable = true;
       enableCompletion = true;
       shellAliases = myAliases;
     };
@@ -1722,50 +1765,37 @@ in
     hyfetch
     lolcat
     cowsay
-    sl
     starfetch
-    cava
+    gnugrep
+    gnused
+    bat
+    bottom
+    fd
+    bc
+    direnv
+    nix-direnv
+
     asciiquarium-transparent
     cmatrix
     ponysay
     terminal-parrot
-    zsh
-    vim
-    neovim
+    tldr
+    ripgrep
+    rsync
+    cava
     killall
     libnotify
     timer
-    brightnessctl
-    gnugrep
-    bat
-    fd
     eza
-    bottom
-    ripgrep
-    rsync
     unzip
-    bc
-    direnv
-    nix-direnv
-    tldr
     w3m
-    pandoc
     hwinfo
     pciutils
-    (pkgs.writeShellScriptBin "airplane-mode" ''
-      #!/bin/sh
-      connectivity="$(nmcli n connectivity)"
-      if [ "$connectivity" == "full" ]
-      then
-          nmcli n off
-      else
-          nmcli n on
-      fi
-    '')
+    brightnessctl
+    pandoc
   ];
 }
 #+end_src
-** TODO wm/
 * themes/
 
 The author of all themes is LibrePhoenix.
@@ -1789,18 +1819,19 @@ The author of all themes is LibrePhoenix.
 ** TODO literate
 ** TODO random-splash-image emacs
 ** TODO make nixos install image
-** TODO install working
+** DONE install working
 had to add git and enable extra experimental features nix-command and flakes in order to get the cogs turning; may need to update the flake.lock in order for the way it's supposed to be installed to work.
 ** TODO roswell install script
 ** TODO Error caused by user's config or system: doom/config.el, (file-missing Cannot open load file No such file or directory /home/chu/.local/share/roswell/helper.el)
-** TODO rustdesk
+** DONE rustdesk
 ** TODO librewolf addons
 *** TODO imagus
 *** TODO tridactyl
 *** TODO copy as org
 *** TODO greasemonkey or whatever is in vogue atm
-** TODO dragon-drop
-** TODO zsh as default shell
+** DONE dragon-drop
+xdragon
+** DONE zsh as default shell
 * References / Credits
 - [[https://www.youtube.com/@wilfridtaylor][Wil T]]
 - [[https://github.com/librephoenix/nixos-config][librephoenix/nixos-config]]
