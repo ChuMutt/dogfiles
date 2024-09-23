@@ -30,7 +30,7 @@
         # window manager type (hyprland or x11) translator
         # wmType = ./system/wm/x11.nix; # TODO
         browser =
-          "firefox"; # Default browser; must select one from ./user/app/browser/
+          "librewolf"; # Default browser; must select one from ./user/app/browser/
         defaultRoamDir = "roam"; # Default org roam directory relative to ~/Org
         term = "konsole";
         font = "Noto Sans"; # Selected font
