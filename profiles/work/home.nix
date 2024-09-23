@@ -1,12 +1,12 @@
 { config, pkgs, userSettings, ... }: {
   imports = [
-    # (./. + "../../../user/wm" + ("/" + userSettings.wm + "/" + userSettings.wm)
+    # (./. + "../../user/wm" + ("/" + userSettings.wm + "/" + userSettings.wm)
     #   + ".nix") # My window manager selected from flake.nix
     ../../user/shell/sh.nix
     ../../user/app/lf/lf.nix
     ../../user/app/git/git.nix
     ../../user/app/vm/vm.nix
-    (./. + "../../../user/app/browser" + ("/" + userSettings.browser)
+    (./. + "../../user/app/browser" + ("/" + userSettings.browser)
       + ".nix") # My default browser selected from flake.nix
     ../../user/lang/cc/cc.nix
     ../../user/lang/lisp/lisp.nix

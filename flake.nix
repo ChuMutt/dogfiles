@@ -22,7 +22,7 @@
       userSettings = rec {
         username = "chu";
         name = "chu";
-        email = "";
+        email = "chufilthymutt@gmail.com";
         dotfilesDir = "/home/chu/.config/dogfiles";
         theme =
           "solarized-dark"; # selcted theme from the LibrePhoenix themes directory (./themes/)
@@ -91,10 +91,6 @@
 
       pkgs-kdenlive =
         import inputs.kdenlive-pin-nixpkgs { system = systemSettings.system; };
-
-      # pkgs-nwg-dock-hyprland = import inputs.nwg-dock-hyprland-pin-nixpkgs {
-      #   system = systemSettings.system;
-      # };
 
       # configure lib
       # use nixpkgs if running a server (homelab or worklab profile)

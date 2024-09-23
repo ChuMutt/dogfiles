@@ -420,10 +420,6 @@ Note: Currently disabled as it does not apply to this set up.
       pkgs-kdenlive =
         import inputs.kdenlive-pin-nixpkgs { system = systemSettings.system; };
 
-      # pkgs-nwg-dock-hyprland = import inputs.nwg-dock-hyprland-pin-nixpkgs {
-      #   system = systemSettings.system;
-      # };
-
       # configure lib
       # use nixpkgs if running a server (homelab or worklab profile)
       # otherwise use patched nixos-unstable nixpkgs
@@ -716,8 +712,8 @@ Note: Currently disabled as it does not apply to this set up.
 #+begin_src nix :mkdirp yes :tangle ./profiles/work/home.nix
 { config, pkgs, userSettings, ... }: {
   imports = [
-    (./. + "../../user/wm" + ("/" + userSettings.wm + "/" + userSettings.wm)
-      + ".nix") # My window manager selected from flake.nix
+    # (./. + "../../user/wm" + ("/" + userSettings.wm + "/" + userSettings.wm)
+    #   + ".nix") # My window manager selected from flake.nix
     ../../user/shell/sh.nix
     ../../user/app/lf/lf.nix
     ../../user/app/git/git.nix
