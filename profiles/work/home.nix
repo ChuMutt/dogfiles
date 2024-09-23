@@ -89,6 +89,14 @@
       path = userSettings.username;
       search = { default = "DuckDuckGo"; };
     };
+    xsession = {
+      enable = true;
+      windowManager.kde.enable = true;
+      windowManager.kde.extraConfig = ''
+        [Theme]
+        name=BreezeDark
+      '';
+    };
   };
 
   services = {
@@ -98,12 +106,12 @@
     };
   };
 
-  # xdg = {
-  #   enable = true;
-  #   userDirs = {
-  #     enable = true;
-  #     createDirectories = true;
-  #     # TODO
-  #   };
-  # };
+  xdg = {
+    enable = true;
+    userDirs = {
+      enable = true;
+      # createDirectories = true;
+      # # TODO
+    };
+  };
 }
