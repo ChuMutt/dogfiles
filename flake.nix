@@ -26,9 +26,9 @@
         dotfilesDir = "/home/chu/.config/dogfiles";
         theme =
           "solarized-dark"; # selcted theme from the LibrePhoenix themes directory (./themes/)
-        # wm = ./system/wm/x11.nix; # TODO
+        wm = ./system/wm/x11.nix; # TODO
         # window manager type (hyprland or x11) translator
-        # wmType = ./system/wm/x11.nix; # TODO
+        wmType = ./system/wm/x11.nix; # TODO
         browser =
           "librewolf"; # Default browser; must select one from ./user/app/browser/
         defaultRoamDir = "roam"; # Default org roam directory relative to ~/Org
