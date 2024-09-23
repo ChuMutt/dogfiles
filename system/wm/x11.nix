@@ -30,7 +30,7 @@
     # exwm.enable = true; # emacs
     # };
     # For virtual machine guests to enable a daemon allowing for clipboard (copy/paste) sharing.
-    spice-vdagentd.enable = true; # TODO VM flag
+    spice-vdagentd.enable = true; # TODO VM flag (i.e, have this on for virtual machines)
     libinput = {
       enable =
         true; # Enable touchpad support (enabled default in most desktopManager).
