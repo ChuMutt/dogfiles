@@ -1068,7 +1068,7 @@ Currently insecure.
     # exwm.enable = true; # emacs
     # };
     # For virtual machine guests to enable a daemon allowing for clipboard (copy/paste) sharing.
-    spice-vdagentd.enable = true; # TODO VM flag
+    spice-vdagentd.enable = true; # TODO VM flag (i.e, have this on for virtual machines)
     libinput = {
       enable =
         true; # Enable touchpad support (enabled default in most desktopManager).
@@ -1078,6 +1078,20 @@ Currently insecure.
 }
 #+end_src
 **** TODO be able to pick between kde/gnome/suckless & be able to extend
+*** plasma.nix
+#+begin_src nix :mkdirp yes :tangle ./system/wm/plasma.nix
+{ pkgs, ... }:
+{
+  services = {
+    displayManager = {
+      sddm.enable = true;
+    };
+    desktopManager = {
+      plasma6.enable = true;
+    };
+  };
+}
+#+end_src
 *** dbus.nix
 #+begin_src nix :mkdirp yes :tangle ./system/wm/dbus.nix
 { pkgs, ... }: {
