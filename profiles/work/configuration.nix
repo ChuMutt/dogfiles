@@ -20,7 +20,6 @@
     ../../system/security/sshd.nix
     ../../system/security/proxy.nix
     ../../system/security/firewall.nix
-    # TODO ../../system/security/automount.nix
   ];
 
   # Fix nix path
