@@ -19,6 +19,7 @@ which will run a number of installation scripts, which are detailed below. Credi
 
 *Heads up!*: For now, these scripts should be run from /within/ the =bin/= directory. I want to fix that in the future.
 
+* Scripts
 ** Install script
 
 Clone dotfiles:
@@ -159,7 +160,7 @@ popd &>/dev/null
 <<harden-enter-harden-and-exit>>
 #+end_src
 
-* Pull script
+** Pull script
 
 #+begin_quote
 Automated script to update my non-primary system's configuration to be in sync with [the] upstream git [repository] while preserving local edits to [the configuration via a =git stash= command].
@@ -202,7 +203,7 @@ sudo $SCRIPT_DIR/bin/harden $SCRIPT_DIR
 <<pull-set-perms>>
 #+end_src
 
-* Soften script
+** Soften script
 
 This will soften the security of these dotfiles, allowing the default unpriveleged user with UID/GID of 1000 to edit ALL FILES in the dotfiles directory.
 
@@ -229,7 +230,7 @@ popd &>/dev/null
 
 #+end_src
 
-* Update script
+** Update script
 
 #+begin_quote
 Script to update my flake without synchronizing configuration.
@@ -248,7 +249,7 @@ popd &>/dev/null
 
 #+end_src
 
-* Upgrade script
+** Upgrade script
 
 #+begin_quote
 Script to update system and sync. Does not pull changes from git.
@@ -266,8 +267,8 @@ $SCRIPT_DIR/sync
 
 #+end_src
 
-* Sync scripts
-** System sync script
+** Sync scripts
+*** System sync script
 
 #+begin_quote
 Script to synchronize system state with configuration files for nixos system and home-manager.
@@ -282,7 +283,7 @@ sudo nixos-rebuild switch --flake $SCRIPT_DIR#system
 
 #+end_src
 
-** User sync script
+*** User sync script
 
 #+begin_quote
 Script to synchronize system state with configuration files for nixos system and home-manager.
@@ -302,7 +303,7 @@ $SCRIPT_DIR/sync-posthook
 
 #+end_src
 
-** Post-hook sync script
+*** Post-hook sync script
 
 #+begin_quote
 Post hooks to be called after a configuration sync.
@@ -331,7 +332,7 @@ Note: Currently disabled as it does not apply to this set up.
 # pgrep emacs &> /dev/null && echo "Reloading emacs stylix theme" && echo "Running emacsclient --no-wait --eval \"(load-theme 'doom-stylix t nil)\"" && emacsclient --no-wait --eval "(load-theme 'doom-stylix t nil)" &> /dev/null;
 
 #+end_src
-** Sync script
+*** Sync script
 #+begin_src sh  :tangle ./bin/sync
 #!/bin/sh
 ./sync-system && ./sync-user
