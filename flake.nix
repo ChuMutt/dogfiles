@@ -30,12 +30,12 @@
         # window manager type (hyprland or x11) translator
         wmType = "x11";
         browser =
-          "librewolf"; # Default browser; must select one from ./user/app/browser/
+          "firefox"; # Default browser; must select one from ./user/app/browser/
         defaultRoamDir = "roam"; # Default org roam directory relative to ~/Org
         term = "konsole";
         font = "Noto Sans"; # Selected font
         fontPkg = pkgs.noto-fonts; # Font package
-        editor = "emacsclient";
+        editor = "nvim";
         spawnEditor = if (editor == "emacsclient") then
           "emacsclient -c -a 'emacs'"
         else
