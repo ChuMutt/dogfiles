@@ -785,6 +785,8 @@ Note: Currently disabled as it does not apply to this set up.
       nixfmt-rfc-style
       ventoy
       kdePackages.kdenlive
+      discord
+      telegram-desktop
     ];
   };
 

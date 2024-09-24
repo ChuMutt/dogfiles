@@ -61,6 +61,8 @@
       nixfmt-rfc-style
       ventoy
       kdePackages.kdenlive
+      discord
+      telegram-desktop
     ];
   };
 
