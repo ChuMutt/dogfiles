@@ -66,6 +66,8 @@
     ];
   };
 
+  # file."$XDG_DATA_DIR}/roswell/helper.el".source = ./user/app/lang/lisp; # TODO
+
   programs = {
     home-manager.enable = true;
     git = {
