@@ -1,4 +1,10 @@
-{ config, pkgs, userSettings, ... }: {
+{
+  config,
+  pkgs,
+  userSettings,
+  ...
+}:
+{
   imports = [
     ../../user/shell/sh.nix
     ../../user/app/lf/lf.nix
@@ -20,6 +26,7 @@
       zsh
       konsole
       librewolf
+      firefox
       git
       # office
       nextcloud-client
@@ -66,7 +73,8 @@
     ];
   };
 
-  # file."$XDG_DATA_DIR}/roswell/helper.el".source = ./user/app/lang/lisp; # TODO
+  home.file."$XDG_DATA_DIR}/roswell/helper.el".source = ../../user/lang/lisp/roswell/helper.el;
+  home.file."$XDG_CONFIG_HOME}/nixpkgs/config.nix".source = ../../user/nixpkgs/config.nix;
 
   programs = {
     home-manager.enable = true;
@@ -79,15 +87,27 @@
         co = "checkout";
         s = "status";
       };
-      extraConfig = { push = { autoSetupRemote = true; }; };
+      extraConfig = {
+        push = {
+          autoSetupRemote = true;
+        };
+      };
     };
     zsh.enable = true;
     ssh.enable = true;
     gpg.enable = true;
+    firefox.enable = true;
     firefox.profiles.chu = {
       name = userSettings.username;
       path = userSettings.username;
-      search = { default = "DuckDuckGo"; };
+      settings.extensions.autoDisableScopes = 0;
+      search = {
+        default = "DuckDuckGo";
+      };
+      # extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      #   privacy-badger
+      #   dark-reader
+      # ];
     };
   };
 
@@ -102,8 +122,6 @@
     enable = true;
     userDirs = {
       enable = true;
-  #     createDirectories = true;
-  #     # TODO
     };
   };
 }

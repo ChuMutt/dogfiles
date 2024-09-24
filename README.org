@@ -343,7 +343,13 @@ Note: Currently disabled as it does not apply to this set up.
 {
   description = "chu's nixOS config flake";
 
-  outputs = inputs@{ self, ... }:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      nur,
+      ...
+    }:
     let
       # ---- SYSTEM SETTINGS ---- #
       systemSettings = {
@@ -353,12 +359,9 @@ Note: Currently disabled as it does not apply to this set up.
         timezone = "America/Chicago";
         locale = "en_US.UTF-8";
         bootMode = "uefi"; # uefi or bios
-        bootMountPath =
-          "/boot"; # mount path for efi boot partition; only used for uefi boot mode
-        grubDevice =
-          ""; # device identifier for grub; only used for legacy (bios) boot mode
-        gpuType =
-          "nvidia"; # amd, intel or nvidia; only makes some slight mods for amd at the moment
+        bootMountPath = "/boot"; # mount path for efi boot partition; only used for uefi boot mode
+        grubDevice = ""; # device identifier for grub; only used for legacy (bios) boot mode
+        gpuType = "nvidia"; # amd, intel or nvidia; only makes some slight mods for amd at the moment
       };
       # ----- USER SETTINGS ----- #
       userSettings = rec {
@@ -366,49 +369,52 @@ Note: Currently disabled as it does not apply to this set up.
         name = "chu";
         email = "chufilthymutt@gmail.com";
         dotfilesDir = "/home/chu/.config/dogfiles";
-        theme =
-          "solarized-dark"; # selcted theme from the LibrePhoenix themes directory (./themes/)
+        theme = "solarized-dark"; # selcted theme from the LibrePhoenix themes directory (./themes/)
         wm = "plasma";
         # window manager type (hyprland or x11) translator
         wmType = "x11";
-        browser =
-          "firefox"; # Default browser; must select one from ./user/app/browser/
+        browser = "firefox"; # Default browser; must select one from ./user/app/browser/
         defaultRoamDir = "roam"; # Default org roam directory relative to ~/Org
         term = "konsole";
         font = "Noto Sans"; # Selected font
         fontPkg = pkgs.noto-fonts; # Font package
         editor = "nvim";
-        spawnEditor = if (editor == "emacsclient") then
-          "emacsclient -c -a 'emacs'"
-        else
-          (if ((editor == "vim") || (editor == "nvim")
-            || (editor == "nano")) then
-            "exec " + term + " -e " + editor
+        spawnEditor =
+          if (editor == "emacsclient") then
+            "emacsclient -c -a 'emacs'"
           else
-            editor);
+            (
+              if ((editor == "vim") || (editor == "nvim") || (editor == "nano")) then
+                "exec " + term + " -e " + editor
+              else
+                editor
+            );
       };
       # create patched nixpkgs
-      nixpkgs-patched = (import inputs.nixpkgs {
-        system = systemSettings.system;
-        rocmSupport = (if systemSettings.gpu == "amd" then true else false);
-      }).applyPatches {
-        name = "nixpkgs-patched";
-        src = inputs.nixpkgs;
-      };
+      nixpkgs-patched =
+        (import inputs.nixpkgs {
+          system = systemSettings.system;
+          rocmSupport = (if systemSettings.gpu == "amd" then true else false);
+        }).applyPatches
+          {
+            name = "nixpkgs-patched";
+            src = inputs.nixpkgs;
+          };
       # configure pkgs
       # use nixpkgs if running a server (homelab or worklab profile)
       # otherwise use patched nixos-unstable nixpkgs
-      pkgs = (if ((systemSettings.profile == "homelab")
-        || (systemSettings.profile == "worklab")) then
-        pkgs-stable
-      else
-        (import nixpkgs-patched {
-          system = systemSettings.system;
-          config = {
-            allowUnfree = true;
-            allowUnfreePredicate = (_: true);
-          };
-        }));
+      pkgs = (
+        if ((systemSettings.profile == "homelab") || (systemSettings.profile == "worklab")) then
+          pkgs-stable
+        else
+          (import nixpkgs-patched {
+            system = systemSettings.system;
+            config = {
+              allowUnfree = true;
+              allowUnfreePredicate = (_: true);
+            };
+          })
+      );
 
       pkgs-stable = import inputs.nixpkgs-stable {
         system = systemSettings.system;
@@ -426,11 +432,9 @@ Note: Currently disabled as it does not apply to this set up.
         };
       };
 
-      pkgs-emacs =
-        import inputs.emacs-pin-nixpkgs { system = systemSettings.system; };
+      pkgs-emacs = import inputs.emacs-pin-nixpkgs { system = systemSettings.system; };
 
-      pkgs-kdenlive =
-        import inputs.kdenlive-pin-nixpkgs { system = systemSettings.system; };
+      pkgs-kdenlive = import inputs.kdenlive-pin-nixpkgs { system = systemSettings.system; };
 
       # pkgs-nwg-dock-hyprland = import inputs.nwg-dock-hyprland-pin-nixpkgs {
       #   system = systemSettings.system;
@@ -439,37 +443,42 @@ Note: Currently disabled as it does not apply to this set up.
       # configure lib
       # use nixpkgs if running a server (homelab or worklab profile)
       # otherwise use patched nixos-unstable nixpkgs
-      lib = (if ((systemSettings.profile == "homelab")
-        || (systemSettings.profile == "worklab")) then
-        inputs.nixpkgs-stable.lib
-      else
-        inputs.nixpkgs.lib);
+      lib = (
+        if ((systemSettings.profile == "homelab") || (systemSettings.profile == "worklab")) then
+          inputs.nixpkgs-stable.lib
+        else
+          inputs.nixpkgs.lib
+      );
 
       # use home-manager-stable if running a server (homelab or worklab profile)
       # otherwise use home-manager-unstable
-      home-manager = (if ((systemSettings.profile == "homelab")
-        || (systemSettings.profile == "worklab")) then
-        inputs.home-manager-stable
-      else
-        inputs.home-manager-unstable);
+      home-manager = (
+        if ((systemSettings.profile == "homelab") || (systemSettings.profile == "worklab")) then
+          inputs.home-manager-stable
+        else
+          inputs.home-manager-unstable
+      );
 
       # Systems that can run tests:
-      supportedSystems = [ "aarch64-linux" "i686-linux" "x86_64-linux" ];
+      supportedSystems = [
+        "aarch64-linux"
+        "i686-linux"
+        "x86_64-linux"
+      ];
 
       # Function to generate a set based on supported systems:
       forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
 
       # Attribute set of nixpkgs for each system:
-      nixpkgsFor =
-        forAllSystems (system: import inputs.nixpkgs { inherit system; });
+      nixpkgsFor = forAllSystems (system: import inputs.nixpkgs { inherit system; });
 
-    in {
+    in
+    {
       homeConfigurations = {
         user = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
-            (./. + "/profiles" + ("/" + systemSettings.profile)
-              + "/home.nix") # load home.nix from selected PROFILE
+            (./. + "/profiles" + ("/" + systemSettings.profile) + "/home.nix") # load home.nix from selected PROFILE
           ];
           extraSpecialArgs = {
             inherit pkgs-stable;
@@ -483,8 +492,21 @@ Note: Currently disabled as it does not apply to this set up.
         system = lib.nixosSystem {
           system = systemSettings.system;
           modules = [
-            (./. + "/profiles" + ("/" + systemSettings.profile)
-              + "/configuration.nix")
+            (./. + "/profiles" + ("/" + systemSettings.profile) + "/configuration.nix")
+            { nixpkgs.overlays = [ nur.overlay ]; }
+            (
+              { pkgs, ... }:
+              let
+                nur-no-pkgs = import nur {
+                  nurpkgs = import nixpkgs { system = "x86_64-linux"; };
+                };
+              in
+              {
+                # imports = [ nur-no-pkgs.repos.iopq.modules.xraya ];
+                # services.xraya.enable = true;
+              }
+            )
+            #./configuration.nix or other imports here
           ]; # load configuration.nix from selected PROFILE
           specialArgs = {
             inherit pkgs-stable;
@@ -494,17 +516,20 @@ Note: Currently disabled as it does not apply to this set up.
           };
         };
       };
-      packages = forAllSystems (system:
-        let pkgs = nixpkgsFor.${system};
-        in {
+      packages = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgsFor.${system};
+        in
+        {
           default = self.packages.${system}.install;
           install = pkgs.writeShellApplication {
             name = "install";
-            runtimeInputs = with pkgs;
-              [ git ]; # I could make this fancier by adding other deps
+            runtimeInputs = with pkgs; [ git ]; # I could make this fancier by adding other deps
             text = ''${./bin/install} "$@"'';
           };
-        });
+        }
+      );
       apps = forAllSystems (system: {
         default = self.apps.${system}.install;
         install = {
@@ -533,6 +558,7 @@ Note: Currently disabled as it does not apply to this set up.
       url = "github:StevenBlack/hosts";
       flake = false;
     };
+    nur.url = "github:nix-community/NUR";
   };
 }
 #+end_src
@@ -543,7 +569,20 @@ Note: Currently disabled as it does not apply to this set up.
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ pkgs, lib, inputs, systemSettings, userSettings, ... }: {
+{
+  pkgs,
+  lib,
+  inputs,
+  systemSettings,
+  userSettings,
+  ...
+}:
+# let
+#   nur-no-pkgs =
+#     import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz")
+#       { };
+# in
+{
   imports = [
     # Include the results of the hardware scan.
     ../../system/hardware-configuration.nix
@@ -561,6 +600,7 @@ Note: Currently disabled as it does not apply to this set up.
     ../../system/security/sshd.nix
     ../../system/security/proxy.nix
     ../../system/security/firewall.nix
+    # nur-no-pkgs.repos.rycee.firefox-addons
   ];
 
   # Fix nix path
@@ -585,17 +625,17 @@ Note: Currently disabled as it does not apply to this set up.
   # Bootloader
   boot = {
     loader = {
-      systemd-boot.enable =
-        if (systemSettings.bootMode == "uefi") then true else false;
-      efi.canTouchEfiVariables =
-        if (systemSettings.bootMode == "uefi") then true else false;
-      efi.efiSysMountPoint =
-        systemSettings.bootMountPath; # does nothing if running bios rather than uefi
+      systemd-boot.enable = if (systemSettings.bootMode == "uefi") then true else false;
+      efi.canTouchEfiVariables = if (systemSettings.bootMode == "uefi") then true else false;
+      efi.efiSysMountPoint = systemSettings.bootMountPath; # does nothing if running bios rather than uefi
       grub.enable = if (systemSettings.bootMode == "uefi") then false else true;
-      grub.device =
-        systemSettings.grubDevice; # does nothing if running uefi rather than bios
+      grub.device = systemSettings.grubDevice; # does nothing if running uefi rather than bios
     };
-    kernelModules = [ "i2c-dev" "i2c-piix4" "cpufreq_powersave" ];
+    kernelModules = [
+      "i2c-dev"
+      "i2c-piix4"
+      "cpufreq_powersave"
+    ];
   };
 
   networking = {
@@ -622,8 +662,15 @@ Note: Currently disabled as it does not apply to this set up.
   users.users.${userSettings.username} = {
     isNormalUser = true;
     description = userSettings.name;
-    extraGroups =
-      [ "networkmanager" "wheel" "input" "dialout" "video" "audio" "render" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "input"
+      "dialout"
+      "video"
+      "audio"
+      "render"
+    ];
     packages = [ ];
     uid = 1000;
     shell = pkgs.zsh;
@@ -697,15 +744,18 @@ Note: Currently disabled as it does not apply to this set up.
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal xdg-desktop-portal-gtk ];
+    extraPortals = with pkgs; [
+      xdg-desktop-portal
+      xdg-desktop-portal-gtk
+    ];
   };
 
   # List services that you want to enable:
   services = {
     # Make Emacs packages available to the Emacs Daemon (emacsclient).
-    emacs.package = with pkgs;
-      ((emacsPackagesFor emacs-gtk).emacsWithPackages
-        (epkgs: [ epkgs."vterm" ]));
+    emacs.package =
+      with pkgs;
+      ((emacsPackagesFor emacs-gtk).emacsWithPackages (epkgs: [ epkgs."vterm" ]));
   };
 
   # Add emacs overlay
@@ -722,7 +772,13 @@ Note: Currently disabled as it does not apply to this set up.
 #+end_src
 *** home.nix
 #+begin_src nix :mkdirp yes :tangle ./profiles/work/home.nix
-{ config, pkgs, userSettings, ... }: {
+{
+  config,
+  pkgs,
+  userSettings,
+  ...
+}:
+{
   imports = [
     ../../user/shell/sh.nix
     ../../user/app/lf/lf.nix
@@ -744,6 +800,7 @@ Note: Currently disabled as it does not apply to this set up.
       zsh
       konsole
       librewolf
+      firefox
       git
       # office
       nextcloud-client
@@ -790,7 +847,8 @@ Note: Currently disabled as it does not apply to this set up.
     ];
   };
 
-  # file."$XDG_DATA_DIR}/roswell/helper.el".source = ./user/app/lang/lisp; # TODO
+  home.file."$XDG_DATA_DIR}/roswell/helper.el".source = ../../user/lang/lisp/roswell/helper.el;
+  home.file."$XDG_CONFIG_HOME}/nixpkgs/config.nix".source = ../../user/nixpkgs/config.nix;
 
   programs = {
     home-manager.enable = true;
@@ -803,15 +861,27 @@ Note: Currently disabled as it does not apply to this set up.
         co = "checkout";
         s = "status";
       };
-      extraConfig = { push = { autoSetupRemote = true; }; };
+      extraConfig = {
+        push = {
+          autoSetupRemote = true;
+        };
+      };
     };
     zsh.enable = true;
     ssh.enable = true;
     gpg.enable = true;
+    firefox.enable = true;
     firefox.profiles.chu = {
       name = userSettings.username;
       path = userSettings.username;
-      search = { default = "DuckDuckGo"; };
+      # settings.extensions.autoDisableScopes = 0;
+      search = {
+        default = "DuckDuckGo";
+      };
+      # extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      #   privacy-badger
+      #   dark-reader
+      # ];
     };
   };
 
@@ -826,8 +896,6 @@ Note: Currently disabled as it does not apply to this set up.
     enable = true;
     userDirs = {
       enable = true;
-  #     createDirectories = true;
-  #     # TODO
     };
   };
 }

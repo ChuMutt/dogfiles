@@ -1,7 +1,20 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ pkgs, lib, inputs, systemSettings, userSettings, ... }: {
+{
+  pkgs,
+  lib,
+  inputs,
+  systemSettings,
+  userSettings,
+  ...
+}:
+# let
+#   nur-no-pkgs =
+#     import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz")
+#       { };
+# in
+{
   imports = [
     # Include the results of the hardware scan.
     ../../system/hardware-configuration.nix
@@ -19,6 +32,7 @@
     ../../system/security/sshd.nix
     ../../system/security/proxy.nix
     ../../system/security/firewall.nix
+    # nur-no-pkgs.repos.rycee.firefox-addons
   ];
 
   # Fix nix path
@@ -43,17 +57,17 @@
   # Bootloader
   boot = {
     loader = {
-      systemd-boot.enable =
-        if (systemSettings.bootMode == "uefi") then true else false;
-      efi.canTouchEfiVariables =
-        if (systemSettings.bootMode == "uefi") then true else false;
-      efi.efiSysMountPoint =
-        systemSettings.bootMountPath; # does nothing if running bios rather than uefi
+      systemd-boot.enable = if (systemSettings.bootMode == "uefi") then true else false;
+      efi.canTouchEfiVariables = if (systemSettings.bootMode == "uefi") then true else false;
+      efi.efiSysMountPoint = systemSettings.bootMountPath; # does nothing if running bios rather than uefi
       grub.enable = if (systemSettings.bootMode == "uefi") then false else true;
-      grub.device =
-        systemSettings.grubDevice; # does nothing if running uefi rather than bios
+      grub.device = systemSettings.grubDevice; # does nothing if running uefi rather than bios
     };
-    kernelModules = [ "i2c-dev" "i2c-piix4" "cpufreq_powersave" ];
+    kernelModules = [
+      "i2c-dev"
+      "i2c-piix4"
+      "cpufreq_powersave"
+    ];
   };
 
   networking = {
@@ -80,8 +94,15 @@
   users.users.${userSettings.username} = {
     isNormalUser = true;
     description = userSettings.name;
-    extraGroups =
-      [ "networkmanager" "wheel" "input" "dialout" "video" "audio" "render" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "input"
+      "dialout"
+      "video"
+      "audio"
+      "render"
+    ];
     packages = [ ];
     uid = 1000;
     shell = pkgs.zsh;
@@ -155,15 +176,18 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal xdg-desktop-portal-gtk ];
+    extraPortals = with pkgs; [
+      xdg-desktop-portal
+      xdg-desktop-portal-gtk
+    ];
   };
 
   # List services that you want to enable:
   services = {
     # Make Emacs packages available to the Emacs Daemon (emacsclient).
-    emacs.package = with pkgs;
-      ((emacsPackagesFor emacs-gtk).emacsWithPackages
-        (epkgs: [ epkgs."vterm" ]));
+    emacs.package =
+      with pkgs;
+      ((emacsPackagesFor emacs-gtk).emacsWithPackages (epkgs: [ epkgs."vterm" ]));
   };
 
   # Add emacs overlay
