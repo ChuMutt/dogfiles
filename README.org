@@ -729,6 +729,12 @@ Note: Currently disabled as it does not apply to this set up.
       xdragon
       rustdesk
       barrier
+      exercism
+      roswell
+      xclip
+      xdotool
+      shfmt
+      gnuplot
     ];
     shells = with pkgs; [ zsh ];
   };
@@ -756,6 +762,13 @@ Note: Currently disabled as it does not apply to this set up.
     emacs.package =
       with pkgs;
       ((emacsPackagesFor emacs-gtk).emacsWithPackages (epkgs: [ epkgs."vterm" ]));
+  };
+
+  environment = {
+    sessionVariables = {
+      MANPATH = "${pkgs.man-db}/share/man:$MANPATH";
+      ROSWELL_HOME = "$XDG_DATA_HOME/roswell";
+    };
   };
 
   # Add emacs overlay
@@ -800,7 +813,6 @@ Note: Currently disabled as it does not apply to this set up.
       zsh
       konsole
       librewolf
-      firefox
       git
       # office
       nextcloud-client
@@ -844,11 +856,12 @@ Note: Currently disabled as it does not apply to this set up.
       kdePackages.kdenlive
       discord
       telegram-desktop
+      exercism
     ];
   };
 
-  home.file."$XDG_DATA_DIR}/roswell/helper.el".source = ../../user/lang/lisp/roswell/helper.el;
-  home.file."$XDG_CONFIG_HOME}/nixpkgs/config.nix".source = ../../user/nixpkgs/config.nix;
+  home.file.".local/share/roswell/helper.el".source = ../../user/lang/lisp/roswell/helper.el;
+  home.file.".config/nixpkgs/config.nix".source = ../../user/nixpkgs/config.nix;
 
   programs = {
     home-manager.enable = true;
@@ -932,7 +945,6 @@ Note: Currently disabled as it does not apply to this set up.
     systemPackages = [ pkgs.steam ];
     sessionVariables = {
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
-      MANPATH = "${pkgs.man-db}/share/man:$MANPATH";
     };
   };
 }
@@ -1804,6 +1816,7 @@ let
     gc = "git commit -m";
     "..." = "cd ../..";
     "...." = "cd ../../..";
+    "doom" = "~/.config/emacs/bin/doom ";
   };
 in
 {
@@ -1880,7 +1893,7 @@ The author of all themes is LibrePhoenix.
 ** TODO better modularization / system profiles that don't repeat themselves
 ** TODO actual profiles that aren't just everything you need thrown into /work profile
 ** TODO lf declarative rather than tangling in luke lf config raw via org babel
-** TODO telegram
+** DONE telegram
 ** TODO emacs email dependencies added and configured
 ** TODO doom install script with my dotfiles
 ** TODO doom path added to path

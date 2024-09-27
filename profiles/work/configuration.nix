@@ -161,6 +161,12 @@
       xdragon
       rustdesk
       barrier
+      exercism
+      roswell
+      xclip
+      xdotool
+      shfmt
+      gnuplot
     ];
     shells = with pkgs; [ zsh ];
   };
@@ -188,6 +194,13 @@
     emacs.package =
       with pkgs;
       ((emacsPackagesFor emacs-gtk).emacsWithPackages (epkgs: [ epkgs."vterm" ]));
+  };
+
+  environment = {
+    sessionVariables = {
+      MANPATH = "${pkgs.man-db}/share/man:$MANPATH";
+      ROSWELL_HOME = "$XDG_DATA_HOME/roswell";
+    };
   };
 
   # Add emacs overlay

@@ -6,6 +6,7 @@ let
     gc = "git commit -m";
     "..." = "cd ../..";
     "...." = "cd ../../..";
+    "doom" = "~/.config/emacs/bin/doom ";
   };
 in
 {

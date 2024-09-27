@@ -6,7 +6,6 @@
     systemPackages = [ pkgs.steam ];
     sessionVariables = {
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${XDG_DATA_DIR}/steam/root/compatibilitytools.d";
-      MANPATH = "${pkgs.man-db}/share/man:$MANPATH";
     };
   };
 }

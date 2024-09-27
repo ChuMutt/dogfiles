@@ -26,7 +26,6 @@
       zsh
       konsole
       librewolf
-      firefox
       git
       # office
       nextcloud-client
@@ -70,11 +69,12 @@
       kdePackages.kdenlive
       discord
       telegram-desktop
+      exercism
     ];
   };
 
-  home.file."$XDG_DATA_DIR}/roswell/helper.el".source = ../../user/lang/lisp/roswell/helper.el;
-  home.file."$XDG_CONFIG_HOME}/nixpkgs/config.nix".source = ../../user/nixpkgs/config.nix;
+  home.file.".local/share/roswell/helper.el".source = ../../user/lang/lisp/roswell/helper.el;
+  home.file.".config/nixpkgs/config.nix".source = ../../user/nixpkgs/config.nix;
 
   programs = {
     home-manager.enable = true;
@@ -100,7 +100,7 @@
     firefox.profiles.chu = {
       name = userSettings.username;
       path = userSettings.username;
-      settings.extensions.autoDisableScopes = 0;
+      # settings.extensions.autoDisableScopes = 0;
       search = {
         default = "DuckDuckGo";
       };
