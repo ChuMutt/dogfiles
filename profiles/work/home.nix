@@ -100,14 +100,9 @@
     firefox.profiles.chu = {
       name = userSettings.username;
       path = userSettings.username;
-      # settings.extensions.autoDisableScopes = 0;
       search = {
         default = "DuckDuckGo";
       };
-      # extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      #   privacy-badger
-      #   dark-reader
-      # ];
     };
   };
 
@@ -122,13 +117,6 @@
     enable = true;
     userDirs = {
       enable = true;
-    };
-  };
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Breeze Dark";
-      packages = libsforQt5.breeze-gtk;
     };
   };
 }
