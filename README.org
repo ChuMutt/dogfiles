@@ -436,10 +436,6 @@ Note: Currently disabled as it does not apply to this set up.
 
       pkgs-kdenlive = import inputs.kdenlive-pin-nixpkgs { system = systemSettings.system; };
 
-      # pkgs-nwg-dock-hyprland = import inputs.nwg-dock-hyprland-pin-nixpkgs {
-      #   system = systemSettings.system;
-      # };
-
       # configure lib
       # use nixpkgs if running a server (homelab or worklab profile)
       # otherwise use patched nixos-unstable nixpkgs
@@ -1172,7 +1168,9 @@ Currently insecure.
       sddm.enable = true;
     };
     desktopManager = {
-      plasma6.enable = true;
+      plasma6 = {
+        enable = true;
+      };
     };
   };
 }

@@ -94,10 +94,6 @@
 
       pkgs-kdenlive = import inputs.kdenlive-pin-nixpkgs { system = systemSettings.system; };
 
-      # pkgs-nwg-dock-hyprland = import inputs.nwg-dock-hyprland-pin-nixpkgs {
-      #   system = systemSettings.system;
-      # };
-
       # configure lib
       # use nixpkgs if running a server (homelab or worklab profile)
       # otherwise use patched nixos-unstable nixpkgs
