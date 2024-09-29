@@ -236,12 +236,8 @@ popd &>/dev/null
 Script to update my flake without synchronizing configuration.
 #+end_quote
 
-<<<<<<< HEAD
 #+begin_src sh  :tangle ./bin/update
 #!/bin/sh
-=======
-#+begin_src sh :shebang #!/bin/sh :tangle ./bin/update
->>>>>>> origin/main
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 # Update flake
@@ -259,12 +255,8 @@ popd &>/dev/null
 Script to update system and sync. Does not pull changes from git.
 #+end_quote
 
-<<<<<<< HEAD
 #+begin_src sh  :tangle ./bin/upgrade
 #!/bin/sh
-=======
-#+begin_src sh :shebang #!/bin/sh :tangle ./bin/upgrade
->>>>>>> origin/main
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 # Update flake
@@ -282,12 +274,8 @@ $SCRIPT_DIR/sync
 Script to synchronize system state with configuration files for nixos system and home-manager.
 #+end_quote
 
-<<<<<<< HEAD
 #+begin_src sh  :tangle ./bin/sync-system
 #!/bin/sh
-=======
-#+begin_src sh :shebang #!/bin/sh :tangle ./bin/sync-system
->>>>>>> origin/main
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 # Rebuild system
@@ -301,12 +289,8 @@ sudo nixos-rebuild switch --flake $SCRIPT_DIR#system
 Script to synchronize system state with configuration files for nixos system and home-manager.
 #+end_quote
 
-<<<<<<< HEAD
 #+begin_src sh  :tangle ./bin/sync-user
 #!/bin/sh
-=======
-#+begin_src sh :shebang #!/bin/sh :tangle ./bin/sync-user
->>>>>>> origin/main
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 # Fix root-owned sqlite errors
@@ -329,12 +313,8 @@ Mainly just to reload stylix.
 
 Note: Currently disabled as it does not apply to this set up.
 
-<<<<<<< HEAD
 #+begin_src sh  :tangle ./bin/sync-posthook
 #!/bin/sh
-=======
-#+begin_src sh :shebang #!/bin/sh :tangle ./bin/sync-posthook
->>>>>>> origin/main
 # xmonad
 # pgrep xmobar &> /dev/null && echo "Killing old xmobar instances" && echo "Running killall xmobar" && killall xmobar &> /dev/null; # xmonad will restart xmobar
 # pgrep xmonad &> /dev/null && echo "Recompiling xmonad" && echo "Running xmonad --recompile && xmonad --restart" && xmonad --recompile &> /dev/null && xmonad --restart &> /dev/null;
