@@ -1884,9 +1884,6 @@ The author of all themes is LibrePhoenix.
 * To-Do
 ** TODO better modularization / system profiles that don't repeat themselves
 ** TODO actual profiles that aren't just everything you need thrown into /work profile
-** TODO lf declarative rather than tangling in luke lf config raw via org babel
-** DONE telegram
-** TODO emacs email dependencies added and configured
 ** TODO doom install script with my dotfiles
 ** TODO doom path added to path
 ** TODO wallpaper
@@ -1897,19 +1894,19 @@ The author of all themes is LibrePhoenix.
 ** TODO blender
 ** TODO hard drives / fstab
 ** TODO impermanence
-** TODO literate
 ** TODO random-splash-image emacs
 ** TODO make nixos install image
-** DONE install working
-had to add git and enable extra experimental features nix-command and flakes in order to get the cogs turning; may need to update the flake.lock in order for the way it's supposed to be installed to work.
 ** TODO roswell install script
 ** TODO Error caused by user's config or system: doom/config.el, (file-missing Cannot open load file No such file or directory /home/chu/.local/share/roswell/helper.el)
-** DONE rustdesk
-** TODO librewolf addons
+** TODO firefox addons
 *** TODO imagus
 *** TODO tridactyl
 *** TODO copy as org
 *** TODO greasemonkey or whatever is in vogue atm
+** DONE telegram
+** DONE install working
+had to add git and enable extra experimental features nix-command and flakes in order to get the cogs turning; may need to update the flake.lock in order for the way it's supposed to be installed to work.
+** DONE rustdesk
 ** DONE dragon-drop
 xdragon
 ** DONE zsh as default shell
