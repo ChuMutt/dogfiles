@@ -436,10 +436,6 @@ Note: Currently disabled as it does not apply to this set up.
 
       pkgs-kdenlive = import inputs.kdenlive-pin-nixpkgs { system = systemSettings.system; };
 
-      # pkgs-nwg-dock-hyprland = import inputs.nwg-dock-hyprland-pin-nixpkgs {
-      #   system = systemSettings.system;
-      # };
-
       # configure lib
       # use nixpkgs if running a server (homelab or worklab profile)
       # otherwise use patched nixos-unstable nixpkgs
@@ -887,14 +883,9 @@ Note: Currently disabled as it does not apply to this set up.
     firefox.profiles.chu = {
       name = userSettings.username;
       path = userSettings.username;
-      # settings.extensions.autoDisableScopes = 0;
       search = {
         default = "DuckDuckGo";
       };
-      # extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      #   privacy-badger
-      #   dark-reader
-      # ];
     };
   };
 
@@ -1172,7 +1163,9 @@ Currently insecure.
       sddm.enable = true;
     };
     desktopManager = {
-      plasma6.enable = true;
+      plasma6 = {
+        enable = true;
+      };
     };
   };
 }
@@ -1792,13 +1785,12 @@ exit 1
   home.packages = with pkgs; [
     rlwrap
     roswell
-    # mitscheme
-    # chez
-    # chicken
-    # guile
-    # racket
-    # fennel
-    # janet
+    mitscheme
+    chicken
+    guile
+    racket
+    fennel
+    janet
   ];
 }
 #+end_src
@@ -1814,8 +1806,8 @@ let
     g = "git";
     ga = "git add .";
     gc = "git commit -m";
-    "..." = "cd ../..";
-    "...." = "cd ../../..";
+    ".." = "cd ./..";
+    "..." = "cd ./../../";
     "doom" = "~/.config/emacs/bin/doom ";
   };
 in

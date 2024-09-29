@@ -5,7 +5,9 @@
       sddm.enable = true;
     };
     desktopManager = {
-      plasma6.enable = true;
+      plasma6 = {
+        enable = true;
+      };
     };
   };
 }

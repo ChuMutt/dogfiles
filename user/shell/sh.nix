@@ -4,8 +4,8 @@ let
     g = "git";
     ga = "git add .";
     gc = "git commit -m";
-    "..." = "cd ../..";
-    "...." = "cd ../../..";
+    ".." = "cd ./..";
+    "..." = "cd ./../../";
     "doom" = "~/.config/emacs/bin/doom ";
   };
 in
