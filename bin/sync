@@ -1,2 +1,10 @@
 #!/bin/sh
+<<<<<<< HEAD
 ./sync-system && ./sync-user
+=======
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+./sync-system &&
+./sync-user &&
+./sync-posthook &&
+echo "Sync complete!"
+>>>>>>> origin/main
