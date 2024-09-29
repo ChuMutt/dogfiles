@@ -124,4 +124,11 @@
       enable = true;
     };
   };
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Breeze Dark";
+      packages = libsforQt5.breeze-gtk;
+    };
+  };
 }
