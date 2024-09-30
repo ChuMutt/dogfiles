@@ -905,6 +905,8 @@ Note: Currently disabled as it does not apply to this set up.
       color-scheme = "prefer-dark";
     };
   };
+  hardware.opentabletdriver.enable = true;
+  hardware.opentabletdriver.daemon.enable = true;
 }
 #+end_src
 * system/

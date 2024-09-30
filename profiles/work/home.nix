@@ -122,4 +122,6 @@
       color-scheme = "prefer-dark";
     };
   };
+  hardware.opentabletdriver.enable = true;
+  hardware.opentabletdriver.daemon.enable = true;
 }
