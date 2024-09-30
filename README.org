@@ -1916,6 +1916,15 @@ had to add git and enable extra experimental features nix-command and flakes in 
 xdragon
 ** DONE zsh as default shell
 * References / Credits
-- [[https://www.youtube.com/@wilfridtaylor][Wil T]]
 - [[https://github.com/librephoenix/nixos-config][librephoenix/nixos-config]]
 - [[https://github.com/hlissner/dotfiles][hlissner/dotfiles]]
+- [[https://www.youtube.com/@wilfridtaylor][Wil T]]
+- [[https://nixos.org/manual/nix/stable][Full Nix Manual]]
+- [[https://nixos.org/manual/nixpkgs/stable][Full Nixpkgs Manual]]
+- [[https://nixos.org/manual/nixos/stable][Full NixOS Manual]]
+- [[https://wiki.nixos.org/][Check the wiki]]
+- [[https://search.nixos.org/packages?][NixOS Search - Packages]]
+- [[https://search.nixos.org/options?][NixOS Search - Options]]
+- [[https://search.nixos.org/flakes?][NixOS Search - Flakes (Experimental)]]
+- [[https://home-manager-options.extranix.com/][Home Manager - Option Search]]
+- [[https://nixos.org/guides/nix-pills][Take the Pills]]
