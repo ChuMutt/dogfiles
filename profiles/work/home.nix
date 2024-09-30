@@ -70,6 +70,8 @@
   home.file.".local/share/roswell/helper.el".source =
     ../../user/lang/lisp/roswell/helper.el;
   home.file.".config/nixpkgs/config.nix".source = ../../user/nixpkgs/config.nix;
+  home.file.".local/share/random-splash-image-dir/chosen-splash-images/src/chu-the-pup-scene-queen-by-samariyuu.png".source =
+    ../../res/chu-the-pup-scene-queen-by-samariyuu.png;
 
   programs = {
     home-manager.enable = true;
