@@ -1,10 +1,4 @@
-{
-  config,
-  pkgs,
-  userSettings,
-  ...
-}:
-{
+{ config, pkgs, userSettings, ... }: {
   imports = [
     ../../user/shell/sh.nix
     ../../user/app/lf/lf.nix
@@ -73,7 +67,8 @@
     ];
   };
 
-  home.file.".local/share/roswell/helper.el".source = ../../user/lang/lisp/roswell/helper.el;
+  home.file.".local/share/roswell/helper.el".source =
+    ../../user/lang/lisp/roswell/helper.el;
   home.file.".config/nixpkgs/config.nix".source = ../../user/nixpkgs/config.nix;
 
   programs = {
@@ -87,11 +82,7 @@
         co = "checkout";
         s = "status";
       };
-      extraConfig = {
-        push = {
-          autoSetupRemote = true;
-        };
-      };
+      extraConfig = { push = { autoSetupRemote = true; }; };
     };
     zsh.enable = true;
     ssh.enable = true;
@@ -100,9 +91,7 @@
     firefox.profiles.chu = {
       name = userSettings.username;
       path = userSettings.username;
-      search = {
-        default = "DuckDuckGo";
-      };
+      search = { default = "DuckDuckGo"; };
     };
   };
 
@@ -115,8 +104,20 @@
 
   xdg = {
     enable = true;
-    userDirs = {
-      enable = true;
+    userDirs = { enable = true; };
+  };
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Breeze-Dark";
+      package = pkgs.libsForQt5.breeze-gtk;
+    };
+  };
+  gtk3 = { extraConfig.gtk-application-prefer-dark-theme = true; };
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      gtk-theme = "Breeze-Dark";
+      color-scheme = "prefer-dark";
     };
   };
 }
