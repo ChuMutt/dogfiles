@@ -12,7 +12,7 @@
       # ---- SYSTEM SETTINGS ---- #
       systemSettings = {
         system = "x86_64-linux";
-        hostname = "chunix";
+        hostname = "chunixos";
         profile = "work";
         timezone = "America/Chicago";
         locale = "en_US.UTF-8";
