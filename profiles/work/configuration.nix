@@ -115,6 +115,7 @@
   environment = {
     systemPackages = with pkgs; [
       vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      neovim
       wget
       zsh
       git
@@ -137,7 +138,6 @@
       '') # by librephoenix
 
       tldr
-      neovim
       htop
       ((emacsPackagesFor emacs-gtk).emacsWithPackages (epkgs: [ epkgs.vterm ]))
       protonup # imperative bootstrap for proton-ge
@@ -167,6 +167,7 @@
       xdotool
       shfmt
       gnuplot
+      ccls
     ];
     shells = with pkgs; [ zsh ];
   };
