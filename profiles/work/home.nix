@@ -115,12 +115,13 @@
       package = pkgs.libsForQt5.breeze-gtk;
     };
   };
+  # gtk3 = { extraConfig.gtk-application-prefer-dark-theme = true; };
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       gtk-theme = "Breeze-Dark";
       color-scheme = "prefer-dark";
     };
   };
-  hardware.opentabletdriver.enable = true;
-  hardware.opentabletdriver.daemon.enable = true;
+  # hardware.opentabletdriver.enable = true;
+  # hardware.opentabletdriver.daemon.enable = true;
 }
