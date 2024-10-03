@@ -115,7 +115,6 @@
       package = pkgs.libsForQt5.breeze-gtk;
     };
   };
-  gtk3 = { extraConfig.gtk-application-prefer-dark-theme = true; };
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       gtk-theme = "Breeze-Dark";
