@@ -12,7 +12,7 @@
       # ---- SYSTEM SETTINGS ---- #
       systemSettings = {
         system = "x86_64-linux";
-        hostname = "chunixos";
+        hostname = "chunix";
         profile = "work";
         timezone = "America/Chicago";
         locale = "en_US.UTF-8";
@@ -37,16 +37,16 @@
         font = "Noto Sans"; # Selected font
         fontPkg = pkgs.noto-fonts; # Font package
         editor = "nvim";
-        spawnEditor =
-          if (editor == "emacsclient") then
-            "emacsclient -c -a 'emacs'"
-          else
-            (
-              if ((editor == "vim") || (editor == "nvim") || (editor == "nano")) then
-                "exec " + term + " -e " + editor
-              else
-                editor
-            );
+        # spawnEditor =
+        #   if (editor == "emacsclient") then
+        #     "emacsclient -c -a 'emacs'"
+        #   else
+        #     (
+        #       if ((editor == "vim") || (editor == "nvim") || (editor == "nano")) then
+        #         "exec " + term + " -e " + editor
+        #       else
+        #         editor
+        #     );
       };
       # create patched nixpkgs
       nixpkgs-patched =

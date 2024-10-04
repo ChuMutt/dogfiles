@@ -157,6 +157,8 @@
         git clone https://github.com/chumutt/doom ~/.config/doom
         git clone https://github.com/doomemacs/doomemacs --depth 1 ~/.config/emacs
         ./.config/emacs/bin/doom install
+        ros install sbcl-bin
+        ros install sly
       '')
       xdragon
       rustdesk
@@ -174,7 +176,7 @@
     shells = with pkgs; [ zsh ];
     sessionVariables = {
       MANPATH = "${pkgs.man-db}/share/man:$MANPATH";
-      ROSWELL_HOME = "$XDG_DATA_HOME/roswell";
+      ROSWELL_HOME = "/home/chu/.local/share/roswell"; # TODO
     };
   };
 

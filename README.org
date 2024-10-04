@@ -379,16 +379,16 @@ Note: Currently disabled as it does not apply to this set up.
         font = "Noto Sans"; # Selected font
         fontPkg = pkgs.noto-fonts; # Font package
         editor = "nvim";
-        spawnEditor =
-          if (editor == "emacsclient") then
-            "emacsclient -c -a 'emacs'"
-          else
-            (
-              if ((editor == "vim") || (editor == "nvim") || (editor == "nano")) then
-                "exec " + term + " -e " + editor
-              else
-                editor
-            );
+        # spawnEditor =
+        #   if (editor == "emacsclient") then
+        #     "emacsclient -c -a 'emacs'"
+        #   else
+        #     (
+        #       if ((editor == "vim") || (editor == "nvim") || (editor == "nano")) then
+        #         "exec " + term + " -e " + editor
+        #       else
+        #         editor
+        #     );
       };
       # create patched nixpkgs
       nixpkgs-patched =
@@ -734,6 +734,8 @@ Note: Currently disabled as it does not apply to this set up.
         git clone https://github.com/chumutt/doom ~/.config/doom
         git clone https://github.com/doomemacs/doomemacs --depth 1 ~/.config/emacs
         ./.config/emacs/bin/doom install
+        ros install sbcl-bin
+        ros install sly
       '')
       xdragon
       rustdesk
@@ -751,7 +753,7 @@ Note: Currently disabled as it does not apply to this set up.
     shells = with pkgs; [ zsh ];
     sessionVariables = {
       MANPATH = "${pkgs.man-db}/share/man:$MANPATH";
-      ROSWELL_HOME = "$XDG_DATA_HOME/roswell";
+      ROSWELL_HOME = "/home/chu/.local/share/roswell"; # TODO
     };
   };
 
@@ -922,26 +924,26 @@ Note: Currently disabled as it does not apply to this set up.
     };
   };
 
-  xdg = {
-    enable = true;
-    userDirs = {
-      enable = true;
-    };
-  };
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Breeze-Dark";
-      package = pkgs.libsForQt5.breeze-gtk;
-    };
-    # extraConfig.gtk-application-prefer-dark-theme = true;
-  };
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      gtk-theme = "Breeze-Dark";
-      color-scheme = "prefer-dark";
-    };
-  };
+  # xdg = {
+  #   enable = true;
+  #   userDirs = {
+  #     enable = true;
+  #   };
+  # };
+  # gtk = {
+  #   enable = true;
+  #   theme = {
+  #     name = "Breeze-Dark";
+  #     package = pkgs.libsForQt5.breeze-gtk;
+  #   };
+  # extraConfig.gtk-application-prefer-dark-theme = true;
+  # };
+  # dconf.settings = {
+  #   "org/gnome/desktop/interface" = {
+  #     gtk-theme = "Breeze-Dark";
+  #     color-scheme = "prefer-dark";
+  #   };
+  # };
   # hardware.opentabletdriver.enable = true;
   # hardware.opentabletdriver.daemon.enable = true;
 }
