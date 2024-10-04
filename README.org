@@ -732,6 +732,7 @@ Note: Currently disabled as it does not apply to this set up.
       shfmt
       gnuplot
       ccls
+      acpilight
     ];
     shells = with pkgs; [ zsh ];
   };

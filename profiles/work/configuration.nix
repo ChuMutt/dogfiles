@@ -168,6 +168,7 @@
       shfmt
       gnuplot
       ccls
+      acpilight
     ];
     shells = with pkgs; [ zsh ];
   };
@@ -195,14 +196,6 @@
     emacs.package =
       with pkgs;
       ((emacsPackagesFor emacs-gtk).emacsWithPackages (epkgs: [ epkgs."vterm" ]));
-  };
-
-  environment = {
-    sessionVariables = {
-      MANPATH = "${pkgs.man-db}/share/man:$MANPATH";
-      ROSWELL_HOME = "$XDG_DATA_HOME/roswell";
-      EDITOR = "nvim";
-    };
   };
 
   # Add emacs overlay
