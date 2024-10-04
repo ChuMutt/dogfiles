@@ -180,7 +180,6 @@
     };
   };
 
-
   users.defaultUserShell = pkgs.zsh;
 
   programs = {

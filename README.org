@@ -757,7 +757,6 @@ Note: Currently disabled as it does not apply to this set up.
     };
   };
 
-
   users.defaultUserShell = pkgs.zsh;
 
   programs = {
