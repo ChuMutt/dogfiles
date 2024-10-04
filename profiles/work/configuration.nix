@@ -169,9 +169,15 @@
       gnuplot
       ccls
       acpilight
+      light
     ];
     shells = with pkgs; [ zsh ];
+    sessionVariables = {
+      MANPATH = "${pkgs.man-db}/share/man:$MANPATH";
+      ROSWELL_HOME = "$XDG_DATA_HOME/roswell";
+    };
   };
+
 
   users.defaultUserShell = pkgs.zsh;
 

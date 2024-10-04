@@ -1,4 +1,10 @@
-{ config, pkgs, userSettings, ... }: {
+{
+  config,
+  pkgs,
+  userSettings,
+  ...
+}:
+{
   imports = [
     ../../user/shell/sh.nix
     ../../user/app/lf/lf.nix
@@ -67,11 +73,9 @@
     ];
   };
 
-  home.file.".local/share/roswell/helper.el".source =
-    ../../user/lang/lisp/roswell/helper.el;
+  home.file.".local/share/roswell/helper.el".source = ../../user/lang/lisp/roswell/helper.el;
   home.file.".config/nixpkgs/config.nix".source = ../../user/nixpkgs/config.nix;
-  home.file.".local/share/random-splash-image-dir/chosen-splash-images/src/chu-the-pup-scene-queen-by-samariyuu.png".source =
-    ../../res/chu-the-pup-scene-queen-by-samariyuu.png;
+  home.file.".local/share/random-splash-image-dir/chosen-splash-images/src/chu-the-pup-scene-queen-by-samariyuu.png".source = ../../res/chu-the-pup-scene-queen-by-samariyuu.png;
 
   programs = {
     home-manager.enable = true;
@@ -84,7 +88,11 @@
         co = "checkout";
         s = "status";
       };
-      extraConfig = { push = { autoSetupRemote = true; }; };
+      extraConfig = {
+        push = {
+          autoSetupRemote = true;
+        };
+      };
     };
     zsh.enable = true;
     ssh.enable = true;
@@ -93,8 +101,21 @@
     firefox.profiles.chu = {
       name = userSettings.username;
       path = userSettings.username;
-      search = { default = "DuckDuckGo"; };
+      search = {
+        default = "DuckDuckGo";
+      };
     };
+    # plasma = {
+    #   enable = true;
+    #   configFile = {
+    #     "kdeglobals"."WM"."activeBackground" = "49,54,59";
+    #     "kdeglobals"."WM"."activeBlend" = "252,252,252";
+    #     "kdeglobals"."WM"."activeForeground" = "252,252,252";
+    #     "kdeglobals"."WM"."inactiveBackground" = "42,46,50";
+    #     "kdeglobals"."WM"."inactiveBlend" = "161,169,177";
+    #     "kdeglobals"."WM"."inactiveForeground" = "161,169,177";
+    #   };
+    # };
   };
 
   services = {
@@ -106,7 +127,9 @@
 
   xdg = {
     enable = true;
-    userDirs = { enable = true; };
+    userDirs = {
+      enable = true;
+    };
   };
   gtk = {
     enable = true;

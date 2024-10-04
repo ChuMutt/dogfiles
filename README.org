@@ -534,14 +534,19 @@ Note: Currently disabled as it does not apply to this set up.
         };
       });
     };
+
   inputs = {
+
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-24.05";
+
     home-manager-unstable.url = "github:nix-community/home-manager/master";
     home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs";
     home-manager-stable.url = "github:nix-community/home-manager/release-24.05";
     home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-stable";
+
     nixos-hardware.url = "github:nixos/nixos-hardware";
+
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       inputs = {
@@ -549,12 +554,20 @@ Note: Currently disabled as it does not apply to this set up.
         nixpkgs-stable.follows = "nixpkgs";
       };
     };
+
     # Ad blocker
     blocklist-hosts = {
       url = "github:StevenBlack/hosts";
       flake = false;
     };
+
     nur.url = "github:nix-community/NUR";
+
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 }
 #+end_src
@@ -733,9 +746,15 @@ Note: Currently disabled as it does not apply to this set up.
       gnuplot
       ccls
       acpilight
+      light
     ];
     shells = with pkgs; [ zsh ];
+    sessionVariables = {
+      MANPATH = "${pkgs.man-db}/share/man:$MANPATH";
+      ROSWELL_HOME = "$XDG_DATA_HOME/roswell";
+    };
   };
+
 
   users.defaultUserShell = pkgs.zsh;
 
@@ -776,7 +795,13 @@ Note: Currently disabled as it does not apply to this set up.
 #+end_src
 *** home.nix
 #+begin_src nix :mkdirp yes :tangle ./profiles/work/home.nix
-{ config, pkgs, userSettings, ... }: {
+{
+  config,
+  pkgs,
+  userSettings,
+  ...
+}:
+{
   imports = [
     ../../user/shell/sh.nix
     ../../user/app/lf/lf.nix
@@ -845,11 +870,9 @@ Note: Currently disabled as it does not apply to this set up.
     ];
   };
 
-  home.file.".local/share/roswell/helper.el".source =
-    ../../user/lang/lisp/roswell/helper.el;
+  home.file.".local/share/roswell/helper.el".source = ../../user/lang/lisp/roswell/helper.el;
   home.file.".config/nixpkgs/config.nix".source = ../../user/nixpkgs/config.nix;
-  home.file.".local/share/random-splash-image-dir/chosen-splash-images/src/chu-the-pup-scene-queen-by-samariyuu.png".source =
-    ../../res/chu-the-pup-scene-queen-by-samariyuu.png;
+  home.file.".local/share/random-splash-image-dir/chosen-splash-images/src/chu-the-pup-scene-queen-by-samariyuu.png".source = ../../res/chu-the-pup-scene-queen-by-samariyuu.png;
 
   programs = {
     home-manager.enable = true;
@@ -862,7 +885,11 @@ Note: Currently disabled as it does not apply to this set up.
         co = "checkout";
         s = "status";
       };
-      extraConfig = { push = { autoSetupRemote = true; }; };
+      extraConfig = {
+        push = {
+          autoSetupRemote = true;
+        };
+      };
     };
     zsh.enable = true;
     ssh.enable = true;
@@ -871,8 +898,21 @@ Note: Currently disabled as it does not apply to this set up.
     firefox.profiles.chu = {
       name = userSettings.username;
       path = userSettings.username;
-      search = { default = "DuckDuckGo"; };
+      search = {
+        default = "DuckDuckGo";
+      };
     };
+    # plasma = {
+    #   enable = true;
+    #   configFile = {
+    #     "kdeglobals"."WM"."activeBackground" = "49,54,59";
+    #     "kdeglobals"."WM"."activeBlend" = "252,252,252";
+    #     "kdeglobals"."WM"."activeForeground" = "252,252,252";
+    #     "kdeglobals"."WM"."inactiveBackground" = "42,46,50";
+    #     "kdeglobals"."WM"."inactiveBlend" = "161,169,177";
+    #     "kdeglobals"."WM"."inactiveForeground" = "161,169,177";
+    #   };
+    # };
   };
 
   services = {
@@ -884,7 +924,9 @@ Note: Currently disabled as it does not apply to this set up.
 
   xdg = {
     enable = true;
-    userDirs = { enable = true; };
+    userDirs = {
+      enable = true;
+    };
   };
   gtk = {
     enable = true;

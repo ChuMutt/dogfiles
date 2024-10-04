@@ -192,14 +192,19 @@
         };
       });
     };
+
   inputs = {
+
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-24.05";
+
     home-manager-unstable.url = "github:nix-community/home-manager/master";
     home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs";
     home-manager-stable.url = "github:nix-community/home-manager/release-24.05";
     home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-stable";
+
     nixos-hardware.url = "github:nixos/nixos-hardware";
+
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       inputs = {
@@ -207,11 +212,19 @@
         nixpkgs-stable.follows = "nixpkgs";
       };
     };
+
     # Ad blocker
     blocklist-hosts = {
       url = "github:StevenBlack/hosts";
       flake = false;
     };
+
     nur.url = "github:nix-community/NUR";
+
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 }
