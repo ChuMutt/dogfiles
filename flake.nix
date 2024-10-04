@@ -12,14 +12,18 @@
       # ---- SYSTEM SETTINGS ---- #
       systemSettings = {
         system = "x86_64-linux";
+<<<<<<< HEAD
         hostname = "chunixos";
+=======
+        hostname = "dogleash";
+>>>>>>> 08dbb80 (sync)
         profile = "work";
         timezone = "America/Chicago";
         locale = "en_US.UTF-8";
         bootMode = "uefi"; # uefi or bios
         bootMountPath = "/boot"; # mount path for efi boot partition; only used for uefi boot mode
         grubDevice = ""; # device identifier for grub; only used for legacy (bios) boot mode
-        gpuType = "amd"; # amd, intel or nvidia; only makes some slight mods for amd at the moment
+        gpuType = "nvidia"; # amd, intel or nvidia; only makes some slight mods for amd at the moment
       };
       # ----- USER SETTINGS ----- #
       userSettings = rec {
