@@ -143,8 +143,8 @@
   # Thunderbird.
   programs.thunderbird = {
     enable = true;
-    profiles."chu".name = "chu";
-    profiles."chu".isDefault = true;
+    profiles."chu".name = "chu"; # TODO make this generic the user variable
+    profiles."chu".isDefault = true; # TODO make this the generic user variable
   };
 
   # GnuPG private key agent.
