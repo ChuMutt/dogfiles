@@ -35,6 +35,11 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
     pkgs.xdg-user-dirs
+    pkgs.htop-vim
+    pkgs.bottom
+    pkgs.fortune
+    pkgs.hyfetch
+    pkgs.asciiquarium
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
