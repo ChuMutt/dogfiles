@@ -69,13 +69,12 @@
   #  /etc/profiles/per-user/chu/etc/profile.d/hm-session-vars.sh
   #
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
+  home.sessionVariables = { EDITOR = "nvim"; };
 
-  xdg.userDirs = { 
+  xdg.userDirs = {
     enable = true;
-    createDirectories = true; # Automatically creates (and will replace) XDG directories if not extant.
+    createDirectories =
+      true; # Automatically creates (and will replace) XDG directories if not extant.
   };
 
   home.preferXdgDirectories = true;
@@ -99,14 +98,10 @@
   };
 
   # GNU Emacs
-  programs.emacs = {
-    enable = true;
-  };
+  programs.emacs = { enable = true; };
 
   # nvim
-  programs.neovim = {
-    enable = true;
-  };
+  programs.neovim = { enable = true; };
 
   # Git
   programs.git = {

@@ -53,10 +53,7 @@
   users.users.chu = {
     isNormalUser = true;
     description = "chu";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
+    extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [ ];
     useDefaultShell = true;
   };
@@ -117,13 +114,13 @@
 
             echo "Installing Home Manager..."
 
-            # Install Home Manager via nix-shell. 
+            # Install Home Manager via nix-shell.
             nix-shell '<home-manager>' -A install
 
             # Build and activate flake-based Home Manager configuration
             home-manager switch --flake $DOTFILES_DIR
 
-            echo "Actually done for real now!" 
+            echo "Actually done for real now!"
             echo ""
             echo "The home-manager tool should now be installed and you can edit"
             echo ""
@@ -135,13 +132,9 @@
     xdg-user-dirs
   ];
 
-  environment.variables = {
-    DOTFILES_DIR = "$HOME/.dogfiles";
-  };
+  environment.variables = { DOTFILES_DIR = "$HOME/.dogfiles"; };
 
-  environment.sessionVariables = {
-    DOTFILES_DIR = "$HOME/.dogfiles";
-  };
+  environment.sessionVariables = { DOTFILES_DIR = "$HOME/.dogfiles"; };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -151,9 +144,7 @@
     enableSSHSupport = true;
   };
 
-  programs.zsh = {
-    enable = true;
-  };
+  programs.zsh = { enable = true; };
 
   # List services that you want to enable:
 
@@ -177,10 +168,7 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Allow members of the wheel group to connect to the Nix daemon.
   # Default is * (all). Root is always allowed regardless of this setting.
@@ -191,10 +179,7 @@
   # Allow members of the wheel group to connect to the Nix daemon, specify
   # additional binary caches, and import unsigned NARs. Default is root.
 
-  nix.settings.trusted-users = [
-    "root"
-    "@wheel"
-  ];
+  nix.settings.trusted-users = [ "root" "@wheel" ];
 
   # Enable KDE Plasma 6
   services = {
