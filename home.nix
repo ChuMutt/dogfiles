@@ -68,6 +68,7 @@
   #
   #  /etc/profiles/per-user/chu/etc/profile.d/hm-session-vars.sh
   #
+
   home.sessionVariables = {
     EDITOR = "nvim";
   };
@@ -87,13 +88,30 @@
     enable = true;
     autocd = true;
     autosuggestion.enable = true;
-    dotDir = "$XDG_CONFIG_HOME/zsh";
+    dotDir = "$HOME/.config/zsh";
     history = {
       size = 10000000; # Number of history lines to keep
       save = 10000000; # Number of history lines to save
-      path = "$XDG_CACHE_HOME/zsh/history"; # BUG
+      path = "$HOME/.cache/zsh/history";
       expireDuplicatesFirst = true;
     };
     historySubstringSearch.enable = true;
+  };
+
+  # GNU Emacs
+  programs.emacs = {
+    enable = true;
+  };
+
+  # nvim
+  programs.neovim = {
+    enable = true;
+  };
+
+  # Git
+  programs.git = {
+    enable = true;
+    userEmail = "chufilthymutt@gmail.com";
+    userName = "chu";
   };
 }
