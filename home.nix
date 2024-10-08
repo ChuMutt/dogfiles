@@ -143,7 +143,7 @@
   # Thunderbird.
   programs.thunderbird = {
     enable = true;
-    profiles.name = "chu";
+    profiles."chu".name = "chu";
   };
 
   # GnuPG private key agent.
