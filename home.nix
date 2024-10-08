@@ -74,14 +74,15 @@
   #  /etc/profiles/per-user/chu/etc/profile.d/hm-session-vars.sh
   #
 
-  home.sessionVariables = { EDITOR = "nvim"; };
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
 
   # Whether to manage {file}$XDG_CONFIG_HOME/user-dirs.dirs.
   # The generated file is read-only.
   xdg.userDirs = {
     enable = true; # Default is false.
-    createDirectories =
-      true; # Automatically create XDG directories if none exist.
+    createDirectories = true; # Automatically create XDG directories if none exist.
   };
 
   # Whether to make programs use XDG directories whenever supported.
@@ -108,9 +109,52 @@
   # GNU Emacs
   programs.emacs = {
     enable = true;
-    extraPackages = epkgs: with epkgs; [ nix-mode magit evil-collection ];
+    extraPackages =
+      epkgs: with epkgs; [
+        nix-mode
+        magit
+        evil-collection
+      ];
     extraConfig = ''
-      (setq standard-indent 2)
+            ;; Initialize vim keybindings
+            (evil-mode)
+            ;; Don't show a splash screen
+            (setq inhibit-startup-message t)
+            ;; Don't show a menu bar
+            (setq menu-bar-mode -1)
+            ;; Don't show a tool bar
+            (setq tool-bar-mode -1)
+            ;; Don't show a scroll bar
+            (setq scroll-bar-mode -1)
+            ;; Display line numbers in every buffer
+            (global-display-line-numbers-mode 1)
+            ;; Set standard indentation to 2 spaces
+            (setq standard-indent 2)
+            ;; Set frame fringe
+            (set-fringe-mode 10)
+            ;; Set up visual flashing bell
+            (setq visible-bell t)
+            ;; Make escape key (ESC) kill prompts
+            (global-set-key (kbd "<escape>" 'keyboard-escape-quit))
+            ;; Initialize package sources
+            (require 'package)
+            (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+      			       ("org" . "https://orgmode.org/elpa/")
+      			       ("elpa" . "https://elpa.gnu.org/packages/")))
+            (package-initialize)
+
+            (unless package-archive-contents
+       (package-refresh-contents))
+
+      ;; Initialize use-package on non-Linux platforms
+      (unless (package-installed-p 'use-package)
+         (package-install 'use-package))
+
+      (require 'use-package)
+      (setq use-package-always-ensure t)
+
+      (use-package command-log-mode)
+
     '';
   };
 
@@ -125,7 +169,9 @@
   };
 
   # Neovim
-  programs.neovim = { enable = true; };
+  programs.neovim = {
+    enable = true;
+  };
 
   # Git
   programs.git = {
@@ -135,10 +181,14 @@
   };
 
   # TeX Live, used for TeX typesetting package distribution.
-  programs.texlive = { enable = true; };
+  programs.texlive = {
+    enable = true;
+  };
 
   # thefuck - magnificent app that corrects your previous console command.
-  programs.thefuck = { enable = true; };
+  programs.thefuck = {
+    enable = true;
+  };
 
   # Thunderbird.
   programs.thunderbird = {
