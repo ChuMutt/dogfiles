@@ -141,7 +141,10 @@
   programs.thefuck = { enable = true; };
 
   # Thunderbird.
-  programs.thunderbird = { enable = true; };
+  programs.thunderbird = {
+    enable = true;
+    profiles.name = "chu";
+  };
 
   # GnuPG private key agent.
   services.gpg-agent = {
