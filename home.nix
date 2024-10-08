@@ -17,29 +17,29 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
+  home.packages = with pkgs; [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
-    # pkgs.hello
+    # hello
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+    # (nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
     # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
+    # (writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    pkgs.xdg-user-dirs
-    pkgs.htop-vim
-    pkgs.bottom
-    pkgs.fortune
-    pkgs.hyfetch
-    pkgs.asciiquarium
+    xdg-user-dirs
+    htop-vim
+    bottom
+    fortune
+    hyfetch
+    asciiquarium
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -103,7 +103,10 @@
   };
 
   # GNU Emacs
-  programs.emacs = { enable = true; };
+  programs.emacs = {
+    enable = true;
+    extraPackages = epkgs: with epkgs; [ nix-mode magit evil-collection ];
+  };
 
   # nvim
   programs.neovim = { enable = true; };
