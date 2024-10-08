@@ -34,12 +34,17 @@
     # (writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    xdg-user-dirs
-    htop-vim
-    bottom
+
     fortune
     hyfetch
     asciiquarium
+    cowsay
+
+    killall
+    xdg-user-dirs
+    htop-vim
+    bottom
+
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -114,6 +119,12 @@
         nix-mode
         magit
         evil-collection
+        command-log-mode
+        doom-modeline
+        all-the-icons
+        doom-themes
+        which-key
+        ivy
       ];
     extraConfig = ''
       ;; Initialize vim keybindings
