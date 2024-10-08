@@ -124,7 +124,9 @@
         all-the-icons
         doom-themes
         which-key
-        ivy
+        ivy-rich
+	counsel
+	rainbow-delimiters
       ];
     extraConfig = ''
       ;; Initialize vim keybindings
@@ -142,17 +144,17 @@
       ;; Don't show a scroll bar
       (setq scroll-bar-mode -1)
 
-      ;; Display line numbers in every buffer
-      (global-display-line-numbers-mode 1)
-
       ;; Set standard indentation to 2 spaces
       (setq standard-indent 2)
 
-      ;; Set frame fringe
-      (set-fringe-mode 10)
-
       ;; Set up visual flashing bell
       (setq visible-bell t)
+
+      ;; Display line numbers in every buffer
+      (global-display-line-numbers-mode 1)
+
+      ;; Set frame fringe
+      (set-fringe-mode 10)
 
       ;; Make escape key (ESC) kill prompts
       (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -176,6 +178,8 @@
       (setq use-package-always-ensure t)
       
       ;; Start installing & configuring packages 
+
+      ;; Make UI more minimal
       (use-package command-log-mode)
 
       (use-package doom-modeline
