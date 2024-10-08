@@ -106,6 +106,9 @@
   programs.emacs = {
     enable = true;
     extraPackages = epkgs: with epkgs; [ nix-mode magit evil-collection ];
+    extraConfig = ''
+      (setq standard-indent 2)
+    '';
   };
 
   # nvim
