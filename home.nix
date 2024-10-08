@@ -144,6 +144,7 @@
   programs.thunderbird = {
     enable = true;
     profiles."chu".name = "chu";
+    profiles."chu".isDefault = true;
   };
 
   # GnuPG private key agent.
