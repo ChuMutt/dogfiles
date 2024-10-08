@@ -76,12 +76,15 @@
 
   home.sessionVariables = { EDITOR = "nvim"; };
 
+  # Whether to manage {file}$XDG_CONFIG_HOME/user-dirs.dirs.
+  # The generated file is read-only.
   xdg.userDirs = {
-    enable = true;
+    enable = true; # Default is false.
     createDirectories =
-      true; # Automatically creates (and will replace) XDG directories if not extant.
+      true; # Automatically create XDG directories if none exist.
   };
 
+  # Whether to make programs use XDG directories whenever supported.
   home.preferXdgDirectories = true;
 
   # Let Home Manager install and manage itself.
@@ -111,7 +114,17 @@
     '';
   };
 
-  # nvim
+  services.emacs = {
+    # Whether to enable the Emacs daemon
+    client.enable = true;
+    # Whether to enable systemd socket activation for the Emacs service daemon.
+    socketActivation.enable = true;
+    # Whether to launch Emacs service with the systemd user session.
+    # If it is [set to] "graphical", Emacs service is started by graphical-session.target.
+    startWithUserSession = "graphical";
+  };
+
+  # Neovim
   programs.neovim = { enable = true; };
 
   # Git
@@ -121,9 +134,21 @@
     userName = "chu";
   };
 
+  # TeX Live, used for TeX typesetting package distribution.
+  programs.texlive = { enable = true; };
+
+  # thefuck - magnificent app that corrects your previous console command.
+  programs.thefuck = { enable = true; };
+
+  # Thunderbird.
+  programs.thunderbird = { enable = true; };
+
+  # GnuPG private key agent.
   services.gpg-agent = {
     enable = true;
+    # Set the time a cache entry is valid to the given number of seconds.
     defaultCacheTtl = 1800;
+    # Whether to use the GnuPG key agent for SSH keys or not.
     enableSshSupport = true;
   };
 
