@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -106,11 +106,11 @@
     enable = true;
     autocd = true;
     autosuggestion.enable = true;
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
     history = {
       size = 10000000; # Number of history lines to keep
       save = 10000000; # Number of history lines to save
-      path = ".cache/zsh/history";
+      path = "${config.xdg.cacheHome}/zsh/history";
       expireDuplicatesFirst = true;
     };
     historySubstringSearch.enable = true;
@@ -212,6 +212,11 @@
     # Whether to launch Emacs service with the systemd user session.
     # If it is [set to] "graphical", Emacs service is started by graphical-session.target.
     startWithUserSession = "graphical";
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
   };
 
   # Neovim
