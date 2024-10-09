@@ -178,6 +178,8 @@
     DOTFILES_DIR = "$HOME/.dogfiles";
   };
 
+  environment.pathsToLink = ["/share/zsh"]; # For zsh.enableCompletion in home.nix
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;

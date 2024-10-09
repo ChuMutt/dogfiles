@@ -117,6 +117,7 @@
       expireDuplicatesFirst = true;
     };
     historySubstringSearch.enable = true;
+    enableCompletion = true;
   };
 
   # GNU Emacs
