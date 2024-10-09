@@ -150,7 +150,6 @@
     jconvolver
     milkytracker
     mixxx
-    mpc
     musescore
     odin2
     paulstretch
@@ -160,8 +159,6 @@
     renoise
     roomeqwizard
     scream
-    sonic-visualizer
-    surge-xt
     touchosc
     vcv-rack
     vorbis-tools

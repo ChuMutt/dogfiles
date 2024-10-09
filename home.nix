@@ -64,6 +64,7 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+    ".config/emacs/init.el".source = ./chumacs/init.el; # TODO Temporary
     ".config/chumacs/init.el".source = ./chumacs/init.el;
   };
 
