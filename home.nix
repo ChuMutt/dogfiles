@@ -110,11 +110,11 @@
     enable = true;
     autocd = true;
     autosuggestion.enable = true;
-    dotDir = "${config.xdg.configHome}/zsh";
+    # dotDir = "${config.xdg.configHome}/zsh";
     history = {
       size = 10000000; # Number of history lines to keep
       save = 10000000; # Number of history lines to save
-      path = "${config.xdg.cacheHome}/zsh/history";
+      # path = "${config.xdg.cacheHome}/zsh/history";
       expireDuplicatesFirst = true;
     };
     historySubstringSearch.enable = true;
