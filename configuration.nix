@@ -53,7 +53,10 @@
   users.users.chu = {
     isNormalUser = true;
     description = "chu";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [ ];
     useDefaultShell = true;
   };
@@ -79,6 +82,7 @@
     xclip
     bottom
     htop-vim
+    beets
     # Shell script template (no shebang required):
     # (writeShellScriptBin "name" ''
     #
@@ -130,11 +134,52 @@
             echo "see all available options."
     '')
     xdg-user-dirs
+
+    # audio
+    airwindows-lv2
+    alsa-scarlett-gui
+    ardour
+    bitwig-studio
+    calf
+    drumgizmo
+    geonkick
+    goattracker
+    guitarix
+    helvum
+    jamesdsp
+    jconvolver
+    milkytracker
+    mixxx
+    mpc
+    musescore
+    odin2
+    paulstretch
+    pavucontrol
+    raysession
+    reaper
+    renoise
+    roomeqwizard
+    scream
+    sonic-visualizer
+    surge-xt
+    touchosc
+    vcv-rack
+    vorbis-tools
+    wolf-shaper
+
+    # image / video
+    cheese
+    kdenlive
+
   ];
 
-  environment.variables = { DOTFILES_DIR = "$HOME/.dogfiles"; };
+  environment.variables = {
+    DOTFILES_DIR = "$HOME/.dogfiles";
+  };
 
-  environment.sessionVariables = { DOTFILES_DIR = "$HOME/.dogfiles"; };
+  environment.sessionVariables = {
+    DOTFILES_DIR = "$HOME/.dogfiles";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -144,7 +189,9 @@
     enableSSHSupport = true;
   };
 
-  programs.zsh = { enable = true; };
+  programs.zsh = {
+    enable = true;
+  };
 
   # List services that you want to enable:
 
@@ -168,7 +215,10 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Allow members of the wheel group to connect to the Nix daemon.
   # Default is * (all). Root is always allowed regardless of this setting.
@@ -179,7 +229,10 @@
   # Allow members of the wheel group to connect to the Nix daemon, specify
   # additional binary caches, and import unsigned NARs. Default is root.
 
-  nix.settings.trusted-users = [ "root" "@wheel" ];
+  nix.settings.trusted-users = [
+    "root"
+    "@wheel"
+  ];
 
   # Enable KDE Plasma 6
   services = {
