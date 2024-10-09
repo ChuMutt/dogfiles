@@ -45,6 +45,10 @@
     htop-vim
     bottom
 
+    firefox
+    # librewolf
+    # qtbrowser
+    # nyxt
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -135,15 +139,19 @@
         rainbow-delimiters
       ];
     extraConfig = ''
+            ;; Start Garbage Collection performance tweak:
+            (setq gc-cons-threshold (* 50 1000 1000))
+
             ;; Initialize vim keybindings
             (evil-mode)
 
-            (setq inhibit-startup-message t ; Don't show a splash screen
-              menu-bar-mode -1              ; Don't show a menu bar
-              tool-bar-mode -1              ; Don't show a tool bar
-              scroll-bar-mode -1            ; Don't show a scroll bar
-              standard-indent 2             ; Set standard indentation to 2 spaces
-              visible-bell t)               ; Set up visual flashing bell
+            (setq
+              inhibit-startup-message t ; Don't show a splash screen
+              menu-bar-mode -1          ; Don't show a menu bar
+              tool-bar-mode -1          ; Don't show a tool bar
+              scroll-bar-mode -1        ; Don't show a scroll bar
+              standard-indent 2         ; Set standard indentation to 2 spaces
+              visible-bell t)           ; Set up visual flashing bell
 
             ;; Display line numbers in every buffer
             (global-display-line-numbers-mode 1)
@@ -157,8 +165,8 @@
             ;; Initialize package sources
             (require 'package)
             (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-      			                         ("org" . "https://orgmode.org/elpa/")
-      			                         ("elpa" . "https://elpa.gnu.org/packages/")))
+                                     ("org" . "https://orgmode.org/elpa/")
+                                     ("elpa" . "https://elpa.gnu.org/packages/")))
             (package-initialize)
 
             (unless package-archive-contents
@@ -201,23 +209,33 @@
             (use-package ivy-rich
               :init (ivy-rich-mode 1))
 
-	    (recentf-mode 1) ; remember recent file history
+      	    (recentf-mode 1) ; remember recent file history
 
-	    ;; Save what you enter into minibuffer prompts
-	    (setq history-length 25)
+      	    ;; Save what you enter into minibuffer prompts
+      	    (setq history-length 25)
             (savehist-mode 1)
 
-	    ;; Remember and restore the last cursor location of opened files
-	    (save-place-mode 1)
+      	    ;; Remember and restore the last cursor location of opened files
+      	    (save-place-mode 1)
 
-	    ;; Don't pop up UI dialogs when prompting
-	    (setq use-dialog-box nil)
+      	    ;; Don't pop up UI dialogs when prompting
+      	    (setq use-dialog-box nil)
 
-	    ;; Buffer auto-reversion
-	    ;; Revert buffers when the underlying file has changed
+      	    ;; Buffer auto-reversion
+      	    ;; Revert buffers when the underlying file has changed
             (global-auto-revert-mode 1)
-	    ;; Revert Dired and other buffers
-	    (setq global-auto-revert-non-file-buffers t)
+      	    ;; Revert Dired and other buffers
+      	    (setq global-auto-revert-non-file-buffers t)
+
+            ;; Disable line numbers for some modes
+            (dolist (mode '(org-mode-hook
+                            term-mode-hook
+                            shell-mode-hook
+                            eshell-mode-hook))
+              (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+            ;; End Garbage Collection performance tweak:
+            (setq gc-cons-threshold (* 2 1000 1000))
     '';
   };
 
