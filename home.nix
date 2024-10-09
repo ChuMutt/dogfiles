@@ -34,7 +34,7 @@
     # (writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-
+    
     fortune
     hyfetch
     asciiquarium
@@ -49,6 +49,8 @@
     # librewolf
     # qtbrowser
     # nyxt
+
+    zathura
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -64,9 +66,8 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-    ".config/emacs/init.el".source = ./chumacs/init.el; # TODO Temporary
-    ".config/emacs/config.el".source = ./chumacs/config.el; # TODO Temporary
-    # ".config/chumacs/init.el".source = ./chumacs/init.el;
+    ".config/emacs/init.el".source = ./chumacs/init.el;
+    ".config/emacs/config.el".source = ./chumacs/config.el;
   };
 
   # Home Manager can also manage your environment variables through
@@ -103,11 +104,6 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      "gtk-overlay-scrollbars" = false;
-    };
-  };
   # Z-Shell
   programs.zsh = {
     enable = true;
@@ -153,15 +149,14 @@
     startWithUserSession = "graphical";
   };
 
+  # Directory Environments
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
   };
 
   # Neovim
-  programs.neovim = {
-    enable = true;
-  };
+  programs.neovim.enable = true;
 
   # Git
   programs.git = {
