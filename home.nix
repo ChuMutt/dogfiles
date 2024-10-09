@@ -201,6 +201,23 @@
             (use-package ivy-rich
               :init (ivy-rich-mode 1))
 
+	    (recentf-mode 1) ; remember recent file history
+
+	    ;; Save what you enter into minibuffer prompts
+	    (setq history-length 25)
+            (savehist-mode 1)
+
+	    ;; Remember and restore the last cursor location of opened files
+	    (save-place-mode 1)
+
+	    ;; Don't pop up UI dialogs when prompting
+	    (setq use-dialog-box nil)
+
+	    ;; Buffer auto-reversion
+	    ;; Revert buffers when the underlying file has changed
+            (global-auto-revert-mode 1)
+	    ;; Revert Dired and other buffers
+	    (setq global-auto-revert-non-file-buffers t)
     '';
   };
 
