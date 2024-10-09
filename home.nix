@@ -113,7 +113,7 @@
   # GNU Emacs
   programs.emacs = {
     enable = true;
-    package with pkgs; = emacs-gtk
+    package = pkgs.emacs-gtk;
     extraPackages = epkgs:
       with epkgs; [
         nix-mode
