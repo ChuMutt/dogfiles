@@ -79,14 +79,15 @@
   #  /etc/profiles/per-user/chu/etc/profile.d/hm-session-vars.sh
   #
 
-  home.sessionVariables = { EDITOR = "nvim"; };
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
 
   # Whether to manage {file}$XDG_CONFIG_HOME/user-dirs.dirs.
   # The generated file is read-only.
   xdg.userDirs = {
     enable = true; # Default is false.
-    createDirectories =
-      true; # Automatically create XDG directories if none exist.
+    createDirectories = true; # Automatically create XDG directories if none exist.
   };
 
   # Whether to make programs use XDG directories whenever supported.
@@ -95,16 +96,21 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      "gtk-overlay-scrollbars" = false;
+    };
+  };
   # Z-Shell
   programs.zsh = {
     enable = true;
     autocd = true;
     autosuggestion.enable = true;
-    dotDir = "$HOME/.config/zsh";
+    dotDir = "/home/chu/.config/zsh";
     history = {
       size = 10000000; # Number of history lines to keep
       save = 10000000; # Number of history lines to save
-      path = "$HOME/.cache/zsh/history";
+      path = "/home/chu/.cache/zsh/history";
       expireDuplicatesFirst = true;
     };
     historySubstringSearch.enable = true;
@@ -114,8 +120,8 @@
   programs.emacs = {
     enable = true;
     package = pkgs.emacs-gtk;
-    extraPackages = epkgs:
-      with epkgs; [
+    extraPackages =
+      epkgs: with epkgs; [
         nix-mode
         magit
         evil-collection
@@ -211,7 +217,9 @@
   };
 
   # Neovim
-  programs.neovim = { enable = true; };
+  programs.neovim = {
+    enable = true;
+  };
 
   # Git
   programs.git = {
@@ -221,10 +229,14 @@
   };
 
   # TeX Live, used for TeX typesetting package distribution.
-  programs.texlive = { enable = true; };
+  programs.texlive = {
+    enable = true;
+  };
 
   # thefuck - magnificent app that corrects your previous console command.
-  programs.thefuck = { enable = true; };
+  programs.thefuck = {
+    enable = true;
+  };
 
   # Thunderbird.
   programs.thunderbird = {
