@@ -106,11 +106,11 @@
     enable = true;
     autocd = true;
     autosuggestion.enable = true;
-    dotDir = "/home/chu/.config/zsh";
+    dotDir = ".config/zsh";
     history = {
       size = 10000000; # Number of history lines to keep
       save = 10000000; # Number of history lines to save
-      path = "/home/chu/.cache/zsh/history";
+      path = ".cache/zsh/history";
       expireDuplicatesFirst = true;
     };
     historySubstringSearch.enable = true;
@@ -196,12 +196,10 @@
             (use-package which-key
               :init (which-key-mode)
               :diminish which-key-mode
-              :config
-                (setq which-key-idle-delay 1))
+              :config (setq which-key-idle-delay 1))
 
             (use-package ivy-rich
-              :init
-                (ivy-rich-mode 1))
+              :init (ivy-rich-mode 1))
 
     '';
   };
