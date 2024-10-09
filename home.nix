@@ -65,7 +65,7 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
     ".config/emacs/init.el".source = ./chumacs/init.el; # TODO Temporary
-    ".config/chumacs/init.el".source = ./chumacs/init.el;
+    # ".config/chumacs/init.el".source = ./chumacs/init.el;
   };
 
   # Home Manager can also manage your environment variables through
@@ -113,10 +113,12 @@
     autocd = true;
     autosuggestion.enable = true;
     # dotDir = "${config.xdg.configHome}/zsh";
+    dotDir = ".config/zsh";
     history = {
       size = 10000000; # Number of history lines to keep
       save = 10000000; # Number of history lines to save
       # path = "${config.xdg.cacheHome}/zsh/history";
+      path = ".cache/zsh/history";
       expireDuplicatesFirst = true;
     };
     historySubstringSearch.enable = true;
@@ -140,8 +142,6 @@
         counsel
         rainbow-delimiters
       ];
-#    extraConfig = ''
-#    '';
   };
 
   services.emacs = {
