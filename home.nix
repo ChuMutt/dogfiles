@@ -113,6 +113,7 @@
   # GNU Emacs
   programs.emacs = {
     enable = true;
+    package with pkgs; = emacs-gtk
     extraPackages = epkgs:
       with epkgs; [
         nix-mode
@@ -121,7 +122,7 @@
         command-log-mode
         doom-modeline
         all-the-icons
-        doom-themes
+        # doom-themes
         which-key
         ivy-rich
         counsel
@@ -177,8 +178,11 @@
 
             (use-package all-the-icons)
 
-            (use-package doom-themes
-              :init (load-theme 'doom-dracula t))
+            ;; (use-package doom-themes
+            ;;   :init (load-theme 'doom-dracula t))
+
+            ;; Load the Modus Vivendi dark theme
+            (load-theme 'modus-vivendi t)
 
             (use-package rainbow-delimiters
               :hook (prog-mode . rainbow-delimiters-mode))
