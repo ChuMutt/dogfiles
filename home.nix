@@ -65,6 +65,7 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
     ".config/emacs/init.el".source = ./chumacs/init.el; # TODO Temporary
+    ".config/emacs/config.el".source = ./chumacs/config.el; # TODO Temporary
     # ".config/chumacs/init.el".source = ./chumacs/init.el;
   };
 
@@ -112,12 +113,10 @@
     enable = true;
     autocd = true;
     autosuggestion.enable = true;
-    # dotDir = "${config.xdg.configHome}/zsh";
     dotDir = ".config/zsh";
     history = {
       size = 10000000; # Number of history lines to keep
       save = 10000000; # Number of history lines to save
-      # path = "${config.xdg.cacheHome}/zsh/history";
       path = ".cache/zsh/history";
       expireDuplicatesFirst = true;
     };
