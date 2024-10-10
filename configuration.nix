@@ -191,6 +191,12 @@
     pathsToLink = [ "/share/zsh" ]; # For zsh.enableCompletion in home.nix
   };
 
+  environment.plasma6.excludePackages = with pkgs; [
+    kate
+    okular
+    plasma-systemmonitor
+  ];
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;
