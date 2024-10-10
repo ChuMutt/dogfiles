@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -22,19 +22,37 @@
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+  # i18n = {
+  #   # Select internationalisation properties.
+  #   defaultLocale = "en_US.UTF-8";
+  #   extraLocaleSettings = {
+  #     LC_ADDRESS = "en_US.UTF-8";
+  #     LC_IDENTIFICATION = "en_US.UTF-8";
+  #     LC_MEASUREMENT = "en_US.UTF-8";
+  #     LC_MONETARY = "en_US.UTF-8";
+  #     LC_NAME = "en_US.UTF-8";
+  #     LC_NUMERIC = "en_US.UTF-8";
+  #     LC_PAPER = "en_US.UTF-8";
+  #     LC_TELEPHONE = "en_US.UTF-8";
+  #     LC_TIME = "en_US.UTF-8";
+  #   };
+  # };
 
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+  # Select internationalisation properties.
+  i18n = let l = "en_US.UTF-8";
+  in {
+    defaultLocale = l;
+    extraLocaleSettings = {
+      LC_ADDRESS = l;
+      LC_IDENTIFICATION = l;
+      LC_MEASUREMENT = l;
+      LC_MONETARY = l;
+      LC_NAME = l;
+      LC_NUMERIC = l;
+      LC_PAPER = l;
+      LC_TELEPHONE = l;
+      LC_TIME = l;
+    };
   };
 
   # Configure keymap in X11
@@ -53,12 +71,9 @@
   users.users.chu = {
     isNormalUser = true;
     description = "chu";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
-    packages = with pkgs; [ ];
-    useDefaultShell = true;
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = [ ];
+    useDefaultShell = true; # use pkgs.zsh
   };
 
   # Enable automatic login for the user.
@@ -170,15 +185,11 @@
 
   ];
 
-  environment.variables = {
-    DOTFILES_DIR = "$HOME/.dogfiles";
+  environment = {
+    variables = { DOTFILES_DIR = "$HOME/.dogfiles"; };
+    sessionVariables = { DOTFILES_DIR = "$HOME/.dogfiles"; };
+    pathsToLink = [ "/share/zsh" ]; # For zsh.enableCompletion in home.nix
   };
-
-  environment.sessionVariables = {
-    DOTFILES_DIR = "$HOME/.dogfiles";
-  };
-
-  environment.pathsToLink = [ "/share/zsh" ]; # For zsh.enableCompletion in home.nix
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -188,9 +199,7 @@
     enableSSHSupport = true;
   };
 
-  programs.zsh = {
-    enable = true;
-  };
+  programs.zsh = { enable = true; };
 
   # List services that you want to enable:
 
@@ -214,10 +223,7 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Allow members of the wheel group to connect to the Nix daemon.
   # Default is * (all). Root is always allowed regardless of this setting.
@@ -228,10 +234,7 @@
   # Allow members of the wheel group to connect to the Nix daemon, specify
   # additional binary caches, and import unsigned NARs. Default is root.
 
-  nix.settings.trusted-users = [
-    "root"
-    "@wheel"
-  ];
+  nix.settings.trusted-users = [ "root" "@wheel" ];
 
   # Enable KDE Plasma 6
   services = {
