@@ -1953,6 +1953,13 @@ had to add git and enable extra experimental features nix-command and flakes in 
 ** DONE dragon-drop
 xdragon
 ** DONE zsh as default shell
+** TODO Dogfiles stable bugs
+*** TODO You have to be in ~/ for chu-install-doom-emacs to work
+*** TODO Nano is always used as install editor no matter what
+*** TODO Gtk settings dont exist error on VM (Maybe?)
+*** TODO Default browser on VM still set to Librewolf (Maybe?)
+** TODO Dogfiles stable notes
+*** TODO Resolution for VM when not fully maximized is 1914x987
 * References / Credits
 - [[https://github.com/librephoenix/nixos-config][librephoenix/nixos-config]]
 - [[https://github.com/hlissner/dotfiles][hlissner/dotfiles]]
