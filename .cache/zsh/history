@@ -45,3 +45,8 @@ exec zsh
 : 1728519076:0;nvim home.nix
 : 1728519088:0;home-manager switch --flake .
 : 1728519123:0;git add .
+: 1728519124:0;git commit -m "zsh settings"
+: 1728519126:0;git push
+: 1728519131:0;git commit --amend
+: 1728519140:0;git commit
+: 1728519142:0;git add .
