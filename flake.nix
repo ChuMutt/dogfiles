@@ -9,12 +9,14 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... }: {
+
     nixosConfigurations = {
       chunixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [ ./configuration.nix ];
       };
     };
+
     homeConfigurations = {
       "chu" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs { system = "x86_64-linux"; };
