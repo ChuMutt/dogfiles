@@ -39,3 +39,9 @@ exec zsh
 : 1728518996:0;git push
 : 1728519005:0;sudo nixos-rebuild switch --flake .
 : 1728519049:0;git add .
+: 1728519052:0;git commit -m "zsh settings"
+: 1728519053:0;git push
+: 1728519059:0;st
+: 1728519076:0;nvim home.nix
+: 1728519088:0;home-manager switch --flake .
+: 1728519123:0;git add .
