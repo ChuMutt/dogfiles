@@ -70,3 +70,8 @@ exit
 : 1728535044:0;ls
 : 1728535047:0;home-manager switch --flake .
 : 1728535060:0;git add .
+: 1728535070:0;git commit -m "rm mypaint (fails to build)"
+: 1728535073:0;git push'
+: 1728535075:0;git push
+: 1728535143:0;sudo nixos-rebuild switch --flake .
+: 1728535241:0;autorandr

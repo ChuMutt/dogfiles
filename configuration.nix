@@ -254,9 +254,25 @@
 
   nix.settings.trusted-users = [ "root" "@wheel" ];
 
-  # Enable KDE Plasma 6
+  # Enable KDE Plasma 6 Desktop
   services = {
     displayManager.sddm.enable = true;
     desktopManager.plasma6.enable = true;
   };
+
+  # Enable KDE Plasma 5 Desktop
+  # services = {
+  #   displayManager.sddm.enable = true;
+  #   desktopManager.plasma5.enable = true;
+  # };
+
+  # Enable GNOME Desktop
+  # services = {
+  #   displayManager.gdm.enable = true;
+  #   desktopManager.gnome.enable = true;
+  # };
+  
+  # Automatically select display configuration based on connected devices
+  services.autorandr.enable = true;
+  
 }
