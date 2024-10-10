@@ -70,6 +70,7 @@
     # '';
     ".config/emacs/init.el".source = ./chumacs/init.el;
     ".config/emacs/config.el".source = ./chumacs/config.el;
+    ".config/zsh/.zshrc".source = ./zsh/zshrc;
   };
 
   # Home Manager can also manage your environment variables through
@@ -89,15 +90,14 @@
   #  /etc/profiles/per-user/chu/etc/profile.d/hm-session-vars.sh
   #
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
+  home.sessionVariables = { EDITOR = "emacs"; };
 
   # Whether to manage {file}$XDG_CONFIG_HOME/user-dirs.dirs.
   # The generated file is read-only.
   xdg.userDirs = {
     enable = true; # Default is false.
-    createDirectories = true; # Automatically create XDG directories if none exist.
+    createDirectories =
+      true; # Automatically create XDG directories if none exist.
   };
 
   # Whether to make programs use XDG directories whenever supported.
@@ -120,60 +120,14 @@
     };
     historySubstringSearch.enable = true;
     enableCompletion = true;
-    initExtra = "
-    # Enable colors and change prompt:
-    autoload -U colors && colors # Load colors
-
-    PS1=\"%B%{$fg[green]%}[%{$fg[magenta]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[green]%}]%{$reset_color%}$%b \"
-
-    # Basic auto/tab complete:
-    autoload -U compinit
-    zstyle ':completion:*' menu select
-    zmodload zsh/complist
-    compinit
-    _comp_options+=(globdots)		# Include hidden files.
-
-    # vi mode
-    bindkey -v
-    export KEYTIMEOUT=1
-
-    # Use vim keys in tab complete menu:
-    bindkey -M menuselect 'h' vi-backward-char
-    bindkey -M menuselect 'k' vi-up-line-or-history
-    bindkey -M menuselect 'l' vi-forward-char
-    bindkey -M menuselect 'j' vi-down-line-or-history
-    bindkey -v '^?' backward-delete-char
-
-    # Use lf to switch directories and bind it to ctrl-o
-    lfcd () {
-        tmp=\"$(mktemp -uq)\"
-        trap 'rm -f $tmp >/dev/null 2>&1 && trap - HUP INT QUIT TERM PWR EXIT' HUP INT QUIT TERM PWR EXIT
-        lf -last-dir-path=\"$tmp\" \"$@\"
-        if [ -f \"$tmp\" ]; then
-            dir=\"$(cat \"$tmp\")\"
-            [ -d \"$dir\" ] && [ \"$dir\" != \"$(pwd)\" ] && cd \"$dir\"
-        fi
-    }
-    bindkey -s '^o' '^ulfcd\n'
-    bindkey -s '^a' '^ubc -lq\n'
-    bindkey -s '^f' '^ucd \"$(dirname \"$(fzf)\")\"\n'
-    bindkey '^[[P' delete-char
-
-    # Edit line in vim with ctrl-e:
-    autoload edit-command-line; zle -N edit-command-line
-    bindkey '^e' edit-command-line
-    bindkey -M vicmd '^[[P' vi-delete-char
-    bindkey -M vicmd '^e' edit-command-line
-    bindkey -M visual '^[[P' vi-delete
-    "; # Extra commands that should be added to {file}.zshrc
   };
 
   # GNU Emacs
   programs.emacs = {
     enable = true;
     package = pkgs.emacs-gtk;
-    extraPackages =
-      epkgs: with epkgs; [
+    extraPackages = epkgs:
+      with epkgs; [
         nix-mode
         magit
         evil-collection
@@ -215,14 +169,10 @@
   };
 
   # TeX Live, used for TeX typesetting package distribution.
-  programs.texlive = {
-    enable = true;
-  };
+  programs.texlive = { enable = true; };
 
   # thefuck - magnificent app that corrects your previous console command.
-  programs.thefuck = {
-    enable = true;
-  };
+  programs.thefuck = { enable = true; };
 
   # Thunderbird.
   programs.thunderbird = {
