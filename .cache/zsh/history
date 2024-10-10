@@ -1,0 +1,37 @@
+nvim
+nvim home.nix
+zsh
+exit
+exit
+home-manager switch --flake .
+exit
+clear
+exec zsh
+exit
+exit
+home-manager switch --flake .
+exec zsh
+exit
+nvim home.nix
+home-manager switch --flake .
+exec zsh
+clear
+exit
+nvim home.nix
+git add .
+home-manager switch --flake .
+exec zsh
+clear
+exit
+nvim home.nix
+zsh
+home-manager switch --flake .
+killall zsh
+zsh
+nvim home.nix
+home-manager switch --flake .
+exec zsh
+nvim home.nix
+home-manager switch --flake .
+exec zsh
+: 1728518991:0;git add .
