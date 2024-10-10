@@ -188,7 +188,6 @@
     cheese
     kdenlive
     krita
-    mypaint
     gimp
     inkscape
 

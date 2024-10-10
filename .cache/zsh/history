@@ -34,19 +34,39 @@ exec zsh
 nvim home.nix
 home-manager switch --flake .
 exec zsh
-: 1728518991:0;git add .
-: 1728518995:0;git commit -m "zsh settings"
-: 1728518996:0;git push
-: 1728519005:0;sudo nixos-rebuild switch --flake .
-: 1728519049:0;git add .
-: 1728519052:0;git commit -m "zsh settings"
-: 1728519053:0;git push
-: 1728519059:0;st
-: 1728519076:0;nvim home.nix
-: 1728519088:0;home-manager switch --flake .
-: 1728519123:0;git add .
-: 1728519124:0;git commit -m "zsh settings"
-: 1728519126:0;git push
-: 1728519131:0;git commit --amend
-: 1728519140:0;git commit
-: 1728519142:0;git add .
+git add .
+git commit -m "zsh settings"
+git push
+sudo nixos-rebuild switch --flake .
+git add .
+git commit -m "zsh settings"
+git push
+st
+nvim home.nix
+home-manager switch --flake .
+git add .
+git commit -m "zsh settings"
+git push
+git commit --amend
+git commit
+git add .
+git commit -m "nextcloud"
+git push
+git pull
+git add .
+git push
+git push --force
+clear
+ls
+exit
+exit
+exit
+: 1728534764:0;git pull
+: 1728534779:0;sudo nixos-rebuild switch --flake .
+: 1728534903:0;git add .
+: 1728534905:0;sudo nixos-rebuild switch --flake .
+: 1728534971:0;home-manager switch --flake .
+: 1728535005:0;sudo nixos-rebuild switch --flake .
+: 1728535044:0;ls
+: 1728535047:0;home-manager switch --flake .
+: 1728535060:0;git add .
