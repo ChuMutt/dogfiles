@@ -151,6 +151,8 @@
     xdg-user-dirs
 
     # audio
+    audacity
+    tenacity
     airwindows-lv2
     alsa-scarlett-gui
     ardour
@@ -180,8 +182,19 @@
     wolf-shaper
 
     # image / video
+    ffmpeg
+    mpd
+    mpv
     cheese
     kdenlive
+    krita
+    mypaint
+    gimp
+    inkscape
+
+    # communications
+    discord
+    telegram-desktop
 
   ];
 
