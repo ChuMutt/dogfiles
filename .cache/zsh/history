@@ -61,28 +61,52 @@ ls
 exit
 exit
 exit
-: 1728534764:0;git pull
-: 1728534779:0;sudo nixos-rebuild switch --flake .
-: 1728534903:0;git add .
-: 1728534905:0;sudo nixos-rebuild switch --flake .
-: 1728534971:0;home-manager switch --flake .
-: 1728535005:0;sudo nixos-rebuild switch --flake .
-: 1728535044:0;ls
-: 1728535047:0;home-manager switch --flake .
-: 1728535060:0;git add .
-: 1728535070:0;git commit -m "rm mypaint (fails to build)"
-: 1728535073:0;git push'
-: 1728535075:0;git push
-: 1728535143:0;sudo nixos-rebuild switch --flake .
-: 1728535241:0;autorandr
-: 1728535270:0;sudo nixos-rebuild switch --flake .
-: 1728535431:0;home-manager switch --flake .
-: 1728535442:0;nh search qtbrowser
-: 1728535446:0;nh search qt browser
-: 1728535450:0;nh search qt-browser
-: 1728535454:0;nh browser
-: 1728535457:0;nh search browser
-: 1728535468:0;home-manager switch --flake .
-: 1728535557:0;\
+git pull
+sudo nixos-rebuild switch --flake .
+git add .
+sudo nixos-rebuild switch --flake .
+home-manager switch --flake .
+sudo nixos-rebuild switch --flake .
+ls
+home-manager switch --flake .
+git add .
+git commit -m "rm mypaint (fails to build)"
+git push'
+git push
+sudo nixos-rebuild switch --flake .
+autorandr
+sudo nixos-rebuild switch --flake .
+home-manager switch --flake .
+nh search qtbrowser
+nh search qt browser
+nh search qt-browser
+nh browser
+nh search browser
+home-manager switch --flake .
+\
 m
-: 1728535559:0;home-manager switch --flake .
+home-manager switch --flake .
+zsh
+exit
+exit
+nvim home.nix
+nvim zsh/zshrc
+source ~/.zshrc
+exit
+clear
+ls
+rm -rf zsh
+clear
+nvim home.nix
+nh search disfetch
+nh search onefetch
+exit
+home-manager switch --flake .
+nvim home.nix
+home-manager switch --flake .
+nvim home.nix
+home-manager switch --flake .
+nvim home.nix
+home-manager switch --flake .
+exit
+: 1728625286:0;git add .

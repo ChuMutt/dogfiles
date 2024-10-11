@@ -1,13 +1,6 @@
 {
   description = "Chu the Pup's NixOS Flake";
 
-  inputs = {
-    # Specify your NixOS version
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-  };
-
   outputs =
     inputs@{
       self,
@@ -59,10 +52,29 @@
       };
 
       homeConfigurations = {
-        user = home-manager.lib.homeManagerConfiguration {
+        chu = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs { system = "x86_64-linux"; };
           modules = [ ./home.nix ];
         };
       };
     };
+
+  inputs = {
+    # Specify your NixOS version
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    
+    home-manager = { # Specify your Home Manager version
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    stylix.url = "github:danth/stylix"; # Themes
+
+    blocklist-hosts = { # Adblock
+      url = "github:StevenBlack/hosts";
+      flake = false;
+    };
+
+  };
+
 }
