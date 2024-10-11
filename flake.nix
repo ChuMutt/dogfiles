@@ -19,7 +19,7 @@
       # TODO prototype let statement
       systemSettings = {
         # TODO prototype(s)
-        # system = "x86_64-linux";
+        system = "x86_64-linux";
         hostname = "chunixos";
         # profile = "work";
         # timezone = "America/Chicago";
@@ -33,12 +33,12 @@
         # TODO prototype(s)
         username = "chu";
         # TODO prototypes
-        name = "Chu"; 
-        email = "chufilthymutt@gmail.com"; 
-        dotfilesDir = "~/.dogfiles"; 
+        name = "Chu";
+        email = "chufilthymutt@gmail.com";
+        dotfilesDir = "~/.dogfiles";
         # theme = ""; 
-        wm = "plasma"; 
-        wmType = if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11"; 
+        wm = "plasma";
+        wmType = if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11";
         # browser = "firefox"; 
         # defaultEmacsOrgDir = "~/nextcloud/documents/org"; 
         # defaultEmacsOrgRoamDir = "roam"; # relative to "/org" (defaultEmacsOrgDir)
@@ -47,19 +47,19 @@
         # fontPkg = pkgs.intel-one-mono;
         # editor = "nvim"; # TODO neovide (maybe)
       };
+      lib = inputs.nixpkgs.lib;
     in
     {
       nixosConfigurations = {
-        # hostname = nixpkgs.lib.nixosSystem {
+        # hostname = nixpkgs.lib.nixosSystem { # TODO
         chunixos = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          system = lib.nixosSystem { system = systemSettings.system; };
           modules = [ ./configuration.nix ];
         };
       };
 
       homeConfigurations = {
-        # user = home-manager.lib.homeManagerConfiguration {
-        "chu" = home-manager.lib.homeManagerConfiguration {
+        user = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs { system = "x86_64-linux"; };
           modules = [ ./home.nix ];
         };
