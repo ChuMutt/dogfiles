@@ -33,12 +33,12 @@
         # TODO prototype(s)
         username = "chu";
         # TODO prototypes
-        # name = "Chu"; 
-        # email = "chufilthymutt@gmail.com"; 
-        # dotfilesDir = "~/.dogfiles"; 
+        name = "Chu"; 
+        email = "chufilthymutt@gmail.com"; 
+        dotfilesDir = "~/.dogfiles"; 
         # theme = ""; 
-        # wm = ""; 
-        # wmType = if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11"; 
+        wm = "plasma"; 
+        wmType = if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11"; 
         # browser = "firefox"; 
         # defaultEmacsOrgDir = "~/nextcloud/documents/org"; 
         # defaultEmacsOrgRoamDir = "roam"; # relative to "/org" (defaultEmacsOrgDir)
