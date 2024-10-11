@@ -75,3 +75,14 @@ exit
 : 1728535075:0;git push
 : 1728535143:0;sudo nixos-rebuild switch --flake .
 : 1728535241:0;autorandr
+: 1728535270:0;sudo nixos-rebuild switch --flake .
+: 1728535431:0;home-manager switch --flake .
+: 1728535442:0;nh search qtbrowser
+: 1728535446:0;nh search qt browser
+: 1728535450:0;nh search qt-browser
+: 1728535454:0;nh browser
+: 1728535457:0;nh search browser
+: 1728535468:0;home-manager switch --flake .
+: 1728535557:0;\
+m
+: 1728535559:0;home-manager switch --flake .

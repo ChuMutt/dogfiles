@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "Chu the Pup's NixOS Flake";
 
   inputs = {
     # Specify your NixOS version
@@ -8,20 +8,61 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }: {
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }:
+    let
+      # TODO prototype let statement
+      systemSettings = {
+        # TODO prototype(s)
+        # system = "x86_64-linux";
+        hostname = "chunixos";
+        # profile = "work";
+        # timezone = "America/Chicago";
+        # locale = "en_US.UTF-8";
+        # boot = "uefi";
+        # bootPath = "/boot";
+        # grubDevice = "";
+        # gpuType = "";
+      };
+      userSettings = rec {
+        # TODO prototype(s)
+        username = "chu";
+        # TODO prototypes
+        # name = "Chu"; 
+        # email = "chufilthymutt@gmail.com"; 
+        # dotfilesDir = "~/.dogfiles"; 
+        # theme = ""; 
+        # wm = ""; 
+        # wmType = if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11"; 
+        # browser = "firefox"; 
+        # defaultEmacsOrgDir = "~/nextcloud/documents/org"; 
+        # defaultEmacsOrgRoamDir = "roam"; # relative to "/org" (defaultEmacsOrgDir)
+        # term = "konsole";
+        # font = "Intel One Mono";
+        # fontPkg = pkgs.intel-one-mono;
+        # editor = "nvim"; # TODO neovide (maybe)
+      };
+    in
+    {
+      nixosConfigurations = {
+        # hostname = nixpkgs.lib.nixosSystem {
+        chunixos = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./configuration.nix ];
+        };
+      };
 
-    nixosConfigurations = {
-      chunixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [ ./configuration.nix ];
+      homeConfigurations = {
+        # user = home-manager.lib.homeManagerConfiguration {
+        "chu" = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs { system = "x86_64-linux"; };
+          modules = [ ./home.nix ];
+        };
       };
     };
-
-    homeConfigurations = {
-      "chu" = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs { system = "x86_64-linux"; };
-        modules = [ ./home.nix ];
-      };
-    };
-  };
 }

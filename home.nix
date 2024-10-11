@@ -47,7 +47,7 @@
 
     firefox
     # librewolf
-    # qtbrowser
+    qutebrowser
     # nyxt
 
     zathura

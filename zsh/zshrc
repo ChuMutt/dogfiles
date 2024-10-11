@@ -1,7 +1,7 @@
 # Enable colors and change prompt:
 autoload -U colors && colors # Load colors
 
-PS1=\"%B%{$fg[green]%}[%{$fg[magenta]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[green]%}]%{$reset_color%}$%b \"
+PS1="%B%{$fg[green]%}[%{$fg[magenta]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[green]%}]%{$reset_color%}$%b "
 
 # Basic auto/tab complete:
 autoload -U compinit
