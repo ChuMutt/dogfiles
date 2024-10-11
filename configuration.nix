@@ -4,6 +4,14 @@
 
 { pkgs, ... }:
 
+let
+  mySessionCommands = ''
+    xset -dpms
+    xset s blank
+    xset r rate 350 50
+    xset s 300
+  '';
+  in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -63,7 +71,10 @@
     };
     # Enable X11 display server
     enable = true;
+    displayManager.sessionCommands = mySessionCommands;
   };
+
+  services.libinput.touchpad.disableWhileTyping = true;
 
   users.defaultUserShell = pkgs.zsh;
 
@@ -254,6 +265,7 @@
 
   nix.settings.trusted-users = [ "root" "@wheel" ];
 
+
   # Enable KDE Plasma 6 Desktop
   services = {
     displayManager.sddm.enable = true;
@@ -263,12 +275,14 @@
   # Enable KDE Plasma 5 Desktop
   # services = {
   #   displayManager.sddm.enable = true;
+  #   displayManager.sessionCommands = mySessionCommands;
   #   desktopManager.plasma5.enable = true;
   # };
 
   # Enable GNOME Desktop
   # services = {
   #   displayManager.gdm.enable = true;
+  #   displayManager.sessionCommands = mySessionCommands;
   #   desktopManager.gnome.enable = true;
   # };
   
