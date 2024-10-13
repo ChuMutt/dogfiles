@@ -1,0 +1,21 @@
+nh search ls
+exit
+home-manager switch --flake .
+ls
+home-manager switch --flake .
+nh search movit
+home-manager switch --flake .
+nh foliate
+nh search foliate
+search
+nh search nautilus
+exit
+nh search bat
+exit
+nh search disfetch
+exit
+nh search onefetch
+nh search eza
+exit
+: 1728785956:0;home-manager switch --flake .
+: 1728786027:0;git add .

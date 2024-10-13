@@ -16,7 +16,14 @@ in
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "chu";
+  # home.username = userSettings.username; # TODO
   home.homeDirectory = "/home/chu";
+  # home.homeDirectory = "/home/"+userSettings.username; TODO
+
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
+
+  imports = [];
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -47,35 +54,69 @@ in
     #   echo "Hello, ${config.home.username}!"
     # '')
 
-    # cli/novel
+    ### cli
+    ## cli/core
+    zsh
+    git
+    rsync
+    sshfs
+
+    ## cli/dev
+    roswell
+
+    ## cli/secrets
+    pass
+
+    ## cli/monitors
+    htop-vim
+    bottom
+
+    ## cli/utils
+    coreutils
+    gnugrep
+    gnused
+    fd
+    bc
+    eza
+    onefetch
+    killall
+    direnv
+    nix-direnv
+    disfetch
+
+    ## cli/color
+    bat
+    lolcat
+    cope
+
+    ## cli/lol
     fortune
     hyfetch
     asciiquarium
     cowsay
+    ponysay
 
-    # cli/useful
-    lolcat
-    killall
-    htop-vim
-    bottom
-    disfetch
-    onefetch
-    gnugrep
-    gnused
-    bat
-    eza
-    fd
-    bc
-    direnv
-    nix-direnv
+    ### gui
+    ## gui/terminal-emulators
+    alacritty
+    st
+    konsole
 
-    # gui
+    ## gui/browsers
     firefox
-    # librewolf
+    librewolf
     qutebrowser
-    # nyxt
-    zathura
+    nyxt
+
+    ## gui/utils
     nextcloud-client
+    ungit
+
+    ## gui/document-viewers
+    zathura
+
+    ## gui/secrets
+    keepassxc # TODO switch to pass
 
   ];
 
@@ -132,9 +173,6 @@ in
 
   # Whether to make programs use XDG directories whenever supported.
   home.preferXdgDirectories = true;
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
 
   # Z-Shell
   programs.zsh = {
