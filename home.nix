@@ -71,18 +71,20 @@ in
     htop-vim
     bottom
 
-    ## cli/utils
+    ## cli/util
     coreutils
     gnugrep
     gnused
     fd
-    bc
     eza
     onefetch
     killall
     direnv
     nix-direnv
     disfetch
+    ## cli/util/calc
+    bc
+    numbat
 
     ## cli/color
     bat
@@ -108,7 +110,7 @@ in
     qutebrowser
     nyxt
 
-    ## gui/utils
+    ## gui/util
     nextcloud-client
     ungit
 
