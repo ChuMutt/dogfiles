@@ -177,46 +177,39 @@ in
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+
     ".config/emacs/init.el".source = ./chumacs/init.el;
     ".config/emacs/config.el".source = ./chumacs/config.el;
+
   };
 
-  # Whether to manage {file}$XDG_CONFIG_HOME/user-dirs.dirs.
-  # The generated file is read-only.
-  # xdg.userDirs = {
-  #   enable = true; # Default is false.
-  #   createDirectories =
-  #     true; # Automatically create XDG directories if none exist.
-  # };
   xdg = {
     enable = true;
     mime.enable = true;
     mimeApps = {
       enable = true;
-      associations.added = {
-        # TODO
+    };
+    # Whether to manage {file}$XDG_CONFIG_HOME/user-dirs.dirs.
+    # The generated file is read-only.
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+      desktop = null;
+      publicShare = null;
+      music = "${config.home.homeDirectory}/Music";
+      videos = "${config.home.homeDirectory}/Videos";
+      pictures = "${config.home.homeDirectory}/Pictures";
+      templates = "${config.home.homeDirectory}/Templates";
+      download = "${config.home.homeDirectory}/Downloads";
+      documents = "${config.home.homeDirectory}/Documents";
+      extraConfig = {
+        XDG_DOTFILES_DIR = "${config.home.homeDirectory}/.dogfiles";
+        XDG_ARCHIVE_DIR = "${config.home.homeDirectory}/Archive";
+        # XDG_VM_DIR = "${config.home.homeDirectory}/VMs";
+        XDG_ORG_DIR = "${config.home.homeDirectory}/nextcloud/documents/org";
+        XDG_BOOK_DIR = "${config.home.homeDirectory}/Books";
       };
     };
-    # userDirs = {
-    #   enable = true;
-    #   createDirectories = true;
-    #   desktop = null;
-    #   publicShare = null;
-    #   music = "${config.home.homeDirectory}/Music";
-    #   videos = "${config.home.homeDirectory}/Videos";
-    #   pictures = "${config.home.homeDirectory}/Pictures";
-    #   templates = "${config.home.homeDirectory}/Templates";
-    #   download = "${config.home.homeDirectory}/Downloads";
-    #   documents = "${config.home.homeDirectory}/Documents";
-    #   # extraConfig = {
-    #   #   XDG_DOTFILES_DIR = "${config.home.homeDirectory}/.dogfiles";
-    #   #   XDG_ARCHIVE_DIR = "${config.home.homeDirectory}/Archive";
-    #   #   XDG_VM_DIR = "${config.home.homeDirectory}/VMs";
-    #   #   XDG_ORG_DIR = "${config.home.homeDirectory}/Nextcloud/Documents/Org";
-    #   #   # XDG_PODCAST_DIR = "${config.home.homeDirectory}/Media/Podcasts";
-    #   #   XDG_BOOK_DIR = "${config.home.homeDirectory}/Books";
-    #   # };
-    # };
   };
 
   # Whether to make programs use XDG directories whenever supported.
@@ -240,11 +233,11 @@ in
   #
 
   home.sessionVariables = { 
-    # EDITOR = userSettings.editor; # TODO
-    EDITOR = "emacs"; 
+    EDITOR = userSettings.editor; # TODO
+    # EDITOR = "emacs"; 
     # SPAWNEDITOR = userSettings.spawnEditor; # TODO
-    # TERM = userSettings.term; # TODO
-    # BROWSER = userSettings.browser; # TODO
+    TERM = userSettings.term; # TODO
+    BROWSER = userSettings.browser; # TODO
     };
 
   # Z-Shell
