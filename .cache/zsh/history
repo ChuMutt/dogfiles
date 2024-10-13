@@ -67,3 +67,7 @@ exit
 : 1728787444:0;git add .
 : 1728787446:0;home-manager switch --flake .
 : 1728787463:0;git add .
+: 1728787468:0;git commit -m "formatting"
+: 1728787470:0;git push
+: 1728787473:0;sudo nixos-rebuild switch --flake .
+: 1728787489:0;git add .
