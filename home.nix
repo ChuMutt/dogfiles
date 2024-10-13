@@ -23,7 +23,9 @@ in
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  imports = [];
+  imports = [
+    (./. + "../../../user/wm"+("/"+userSettings.wm+"/"+userSettings.wm)+".nix")
+  ];
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
