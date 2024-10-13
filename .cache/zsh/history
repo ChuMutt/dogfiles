@@ -33,3 +33,8 @@ exit
 : 1728786995:0;nvim home.nix
 : 1728787011:0;home-manager switch --flake .
 : 1728787031:0;git add .
+: 1728787038:0;git commit -m "xdg config for home.nix"
+: 1728787040:0;git push
+: 1728787042:0;clear
+: 1728787043:0;sudo nixos-rebuild switch --flake .
+: 1728787066:0;git add .
