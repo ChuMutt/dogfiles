@@ -38,3 +38,7 @@ exit
 : 1728787042:0;clear
 : 1728787043:0;sudo nixos-rebuild switch --flake .
 : 1728787066:0;git add .
+: 1728787069:0;git commit -m "sync"
+: 1728787071:0;git push
+: 1728787079:0;nvim home.nix
+: 1728787158:0;git add .

@@ -217,6 +217,9 @@ in
     # };
   };
 
+  # Whether to make programs use XDG directories whenever supported.
+  home.preferXdgDirectories = true;
+
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
   # shell provided by Home Manager. If you don't want to manage your shell
@@ -241,9 +244,6 @@ in
     # TERM = userSettings.term; # TODO
     # BROWSER = userSettings.browser; # TODO
     };
-
-  # Whether to make programs use XDG directories whenever supported.
-  home.preferXdgDirectories = true;
 
   # Z-Shell
   programs.zsh = {
@@ -377,4 +377,15 @@ in
     # Whether to use the GnuPG key agent for SSH keys or not.
     enableSshSupport = true;
   };
+
+  news.display = "silent"; # silence home manager news
+
+  # gtk.iconTheme = {
+  #   package = pkgs.papirus-icon-theme;
+  #   name = if (config.stylix.polarity == "dark") then "Papirus-Dark" else "Papirus-Light";
+  # };
+
+  # services.pasystray.enable = true;
+  
+
 }
