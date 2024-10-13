@@ -43,11 +43,11 @@
 
 (use-package all-the-icons)
 
-;; (use-package doom-themes
-;;   :init (load-theme 'doom-dracula t))
+(use-package doom-themes
+  :init (load-theme 'doom-dracula t))
 
 ;; Load the Modus Vivendi dark theme
-(load-theme 'modus-vivendi t)
+;; (load-theme 'modus-vivendi t)
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -85,13 +85,17 @@
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-(setq
-  inhibit-startup-message t ; Don't show a splash screen
-  menu-bar-mode -1          ; Don't show a menu bar
-  tool-bar-mode -1          ; Don't show a tool bar
-  scroll-bar-mode -1        ; Don't show a scroll bar (doesn't do anything)
-  standard-indent 2         ; Set standard indentation to 2 spaces
-  visible-bell t)           ; Set up visual flashing bell
+(setq inhibit-startup-message t) ; Don't show a splash screen
+
+(setq menu-bar-mode -1) ; Don't show a menu bar
+
+(setq tool-bar-mode -1) ; Don't show a tool bar
+
+(setq scroll-bar-mode -1) ; Don't show a scroll bar
+
+(setq standard-indent 2) ; Set standard indentation to 2 spaces
+
+(setq visible-bell t) ; Visible flashing bell
 
 ;; End Garbage Collection performance tweak:
 (setq gc-cons-threshold (* 2 1000 1000))
