@@ -23,3 +23,13 @@ git commit -m "packages"
 git push
 nh search numbat
 exit
+: 1728777356:0;git checkout bloodbath
+: 1728777365:2;home-manager switch --flake .
+: 1728777372:8;sudo nixos-rebuild switch --flake .
+: 1728777391:0;clear
+: 1728777394:0;ls
+: 1728777396:9591;nvim home.nix
+: 1728786989:0;home-manager switch --flake .
+: 1728786995:0;nvim home.nix
+: 1728787011:0;home-manager switch --flake .
+: 1728787031:0;git add .

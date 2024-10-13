@@ -151,6 +151,8 @@ in
     libffi zlib
     ventoy
     kdenlive
+    # discord # TODO BUG
+    element
   ];
 
   # Per-directory shell environments
@@ -177,6 +179,44 @@ in
     ".config/emacs/config.el".source = ./chumacs/config.el;
   };
 
+  # Whether to manage {file}$XDG_CONFIG_HOME/user-dirs.dirs.
+  # The generated file is read-only.
+  # xdg.userDirs = {
+  #   enable = true; # Default is false.
+  #   createDirectories =
+  #     true; # Automatically create XDG directories if none exist.
+  # };
+  xdg = {
+    enable = true;
+    mime.enable = true;
+    mimeApps = {
+      enable = true;
+      associations.added = {
+        # TODO
+      };
+    };
+    # userDirs = {
+    #   enable = true;
+    #   createDirectories = true;
+    #   desktop = null;
+    #   publicShare = null;
+    #   music = "${config.home.homeDirectory}/Music";
+    #   videos = "${config.home.homeDirectory}/Videos";
+    #   pictures = "${config.home.homeDirectory}/Pictures";
+    #   templates = "${config.home.homeDirectory}/Templates";
+    #   download = "${config.home.homeDirectory}/Downloads";
+    #   documents = "${config.home.homeDirectory}/Documents";
+    #   # extraConfig = {
+    #   #   XDG_DOTFILES_DIR = "${config.home.homeDirectory}/.dogfiles";
+    #   #   XDG_ARCHIVE_DIR = "${config.home.homeDirectory}/Archive";
+    #   #   XDG_VM_DIR = "${config.home.homeDirectory}/VMs";
+    #   #   XDG_ORG_DIR = "${config.home.homeDirectory}/Nextcloud/Documents/Org";
+    #   #   # XDG_PODCAST_DIR = "${config.home.homeDirectory}/Media/Podcasts";
+    #   #   XDG_BOOK_DIR = "${config.home.homeDirectory}/Books";
+    #   # };
+    # };
+  };
+
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
   # shell provided by Home Manager. If you don't want to manage your shell
@@ -194,15 +234,13 @@ in
   #  /etc/profiles/per-user/chu/etc/profile.d/hm-session-vars.sh
   #
 
-  home.sessionVariables = { EDITOR = "emacs"; };
-
-  # Whether to manage {file}$XDG_CONFIG_HOME/user-dirs.dirs.
-  # The generated file is read-only.
-  xdg.userDirs = {
-    enable = true; # Default is false.
-    createDirectories =
-      true; # Automatically create XDG directories if none exist.
-  };
+  home.sessionVariables = { 
+    EDITOR = "emacs"; 
+    # EDITOR = userSettings.editor; # TODO
+    # SPAWNEDITOR = userSettings.spawnEditor; # TODO
+    # TERM = userSettings.term; # TODO
+    # BROWSER = userSettings.browser; # TODO
+    };
 
   # Whether to make programs use XDG directories whenever supported.
   home.preferXdgDirectories = true;
