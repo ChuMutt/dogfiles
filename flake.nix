@@ -42,11 +42,10 @@
       };
       lib = inputs.nixpkgs.lib;
       
-      supportedSystems = ["x86_64-linux"];
+      supportedSystems = [ "x86_64-linux" ];
       forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
       nixpkgsFor =
         forAllSystems (system: import inputs.nixpkgs { inherit system; });
-
 
     in
     {
@@ -55,6 +54,11 @@
         chunixos = nixpkgs.lib.nixosSystem {
           system = lib.nixosSystem { system = systemSettings.system; };
           modules = [ ./configuration.nix ];
+	  specialArgs = {
+            inherit systemSettings;
+	    inherit userSettings;
+	    inherit inputs;
+	  };
         };
       };
 
@@ -62,6 +66,11 @@
         chu = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs { system = "x86_64-linux"; };
           modules = [ ./home.nix ];
+	  extraSpecialArgs = {
+            inherit systemSettings;
+	    inherit userSettings;
+	    inherit inputs;
+	  };
         };
       };
     };
