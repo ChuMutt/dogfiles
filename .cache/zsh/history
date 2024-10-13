@@ -49,3 +49,8 @@ exit
 : 1728787187:0;nvim home.nix
 : 1728787203:0;home-manager switch --flake .
 : 1728787229:0;git add .
+: 1728787240:0;git commit -m "update function argument set header"
+: 1728787241:0;git push
+: 1728787244:0;clear
+: 1728787248:0;sudo nixos-rebuild switch --flake .
+: 1728787265:0;git add .
