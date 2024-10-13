@@ -42,3 +42,10 @@ exit
 : 1728787071:0;git push
 : 1728787079:0;nvim home.nix
 : 1728787158:0;git add .
+: 1728787162:0;git commit -m "add some more configs"
+: 1728787163:0;git push
+: 1728787165:0;clear
+: 1728787167:0;home-manager switch --flake .
+: 1728787187:0;nvim home.nix
+: 1728787203:0;home-manager switch --flake .
+: 1728787229:0;git add .

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, userSettings, ... }:
 let
   myShellAliases = { # TODO
     ls = "eza --icons -l -T -L=1";
