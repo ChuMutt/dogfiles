@@ -24,7 +24,7 @@ in
   programs.home-manager.enable = true;
 
   imports = [
-    (./. + "../../../user/wm"+("/"+userSettings.wm+"/"+userSettings.wm)+".nix")
+    # (./. + "../../../user/wm"+("/"+userSettings.wm+"/"+userSettings.wm)+".nix")
   ];
 
   # This value determines the Home Manager release that your configuration is

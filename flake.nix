@@ -14,13 +14,13 @@
         # TODO prototype(s)
         system = "x86_64-linux";
         hostname = "chunixos";
-        # profile = "work";
-        # timezone = "America/Chicago";
-        # locale = "en_US.UTF-8";
-        # boot = "uefi";
-        # bootPath = "/boot";
-        # grubDevice = "";
-        # gpuType = "";
+        profile = "work";
+        timezone = "America/Chicago";
+        locale = "en_US.UTF-8";
+        boot = "uefi";
+        bootPath = "/boot";
+        grubDevice = "";
+        gpuType = "";
       };
       userSettings = rec {
         # TODO prototype(s)
@@ -32,15 +32,22 @@
         # theme = ""; 
         wm = "plasma";
         wmType = if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11";
-        # browser = "firefox"; 
-        # defaultEmacsOrgDir = "~/nextcloud/documents/org"; 
-        # defaultEmacsOrgRoamDir = "roam"; # relative to "/org" (defaultEmacsOrgDir)
-        # term = "konsole";
-        # font = "Intel One Mono";
-        # fontPkg = pkgs.intel-one-mono;
-        # editor = "nvim"; # TODO neovide (maybe)
+        browser = "firefox"; 
+        defaultEmacsOrgDir = "~/nextcloud/documents/org"; 
+        defaultEmacsOrgRoamDir = "roam"; # relative to "/org" (defaultEmacsOrgDir)
+        term = "konsole";
+        font = "Intel One Mono";
+        fontPkg = nixpkgs.intel-one-mono;
+        editor = "nvim"; # TODO neovide (maybe)
       };
       lib = inputs.nixpkgs.lib;
+      
+      supportedSystems = ["x86_64-linux"];
+      forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
+      nixpkgsFor =
+        forAllSystems (system: import inputs.nixpkgs { inherit system; });
+
+
     in
     {
       nixosConfigurations = {
