@@ -17,8 +17,9 @@ exit
 nh search onefetch
 nh search eza
 exit
-: 1728785956:0;home-manager switch --flake .
-: 1728786027:0;git add .
-: 1728786029:0;git commit -m "packages"
-: 1728786031:0;git push
-: 1728786043:0;nh search numbat
+home-manager switch --flake .
+git add .
+git commit -m "packages"
+git push
+nh search numbat
+exit

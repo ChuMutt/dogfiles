@@ -61,9 +61,6 @@ in
     rsync
     sshfs
 
-    ## cli/dev
-    roswell
-
     ## cli/secrets
     pass
 
@@ -82,7 +79,8 @@ in
     direnv
     nix-direnv
     disfetch
-    ## cli/util/calc
+
+    ## cli/calc
     bc
     numbat
 
@@ -120,6 +118,39 @@ in
     ## gui/secrets
     keepassxc # TODO switch to pass
 
+    ## unsorted/misc.
+    roswell
+    glib
+    shared-mime-info
+    openai-whisper-cpp
+    wine
+    bottles
+    foliate
+    xournalpp
+    libreoffice-fresh
+    gimp
+    krita
+    pinta
+    inkscape
+    libresprite
+    # mypaint
+    mpd
+    mpv
+    yt-dlp
+    # openscad
+    obs-studio
+    ffmpeg
+    movit
+    mediainfo
+    libmediainfo
+    audio-recorder
+    cheese
+    tenacity
+    ardour
+    airwindows-lv2
+    libffi zlib
+    ventoy
+    kdenlive
   ];
 
   # Per-directory shell environments
