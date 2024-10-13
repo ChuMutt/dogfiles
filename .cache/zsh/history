@@ -71,3 +71,6 @@ exit
 : 1728787470:0;git push
 : 1728787473:0;sudo nixos-rebuild switch --flake .
 : 1728787489:0;git add .
+: 1728787492:0;git commit -m "sync"
+: 1728787494:0;git push
+: 1728787496:0;clear

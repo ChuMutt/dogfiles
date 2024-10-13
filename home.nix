@@ -253,7 +253,7 @@ in
     enableCompletion = true;
     autocd = true;
     # dotDir = "/home/"+ userSettings.username +"/.config/zsh";
-    dotDir = "/home/chu/.config/zsh";
+    dotDir = ".config/zsh";
     shellAliases = myShellAliases;
     history = {
       size = 10000000; # Number of history lines to keep
