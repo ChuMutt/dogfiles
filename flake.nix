@@ -32,8 +32,8 @@
         # theme = ""; 
         wm = "plasma";
         wmType = if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11";
-        browser = "firefox"; 
-        defaultEmacsOrgDir = "~/nextcloud/documents/org"; 
+        browser = "firefox";
+        defaultEmacsOrgDir = "~/nextcloud/documents/org";
         defaultEmacsOrgRoamDir = "roam"; # relative to "/org" (defaultEmacsOrgDir)
         term = "konsole";
         font = "Intel One Mono";
@@ -41,11 +41,10 @@
         editor = "nvim"; # TODO neovide (maybe)
       };
       lib = inputs.nixpkgs.lib;
-      
+
       supportedSystems = [ "x86_64-linux" ];
       forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
-      nixpkgsFor =
-        forAllSystems (system: import inputs.nixpkgs { inherit system; });
+      nixpkgsFor = forAllSystems (system: import inputs.nixpkgs { inherit system; });
 
     in
     {
@@ -54,11 +53,11 @@
         chunixos = nixpkgs.lib.nixosSystem {
           system = lib.nixosSystem { system = systemSettings.system; };
           modules = [ ./configuration.nix ];
-	  specialArgs = {
+          specialArgs = {
             inherit systemSettings;
-	    inherit userSettings;
-	    inherit inputs;
-	  };
+            inherit userSettings;
+            inherit inputs;
+          };
         };
       };
 
@@ -66,31 +65,62 @@
         chu = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs { system = "x86_64-linux"; };
           modules = [ ./home.nix ];
-	  extraSpecialArgs = {
+          extraSpecialArgs = {
             inherit systemSettings;
-	    inherit userSettings;
-	    inherit inputs;
-	  };
+            inherit userSettings;
+            inherit inputs;
+          };
         };
+
+        packages = forAllSystems (
+          system:
+          let
+            pkgs = nixpkgsFor.${system};
+          in
+          {
+            default = self.packages.${system}.install;
+
+            install = pkgs.writeShellApplication {
+              name = "install";
+              runtimeInputs = with pkgs; [ git ]; # I could make this fancier by adding other deps
+              text = ''${./install.sh} "$@"'';
+            };
+          }
+        );
+
+        apps = forAllSystems (system: {
+          default = self.apps.${system}.install;
+
+          install = {
+            type = "app";
+            program = "${self.packages.${system}.install}/bin/install";
+          };
+        });
       };
     };
 
   inputs = {
     # Specify your NixOS version
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    
-    home-manager = { # Specify your Home Manager version
+
+    home-manager = {
+      # Specify your Home Manager version
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     stylix.url = "github:danth/stylix"; # Themes
 
-    blocklist-hosts = { # Adblock
+    blocklist-hosts = {
+      # Adblock
       url = "github:StevenBlack/hosts";
       flake = false;
     };
 
-  };
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.90.0.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
+  };
 }
