@@ -82,6 +82,9 @@ in
     nix-direnv
     disfetch
     intel-gpu-tools # lsgpu
+    # pciutils
+    # busybox
+    # toybox
 
     ## cli/calc
     bc
@@ -140,20 +143,28 @@ in
     mpd
     mpv
     yt-dlp
+    gallery-dl
     # openscad
     obs-studio
     ffmpeg
-    movit
+    (pkgs.writeScriptBin "kdenlive-accel" ''
+      #!/bin/sh
+      DRI_PRIME=0 kdenlive "$1"
+    '')
+    kdenlive
     mediainfo
     libmediainfo
     audio-recorder
     cheese
-    tenacity
+    raysession
     ardour
+    # rosegarden
+    tenacity
     airwindows-lv2
+    calf
+    movit
     libffi zlib
     ventoy
-    kdenlive
     # discord # TODO BUG
     element
   ];
