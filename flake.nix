@@ -57,9 +57,6 @@
     {
       nixosConfigurations = {
         hostname = nixpkgs.lib.nixosSystem {
-          # TODO
-          # chunixos = nixpkgs.lib.nixosSystem {
-          # system = lib.nixosSystem { system = systemSettings.system; };
           system = lib.nixosSystem {
             system = systemSettings.system;
             modules = [ ./configuration.nix ];
