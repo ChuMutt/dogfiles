@@ -5,11 +5,11 @@
 {
   pkgs,
   lib,
+  inputs,
   systemSettings,
   userSettings,
   ...
 }:
-
 let
   mySessionCommands = ''
     xset -dpms
@@ -25,14 +25,51 @@ in
     # (./. + "../../../system/wm"+("/"+userSettings.wm)+".nix") # My window manager
   ];
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # Fix nix path
+  nix.nixPath = [
+    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    ("nixos-config=" + userSettings.dotfilesDir + "/system/configuration.nix")
+    "/nix/var/nix/profiles/per-user/root/channels"
+  ];
 
-  networking.hostName = "chunixos"; # Define your hostname.
+  # Ensure nix flakes are enabled
+  nix.package = pkgs.nixFlakes;
 
-  # Enable networking
-  networking.networkmanager.enable = true;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
+  # wheel group gets trusted access to nix daemon
+  nix.settings.trusted-users = [ "@wheel" ];
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
+  # Bootloader
+  boot = {
+    loader = {
+      systemd-boot.enable = if (systemSettings.bootMode == "uefi") then true else false;
+      efi.canTouchEfiVariables = if (systemSettings.bootMode == "uefi") then true else false;
+      efi.efiSysMountPoint = systemSettings.bootMountPath; # does nothing if running bios rather than uefi
+      grub.enable = if (systemSettings.bootMode == "uefi") then false else true;
+      grub.device = systemSettings.grubDevice; # does nothing if running uefi rather than bios
+    };
+    kernelModules = [
+      "i2c-dev"
+      "i2c-piix4"
+      "cpufreq_powersave"
+    ];
+  };
+
+  networking = {
+    hostName = systemSettings.hostname; # Define your hostname.
+    networkmanager.enable = true; # Enable networking
+  };
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -70,25 +107,42 @@ in
 
   services.libinput.touchpad.disableWhileTyping = true;
 
-  users.defaultUserShell = pkgs.zsh;
+  # users.defaultUserShell = pkgs.zsh;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.chu = {
+  # users.users.chu = {
+  #   isNormalUser = true;
+  #   description = "chu";
+  #   extraGroups = [
+  #     "networkmanager"
+  #     "wheel"
+  #   ];
+  #   packages = [ ];
+  #   useDefaultShell = true; # use pkgs.zsh
+  # };
+
+  # User account
+  users.users.${userSettings.username} = {
     isNormalUser = true;
-    description = "chu";
+    description = userSettings.name;
     extraGroups = [
       "networkmanager"
       "wheel"
+      "input"
+      "dialout"
+      "video"
+      "audio"
+      "render"
     ];
     packages = [ ];
-    useDefaultShell = true; # use pkgs.zsh
+    uid = 1000;
+    shell = pkgs.zsh;
   };
+
 
   # Enable automatic login for the user.
   services.getty.autologinUser = "chu";
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -255,25 +309,6 @@ in
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
-  # Allow members of the wheel group to connect to the Nix daemon.
-  # Default is * (all). Root is always allowed regardless of this setting.
-  # This is required for standalone home-manager (which this setup uses).
-
-  nix.settings.allowed-users = [ "@wheel" ];
-
-  # Allow members of the wheel group to connect to the Nix daemon, specify
-  # additional binary caches, and import unsigned NARs. Default is root.
-
-  nix.settings.trusted-users = [
-    "root"
-    "@wheel"
-  ];
-
   # Enable KDE Plasma 6 Desktop
   services = {
     displayManager.sddm.enable = true;
@@ -293,8 +328,5 @@ in
   #   displayManager.sessionCommands = mySessionCommands;
   #   desktopManager.gnome.enable = true;
   # };
-
-  # Automatically select display configuration based on connected devices
-  services.autorandr.enable = true;
 
 }

@@ -18,7 +18,7 @@
         boot = "uefi";
         bootPath = "/boot";
         grubDevice = "";
-        gpuType = "";
+        gpuType = "nvidia";
       };
       userSettings = rec {
         username = "chu";
@@ -33,7 +33,7 @@
         defaultEmacsOrgRoamDir = "roam"; # relative to "/org" (defaultEmacsOrgDir)
         term = "konsole";
         font = "Intel One Mono";
-        fontPkg = nixpkgs.intel-one-mono;
+        fontPkg = pkgs.intel-one-mono;
         editor = "nvim";
       };
 
@@ -52,99 +52,93 @@
           allowUnfreePredicate = (_: true);
         };
       };
-
     in
     {
       nixosConfigurations = {
-        hostname = nixpkgs.lib.nixosSystem {
-          system = lib.nixosSystem {
-            system = systemSettings.system;
-            modules = [ ./configuration.nix ];
-            specialArgs = {
-              inherit pkgs;
-              inherit systemSettings;
-              inherit userSettings;
-              inherit inputs;
-            };
-          };
-        };
-        homeConfigurations = {
-          user = home-manager.lib.homeManagerConfiguration {
+        system = lib.nixosSystem {
+          system = systemSettings.system;
+          modules = [ ./configuration.nix ];
+          specialArgs = {
             inherit pkgs;
-            modules = [ ./home.nix ];
-            extraSpecialArgs = {
-              inherit pkgs;
-              inherit systemSettings;
-              inherit userSettings;
-              inherit inputs;
-            };
+            inherit systemSettings;
+            inherit userSettings;
+            inherit inputs;
           };
         };
-
-        packages = forAllSystems (
-          system:
-          let
-            pkgs = nixpkgsFor.${system};
-          in
-          {
-            default = self.packages.${system}.install;
-            install = pkgs.writeShellApplication {
-              name = "install";
-              runtimeInputs = with pkgs; [ git ]; # I could make this fancier by adding other deps
-              text = ''${./install.sh} "$@"'';
-            };
-          }
-        );
-
-        apps = forAllSystems (system: {
-          default = self.apps.${system}.install;
-          install = {
-            type = "app";
-            program = "${self.packages.${system}.install}/bin/install";
+      };
+      homeConfigurations = {
+        user = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./home.nix ];
+          extraSpecialArgs = {
+            inherit pkgs;
+            inherit systemSettings;
+            inherit userSettings;
+            inherit inputs;
           };
-        });
+        };
       };
-
-      inputs = {
-        # Specify your NixOS version
-        nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-        home-manager = {
-          # Specify your Home Manager version
-          url = "github:nix-community/home-manager";
-          inputs.nixpkgs.follows = "nixpkgs";
+      packages = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgsFor.${system};
+        in
+        {
+          default = self.packages.${system}.install;
+          install = pkgs.writeShellApplication {
+            name = "install";
+            runtimeInputs = with pkgs; [ git ]; # I could make this fancier by adding other deps
+            text = ''${./install.sh} "$@"'';
+          };
+        }
+      );
+      apps = forAllSystems (system: {
+        default = self.apps.${system}.install;
+        install = {
+          type = "app";
+          program = "${self.packages.${system}.install}/bin/install";
         };
-        stylix.url = "github:danth/stylix"; # Themes
-        blocklist-hosts = {
-          # Adblock
-          url = "github:StevenBlack/hosts";
-          flake = false;
-        };
-        lix-module = {
-          url = "https://git.lix.systems/lix-project/nixos-module/archive/2.90.0.tar.gz";
-          inputs.nixpkgs.follows = "nixpkgs";
-        };
-        hyprland = {
-          type = "git";
-          url = "https://code.hyprland.org/hyprwm/Hyprland.git";
-          submodules = true;
-          rev = "0f594732b063a90d44df8c5d402d658f27471dfe"; # v0.43.0
-          inputs.nixpkgs.follows = "nixpkgs";
-        };
-        hyprland-plugins = {
-          type = "git";
-          url = "https://code.hyprland.org/hyprwm/hyprland-plugins.git";
-          rev = "b73d7b901d8cb1172dd25c7b7159f0242c625a77"; # v0.43.0
-          inputs.hyprland.follows = "hyprland";
-        };
-        hyprlock = {
-          type = "git";
-          url = "https://code.hyprland.org/hyprwm/hyprlock.git";
-          rev = "73b0fc26c0e2f6f82f9d9f5b02e660a958902763";
-          inputs.nixpkgs.follows = "nixpkgs";
-        };
-        hyprgrass.url = "github:horriblename/hyprgrass/427690aec574fec75f5b7b800ac4a0b4c8e4b1d5";
-        hyprgrass.inputs.hyprland.follows = "hyprland";
-        nwg-dock-hyprland-pin-nixpkgs.url = "nixpkgs/2098d845d76f8a21ae4fe12ed7c7df49098d3f15";
-      };
+      });
     };
+  inputs = {
+    # Specify your NixOS version
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    home-manager = {
+      # Specify your Home Manager version
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    stylix.url = "github:danth/stylix"; # Themes
+    blocklist-hosts = {
+      # Adblock
+      url = "github:StevenBlack/hosts";
+      flake = false;
+    };
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.90.0.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hyprland = {
+      type = "git";
+      url = "https://code.hyprland.org/hyprwm/Hyprland.git";
+      submodules = true;
+      rev = "0f594732b063a90d44df8c5d402d658f27471dfe"; # v0.43.0
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hyprland-plugins = {
+      type = "git";
+      url = "https://code.hyprland.org/hyprwm/hyprland-plugins.git";
+      rev = "b73d7b901d8cb1172dd25c7b7159f0242c625a77"; # v0.43.0
+      inputs.hyprland.follows = "hyprland";
+    };
+    hyprlock = {
+      type = "git";
+      url = "https://code.hyprland.org/hyprwm/hyprlock.git";
+      rev = "73b0fc26c0e2f6f82f9d9f5b02e660a958902763";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hyprgrass.url = "github:horriblename/hyprgrass/427690aec574fec75f5b7b800ac4a0b4c8e4b1d5";
+    hyprgrass.inputs.hyprland.follows = "hyprland";
+    nwg-dock-hyprland-pin-nixpkgs.url = "nixpkgs/2098d845d76f8a21ae4fe12ed7c7df49098d3f15";
+  };
 }
