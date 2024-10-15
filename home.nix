@@ -1,6 +1,11 @@
-{ config, pkgs, userSettings, ... }:
+{
+  config,
+  pkgs,
+  userSettings,
+  ...
+}:
 let
-  myShellAliases = { # TODO
+  myShellAliases = {
     ls = "eza --icons -l -T -L=1";
     cat = "bat";
     htop = "btm";
@@ -9,7 +14,6 @@ let
     neofetch = "disfetch";
     fetch = "disfetch";
     gitfetch = "onefetch";
-    # "," = "comma";
   };
 in
 {
@@ -18,14 +22,14 @@ in
   # home.username = "chu";
   home.username = userSettings.username; # TODO
   # home.homeDirectory = "/home/chu";
-  home.homeDirectory = "/home/"+userSettings.username; # TODO
+  home.homeDirectory = "/home/" + userSettings.username; # TODO
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-#  imports = [
-#    (./. + "../../../user/wm"+("/"+userSettings.wm+"/"+userSettings.wm)+".nix")
-#  ];
+  #  imports = [
+  #    (./. + "../../../user/wm"+("/"+userSettings.wm+"/"+userSettings.wm)+".nix")
+  #  ];
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -86,6 +90,9 @@ in
     # busybox
     # toybox
 
+    ## filesystems
+    zfs
+
     ## cli/calc
     bc
     numbat
@@ -131,6 +138,8 @@ in
     openai-whisper-cpp
     wine
     bottles
+    steam
+    protonup
     foliate
     xournalpp
     libreoffice-fresh
@@ -163,7 +172,8 @@ in
     airwindows-lv2
     calf
     movit
-    libffi zlib
+    libffi
+    zlib
     ventoy
     # discord # TODO BUG
     element
@@ -244,13 +254,12 @@ in
   #  /etc/profiles/per-user/chu/etc/profile.d/hm-session-vars.sh
   #
 
-  home.sessionVariables = { 
+  home.sessionVariables = {
     EDITOR = userSettings.editor; # TODO
-    # EDITOR = "emacs"; 
     # SPAWNEDITOR = userSettings.spawnEditor; # TODO
     TERM = userSettings.term; # TODO
     BROWSER = userSettings.browser; # TODO
-    };
+  };
 
   # Z-Shell
   programs.zsh = {
@@ -271,52 +280,52 @@ in
     };
     historySubstringSearch.enable = true;
     initExtra = ''
-    [ $TERM = "dumb" ] && unsetopt zle && PS1='$ '
+      [ $TERM = "dumb" ] && unsetopt zle && PS1='$ '
 
-    # Enable colors and change prompt:
-    autoload -U colors && colors # Load colors
+      # Enable colors and change prompt:
+      autoload -U colors && colors # Load colors
 
-    PS1="%B%{$fg[green]%}[%{$fg[magenta]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[green]%}]%{$reset_color%}$%b "
-    
-    # Basic auto/tab complete:
-    autoload -U compinit
-    zstyle ':completion:*' menu select
-    zmodload zsh/complist
-    compinit
-    _comp_options+=(globdots)		# Include hidden files.
-    
-    # vi mode
-    bindkey -v
-    export KEYTIMEOUT=1
-    
-    # Use vim keys in tab complete menu:
-    bindkey -M menuselect 'h' vi-backward-char
-    bindkey -M menuselect 'k' vi-up-line-or-history
-    bindkey -M menuselect 'l' vi-forward-char
-    bindkey -M menuselect 'j' vi-down-line-or-history
-    bindkey -v '^?' backward-delete-char
-    
-    # Use lf to switch directories and bind it to ctrl-o
-    lfcd () {
-    tmp=\"$(mktemp -uq)\"
-    trap 'rm -f $tmp >/dev/null 2>&1 && trap - HUP INT QUIT TERM PWR EXIT' HUP INT QUIT TERM PWR EXIT
-    lf -last-dir-path=\"$tmp\" \"$@\"
-    if [ -f \"$tmp\" ]; then
-    dir=\"$(cat \"$tmp\")\"
-    [ -d \"$dir\" ] && [ \"$dir\" != \"$(pwd)\" ] && cd \"$dir\"
-    fi
-    }
-    bindkey -s '^o' '^ulfcd\n'
-    bindkey -s '^a' '^ubc -lq\n'
-    bindkey -s '^f' '^ucd \"$(dirname \"$(fzf)\")\"\n'
-    bindkey '^[[P' delete-char
-    
-    # Edit line in vim with ctrl-e:
-    autoload edit-command-line; zle -N edit-command-line
-    bindkey '^e' edit-command-line
-    bindkey -M vicmd '^[[P' vi-delete-char
-    bindkey -M vicmd '^e' edit-command-line
-    bindkey -M visual '^[[P' vi-delete
+      PS1="%B%{$fg[green]%}[%{$fg[magenta]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[green]%}]%{$reset_color%}$%b "
+
+      # Basic auto/tab complete:
+      autoload -U compinit
+      zstyle ':completion:*' menu select
+      zmodload zsh/complist
+      compinit
+      _comp_options+=(globdots)		# Include hidden files.
+
+      # vi mode
+      bindkey -v
+      export KEYTIMEOUT=1
+
+      # Use vim keys in tab complete menu:
+      bindkey -M menuselect 'h' vi-backward-char
+      bindkey -M menuselect 'k' vi-up-line-or-history
+      bindkey -M menuselect 'l' vi-forward-char
+      bindkey -M menuselect 'j' vi-down-line-or-history
+      bindkey -v '^?' backward-delete-char
+
+      # Use lf to switch directories and bind it to ctrl-o
+      lfcd () {
+      tmp=\"$(mktemp -uq)\"
+      trap 'rm -f $tmp >/dev/null 2>&1 && trap - HUP INT QUIT TERM PWR EXIT' HUP INT QUIT TERM PWR EXIT
+      lf -last-dir-path=\"$tmp\" \"$@\"
+      if [ -f \"$tmp\" ]; then
+      dir=\"$(cat \"$tmp\")\"
+      [ -d \"$dir\" ] && [ \"$dir\" != \"$(pwd)\" ] && cd \"$dir\"
+      fi
+      }
+      bindkey -s '^o' '^ulfcd\n'
+      bindkey -s '^a' '^ubc -lq\n'
+      bindkey -s '^f' '^ucd \"$(dirname \"$(fzf)\")\"\n'
+      bindkey '^[[P' delete-char
+
+      # Edit line in vim with ctrl-e:
+      autoload edit-command-line; zle -N edit-command-line
+      bindkey '^e' edit-command-line
+      bindkey -M vicmd '^[[P' vi-delete-char
+      bindkey -M vicmd '^e' edit-command-line
+      bindkey -M visual '^[[P' vi-delete
     '';
   };
 
@@ -330,8 +339,8 @@ in
   programs.emacs = {
     enable = true;
     package = pkgs.emacs-gtk;
-    extraPackages = epkgs:
-      with epkgs; [
+    extraPackages =
+      epkgs: with epkgs; [
         nix-mode
         magit
         evil-collection
@@ -367,10 +376,14 @@ in
   };
 
   # TeX Live, used for TeX typesetting package distribution.
-  programs.texlive = { enable = true; };
+  programs.texlive = {
+    enable = true;
+  };
 
   # thefuck - magnificent app that corrects your previous console command.
-  programs.thefuck = { enable = true; };
+  programs.thefuck = {
+    enable = true;
+  };
 
   # Thunderbird.
   programs.thunderbird = {
@@ -395,6 +408,5 @@ in
   # };
 
   # services.pasystray.enable = true;
-  
 
 }
