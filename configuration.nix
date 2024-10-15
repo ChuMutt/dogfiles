@@ -252,10 +252,10 @@ let
 
 
   # Enable KDE Plasma 6 Desktop
-  # services = {
-  #   displayManager.sddm.enable = true;
-  #   desktopManager.plasma6.enable = true;
-  # };
+  services = {
+    displayManager.sddm.enable = true;
+    desktopManager.plasma6.enable = true;
+  };
 
   # Enable KDE Plasma 5 Desktop
   # services = {
