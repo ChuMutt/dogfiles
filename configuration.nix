@@ -15,7 +15,7 @@ let
     xset -dpms
     xset s blank
     xset r rate 350 50
-    xset s 300
+    xset s 30
   '';
 in
 {
@@ -53,10 +53,10 @@ in
   # Bootloader
   boot = {
     loader = {
-      systemd-boot.enable = if (systemSettings.bootMode == "uefi") then true else false;
-      efi.canTouchEfiVariables = if (systemSettings.bootMode == "uefi") then true else false;
-      efi.efiSysMountPoint = systemSettings.bootMountPath; # does nothing if running bios rather than uefi
-      grub.enable = if (systemSettings.bootMode == "uefi") then false else true;
+      systemd-boot.enable = if (systemSettings.boot == "uefi") then true else false;
+      efi.canTouchEfiVariables = if (systemSettings.boot == "uefi") then true else false;
+      efi.efiSysMountPoint = systemSettings.bootPath; # does nothing if running bios rather than uefi
+      grub.enable = if (systemSettings.boot == "uefi") then false else true;
       grub.device = systemSettings.grubDevice; # does nothing if running uefi rather than bios
     };
     kernelModules = [

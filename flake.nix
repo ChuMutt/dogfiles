@@ -24,7 +24,7 @@
         username = "chu";
         name = "Chu";
         email = "chufilthymutt@gmail.com";
-        dotfilesDir = "~/.dogfiles";
+        dotfilesDir = "/home/chu/.dogfiles";
         theme = "io";
         # wm = "plasma";
         # wmType = if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11";
@@ -37,7 +37,17 @@
         editor = "nvim";
       };
 
+      pkgs = import inputs.nixpkgs {
+          system = systemSettings.system;
+          config = {
+            allowUnfree = true;
+            allowUnfreePredicate = (_: true);
+          };
+        };
+
       lib = inputs.nixpkgs.lib;
+
+      home-manager = inputs.home-manager;
 
       supportedSystems = [ "x86_64-linux" ];
 
@@ -45,13 +55,6 @@
 
       nixpkgsFor = forAllSystems (system: import inputs.nixpkgs { inherit system; });
 
-      pkgs = {
-        system = systemSettings.system;
-        config = {
-          allowUnfree = true;
-          allowUnfreePredicate = (_: true);
-        };
-      };
     in
     {
       nixosConfigurations = {
