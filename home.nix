@@ -81,6 +81,7 @@ in
     direnv
     nix-direnv
     disfetch
+    intel-gpu-tools # lsgpu
 
     ## cli/calc
     bc
