@@ -15,17 +15,17 @@ in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "chu";
-  # home.username = userSettings.username; # TODO
-  home.homeDirectory = "/home/chu";
-  # home.homeDirectory = "/home/"+userSettings.username; TODO
+  # home.username = "chu";
+  home.username = userSettings.username; # TODO
+  # home.homeDirectory = "/home/chu";
+  home.homeDirectory = "/home/"+userSettings.username; # TODO
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  imports = [
-    # (./. + "../../../user/wm"+("/"+userSettings.wm+"/"+userSettings.wm)+".nix")
-  ];
+#  imports = [
+#    (./. + "../../../user/wm"+("/"+userSettings.wm+"/"+userSettings.wm)+".nix")
+#  ];
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release

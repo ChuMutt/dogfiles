@@ -23,23 +23,22 @@
         gpuType = "";
       };
       userSettings = rec {
-        # TODO prototype(s)
         username = "chu";
-        # TODO prototypes
         name = "Chu";
         email = "chufilthymutt@gmail.com";
         dotfilesDir = "~/.dogfiles";
-        # theme = ""; 
-        wm = "plasma";
-        wmType = if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11";
+        theme = "io"; 
+        # wm = "plasma";
+        # wmType = if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11";
         browser = "firefox";
         defaultEmacsOrgDir = "~/nextcloud/documents/org";
         defaultEmacsOrgRoamDir = "roam"; # relative to "/org" (defaultEmacsOrgDir)
         term = "konsole";
         font = "Intel One Mono";
         fontPkg = nixpkgs.intel-one-mono;
-        editor = "nvim"; # TODO neovide (maybe)
+        editor = "nvim";
       };
+
       lib = inputs.nixpkgs.lib;
 
       supportedSystems = [ "x86_64-linux" ];

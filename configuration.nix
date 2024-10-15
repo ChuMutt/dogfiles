@@ -16,6 +16,7 @@ let
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    # (./. + "../../../system/wm"+("/"+userSettings.wm)+".nix") # My window manager
   ];
 
   # Bootloader.
@@ -251,10 +252,10 @@ let
 
 
   # Enable KDE Plasma 6 Desktop
-  services = {
-    displayManager.sddm.enable = true;
-    desktopManager.plasma6.enable = true;
-  };
+  # services = {
+  #   displayManager.sddm.enable = true;
+  #   desktopManager.plasma6.enable = true;
+  # };
 
   # Enable KDE Plasma 5 Desktop
   # services = {
