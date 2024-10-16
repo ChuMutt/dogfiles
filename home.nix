@@ -100,7 +100,7 @@ in
     ## cli/color
     bat
     lolcat
-    cope
+    # cope
 
     ## cli/lol
     fortune
@@ -118,8 +118,8 @@ in
     ## gui/browsers
     firefox
     librewolf
-    qutebrowser
-    nyxt
+    # qutebrowser
+    # nyxt
 
     ## gui/util
     nextcloud-client

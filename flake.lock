@@ -102,11 +102,11 @@
     "blocklist-hosts": {
       "flake": false,
       "locked": {
-        "lastModified": 1728869459,
-        "narHash": "sha256-QCxqlaa/B45IaF5NrUgbNxAasNW6CVXRdUL8dIY1xCk=",
+        "lastModified": 1729046131,
+        "narHash": "sha256-XwZdoYfMwyYMWD7tbhVos/g35+vb80Z++gK4+TZlzBg=",
         "owner": "StevenBlack",
         "repo": "hosts",
-        "rev": "fb1ec6fcff9afe1ad29ceb8307ae9ed604018b0c",
+        "rev": "d5340679ded585b9596e74b6a6f7ce6b6d6d45d7",
         "type": "github"
       },
       "original": {
@@ -225,11 +225,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1728903686,
-        "narHash": "sha256-ZHFrGNWDDriZ4m8CA/5kDa250SG1LiiLPApv1p/JF0o=",
+        "lastModified": 1729027341,
+        "narHash": "sha256-IqWD7bA9iJVifvJlB4vs2KUXVhN+d9lECWdNB4jJ0tE=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "e1aec543f5caf643ca0d94b6a633101942fd065f",
+        "rev": "2a4fd1cfd8ed5648583dadef86966a8231024221",
         "type": "github"
       },
       "original": {
@@ -325,6 +325,7 @@
       "locked": {
         "lastModified": 1725814101,
         "narHash": "sha256-+wE97utoDfhQP6AMdZHUmBeL8grbce/Jv2i5M+6AbaE=",
+        "ref": "refs/heads/main",
         "rev": "0f594732b063a90d44df8c5d402d658f27471dfe",
         "revCount": 5196,
         "submodules": true,
@@ -357,6 +358,7 @@
       "locked": {
         "lastModified": 1723143591,
         "narHash": "sha256-dPcWAeRJoG5CyWC32X3XX+Og0v/k1/S1N0T5dQWT32k=",
+        "ref": "refs/heads/main",
         "rev": "b73d7b901d8cb1172dd25c7b7159f0242c625a77",
         "revCount": 192,
         "type": "git",
@@ -465,6 +467,7 @@
       "locked": {
         "lastModified": 1725203994,
         "narHash": "sha256-N7Kfq8tpOWjtRKBnH5RqcDtQFGZPZ5vXgmxbnZVPCuU=",
+        "ref": "refs/heads/main",
         "rev": "73b0fc26c0e2f6f82f9d9f5b02e660a958902763",
         "revCount": 248,
         "type": "git",
