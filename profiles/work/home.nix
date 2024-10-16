@@ -253,7 +253,6 @@ in
 
   home.sessionVariables = {
     EDITOR = userSettings.editor; # TODO
-    # SPAWNEDITOR = userSettings.spawnEditor; # TODO
     TERM = userSettings.term; # TODO
     BROWSER = userSettings.browser; # TODO
   };
@@ -265,14 +264,14 @@ in
     syntaxHighlighting.enable = true;
     enableCompletion = true;
     autocd = true;
-    # dotDir = "/home/"+ userSettings.username +"/.config/zsh";
-    dotDir = ".config/zsh";
+    dotDir = "/home/"+ userSettings.username +"/.config/zsh";
+    # dotDir = ".config/zsh";
     shellAliases = myShellAliases;
     history = {
       size = 10000000; # Number of history lines to keep
       save = 10000000; # Number of history lines to save
-      # path = "/home/"+ userSettings.username +"/.cache/zsh/history";
-      path = "/home/chu/.cache/zsh/history";
+      path = "/home/"+ userSettings.username +"/.cache/zsh/history";
+      # path = "/home/chu/.cache/zsh/history";
       expireDuplicatesFirst = true;
     };
     historySubstringSearch.enable = true;
