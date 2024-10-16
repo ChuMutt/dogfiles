@@ -19,9 +19,7 @@ in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  # home.username = "chu";
   home.username = userSettings.username; # TODO
-  # home.homeDirectory = "/home/chu";
   home.homeDirectory = "/home/" + userSettings.username; # TODO
 
   # Let Home Manager install and manage itself.
@@ -227,7 +225,6 @@ in
       extraConfig = {
         XDG_DOTFILES_DIR = "${config.home.homeDirectory}/.dogfiles";
         XDG_ARCHIVE_DIR = "${config.home.homeDirectory}/Archive";
-        # XDG_VM_DIR = "${config.home.homeDirectory}/VMs";
         XDG_ORG_DIR = "${config.home.homeDirectory}/nextcloud/documents/org";
         XDG_BOOK_DIR = "${config.home.homeDirectory}/Books";
       };
@@ -402,11 +399,11 @@ in
 
   news.display = "silent"; # silence home manager news
 
-  # gtk.iconTheme = {
-  #   package = pkgs.papirus-icon-theme;
-  #   name = if (config.stylix.polarity == "dark") then "Papirus-Dark" else "Papirus-Light";
-  # };
+  gtk.iconTheme = {
+    package = pkgs.papirus-icon-theme;
+    name = if (config.stylix.polarity == "dark") then "Papirus-Dark" else "Papirus-Light";
+  };
 
-  # services.pasystray.enable = true;
+  services.pasystray.enable = true;
 
 }
