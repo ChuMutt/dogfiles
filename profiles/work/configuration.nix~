@@ -22,7 +22,8 @@ in
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    # (./. + "../../../system/wm"+("/"+userSettings.wm)+".nix") # My window manager
+    (./. + "../../../system/wm"+("/"+userSettings.wm)+".nix") # My window manager
+    
   ];
 
   # Fix nix path
@@ -269,12 +270,6 @@ in
     pathsToLink = [ "/share/zsh" ]; # For zsh.enableCompletion in home.nix
   };
 
-  environment.plasma6.excludePackages = with pkgs; [
-    kate
-    okular
-    plasma-systemmonitor
-  ];
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;
@@ -308,12 +303,6 @@ in
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
-  # Enable KDE Plasma 6 Desktop
-  services = {
-    displayManager.sddm.enable = true;
-    desktopManager.plasma6.enable = true;
-  };
 
   # Enable KDE Plasma 5 Desktop
   # services = {

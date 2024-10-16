@@ -26,8 +26,8 @@
         email = "chufilthymutt@gmail.com";
         dotfilesDir = "/home/chu/.dogfiles";
         theme = "io";
-        # wm = "plasma";
-        # wmType = if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11";
+        wm = "plasma";
+        wmType = if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11";
         browser = "firefox";
         defaultEmacsOrgDir = "~/nextcloud/documents/org";
         defaultEmacsOrgRoamDir = "roam"; # relative to "/org" (defaultEmacsOrgDir)
@@ -60,7 +60,11 @@
       nixosConfigurations = {
         system = lib.nixosSystem {
           system = systemSettings.system;
-          modules = [ ./configuration.nix ];
+          modules = [
+            # ./configuration.nix
+            (./. + "/profiles" + ("/" + systemSettings.profile) + "/configuration.nix")
+            # inputs.lix-module.nixosModules.default
+          ];
           specialArgs = {
             inherit pkgs;
             inherit systemSettings;
