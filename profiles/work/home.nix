@@ -264,12 +264,14 @@ in
     syntaxHighlighting.enable = true;
     enableCompletion = true;
     autocd = true;
-    dotDir = "/home/" + userSettings.username + "/.config/zsh";
+    # dotDir = "/home/" + userSettings.username + "/.config/zsh";
+    dotDir = ".config/zsh";
     shellAliases = myShellAliases;
     history = {
       size = 10000000; # Number of history lines to keep
       save = 10000000; # Number of history lines to save
-      path = "/home/" + userSettings.username + "/.cache/zsh/history";
+      # path = "/home/" + userSettings.username + "/.cache/zsh/history";
+      path = ".cache/zsh/history";
       expireDuplicatesFirst = true;
     };
     historySubstringSearch.enable = true;
