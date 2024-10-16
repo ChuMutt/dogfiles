@@ -26,7 +26,7 @@ in
   programs.home-manager.enable = true;
 
   imports = [
-    (./. + "../../../user/wm"+("/"+userSettings.wm+"/"+userSettings.wm)+".nix")
+    (./. + "../../../user/wm" + ("/" + userSettings.wm + "/" + userSettings.wm) + ".nix")
   ];
 
   # This value determines the Home Manager release that your configuration is
@@ -264,14 +264,12 @@ in
     syntaxHighlighting.enable = true;
     enableCompletion = true;
     autocd = true;
-    dotDir = "/home/"+ userSettings.username +"/.config/zsh";
-    # dotDir = ".config/zsh";
+    dotDir = "/home/" + userSettings.username + "/.config/zsh";
     shellAliases = myShellAliases;
     history = {
       size = 10000000; # Number of history lines to keep
       save = 10000000; # Number of history lines to save
-      path = "/home/"+ userSettings.username +"/.cache/zsh/history";
-      # path = "/home/chu/.cache/zsh/history";
+      path = "/home/" + userSettings.username + "/.cache/zsh/history";
       expireDuplicatesFirst = true;
     };
     historySubstringSearch.enable = true;

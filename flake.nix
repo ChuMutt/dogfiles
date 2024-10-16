@@ -77,7 +77,7 @@
           inherit pkgs;
           modules = [
             # load home.nix from selected PROFILE
-            (./. + "/profiles" + ("/" + systemSettings.profile) + "/home.nix") 
+            (./. + "/profiles" + ("/" + systemSettings.profile) + "/home.nix")
           ];
           extraSpecialArgs = {
             inherit pkgs;
