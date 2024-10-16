@@ -58,21 +58,17 @@ in
     #   echo "Hello, ${config.home.username}!"
     # '')
 
-    ### cli
-    ## cli/core
     zsh
     git
     rsync
     sshfs
+    glib
 
-    ## cli/secrets
     pass
 
-    ## cli/monitors
     htop-vim
     bottom
 
-    ## cli/util
     coreutils
     gnugrep
     gnused
@@ -83,71 +79,80 @@ in
     direnv
     nix-direnv
     disfetch
-    intel-gpu-tools # lsgpu
-    # pciutils
-    # busybox
-    # toybox
 
-    ## filesystems
+    wireplumber pipewire
+    yabridge yabridgectl # modern interface for windows vst2 & vst3 plugins
+    openai-whisper-cpp # speech-to-text, dep. of emacspkg whisper.el
+    mpd
+
     zfs
 
-    ## cli/calc
     bc
     numbat
 
-    ## cli/color
     bat
     lolcat
-    # cope
+    # cope # TODO won't build
 
-    ## cli/lol
+    shared-mime-info
+
     fortune
     hyfetch
     asciiquarium
     cowsay
     ponysay
 
-    ### gui
-    ## gui/terminal-emulators
+    wine
+
     alacritty
     st
     konsole
 
-    ## gui/browsers
     firefox
-    librewolf
+    # librewolf
     # qutebrowser
     # nyxt
 
-    ## gui/util
     nextcloud-client
     ungit
 
-    ## gui/document-viewers
-    zathura
+    foliate # ebook reader
+    # calibre # ebook reader
+    zathura # pdf reader
 
-    ## gui/secrets
-    keepassxc # TODO switch to pass
+    keepassxc # gui password/secret manager
 
-    ## unsorted/misc.
-    roswell
-    glib
-    shared-mime-info
-    openai-whisper-cpp
-    wine
-    bottles
+    bottles # wine interface
+
+    ## gui/audio
+    audio-recorder
+    raysession
+    ardour
+    tenacity
+    calf
+    mixxx
+    musescore
+
+    airwindows-lv2
+
     steam
     protonup
-    foliate
-    xournalpp
+
+    discord
+    telegram-desktop
+    element
+
+    roswell # lisp
+
+
     libreoffice-fresh
     gimp
     krita
     pinta
     inkscape
     libresprite
-    # mypaint
-    mpd
+    # mypaint # TODO won't build
+    xournalpp
     mpv
     yt-dlp
     gallery-dl
@@ -161,20 +166,11 @@ in
     kdenlive
     mediainfo
     libmediainfo
-    audio-recorder
     cheese
-    raysession
-    ardour
-    # rosegarden
-    tenacity
-    airwindows-lv2
-    calf
     movit
     libffi
     zlib
     ventoy
-    # discord # TODO BUG
-    element
   ];
 
   # Per-directory shell environments
