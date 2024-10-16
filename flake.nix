@@ -38,12 +38,12 @@
       };
 
       pkgs = import inputs.nixpkgs {
-          system = systemSettings.system;
-          config = {
-            allowUnfree = true;
-            allowUnfreePredicate = (_: true);
-          };
+        system = systemSettings.system;
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = (_: true);
         };
+      };
 
       lib = inputs.nixpkgs.lib;
 
@@ -61,7 +61,6 @@
         system = lib.nixosSystem {
           system = systemSettings.system;
           modules = [
-            # ./configuration.nix
             (./. + "/profiles" + ("/" + systemSettings.profile) + "/configuration.nix")
             # inputs.lix-module.nixosModules.default
           ];
@@ -76,7 +75,10 @@
       homeConfigurations = {
         user = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./home.nix ];
+          modules = [
+            # load home.nix from selected PROFILE
+            (./. + "/profiles" + ("/" + systemSettings.profile) + "/home.nix") 
+          ];
           extraSpecialArgs = {
             inherit pkgs;
             inherit systemSettings;

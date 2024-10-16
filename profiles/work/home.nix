@@ -198,8 +198,8 @@ in
     #   org.gradle.daemon.idletimeout=3600000
     # '';
 
-    ".config/emacs/init.el".source = ./chumacs/init.el;
-    ".config/emacs/config.el".source = ./chumacs/config.el;
+    ".config/emacs/init.el".source = ../../chumacs/init.el;
+    ".config/emacs/config.el".source = ../../chumacs/config.el;
 
   };
 
