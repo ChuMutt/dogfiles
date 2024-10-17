@@ -8,7 +8,7 @@ let
   myShellAliases = {
     ls = "eza --icons -l -T -L=1";
     cat = "bat";
-    # htop = "btm";
+    hop = "htop";
     fd = "fd -Lu";
     w3m = "w3m -no-cookie -v";
     neofetch = "disfetch";
