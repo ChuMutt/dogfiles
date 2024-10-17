@@ -10,6 +10,7 @@
 
   imports = [
     (./. + "../../../user/wm" + ("/" + userSettings.wm + "/" + userSettings.wm) + ".nix")
+    ../../user/shell/shells.nix # zsh/bash configs; cli programs
   ];
 
   # This value determines the Home Manager release that your configuration is
