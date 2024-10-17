@@ -8,7 +8,7 @@ let
   myShellAliases = {
     ls = "eza --icons -l -T -L=1";
     cat = "bat";
-    htop = "btm";
+    # htop = "btm";
     fd = "fd -Lu";
     w3m = "w3m -no-cookie -v";
     neofetch = "disfetch";
@@ -127,11 +127,15 @@ in
     ## gui/audio
     audio-recorder
     raysession
+    alsa-scarlett-gui # if you have a scarlett focusrite
     ardour
     tenacity
     calf
     mixxx
     musescore
+    drumgizmo
+    geonkick
+    goattracker
 
     airwindows-lv2
 
@@ -170,13 +174,9 @@ in
     libffi
     zlib
     ventoy
-
     tldr
-
-    
-
-
-
+    tree
+    looking-glass-client
   ];
 
   # Per-directory shell environments

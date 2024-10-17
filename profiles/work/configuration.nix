@@ -149,8 +149,52 @@ in
     nh
     xclip
     bottom
-    htop-vim
     beets
+    xdg-user-dirs
+    # audio
+    # tenacity
+    # airwindows-lv2
+    # alsa-scarlett-gui
+    # ardour
+    # bitwig-studio
+    # calf
+    drumgizmo
+    geonkick
+    goattracker
+    guitarix
+    helvum
+    jamesdsp
+    jconvolver
+    milkytracker
+    mixxx
+    musescore
+    odin2
+    paulstretch
+    pavucontrol
+    raysession
+    reaper
+    renoise
+    roomeqwizard
+    scream
+    touchosc
+    vcv-rack
+    vorbis-tools
+    wolf-shaper
+
+    # image / video
+    ffmpeg
+    mpd
+    mpv
+    cheese
+    kdenlive
+    krita
+    gimp
+    inkscape
+
+    # communications
+    discord
+    telegram-desktop
+
     # Shell script template (no shebang required):
     # (writeShellScriptBin "name" ''
     #
@@ -201,53 +245,6 @@ in
             echo "to configure Home Manager. Run 'man home-configuration.nix' to"
             echo "see all available options."
     '')
-    xdg-user-dirs
-
-    # audio
-    audacity
-    tenacity
-    airwindows-lv2
-    alsa-scarlett-gui
-    ardour
-    bitwig-studio
-    calf
-    drumgizmo
-    geonkick
-    goattracker
-    guitarix
-    helvum
-    jamesdsp
-    jconvolver
-    milkytracker
-    mixxx
-    musescore
-    odin2
-    paulstretch
-    pavucontrol
-    raysession
-    reaper
-    renoise
-    roomeqwizard
-    scream
-    touchosc
-    vcv-rack
-    vorbis-tools
-    wolf-shaper
-
-    # image / video
-    ffmpeg
-    mpd
-    mpv
-    cheese
-    kdenlive
-    krita
-    gimp
-    inkscape
-
-    # communications
-    discord
-    telegram-desktop
-
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
