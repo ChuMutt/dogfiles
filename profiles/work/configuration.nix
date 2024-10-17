@@ -110,20 +110,6 @@ in
 
   services.libinput.touchpad.disableWhileTyping = true;
 
-  # users.defaultUserShell = pkgs.zsh;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.chu = {
-  #   isNormalUser = true;
-  #   description = "chu";
-  #   extraGroups = [
-  #     "networkmanager"
-  #     "wheel"
-  #   ];
-  #   packages = [ ];
-  #   useDefaultShell = true; # use pkgs.zsh
-  # };
-
   # User account
   users.users.${userSettings.username} = {
     isNormalUser = true;
@@ -260,26 +246,12 @@ in
 
   ];
 
-  environment = {
-    variables = {
-      DOTFILES_DIR = "$HOME/.dogfiles";
-    };
-    sessionVariables = {
-      DOTFILES_DIR = "$HOME/.dogfiles";
-    };
-    pathsToLink = [ "/share/zsh" ]; # For zsh.enableCompletion in home.nix
-  };
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-  };
-
-  programs.zsh = {
-    enable = true;
   };
 
   # List services that you want to enable:
@@ -296,6 +268,20 @@ in
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
 
+  environment.shells = with pkgs; [ zsh ];
+  users.defaultUserShell = pkgs.zsh;
+  programs.zsh.enable = true;
+
+  fonts.fontDir.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal
+      pkgs.xdg-desktop-portal-xdg
+    ];
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
@@ -303,19 +289,5 @@ in
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
-  # Enable KDE Plasma 5 Desktop
-  # services = {
-  #   displayManager.sddm.enable = true;
-  #   displayManager.sessionCommands = mySessionCommands;
-  #   desktopManager.plasma5.enable = true;
-  # };
-
-  # Enable GNOME Desktop
-  # services = {
-  #   displayManager.gdm.enable = true;
-  #   displayManager.sessionCommands = mySessionCommands;
-  #   desktopManager.gnome.enable = true;
-  # };
 
 }

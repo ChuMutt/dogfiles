@@ -194,8 +194,8 @@ in
     #   org.gradle.daemon.idletimeout=3600000
     # '';
 
-    ".config/emacs/init.el".source = ../../chumacs/init.el;
-    ".config/emacs/config.el".source = ../../chumacs/config.el;
+    ".config/emacs/init.el".source = ../../user/emacs-profiles/chumacs/init.el;
+    ".config/emacs/config.el".source = ../../user/emacs-profiles/chumacs/config.el;
 
   };
 
@@ -261,13 +261,13 @@ in
     enableCompletion = true;
     autocd = true;
     # dotDir = "/home/" + userSettings.username + "/.config/zsh";
-    dotDir = ".config/zsh";
+    dotDir = "~/.config/zsh";
     shellAliases = myShellAliases;
     history = {
       size = 10000000; # Number of history lines to keep
       save = 10000000; # Number of history lines to save
       # path = "/home/" + userSettings.username + "/.cache/zsh/history";
-      path = ".cache/zsh/history";
+      path = "~/.cache/zsh/history";
       expireDuplicatesFirst = true;
     };
     historySubstringSearch.enable = true;
