@@ -136,11 +136,15 @@ in
   # Do not forget to add an editor to edit configuration.nix! The Nano editor
   # is also installed by default.
   environment.systemPackages = with pkgs; [
-    neovim
+    vim
     wget
-    spice-vdagent # Provides copy/paste support if this is a VM guest.
+    zsh
     git
-    tldr
+    cryptsetup
+    home-manager
+    wpa_supplicant
+    spice-vdagent # Provides copy/paste support if this is a VM guest.
+    # tldr
     nixfmt-rfc-style
     nh
     xclip

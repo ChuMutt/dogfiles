@@ -144,7 +144,6 @@ in
 
     roswell # lisp
 
-
     libreoffice-fresh
     gimp
     krita
@@ -171,6 +170,13 @@ in
     libffi
     zlib
     ventoy
+
+    tldr
+
+    
+
+
+
   ];
 
   # Per-directory shell environments

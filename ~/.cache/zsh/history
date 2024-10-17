@@ -1,0 +1,4 @@
+exit
+: 1729124489:0;sudo nixos-rebuild switch --flake #system && home-manager switch --flake #user
+: 1729124508:0;sudo nixos-rebuild switch --flake .#system && home-manager switch --flake .#user
+: 1729124784:0;git add .
