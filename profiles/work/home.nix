@@ -14,6 +14,7 @@ let
     neofetch = "disfetch";
     fetch = "disfetch";
     gitfetch = "onefetch";
+    "," = "comma";
   };
 in
 {
@@ -63,12 +64,9 @@ in
     rsync
     sshfs
     glib
-
     pass
-
     htop-vim
     bottom
-
     coreutils
     gnugrep
     gnused
@@ -79,51 +77,37 @@ in
     direnv
     nix-direnv
     disfetch
-
     wireplumber pipewire
     yabridge yabridgectl # modern interface for windows vst2 & vst3 plugins
     openai-whisper-cpp # speech-to-text, dep. of emacspkg whisper.el
     mpd
-
     zfs
-
     bc
     numbat
-
     bat
     lolcat
     # cope # TODO won't build
-
     shared-mime-info
-
     fortune
     hyfetch
     asciiquarium
     cowsay
     ponysay
-
     wine
-
     alacritty
     st
     konsole
-
     firefox
     # librewolf
     # qutebrowser
     # nyxt
-
     nextcloud-client
     ungit
-
     foliate # ebook reader
     # calibre # ebook reader
     zathura # pdf reader
-
     keepassxc # gui password/secret manager
-
     bottles # wine interface
-
     ## gui/audio
     audio-recorder
     raysession
@@ -136,18 +120,13 @@ in
     drumgizmo
     geonkick
     goattracker
-
     airwindows-lv2
-
     steam
     protonup
-
     discord
     telegram-desktop
     element
-
     roswell # lisp
-
     libreoffice-fresh
     gimp
     krita
@@ -162,10 +141,6 @@ in
     # openscad
     obs-studio
     ffmpeg
-    (pkgs.writeScriptBin "kdenlive-accel" ''
-      #!/bin/sh
-      DRI_PRIME=0 kdenlive "$1"
-    '')
     kdenlive
     mediainfo
     libmediainfo
@@ -177,7 +152,6 @@ in
     tldr
     tree
     looking-glass-client
-
     drumgizmo
     geonkick
     goattracker
@@ -200,8 +174,6 @@ in
     vcv-rack
     vorbis-tools
     wolf-shaper
-
-    # image / video
     ffmpeg
     mpd
     mpv
@@ -210,19 +182,18 @@ in
     krita
     gimp
     inkscape
-
     nixfmt-rfc-style
     nh
     xclip
     bottom
     beets
     xdg-user-dirs
-
-
-    # communications
     discord
     telegram-desktop
-
+    (pkgs.writeScriptBin "kdenlive-accel" ''
+      #!/bin/sh
+      DRI_PRIME=0 kdenlive "$1"
+    '')
   ];
 
   # Per-directory shell environments

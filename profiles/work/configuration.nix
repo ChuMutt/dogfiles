@@ -144,10 +144,26 @@ in
     home-manager
     wpa_supplicant
     spice-vdagent # Provides copy/paste support if this is a VM guest.
+
     # Shell script template (no shebang required):
     # (writeShellScriptBin "name" ''
     #
     # '')
+
+    (pkgs.writeScriptBin "comma" ''
+    # by librephoenix
+      if [ "$#" = 0 ]; then
+        echo "usage: comma PKGNAME... [EXECUTABLE]";
+      elif [ "$#" = 1 ]; then
+        nix-shell -p $1 --run $1;
+      elif [ "$#" = 2 ]; then
+        nix-shell -p $1 --run $2;
+      else
+        echo "error: too many arguments";
+        echo "usage: comma PKGNAME... [EXECUTABLE]";
+      fi
+    '')
+
     (writeShellScriptBin "chu-install-home-manager" ''
             # Installs the standalone version of Home Manager.
             # Step 1 of the configuration installation process following first
