@@ -177,6 +177,52 @@ in
     tldr
     tree
     looking-glass-client
+
+    drumgizmo
+    geonkick
+    goattracker
+    guitarix
+    helvum
+    jamesdsp
+    jconvolver
+    milkytracker
+    mixxx
+    musescore
+    odin2
+    paulstretch
+    pavucontrol
+    raysession
+    reaper
+    renoise
+    roomeqwizard
+    scream
+    touchosc
+    vcv-rack
+    vorbis-tools
+    wolf-shaper
+
+    # image / video
+    ffmpeg
+    mpd
+    mpv
+    cheese
+    kdenlive
+    krita
+    gimp
+    inkscape
+
+    nixfmt-rfc-style
+    nh
+    xclip
+    bottom
+    beets
+    xdg-user-dirs
+
+
+    # communications
+    discord
+    telegram-desktop
+
   ];
 
   # Per-directory shell environments

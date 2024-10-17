@@ -144,57 +144,6 @@ in
     home-manager
     wpa_supplicant
     spice-vdagent # Provides copy/paste support if this is a VM guest.
-    # tldr
-    nixfmt-rfc-style
-    nh
-    xclip
-    bottom
-    beets
-    xdg-user-dirs
-    # audio
-    # tenacity
-    # airwindows-lv2
-    # alsa-scarlett-gui
-    # ardour
-    # bitwig-studio
-    # calf
-    drumgizmo
-    geonkick
-    goattracker
-    guitarix
-    helvum
-    jamesdsp
-    jconvolver
-    milkytracker
-    mixxx
-    musescore
-    odin2
-    paulstretch
-    pavucontrol
-    raysession
-    reaper
-    renoise
-    roomeqwizard
-    scream
-    touchosc
-    vcv-rack
-    vorbis-tools
-    wolf-shaper
-
-    # image / video
-    ffmpeg
-    mpd
-    mpv
-    cheese
-    kdenlive
-    krita
-    gimp
-    inkscape
-
-    # communications
-    discord
-    telegram-desktop
-
     # Shell script template (no shebang required):
     # (writeShellScriptBin "name" ''
     #
