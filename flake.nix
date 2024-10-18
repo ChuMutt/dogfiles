@@ -1,13 +1,7 @@
 {
   description = "Chu the Pup's NixOS Flake";
 
-  outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      home-manager,
-      ...
-    }:
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
     let
       systemSettings = {
         system = "x86_64-linux";
@@ -27,10 +21,12 @@
         dotfilesDir = "/home/chu/.dogfiles";
         theme = "io"; # TODO
         wm = "hyprland";
-        wmType = if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11";
+        wmType =
+          if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11";
         browser = "firefox";
         defaultEmacsOrgDir = "~/nextcloud/documents/org";
-        defaultEmacsOrgRoamDir = "roam"; # relative to "/org" (defaultEmacsOrgDir)
+        defaultEmacsOrgRoamDir =
+          "roam"; # relative to "/org" (defaultEmacsOrgDir)
         term = "kitty";
         font = "Intel One Mono";
         fontPkg = pkgs.intel-one-mono;
@@ -53,15 +49,16 @@
 
       forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
 
-      nixpkgsFor = forAllSystems (system: import inputs.nixpkgs { inherit system; });
+      nixpkgsFor =
+        forAllSystems (system: import inputs.nixpkgs { inherit system; });
 
-    in
-    {
+    in {
       nixosConfigurations = {
         system = lib.nixosSystem {
           system = systemSettings.system;
           modules = [
-            (./. + "/profiles" + ("/" + systemSettings.profile) + "/configuration.nix")
+            (./. + "/profiles" + ("/" + systemSettings.profile)
+              + "/configuration.nix")
             inputs.lix-module.nixosModules.default
           ];
           specialArgs = {
@@ -87,20 +84,17 @@
           };
         };
       };
-      packages = forAllSystems (
-        system:
-        let
-          pkgs = nixpkgsFor.${system};
-        in
-        {
+      packages = forAllSystems (system:
+        let pkgs = nixpkgsFor.${system};
+        in {
           default = self.packages.${system}.install;
           install = pkgs.writeShellApplication {
             name = "install";
-            runtimeInputs = with pkgs; [ git ]; # I could make this fancier by adding other deps
+            runtimeInputs = with pkgs;
+              [ git ]; # I could make this fancier by adding other deps
             text = ''${./install.sh} "$@"'';
           };
-        }
-      );
+        });
       apps = forAllSystems (system: {
         default = self.apps.${system}.install;
         install = {
@@ -124,7 +118,8 @@
       flake = false;
     };
     lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.90.0.tar.gz";
+      url =
+        "https://git.lix.systems/lix-project/nixos-module/archive/2.90.0.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland = {
@@ -146,8 +141,10 @@
       rev = "73b0fc26c0e2f6f82f9d9f5b02e660a958902763";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprgrass.url = "github:horriblename/hyprgrass/427690aec574fec75f5b7b800ac4a0b4c8e4b1d5";
+    hyprgrass.url =
+      "github:horriblename/hyprgrass/427690aec574fec75f5b7b800ac4a0b4c8e4b1d5";
     hyprgrass.inputs.hyprland.follows = "hyprland";
-    nwg-dock-hyprland-pin-nixpkgs.url = "nixpkgs/2098d845d76f8a21ae4fe12ed7c7df49098d3f15";
+    nwg-dock-hyprland-pin-nixpkgs.url =
+      "nixpkgs/2098d845d76f8a21ae4fe12ed7c7df49098d3f15";
   };
 }
