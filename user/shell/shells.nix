@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 let
   myShellAliases = {
     ls = "eza --icons -l -T -L=1";
@@ -14,22 +11,17 @@ let
     gitfetch = "onefetch";
     "," = "comma";
   };
-in
-{
+in {
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     enableCompletion = true;
     autocd = true;
-    # dotDir = "/home/" + userSettings.username + "/.config/zsh";
-    # dotDir = "~/.config/zsh";
     shellAliases = myShellAliases;
     history = {
       size = 10000000; # Number of history lines to keep
       save = 10000000; # Number of history lines to save
-      # path = "/home/" + userSettings.username + "/.cache/zsh/history";
-      # path = "~/.cache/zsh/history";
       expireDuplicatesFirst = true;
     };
     historySubstringSearch.enable = true;
