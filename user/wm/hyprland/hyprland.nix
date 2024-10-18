@@ -8,7 +8,7 @@
       inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
       inputs.hyprgrass.packages.${pkgs.system}.default
     ];
+    xwayland = { enable = true; };
+    systemd.enable = true;
   };
-  xwayland = { enable = true; };
-  systemd.enable = true;
 }
