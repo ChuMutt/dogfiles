@@ -2,14 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{
-  pkgs,
-  lib,
-  inputs,
-  systemSettings,
-  userSettings,
-  ...
-}:
+{ pkgs, lib, inputs, systemSettings, userSettings, ... }:
 let
   mySessionCommands = ''
     xset -dpms
@@ -17,12 +10,12 @@ let
     xset r rate 350 50
     xset s 30
   '';
-in
-{
+in {
   imports = [
     # Include the results of the hardware scan.
     ../../system/hardware-configuration.nix
-    (./. + "../../../system/wm" + ("/" + userSettings.wm) + ".nix") # My window manager
+    (./. + "../../../system/wm" + ("/" + userSettings.wm)
+      + ".nix") # My window manager
   ];
 
   nix = {
@@ -41,10 +34,7 @@ in
     '';
 
     settings = {
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
+      experimental-features = [ "nix-command" "flakes" ];
       # wheel group gets trusted access to nix daemon
       trusted-users = [ "@wheel" ];
     };
@@ -56,17 +46,17 @@ in
   # Bootloader
   boot = {
     loader = {
-      systemd-boot.enable = if (systemSettings.boot == "uefi") then true else false;
-      efi.canTouchEfiVariables = if (systemSettings.boot == "uefi") then true else false;
-      efi.efiSysMountPoint = systemSettings.bootPath; # does nothing if running bios rather than uefi
+      systemd-boot.enable =
+        if (systemSettings.boot == "uefi") then true else false;
+      efi.canTouchEfiVariables =
+        if (systemSettings.boot == "uefi") then true else false;
+      efi.efiSysMountPoint =
+        systemSettings.bootPath; # does nothing if running bios rather than uefi
       grub.enable = if (systemSettings.boot == "uefi") then false else true;
-      grub.device = systemSettings.grubDevice; # does nothing if running uefi rather than bios
+      grub.device =
+        systemSettings.grubDevice; # does nothing if running uefi rather than bios
     };
-    kernelModules = [
-      "i2c-dev"
-      "i2c-piix4"
-      "cpufreq_powersave"
-    ];
+    kernelModules = [ "i2c-dev" "i2c-piix4" "cpufreq_powersave" ];
   };
 
   networking = {
@@ -78,24 +68,21 @@ in
   time.timeZone = "America/Chicago";
 
   # Select internationalisation properties.
-  i18n =
-    let
-      l = "en_US.UTF-8";
-    in
-    {
-      defaultLocale = l;
-      extraLocaleSettings = {
-        LC_ADDRESS = l;
-        LC_IDENTIFICATION = l;
-        LC_MEASUREMENT = l;
-        LC_MONETARY = l;
-        LC_NAME = l;
-        LC_NUMERIC = l;
-        LC_PAPER = l;
-        LC_TELEPHONE = l;
-        LC_TIME = l;
-      };
+  i18n = let l = "en_US.UTF-8";
+  in {
+    defaultLocale = l;
+    extraLocaleSettings = {
+      LC_ADDRESS = l;
+      LC_IDENTIFICATION = l;
+      LC_MEASUREMENT = l;
+      LC_MONETARY = l;
+      LC_NAME = l;
+      LC_NUMERIC = l;
+      LC_PAPER = l;
+      LC_TELEPHONE = l;
+      LC_TIME = l;
     };
+  };
 
   # Configure keymap in X11
   services.xserver = {
@@ -114,15 +101,8 @@ in
   users.users.${userSettings.username} = {
     isNormalUser = true;
     description = userSettings.name;
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "input"
-      "dialout"
-      "video"
-      "audio"
-      "render"
-    ];
+    extraGroups =
+      [ "networkmanager" "wheel" "input" "dialout" "video" "audio" "render" ];
     packages = [ ];
     uid = 1000;
     shell = pkgs.zsh;
@@ -151,17 +131,17 @@ in
     # '')
 
     (pkgs.writeScriptBin "comma" ''
-    # by librephoenix
-      if [ "$#" = 0 ]; then
-        echo "usage: comma PKGNAME... [EXECUTABLE]";
-      elif [ "$#" = 1 ]; then
-        nix-shell -p $1 --run $1;
-      elif [ "$#" = 2 ]; then
-        nix-shell -p $1 --run $2;
-      else
-        echo "error: too many arguments";
-        echo "usage: comma PKGNAME... [EXECUTABLE]";
-      fi
+      # by librephoenix
+        if [ "$#" = 0 ]; then
+          echo "usage: comma PKGNAME... [EXECUTABLE]";
+        elif [ "$#" = 1 ]; then
+          nix-shell -p $1 --run $1;
+        elif [ "$#" = 2 ]; then
+          nix-shell -p $1 --run $2;
+        else
+          echo "error: too many arguments";
+          echo "usage: comma PKGNAME... [EXECUTABLE]";
+        fi
     '')
 
     (writeShellScriptBin "chu-install-home-manager" ''
@@ -242,10 +222,7 @@ in
 
   xdg.portal = {
     enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal
-      pkgs.xdg-desktop-portal-gtk
-    ];
+    extraPortals = [ pkgs.xdg-desktop-portal pkgs.xdg-desktop-portal-gtk ];
   };
 
   # This value determines the NixOS release from which the default
