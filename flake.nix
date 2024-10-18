@@ -62,7 +62,7 @@
           system = systemSettings.system;
           modules = [
             (./. + "/profiles" + ("/" + systemSettings.profile) + "/configuration.nix")
-            # inputs.lix-module.nixosModules.default
+            inputs.lix-module.nixosModules.default
           ];
           specialArgs = {
             inherit pkgs;

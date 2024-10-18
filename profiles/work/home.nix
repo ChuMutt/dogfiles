@@ -61,6 +61,7 @@
     wine
     alacritty
     st
+    lf
     konsole
     firefox
     # librewolf
