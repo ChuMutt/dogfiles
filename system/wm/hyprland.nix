@@ -8,8 +8,8 @@ in {
   # Import wayland config
   imports = [
     ./wayland.nix
-    # ./pipewire.nix
-    # ./dbus.nix
+    ./pipewire.nix
+    ./dbus.nix
   ];
 
   # Security
