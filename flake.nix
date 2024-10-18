@@ -31,7 +31,7 @@
         browser = "firefox";
         defaultEmacsOrgDir = "~/nextcloud/documents/org";
         defaultEmacsOrgRoamDir = "roam"; # relative to "/org" (defaultEmacsOrgDir)
-        term = "konsole";
+        term = "kitty";
         font = "Intel One Mono";
         fontPkg = pkgs.intel-one-mono;
         editor = "nvim";

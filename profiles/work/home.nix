@@ -63,6 +63,7 @@
     st
     lf
     konsole
+    kitty
     firefox
     # librewolf
     # qutebrowser
