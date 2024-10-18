@@ -3,14 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { pkgs, systemSettings, userSettings, ... }:
-# let
-#   mySessionCommands = ''
-#     xset -dpms
-#     xset s blank
-#     xset r rate 350 50
-#     xset s 30
-#   '';
-# in
 {
   imports = [
     # Include the results of the hardware scan.
