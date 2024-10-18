@@ -1,5 +1,4 @@
-{ config, pkgs, userSettings, ... }:
-{
+{ config, pkgs, userSettings, ... }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = userSettings.username; # TODO
@@ -9,7 +8,8 @@
   programs.home-manager.enable = true;
 
   imports = [
-    (./. + "../../../user/wm" + ("/" + userSettings.wm + "/" + userSettings.wm) + ".nix")
+    (./. + "../../../user/wm" + ("/" + userSettings.wm + "/" + userSettings.wm)
+      + ".nix")
     ../../user/shell/shells.nix # zsh/bash configs; cli programs
   ];
 
@@ -52,8 +52,10 @@
     coreutils
     direnv
     nix-direnv
-    wireplumber pipewire
-    yabridge yabridgectl # modern interface for windows vst2 & vst3 plugins
+    wireplumber
+    pipewire
+    yabridge
+    yabridgectl # modern interface for windows vst2 & vst3 plugins
     openai-whisper-cpp # speech-to-text, dep. of emacspkg whisper.el
     mpd
     zfs
@@ -174,16 +176,15 @@
     # '';
 
     ".config/emacs/init.el".source = ../../user/emacs-profiles/chumacs/init.el;
-    ".config/emacs/config.el".source = ../../user/emacs-profiles/chumacs/config.el;
+    ".config/emacs/config.el".source =
+      ../../user/emacs-profiles/chumacs/config.el;
 
   };
 
   xdg = {
     enable = true;
     mime.enable = true;
-    mimeApps = {
-      enable = true;
-    };
+    mimeApps = { enable = true; };
     # Whether to manage {file}$XDG_CONFIG_HOME/user-dirs.dirs.
     # The generated file is read-only.
     userDirs = {
@@ -236,8 +237,8 @@
   programs.emacs = {
     enable = true;
     package = pkgs.emacs-gtk;
-    extraPackages =
-      epkgs: with epkgs; [
+    extraPackages = epkgs:
+      with epkgs; [
         nix-mode
         magit
         evil-collection
@@ -273,14 +274,10 @@
   };
 
   # TeX Live, used for TeX typesetting package distribution.
-  programs.texlive = {
-    enable = true;
-  };
+  programs.texlive = { enable = true; };
 
   # thefuck - magnificent app that corrects your previous console command.
-  programs.thefuck = {
-    enable = true;
-  };
+  programs.thefuck = { enable = true; };
 
   # Thunderbird.
   programs.thunderbird = {
@@ -301,7 +298,10 @@
 
   gtk.iconTheme = {
     package = pkgs.papirus-icon-theme;
-    name = if (config.stylix.polarity == "dark") then "Papirus-Dark" else "Papirus-Light";
+    name = if (config.stylix.polarity == "dark") then
+      "Papirus-Dark"
+    else
+      "Papirus-Light";
   };
 
   services.pasystray.enable = true;
