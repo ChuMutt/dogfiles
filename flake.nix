@@ -20,7 +20,7 @@
         email = "chufilthymutt@gmail.com";
         dotfilesDir = "/home/chu/.dogfiles";
         theme = "io"; # TODO
-        wm = "hyprland";
+        wm = "plasma";
         wmType =
           if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11";
         browser = "firefox";
