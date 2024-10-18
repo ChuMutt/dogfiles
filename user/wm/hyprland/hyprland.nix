@@ -9,6 +9,6 @@
       inputs.hyprgrass.packages.${pkgs.system}.default
     ];
   };
-  xwayland = { enable = true;  };
+  xwayland = { enable = true; };
   systemd.enable = true;
 }
