@@ -25,8 +25,8 @@
         name = "Chu";
         email = "chufilthymutt@gmail.com";
         dotfilesDir = "/home/chu/.dogfiles";
-        theme = "io";
-        wm = "plasma";
+        theme = "io"; # TODO
+        wm = "hyprland";
         wmType = if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11";
         browser = "firefox";
         defaultEmacsOrgDir = "~/nextcloud/documents/org";
