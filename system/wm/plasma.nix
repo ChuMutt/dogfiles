@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   # Enable KDE Plasma 6 Desktop
   services = {
     displayManager.sddm.enable = true;
