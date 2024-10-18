@@ -2,15 +2,16 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, lib, inputs, systemSettings, userSettings, ... }:
-let
-  mySessionCommands = ''
-    xset -dpms
-    xset s blank
-    xset r rate 350 50
-    xset s 30
-  '';
-in {
+{ pkgs, systemSettings, userSettings, ... }:
+# let
+#   mySessionCommands = ''
+#     xset -dpms
+#     xset s blank
+#     xset r rate 350 50
+#     xset s 30
+#   '';
+# in
+{
   imports = [
     # Include the results of the hardware scan.
     ../../system/hardware-configuration.nix
@@ -92,7 +93,7 @@ in {
     };
     # Enable X11 display server
     enable = true;
-    displayManager.sessionCommands = mySessionCommands;
+    # displayManager.sessionCommands = mySessionCommands;
   };
 
   services.libinput.touchpad.disableWhileTyping = true;
