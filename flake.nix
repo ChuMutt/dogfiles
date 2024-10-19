@@ -12,7 +12,7 @@
         boot = "uefi";
         bootPath = "/boot";
         grubDevice = "";
-        gpuType = "nvidia";
+        gpuType = "amd";
       };
       userSettings = rec {
         username = "chu";
@@ -23,14 +23,37 @@
         wm = "hyprland";
         wmType =
           if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11";
-        browser = "firefox";
+        browser = "qutebrowser";
+        spawnBrowser =
+          if ((browser == "qutebrowser") && (wm == "hyprland")) then
+            "qutebrowser-hyprprofile"
+          else
+            (if (browser == "qutebrowser") then
+              "qutebrowser --qt-flag enable-gpu-rasterization --qt-flag enable-native-gpu-memory-buffers --qt-flag num-raster-threads=4"
+            else
+              browser); # Browser spawn command must be specail for qb, since it doesn't gpu accelerate by default (why?)
         defaultEmacsOrgDir = "~/nextcloud/documents/org";
         defaultEmacsOrgRoamDir =
           "roam"; # relative to "/org" (defaultEmacsOrgDir)
-        term = "kitty";
+        term = "alacritty";
         font = "Intel One Mono";
         fontPkg = pkgs.intel-one-mono;
         editor = "nvim";
+        # editor spawning translator
+        # generates a command that can be used to spawn editor inside a gui
+        # EDITOR and TERM session variables must be set in home.nix or other module
+        # I set the session variable SPAWNEDITOR to this in my home.nix for convenience
+        spawnEditor = if (editor == "emacsclient") then
+          "emacsclient -c -a 'emacs'"
+        else
+          (if ((editor == "vim") || (editor == "nvim")
+            || (editor == "nano")) then
+            "exec " + term + " -e " + editor
+          else
+            (if (editor == "neovide") then
+              "neovide -- --listen /tmp/nvimsocket"
+            else
+              editor));
       };
 
       pkgs = import inputs.nixpkgs {
