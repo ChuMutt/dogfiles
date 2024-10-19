@@ -6,11 +6,7 @@ in {
   environment.sessionVariables.NIXOS_OZONE_WL = "1"; # req'd for standalone HM
 
   # Import wayland config
-  imports = [
-    ./wayland.nix
-    ./pipewire.nix
-    ./dbus.nix
-  ];
+  imports = [ ./wayland.nix ./pipewire.nix ./dbus.nix ];
 
   # Security
   security = { pam.services.login.enableGnomeKeyring = true; };
@@ -28,7 +24,7 @@ in {
 
   services.xserver.excludePackages = [ pkgs.xterm ];
 
-  services= {
+  services = {
     displayManager.sddm = {
       enable = true;
       wayland.enable = true;
