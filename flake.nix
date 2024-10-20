@@ -75,6 +75,10 @@
       nixpkgsFor =
         forAllSystems (system: import inputs.nixpkgs { inherit system; });
 
+      pkgs-nwg-dock-hyprland = import inputs.nwg-dock-hyprland-pin-nixpkgs {
+        system = systemSettings.system;
+      };
+
     in {
       nixosConfigurations = {
         system = lib.nixosSystem {
