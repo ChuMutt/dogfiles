@@ -273,9 +273,6 @@
     startWithUserSession = "graphical";
   };
 
-  # Neovim
-  programs.neovim.enable = true;
-
   # TeX Live, used for TeX typesetting package distribution.
   programs.texlive = { enable = true; };
 
