@@ -10,6 +10,7 @@ let
     fetch = "disfetch";
     gitfetch = "onefetch";
     "," = "comma";
+    parrot = "terminal-parrot";
   };
 in {
   programs.zsh = {
