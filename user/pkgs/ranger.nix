@@ -2,13 +2,14 @@
 
 {
   nixpkgs.overlays = [
-    (self: super:
-      {
-        ranger = super.ranger.overrideAttrs (oldAttrs: rec {
+    (self: super: {
+      ranger = super.ranger.overrideAttrs (oldAttrs: rec {
         preConfigure = ''
           substituteInPlace ranger/__init__.py \
-            --replace "DEFAULT_PAGER = 'less'" "DEFAULT_PAGER = '${lib.getBin pkgs.bat}/bin/bat'"
-      
+            --replace "DEFAULT_PAGER = 'less'" "DEFAULT_PAGER = '${
+              lib.getBin pkgs.bat
+            }/bin/bat'"
+
           # give image previews out of the box when building with w3m
           substituteInPlace ranger/config/rc.conf \
             --replace "set preview_images false" "set preview_images true"
@@ -26,14 +27,9 @@
           substituteInPlace doc/ranger.desktop \
             --replace "Exec=ranger" "Exec=kitty -e ranger %U"
         '';
-        });
-      }
-    )
+      });
+    })
   ];
-  home.packages = with pkgs; [
-    poppler_utils
-    librsvg
-    ffmpegthumbnailer
-  ];
+  home.packages = with pkgs; [ poppler_utils librsvg ffmpegthumbnailer ];
 
 }

@@ -1,21 +1,21 @@
 { config, pkgs, ... }:
-let myCbxScript = ''
-  #!/bin/sh
+let
+  myCbxScript = ''
+    #!/bin/sh
 
-  # this lets my copy and paste images and/or plaintext of files directly out of ranger
-  if [ "$#" -le "2" ]; then
-    if [ "$1" = "copy" -o "$1" = "cut" ]; then
-      if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-        wl-copy < $2;
-      else
-        # xclip -selection clipboard -t $(file -b --mime-type $2) -i $2;
-        xclip -selection clipboard -t image/png -i $2;
+    # this lets my copy and paste images and/or plaintext of files directly out of ranger
+    if [ "$#" -le "2" ]; then
+      if [ "$1" = "copy" -o "$1" = "cut" ]; then
+        if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+          wl-copy < $2;
+        else
+          # xclip -selection clipboard -t $(file -b --mime-type $2) -i $2;
+          xclip -selection clipboard -t image/png -i $2;
+        fi
       fi
     fi
-  fi
   '';
-in
-{
+in {
   imports = [ ../../pkgs/ranger.nix ];
 
   home.packages = with pkgs; [
@@ -24,9 +24,7 @@ in
     highlight
     (pkgs.writeScriptBin "cbx" myCbxScript)
   ];
-  xdg.mimeApps.associations.added = {
-    "inode/directory" = "ranger.desktop";
-  };
+  xdg.mimeApps.associations.added = { "inode/directory" = "ranger.desktop"; };
   home.file.".config/ranger/rc.conf".source = ./rc.conf;
   home.file.".config/ranger/rifle.conf".source = ./rifle.conf;
   home.file.".config/ranger/scope.sh" = {

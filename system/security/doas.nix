@@ -10,7 +10,6 @@
     persist = true;
   }];
 
-  environment.systemPackages = [
-    (pkgs.writeScriptBin "sudo" ''exec doas "$@"'')
-  ];
+  environment.systemPackages =
+    [ (pkgs.writeScriptBin "sudo" ''exec doas "$@"'') ];
 }
