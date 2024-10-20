@@ -105,6 +105,7 @@
           ];
           extraSpecialArgs = {
             inherit pkgs;
+            inherit pkgs-nwg-dock-hyprland;
             inherit systemSettings;
             inherit userSettings;
             inherit inputs;
