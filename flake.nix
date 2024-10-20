@@ -19,7 +19,7 @@
         name = "Chu";
         email = "chufilthymutt@gmail.com";
         dotfilesDir = "/home/chu/.dogfiles";
-        theme = "io"; # TODO
+        theme = "io";
         wm = "hyprland";
         wmType =
           if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11";
