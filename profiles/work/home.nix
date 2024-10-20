@@ -276,13 +276,6 @@
   # Neovim
   programs.neovim.enable = true;
 
-  # Git
-  programs.git = {
-    enable = true;
-    userEmail = "chufilthymutt@gmail.com";
-    userName = "chu";
-  };
-
   # TeX Live, used for TeX typesetting package distribution.
   programs.texlive = { enable = true; };
 
