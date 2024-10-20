@@ -1,7 +1,7 @@
 {
   description = "Chu the Pup's NixOS Flake";
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
+  outputs = inputs@{ self, ... }:
     let
       systemSettings = {
         system = "x86_64-linux";
