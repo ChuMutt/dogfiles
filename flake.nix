@@ -35,10 +35,10 @@
         defaultEmacsOrgDir = "~/nextcloud/documents/org";
         defaultEmacsOrgRoamDir =
           "roam"; # relative to "/org" (defaultEmacsOrgDir)
-        term = "alacritty";
+        term = "kitty";
         font = "Intel One Mono";
         fontPkg = pkgs.intel-one-mono;
-        editor = "nvim";
+        editor = "neovide";
         # editor spawning translator
         # generates a command that can be used to spawn editor inside a gui
         # EDITOR and TERM session variables must be set in home.nix or other module
