@@ -1,8 +1,8 @@
 { config, pkgs, userSettings, ... }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = userSettings.username; # TODO
-  home.homeDirectory = "/home/" + userSettings.username; # TODO
+  home.username = userSettings.username;
+  home.homeDirectory = "/home/" + userSettings.username;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -11,6 +11,16 @@
     (./. + "../../../user/wm" + ("/" + userSettings.wm + "/" + userSettings.wm)
       + ".nix")
     ../../user/shell/shells.nix # zsh/bash configs; cli programs
+    ../../user/shell/cli-collection.nix # Useful CLI apps
+    ../../user/app/nvim/nvim.nix # My doom emacs config
+    ../../user/app/ranger/ranger.nix # My ranger file manager config
+    ../../user/app/git/git.nix # My git config
+    (./. + "../../../user/app/browser" + ("/" + userSettings.browser)
+      + ".nix") # My default browser selected from flake
+    ../../user/app/virtualization/virtualization.nix # Virtual machines
+    ../../user/style/stylix.nix # Styling and themes for my apps
+    ../../user/lang/cc/cc.nix # C and C++ tools
+    ../../user/hardware/bluetooth.nix # Bluetooth
   ];
 
   # This value determines the Home Manager release that your configuration is
