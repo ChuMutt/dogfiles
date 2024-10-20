@@ -16,7 +16,7 @@
     (./. + "../../../system/wm" + ("/" + userSettings.wm)
       + ".nix") # My window manager
     ../../system/app/virtualization.nix
-    ../../system/security/doas.nix
+    # ../../system/security/doas.nix
     ../../system/security/gpg.nix
     ../../system/security/blocklist.nix
     ../../system/security/firewall.nix
