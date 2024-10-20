@@ -1,15 +1,18 @@
-{ inputs, pkgs, ... }:
-let
-  pkgs-hyprland =
-    inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-in {
-  environment.sessionVariables.NIXOS_OZONE_WL = "1"; # req'd for standalone HM
 
+{ inputs, pkgs, lib, ... }: let
+  pkgs-hyprland = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+in
+{
   # Import wayland config
-  imports = [ ./wayland.nix ./pipewire.nix ./dbus.nix ];
+  imports = [ ./wayland.nix
+              ./pipewire.nix
+              ./dbus.nix
+            ];
 
   # Security
-  security = { pam.services.login.enableGnomeKeyring = true; };
+  security = {
+    pam.services.login.enableGnomeKeyring = true;
+  };
 
   services.gnome.gnome-keyring.enable = true;
 
@@ -17,14 +20,16 @@ in {
     hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-      xwayland = { enable = true; };
+      xwayland = {
+        enable = true;
+      };
       portalPackage = pkgs-hyprland.xdg-desktop-portal-hyprland;
     };
   };
 
   services.xserver.excludePackages = [ pkgs.xterm ];
 
-  services = {
+  services.xserver = {
     displayManager.sddm = {
       enable = true;
       wayland.enable = true;
@@ -32,5 +37,6 @@ in {
       theme = "chili";
       package = pkgs.sddm;
     };
+
   };
 }
