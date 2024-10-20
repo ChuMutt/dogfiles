@@ -6,6 +6,7 @@
     # Fonts
     nerdfonts
     powerline
+    source-code-pro
   ];
 
 }
