@@ -35,7 +35,7 @@
     ];
 
     # Ensure nix flakes are enabled
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
 
     extraOptions = ''
       experimental-features = nix-command flakes
