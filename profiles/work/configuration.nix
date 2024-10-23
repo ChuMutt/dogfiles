@@ -161,43 +161,41 @@
             # to ~/.config/home-manager/home.nix. Here, it'll go into $DOTFILES_DIR.
 
             # Add Home Manager channel to channel list:
-            echo "Adding Home Manager channel to channel list..."
             nix-channel --add \
               https://github.com/nix-community/home-manager/archive/master.tar.gz \
       	      home-manager
 
             # Pull channel updates from channel list:
-            echo "Pulling Home Manager channel updates in..."
             nix-channel --update
 
             # Generate a minimal Home Manager config at ~/.config/home-manager/home.nix
-            echo "Generating Home Manager configuration..."
-
             nix run home-manager/master -- init --switch $DOTFILES_DIR
-
-            echo "Home Manager configuration generated."
 
             # Flake inputs aren't updated by Home Manager, so we need to do it
             # ourselves:
             nix flake update
-
-            echo "Installing Home Manager..."
 
             # Install Home Manager via nix-shell.
             nix-shell '<home-manager>' -A install
 
             # Build and activate flake-based Home Manager configuration
             home-manager switch --flake $DOTFILES_DIR
-
-            echo "Actually done for real now!"
-            echo ""
-            echo "The home-manager tool should now be installed and you can edit"
-            echo ""
-            echo "    $DOTFILES_DIR/home.nix"
-            echo ""
-            echo "to configure Home Manager. Run 'man home-configuration.nix' to"
-            echo "see all available options."
     '')
+
+    (writeShellScriptBin "chu-install-doom-emacs" ''
+      git clone https://github.com/chumutt/doom ~/.config/doom
+      git clone https://github.com/doomemacs/doomemacs --depth 1 ~/.config/emacs
+      ./.config/emacs/bin/doom install
+    '')
+
+    (writeShellScriptBin "chu-install-roswell" ''
+      ros install sbcl-bin
+      ros use sbcl
+      ros install sly
+      ros install alexandria
+      ros update quicklisp
+    '')
+
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
