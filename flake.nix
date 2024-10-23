@@ -1,18 +1,18 @@
 {
-  description = "chu the Pup's NixOS Flake";
+  description = "Chu the Pup's NixOS Flake";
 
   outputs = inputs@{ self, ... }:
     let
       systemSettings = {
         system = "x86_64-linux";
-        hostname = "dogleash";
+        hostname = "chunix";
         profile = "work";
         timezone = "America/Chicago";
         locale = "en_US.UTF-8";
         boot = "uefi";
         bootPath = "/boot";
         grubDevice = "";
-        gpuType = "nvidia";
+        gpuType = "amd";
       };
       userSettings = rec {
         username = "chu";
