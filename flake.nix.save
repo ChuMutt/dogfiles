@@ -17,7 +17,7 @@
       userSettings = rec {
         username = "chu";
         name = "Chu";
-        email = "chufilthymutt@gmail.com";
+        email = "";
         dotfilesDir = "/home/chu/.dogfiles";
         theme = "io";
         wm = "hyprland";
