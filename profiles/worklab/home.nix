@@ -1,0 +1,1 @@
+{ ... }: { imports = [ ../homelab/home.nix ]; }
