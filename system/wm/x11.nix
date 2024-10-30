@@ -1,7 +1,11 @@
 { pkgs, ... }:
-
 {
-  imports = [ ./pipewire.nix ./dbus.nix ./gnome-keyring.nix ./fonts.nix ];
+  imports = [
+    ./pipewire.nix
+    ./dbus.nix
+    ./gnome-keyring.nix
+    ./fonts.nix
+  ];
 
   # Configure X11
   services.xserver = {
@@ -20,6 +24,8 @@
         ${pkgs.lightlocker}/bin/light-locker --idle-hint &
       '';
     };
-    libinput = { touchpad.disableWhileTyping = true; };
+    libinput = {
+      touchpad.disableWhileTyping = true;
+    };
   };
 }

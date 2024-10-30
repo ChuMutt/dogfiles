@@ -2,9 +2,15 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, systemSettings, userSettings, ... }: {
+{
+  pkgs,
+  lib,
+  systemSettings,
+  userSettings,
+  ...
+}:
+{
   imports = [
-    # Include the results of the hardware scan.
     ../../system/hardware-configuration.nix
     ../../system/hardware/systemd.nix # systemd config
     ../../system/hardware/kernel.nix # Kernel config
@@ -13,118 +19,120 @@
     ../../system/hardware/opengl.nix
     ../../system/hardware/printing.nix
     ../../system/hardware/bluetooth.nix
-    (./. + "../../../system/wm" + ("/" + userSettings.wm)
-      + ".nix") # My window manager
+    (./. + "../../../system/wm" + ("/" + userSettings.wm) + ".nix") # My window manager
+    ../../system/app/flatpak.nix
     ../../system/app/virtualization.nix
+    (import ../../system/app/docker.nix {
+      storageDriver = null;
+      inherit pkgs userSettings lib;
+    })
     # ../../system/security/doas.nix
+    ../../system/security/sudo.nix
     ../../system/security/gpg.nix
     ../../system/security/blocklist.nix
     ../../system/security/firewall.nix
     ../../system/security/firejail.nix
     ../../system/security/openvpn.nix
-    # ../../system/security/automount.nix
+    ../../system/security/automount.nix
     ../../system/style/stylix.nix
   ];
 
-  nix = {
-    # Fix nix path
-    nixPath = [
-      "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-      ("nixos-config=" + userSettings.dotfilesDir + "/system/configuration.nix")
-      "/nix/var/nix/profiles/per-user/root/channels"
-    ];
+  # Fix nix path
+  nix.nixPath = [
+    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    "nixos-config=$HOME/dotfiles/system/configuration.nix"
+    "/nix/var/nix/profiles/per-user/root/channels"
+  ];
 
-    # Ensure nix flakes are enabled
-    package = pkgs.nixVersions.stable;
+  # Ensure nix flakes are enabled
+  nix.package = pkgs.nixVersions.stable;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+  nixpkgs.overlays = [
+    (final: prev: {
+      logseq = prev.logseq.overrideAttrs (oldAttrs: {
+        postFixup = ''
+          makeWrapper ${prev.electron_27}/bin/electron $out/bin/${oldAttrs.pname} \
+            --set "LOCAL_GIT_DIRECTORY" ${prev.git} \
+            --add-flags $out/share/${oldAttrs.pname}/resources/app \
+            --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}" \
+            --prefix LD_LIBRARY_PATH : "${prev.lib.makeLibraryPath [ prev.stdenv.cc.cc.lib ]}"
+        '';
+      });
+    })
+  ];
 
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
+  # logseq
+  nixpkgs.config.permittedInsecurePackages = [ "electron-27.3.11" ];
 
-    settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-      # wheel group gets trusted access to nix daemon
-      trusted-users = [ "@wheel" ];
-    };
-  };
+  # wheel group gets trusted access to nix daemon
+  nix.settings.trusted-users = [ "@wheel" ];
 
-  # Allow unfree packages
+  # I'm sorry Stallman-taichou
   nixpkgs.config.allowUnfree = true;
 
-  # Bootloader
-  boot = {
-    loader = {
-      systemd-boot.enable =
-        if (systemSettings.boot == "uefi") then true else false;
-      efi.canTouchEfiVariables =
-        if (systemSettings.boot == "uefi") then true else false;
-      efi.efiSysMountPoint =
-        systemSettings.bootPath; # does nothing if running bios rather than uefi
-      grub.enable = if (systemSettings.boot == "uefi") then false else true;
-      grub.device =
-        systemSettings.grubDevice; # does nothing if running uefi rather than bios
-    };
-    kernelModules = [ "i2c-dev" "i2c-piix4" "cpufreq_powersave" ];
-  };
+  # Kernel modules
+  boot.kernelModules = [
+    "i2c-dev"
+    "i2c-piix4"
+    "cpufreq_powersave"
+  ];
 
-  networking = {
-    hostName = systemSettings.hostname; # Define your hostname.
-    networkmanager.enable = true; # Enable networking
-  };
+  # Bootloader
+  # Use systemd-boot if uefi, default to grub otherwise
+  boot.loader.systemd-boot.enable = if (systemSettings.bootMode == "uefi") then true else false;
+  boot.loader.efi.canTouchEfiVariables = if (systemSettings.bootMode == "uefi") then true else false;
+  boot.loader.efi.efiSysMountPoint = systemSettings.bootMountPath; # does nothing if running bios rather than uefi
+  boot.loader.grub.enable = if (systemSettings.bootMode == "uefi") then false else true;
+  boot.loader.grub.device = systemSettings.grubDevice; # does nothing if running uefi rather than bios
+
+  # Networking
+  networking.hostName = systemSettings.hostname; # Define your hostname.
+  networking.networkmanager.enable = true; # Use networkmanager
 
   # Set your time zone.
-  time.timeZone = "America/Chicago";
-
+  time.timeZone = systemSettings.timezone;
   # Select internationalisation properties.
-  i18n = let l = "en_US.UTF-8";
-  in {
-    defaultLocale = l;
-    extraLocaleSettings = {
-      LC_ADDRESS = l;
-      LC_IDENTIFICATION = l;
-      LC_MEASUREMENT = l;
-      LC_MONETARY = l;
-      LC_NAME = l;
-      LC_NUMERIC = l;
-      LC_PAPER = l;
-      LC_TELEPHONE = l;
-      LC_TIME = l;
+  i18n =
+    let
+      l = systemSettings.locale;
+    in
+    {
+      defaultLocale = l;
+      extraLocaleSettings = {
+        LC_ADDRESS = l;
+        LC_IDENTIFICATION = l;
+        LC_MEASUREMENT = l;
+        LC_MONETARY = l;
+        LC_NAME = l;
+        LC_NUMERIC = l;
+        LC_PAPER = l;
+        LC_TELEPHONE = l;
+        LC_TIME = l;
+      };
     };
-  };
-
-  # Configure keymap in X11
-  services.xserver = {
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
-    # Enable X11 display server
-    enable = true;
-    # displayManager.sessionCommands = mySessionCommands;
-  };
-
-  services.libinput.touchpad.disableWhileTyping = true;
 
   # User account
   users.users.${userSettings.username} = {
     isNormalUser = true;
     description = userSettings.name;
-    extraGroups =
-      [ "networkmanager" "wheel" "input" "dialout" "video" "audio" "render" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "input"
+      "dialout"
+      "video"
+      "render"
+    ];
     packages = [ ];
     uid = 1000;
-    shell = pkgs.zsh;
   };
 
-  # Enable automatic login for the user.
-  services.getty.autologinUser = "chu";
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  # Do not forget to add an editor to edit configuration.nix! The Nano editor
-  # is also installed by default.
+  # System packages
   environment.systemPackages = with pkgs; [
     vim
+    logseq
     wget
     zsh
     git
@@ -139,19 +147,17 @@
     # '')
 
     (pkgs.writeScriptBin "comma" ''
-      # by librephoenix
-        if [ "$#" = 0 ]; then
-          echo "usage: comma PKGNAME... [EXECUTABLE]";
-        elif [ "$#" = 1 ]; then
-          nix-shell -p $1 --run $1;
-        elif [ "$#" = 2 ]; then
-          nix-shell -p $1 --run $2;
-        else
-          echo "error: too many arguments";
-          echo "usage: comma PKGNAME... [EXECUTABLE]";
-        fi
+      if [ "$#" = 0 ]; then
+        echo "usage: comma PKGNAME... [EXECUTABLE]";
+      elif [ "$#" = 1 ]; then
+        nix-shell -p $1 --run $1;
+      elif [ "$#" = 2 ]; then
+        nix-shell -p $1 --run $2;
+      else
+        echo "error: too many arguments";
+        echo "usage: comma PKGNAME... [EXECUTABLE]";
+      fi
     '')
-
     (writeShellScriptBin "chu-install-home-manager" ''
             # Installs the standalone version of Home Manager.
             # Step 1 of the configuration installation process following first
@@ -195,21 +201,15 @@
       ros install alexandria
       ros update quicklisp
     '')
-
+    vesktop
+    (pkgs.discord.override {
+      # remove any overrides that you don't want
+      withOpenASAR = true;
+      withVencord = true;
+      withTTS = true;
+    })
+    webcord
   ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
   # Enable the copy/paste support for virtual machines.
   services.spice-vdagentd.enable = true;
@@ -222,15 +222,13 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-wlr
+    ];
   };
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
-
+  # It is ok to leave this unchanged for compatibility purposes
+  system.stateVersion = "22.11";
 }

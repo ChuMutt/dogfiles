@@ -1,12 +1,12 @@
 { config, lib, pkgs, dmenuCmd ? "rofi -dmenu", ... }:
 let
   dmenuScript = ''
-    #!/bin/sh
-    choice="$(\ls ~/.config/hyprprofiles | '' + dmenuCmd + ''
-      )";
-            hyprprofile $choice;
-    '';
-in {
+      #!/bin/sh
+      choice="$(\ls ~/.config/hyprprofiles | ''+dmenuCmd+'')";
+      hyprprofile $choice;
+  '';
+in
+{
   home.packages = [
     (pkgs.writeScriptBin "hyprprofile" ''
       #!/bin/sh
@@ -39,8 +39,8 @@ in {
       name = "qutebrowser-hyprprofile";
       desktopName = "Qutebrowser Hyprprofile";
       exec = "qutebrowser-hyprprofile %u";
-      categories = [ "Network" "WebBrowser" ];
-      keywords = [ "Browser" ];
+      categories = ["Network" "WebBrowser"];
+      keywords = ["Browser"];
       terminal = false;
       type = "Application";
       noDisplay = false;
@@ -48,13 +48,13 @@ in {
     })
     (pkgs.writeScriptBin "hyprprofile-dmenu" dmenuScript)
   ];
-  xdg.mimeApps.defaultApplications = lib.mkForce {
+    xdg.mimeApps.defaultApplications = lib.mkForce {
     "text/html" = "qutebrowser-hyprprofile.desktop";
     "x-scheme-handler/http" = "qutebrowser-hyprprofile.desktop";
     "x-scheme-handler/https" = "qutebrowser-hyprprofile.desktop";
     "x-scheme-handler/about" = "qutebrowser-hyprprofile.desktop";
     "x-scheme-handler/unknown" = "qutebrowser-hyprprofile.desktop";
-  };
+    };
   home.file.".config/hyprprofiles/" = {
     source = ./profiles;
     recursive = true;

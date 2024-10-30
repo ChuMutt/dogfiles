@@ -5,7 +5,6 @@
     disfetch
     lolcat
     cowsay
-    terminal-parrot
     starfetch
     cava
     killall

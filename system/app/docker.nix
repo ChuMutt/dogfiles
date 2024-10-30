@@ -8,9 +8,7 @@ assert lib.asserts.assertOneOf "storageDriver" storageDriver [
   "overlay"
   "overlay2"
   "zfs"
-];
-
-{
+]; {
   virtualisation.docker = {
     enable = true;
     enableOnBoot = true;

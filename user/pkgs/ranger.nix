@@ -1,6 +1,4 @@
-{ lib, pkgs, ... }:
-
-{
+{ lib, pkgs, ... }: {
   nixpkgs.overlays = [
     (self: super: {
       ranger = super.ranger.overrideAttrs (oldAttrs: rec {

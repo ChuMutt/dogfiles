@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{ pkgs, ... }: {
   # Enable printing
   services.printing.enable = true;
   services.avahi.enable = true;

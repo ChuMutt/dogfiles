@@ -1,8 +1,7 @@
 { inputs, ... }:
-
 let
   blocklist = builtins.readFile
-    "${inputs.blocklist-hosts}/alternates/gambling-porn/hosts";
+    "${inputs.blocklist-hosts}/hosts";
 in {
   networking.extraHosts = ''
     "${blocklist}"

@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{ pkgs, ... }: {
   # Module installing  as default browser
   home.packages = [ pkgs.floorp ];
 

@@ -1,12 +1,7 @@
-{ pkgs, ... }:
-
+{ pkgs-stable, ... }:
 {
-  # Fonts are nice to have
-  fonts.packages = with pkgs; [
-    # Fonts
+  fonts.packages = with pkgs-stable; [
     nerdfonts
     powerline
-    source-code-pro
   ];
-
 }

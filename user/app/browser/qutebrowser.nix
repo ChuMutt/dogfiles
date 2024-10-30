@@ -80,7 +80,6 @@ let
                             <br>
                             <!--qutebrowser title-->
                             <p style="color:#''
-
     + config.lib.stylix.colors.base01 + ''
       ">Welcome to Qutebrowser</p>
             <br>
@@ -175,7 +174,7 @@ in {
           config.set('content.cookies.accept', 'no-3rdparty', 'chrome-devtools://*')
           config.set('content.cookies.accept', 'no-3rdparty', 'devtools://*')
 
-          config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}; rv:90.0) Gecko/20100101 Firefox/90.0', 'https://accounts.google.com/*')
+          config.set('content.headers.user_agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'https://accounts.google.com/*')
           config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99 Safari/537.36', 'https://*.slack.com/*')
 
           config.set('content.images', True, 'chrome-devtools://*')

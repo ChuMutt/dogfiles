@@ -6,6 +6,6 @@
   programs.git.extraConfig = {
     init.defaultBranch = "main";
     safe.directory =
-      [ (userSettings.dotfilesDir) (userSettings.dotfilesDir + "/.git") ];
+      [ userSettings.dotfilesDir (userSettings.dotfilesDir + "/.git") ];
   };
 }

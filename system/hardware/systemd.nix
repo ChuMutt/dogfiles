@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{ ... }: {
   services.journald.extraConfig = ''
     SystemMaxUse=50M
     SystemMaxFiles=5'';

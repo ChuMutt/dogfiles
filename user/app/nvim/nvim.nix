@@ -1,6 +1,4 @@
-{ config, pkgs, inputs, ... }:
-
-{
+{ config, pkgs, ... }: {
   home.packages = with pkgs; [
     neovim
     neovim-remote
