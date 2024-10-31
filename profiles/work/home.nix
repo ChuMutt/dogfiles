@@ -267,6 +267,10 @@
     telegram-desktop
     nurl
     nix-prefetch
+
+    nnn
+    ags
+
   ]);
 
   home.file.".local/share/pixmaps/nixos-snowflake-stylix.svg".source =
