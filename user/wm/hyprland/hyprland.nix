@@ -26,7 +26,7 @@ in
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     plugins = [
-      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
+      inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
       inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
       inputs.hyprgrass.packages.${pkgs.system}.default
     ];
@@ -707,7 +707,7 @@ in
 
     label {
       monitor =
-      text = Hello, Emmet
+      text = Hello, Chu
       color = rgb(''+config.lib.stylix.colors.base07-rgb-r+'',''+config.lib.stylix.colors.base07-rgb-g+'', ''+config.lib.stylix.colors.base07-rgb-b+'')
       font_size = 25
       font_family = ''+userSettings.font+''

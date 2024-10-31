@@ -200,12 +200,12 @@
       ros install alexandria
       ros update quicklisp
     '')
-    vesktop # discord
-    libinput
+    vesktop
   ];
 
   # Enable the copy/paste support for virtual machines.
   services.spice-vdagentd.enable = true;
+  services.seatd.enable = true;
 
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
