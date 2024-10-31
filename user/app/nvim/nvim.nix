@@ -9,7 +9,7 @@
     clang-tools
     marksman
     python311Packages.python-lsp-server
-    typescript-language-server
+    #typescript-language-server
     java-language-server
     dockerfile-language-server-nodejs
     docker-compose-language-service

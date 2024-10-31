@@ -200,19 +200,12 @@
       ros install alexandria
       ros update quicklisp
     '')
-    vesktop
-    (pkgs.discord.override {
-      # remove any overrides that you don't want
-      withOpenASAR = true;
-      withVencord = true;
-      withTTS = true;
-    })
-    webcord
+    vesktop # discord
+    libinput
   ];
 
   # Enable the copy/paste support for virtual machines.
   services.spice-vdagentd.enable = true;
-  services.seatd.enable = true;
 
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
