@@ -119,15 +119,15 @@
     yt-dlp
     blender-hip
     libresprite
-    (pkgs.appimageTools.wrapType2 {
-      name = "Cura";
-      src = fetchurl {
-        url =
-          "https://github.com/Ultimaker/Cura/releases/download/5.8.1/UltiMaker-Cura-5.8.1-linux-X64.AppImage";
-        hash = "sha256-VLd+V00LhRZYplZbKkEp4DXsqAhA9WLQhF933QAZRX0=";
-      };
-      extraPkgs = pkgs: with pkgs; [ ];
-    })
+    # (pkgs.appimageTools.wrapType2 {
+    #   name = "Cura";
+    #   src = fetchurl {
+    #     url =
+    #       "https://github.com/Ultimaker/Cura/releases/download/5.8.1/UltiMaker-Cura-5.8.1-linux-X64.AppImage";
+    #     hash = "sha256-VLd+V00LhRZYplZbKkEp4DXsqAhA9WLQhF933QAZRX0=";
+    #   };
+    #   extraPkgs = pkgs: with pkgs; [ ];
+    # })
     #(pkgs-stable.cura.overrideAttrs (oldAttrs: {
     #  postInstall = oldAttrs.postInstall + ''cp -rf ${(pkgs.makeDesktopItem {
     #      name = "com.ultimaker.cura";
