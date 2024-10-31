@@ -87,7 +87,9 @@
               allowUnfree = true;
               allowUnfreePredicate = (_: true);
             };
-            overlays = [ inputs.rust-overlay.overlays.default ];
+            overlays = [
+              inputs.rust-overlay.overlays.default
+            ];
           })
       );
 
@@ -105,7 +107,9 @@
           allowUnfree = true;
           allowUnfreePredicate = (_: true);
         };
-        overlays = [ inputs.rust-overlay.overlays.default ];
+        overlays = [
+          inputs.rust-overlay.overlays.default
+        ];
       };
 
       pkgs-emacs = import inputs.emacs-pin-nixpkgs { system = systemSettings.system; };
@@ -199,7 +203,6 @@
       #     inherit inputs;
       #   };
       # };
-
       packages = forAllSystems (
         system:
         let
@@ -207,7 +210,6 @@
         in
         {
           default = self.packages.${system}.install;
-
           install = pkgs.writeShellApplication {
             name = "install";
             runtimeInputs = with pkgs; [ git ]; # I could make this fancier by adding other deps
@@ -218,7 +220,6 @@
 
       apps = forAllSystems (system: {
         default = self.apps.${system}.install;
-
         install = {
           type = "app";
           program = "${self.packages.${system}.install}/bin/install";
@@ -257,26 +258,21 @@
     # };
 
     hyprland = {
-      type = "git";
-      url = "https://code.hyprland.org/hyprwm/Hyprland.git";
-      submodules = true;
-      rev = "0f594732b063a90d44df8c5d402d658f27471dfe"; # v0.43.0
-      # rev = "0c7a7e2d569eeed9d6025f3eef4ea0690d90845d"; # v0.44.0
+      url = "github:hyprwm/Hyprland/v0.44.1?submodules=true";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprland-plugins = {
       type = "git";
       url = "https://code.hyprland.org/hyprwm/hyprland-plugins.git";
-      rev = "b73d7b901d8cb1172dd25c7b7159f0242c625a77"; # v0.43.0
-      # rev = "d05eb1ffba2ebffb5b4e1b407f134a4dcb411a88"; # v0.44.0
+      rev = "4d7f0b5d8b952f31f7d2e29af22ab0a55ca5c219"; #v0.44.1
       inputs.hyprland.follows = "hyprland";
     };
 
     hyprlock = {
       type = "git";
       url = "https://code.hyprland.org/hyprwm/hyprlock.git";
-      # rev = "73b0fc26c0e2f6f82f9d9f5b02e660a958902763";
+      rev = "73b0fc26c0e2f6f82f9d9f5b02e660a958902763";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

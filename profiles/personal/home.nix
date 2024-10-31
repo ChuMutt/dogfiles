@@ -18,7 +18,7 @@
     zsh
     alacritty
     brave
-    librewolf
+    # librewolf
     firefox
     git
     syncthing

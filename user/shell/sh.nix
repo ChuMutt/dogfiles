@@ -12,7 +12,13 @@ let
     fetch = "disfetch";
     gitfetch = "onefetch";
     "," = "comma";
+    ".." = "cd ./..";
+    "..." = "cd ./../../";
     parrot = "terminal-parrot";
+    g = "git";
+    ga = "git add .";
+    gc = "git commit -m";
+    "doom" = "~/.config/emacs/bin/doom ";
   };
 in {
   programs.zsh = {
@@ -98,19 +104,30 @@ in {
     eza
     bottom
     fd
+    jq
     bc
     direnv
     nix-direnv
     nixfmt-rfc-style
+    ripgrep
+    rsync
+    cava
     killall
     fortune
     hyfetch
     lolcat
     cowsay
-    asciiquarium
+    asciiquarium-transparent
     ponysay
     tealdeer
     tree
+    pandoc
+    eza
+    timer
+    starfetch
+    unzip
+    hwinfo
+    pciutils
   ];
 
   # Per-directory shell environments

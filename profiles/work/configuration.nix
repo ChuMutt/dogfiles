@@ -26,7 +26,6 @@
       storageDriver = null;
       inherit pkgs userSettings lib;
     })
-    # ../../system/security/doas.nix
     ../../system/security/sudo.nix
     ../../system/security/gpg.nix
     ../../system/security/blocklist.nix
@@ -213,6 +212,7 @@
 
   # Enable the copy/paste support for virtual machines.
   services.spice-vdagentd.enable = true;
+  services.seatd.enable = true;
 
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;

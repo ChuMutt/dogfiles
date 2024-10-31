@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-stable, pkgs-emacs, systemSettings, userSettings, inputs, ... }:
+{ pkgs, pkgs-stable, pkgs-emacs, systemSettings, userSettings, inputs, ... }:
 
 {
   # Simply install just the packages
