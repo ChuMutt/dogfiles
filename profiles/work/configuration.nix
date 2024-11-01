@@ -203,7 +203,7 @@
     vesktop
     cachix
     (writeShellScriptBin "chu-install-cachix" ''
-      cachix use '' + userSettings.githubUserName + ''
+      cachix use ${userSettings.githubUserName}
     '')
   ];
 
