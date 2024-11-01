@@ -138,6 +138,7 @@
     cryptsetup
     home-manager
     wpa_supplicant
+    cachix
     spice-vdagent # Provides copy/paste support if this is a VM guest.
 
     # Shell script template (no shebang required):
