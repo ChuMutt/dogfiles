@@ -19,6 +19,7 @@
     ../../user/shell/cli-collection.nix # Useful CLI apps
     ../../user/app/emacs/emacs.nix # My doom emacs config
     ../../user/app/doom-emacs/doom.nix # My doom emacs config
+    ../../user/app/chumacs/chumacs.nix # My doom emacs config
     ../../user/app/nvim/nvim.nix # My doom emacs config
     ../../user/app/ranger/ranger.nix # My ranger file manager config
     ../../user/app/git/git.nix # My git config
