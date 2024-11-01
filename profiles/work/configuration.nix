@@ -190,7 +190,7 @@
     (writeShellScriptBin "chu-install-doom-emacs" ''
       git clone https://github.com/chumutt/doom ~/.config/doom
       git clone https://github.com/doomemacs/doomemacs --depth 1 ~/.config/emacs
-      ./.config/emacs/bin/doom install
+      ~/.config/emacs/bin/doom install
     '')
 
     (writeShellScriptBin "chu-install-roswell" ''
@@ -209,7 +209,6 @@
 
   # Enable the copy/paste support for virtual machines.
   services.spice-vdagentd.enable = true;
-  services.seatd.enable = true;
 
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
