@@ -279,7 +279,7 @@
       nix-prefetch
 
       nnn
-      ags
+      ags notify
 
     ]
   );
