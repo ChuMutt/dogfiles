@@ -24,10 +24,10 @@ in
 
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     plugins = [
       # inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
       inputs.hyprgrass.packages.${pkgs.system}.default
     ];
     settings = { };
@@ -59,7 +59,7 @@ in
       exec-once = emacs --daemon
 
       exec-once = hypridle
-      exec-once = sleep 5 && libinput-gestures
+      # exec-once = sleep 5 && libinput-gestures
       exec-once = obs-notification-mute-daemon
 
       exec-once = hyprpaper

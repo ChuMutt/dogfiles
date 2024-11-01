@@ -246,45 +246,35 @@
     home-manager-stable.url = "github:nix-community/home-manager/release-24.05";
     home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-stable";
 
-    # hyprland = {
-    #   #   # url = "github:hyprwm/Hyprland/v0.44.1?submodules=true";
-    #   url = "github:hyprwm/Hyprland";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # hyprland-plugins = {
-    #   type = "git";
-    #   url = "https://code.hyprland.org/hyprwm/hyprland-plugins.git";
-    #   #   # rev = "4d7f0b5d8b952f31f7d2e29af22ab0a55ca5c219"; #v0.44.1
-    #   inputs.hyprland.follows = "hyprland";
-    # };
-    # hyprlock = {
-    #   type = "git";
-    #   url = "https://code.hyprland.org/hyprwm/hyprlock.git";
-    #   #   # rev = "73b0fc26c0e2f6f82f9d9f5b02e660a958902763";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # # hyprgrass.url = "github:horriblename/hyprgrass/427690aec574fec75f5b7b800ac4a0b4c8e4b1d5";
-    # hyprgrass.url = "github:horriblename/hyprgrass/";
-    # hyprgrass.inputs.hyprland.follows = "hyprland";
-
     hyprland = {
-      url = "github:hyprwm/Hyprland/v0.44.0?submodules=true";
+      # url = "github:hyprwm/Hyprland/v0.44.1?submodules=true";
+      url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # hyprland-plugins = {
+    # type = "git";
+    # url = "https://code.hyprland.org/hyprwm/hyprland-plugins.git";
+    # rev = "4d7f0b5d8b952f31f7d2e29af22ab0a55ca5c219"; #v0.44.1
+    # rev = "13301eeede3deb4b3a5478518eb0931ae274a798"; #v0.44.1-3
+    #   inputs.hyprland.follows = "hyprland";
+    # };
     hyprland-plugins = {
-      type = "git";
-      url = "https://code.hyprland.org/hyprwm/hyprland-plugins.git";
-      # rev = "4d7f0b5d8b952f31f7d2e29af22ab0a55ca5c219"; #v0.44.1
+      url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
     hyprlock = {
-      type = "git";
-      url = "https://code.hyprland.org/hyprwm/hyprlock.git";
+      # type = "git";
+      # url = "https://code.hyprland.org/hyprwm/hyprlock.git";
+      url = "github:hyprwm/hyprlock";
       # rev = "73b0fc26c0e2f6f82f9d9f5b02e660a958902763";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprgrass.url = "github:horriblename/hyprgrass/427690aec574fec75f5b7b800ac4a0b4c8e4b1d5";
-    hyprgrass.inputs.hyprland.follows = "hyprland";
+    # hyprgrass.url = "github:horriblename/hyprgrass/427690aec574fec75f5b7b800ac4a0b4c8e4b1d5";
+    # hyprgrass.inputs.hyprland.follows = "hyprland";
+    hyprgrass = {
+      url = "github:horriblename/hyprgrass";
+      inputs.hyprland.follows = "hyprland";
+    };
 
     nvchad = {
       url = "github:NvChad/starter";
