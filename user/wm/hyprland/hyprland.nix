@@ -508,6 +508,8 @@ in
     pavucontrol
     pamixer
     tesseract4
+    hyprlandPlugins.hyprtrails
+    hyprlandPlugins.hyprexpo
     (pkgs.writeScriptBin "screenshot-ocr" ''
       #!/bin/sh
       imgname="/tmp/screenshot-ocr-$(date +%Y%m%d%H%M%S).png"
