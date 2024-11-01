@@ -201,6 +201,7 @@
       ros update quicklisp
     '')
     vesktop
+    cachix
   ];
 
   # Enable the copy/paste support for virtual machines.
