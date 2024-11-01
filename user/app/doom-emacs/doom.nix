@@ -5,7 +5,8 @@
     extension = ".el";
   };
 
-  home.file."${config.xdg.localShareHome}/random-splash-image-dir/chosen-splash-images/src/chu-the-pup-scene-queen-by-samariyuu.png" = {
+  home.file.".local/share/random-splash-image-dir/chosen-splash-images/src/chu-the-pup-scene-queen-by-samariyuu.png" = {
+    # TODO shorten
     source = ./../doom-emacs/res/chu-the-pup-scene-queen-by-samariyuu.png;
   };
 }
