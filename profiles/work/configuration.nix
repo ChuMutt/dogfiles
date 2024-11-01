@@ -138,7 +138,6 @@
     cryptsetup
     home-manager
     wpa_supplicant
-    cachix
     spice-vdagent # Provides copy/paste support if this is a VM guest.
 
     # Shell script template (no shebang required):
@@ -203,6 +202,9 @@
     '')
     vesktop
     cachix
+    (writeShellScriptBin "chu-install-cachix" ''
+      cachix use '' + userSettings.githubUserName + ''
+    '')
   ];
 
   # Enable the copy/paste support for virtual machines.
