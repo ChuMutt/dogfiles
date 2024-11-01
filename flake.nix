@@ -277,5 +277,6 @@
       url = "github:StevenBlack/hosts";
       flake = false;
     };
+    ags.url = "github:Aylur/ags";
   };
 }

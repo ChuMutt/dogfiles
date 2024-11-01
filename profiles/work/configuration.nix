@@ -205,6 +205,9 @@
     (writeShellScriptBin "chu-install-cachix" ''
       cachix use ${userSettings.githubUserName}
     '')
+    ddcutil
+    libdbusmenu-gtk3
+    glib
   ];
 
   # Enable the copy/paste support for virtual machines.

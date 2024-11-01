@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   pkgs,
   pkgs-stable,
@@ -31,6 +32,8 @@
     ../../user/lang/cc/cc.nix # C and C++ tools
     ../../user/lang/godot/godot.nix # Game development
     ../../user/hardware/bluetooth.nix # Bluetooth
+
+    inputs.ags.homeManagerModules.default
     ../../user/app/ags/ags.nix
   ];
 
@@ -279,7 +282,6 @@
       nix-prefetch
 
       nnn
-      ags notify
 
     ]
   );

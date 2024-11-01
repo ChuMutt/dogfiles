@@ -101,16 +101,16 @@ in
        }
 
        plugin {
-         hyprtrails {
-             color = rgba(''+config.lib.stylix.colors.base08+''55)
-         }
-         hyprexpo {
-             columns = 3
-             gap_size = 5
-             bg_col = rgb(''+config.lib.stylix.colors.base00+'')
-             workspace_method = first 1 # [center/first] [workspace] e.g. first 1 or center m+1
-             enable_gesture = false # laptop touchpad
-         }
+         # hyprtrails {
+         #     color = rgba(''+config.lib.stylix.colors.base08+''55)
+         # }
+         # hyprexpo {
+         #     columns = 3
+         #     gap_size = 5
+         #     bg_col = rgb(''+config.lib.stylix.colors.base00+'')
+         #     workspace_method = first 1 # [center/first] [workspace] e.g. first 1 or center m+1
+         #     enable_gesture = false # laptop touchpad
+         # }
          touch_gestures {
              sensitivity = 4.0
              long_press_delay = 260
@@ -118,7 +118,7 @@ in
              hyprgrass-bind = , edge:l:r, exec, hyprnome --previous
              hyprgrass-bind = , swipe:3:d, exec, nwggrid-wrapper
 
-             hyprgrass-bind = , swipe:3:u, hyprexpo:expo, toggleoverview
+             # hyprgrass-bind = , swipe:3:u, hyprexpo:expo, toggleoverview
              hyprgrass-bind = , swipe:3:d, exec, nwggrid-wrapper
 
              hyprgrass-bind = , swipe:3:l, exec, hyprnome --previous
@@ -148,7 +148,7 @@ in
        bind=ALT,TAB,bringactivetotop
        bind=ALTSHIFT,TAB,cyclenext,prev
        bind=ALTSHIFT,TAB,bringactivetotop
-       bind=SUPER,TAB,hyprexpo:expo, toggleoverview
+       # bind=SUPER,TAB,hyprexpo:expo, toggleoverview
        bind=SUPER,V,exec,wl-copy $(wl-paste | tr '\n' ' ')
        bind=SUPERSHIFT,T,exec,screenshot-ocr
        bind=CTRLALT,Delete,exec,hyprctl kill
@@ -1311,7 +1311,7 @@ in
     }
   '';
   home.file.".config/libinput-gestures.conf".text = ''
-  gesture swipe up 3	hyprctl dispatch hyprexpo:expo toggle
+  # gesture swipe up 3	hyprctl dispatch hyprexpo:expo toggle
   gesture swipe down 3	nwggrid-wrapper
 
   gesture swipe right 3	hyprnome
