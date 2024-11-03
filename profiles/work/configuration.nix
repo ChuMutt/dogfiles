@@ -2,14 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{
-  pkgs,
-  lib,
-  systemSettings,
-  userSettings,
-  ...
-}:
-{
+{ pkgs, lib, systemSettings, userSettings, ... }: {
   imports = [
     ../../system/hardware-configuration.nix
     ../../system/hardware/systemd.nix # systemd config
@@ -19,8 +12,9 @@
     ../../system/hardware/opengl.nix
     ../../system/hardware/printing.nix
     ../../system/hardware/bluetooth.nix
-    (./. + "../../../system/wm" + ("/" + userSettings.wm) + ".nix") # My window manager
-    ../../system/app/flatpak.nix
+    (./. + "../../../system/wm" + ("/" + userSettings.wm)
+      + ".nix") # My window manager
+    # ../../system/app/flatpak.nix
     ../../system/app/virtualization.nix
     (import ../../system/app/docker.nix {
       storageDriver = null;
@@ -56,7 +50,9 @@
             --set "LOCAL_GIT_DIRECTORY" ${prev.git} \
             --add-flags $out/share/${oldAttrs.pname}/resources/app \
             --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}" \
-            --prefix LD_LIBRARY_PATH : "${prev.lib.makeLibraryPath [ prev.stdenv.cc.cc.lib ]}"
+            --prefix LD_LIBRARY_PATH : "${
+              prev.lib.makeLibraryPath [ prev.stdenv.cc.cc.lib ]
+            }"
         '';
       });
     })
@@ -72,19 +68,20 @@
   nixpkgs.config.allowUnfree = true;
 
   # Kernel modules
-  boot.kernelModules = [
-    "i2c-dev"
-    "i2c-piix4"
-    "cpufreq_powersave"
-  ];
+  boot.kernelModules = [ "i2c-dev" "i2c-piix4" "cpufreq_powersave" ];
 
   # Bootloader
   # Use systemd-boot if uefi, default to grub otherwise
-  boot.loader.systemd-boot.enable = if (systemSettings.bootMode == "uefi") then true else false;
-  boot.loader.efi.canTouchEfiVariables = if (systemSettings.bootMode == "uefi") then true else false;
-  boot.loader.efi.efiSysMountPoint = systemSettings.bootMountPath; # does nothing if running bios rather than uefi
-  boot.loader.grub.enable = if (systemSettings.bootMode == "uefi") then false else true;
-  boot.loader.grub.device = systemSettings.grubDevice; # does nothing if running uefi rather than bios
+  boot.loader.systemd-boot.enable =
+    if (systemSettings.bootMode == "uefi") then true else false;
+  boot.loader.efi.canTouchEfiVariables =
+    if (systemSettings.bootMode == "uefi") then true else false;
+  boot.loader.efi.efiSysMountPoint =
+    systemSettings.bootMountPath; # does nothing if running bios rather than uefi
+  boot.loader.grub.enable =
+    if (systemSettings.bootMode == "uefi") then false else true;
+  boot.loader.grub.device =
+    systemSettings.grubDevice; # does nothing if running uefi rather than bios
 
   # Networking
   networking.hostName = systemSettings.hostname; # Define your hostname.
@@ -93,37 +90,28 @@
   # Set your time zone.
   time.timeZone = systemSettings.timezone;
   # Select internationalisation properties.
-  i18n =
-    let
-      l = systemSettings.locale;
-    in
-    {
-      defaultLocale = l;
-      extraLocaleSettings = {
-        LC_ADDRESS = l;
-        LC_IDENTIFICATION = l;
-        LC_MEASUREMENT = l;
-        LC_MONETARY = l;
-        LC_NAME = l;
-        LC_NUMERIC = l;
-        LC_PAPER = l;
-        LC_TELEPHONE = l;
-        LC_TIME = l;
-      };
+  i18n = let l = systemSettings.locale;
+  in {
+    defaultLocale = l;
+    extraLocaleSettings = {
+      LC_ADDRESS = l;
+      LC_IDENTIFICATION = l;
+      LC_MEASUREMENT = l;
+      LC_MONETARY = l;
+      LC_NAME = l;
+      LC_NUMERIC = l;
+      LC_PAPER = l;
+      LC_TELEPHONE = l;
+      LC_TIME = l;
     };
+  };
 
   # User account
   users.users.${userSettings.username} = {
     isNormalUser = true;
     description = userSettings.name;
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "input"
-      "dialout"
-      "video"
-      "render"
-    ];
+    extraGroups =
+      [ "networkmanager" "wheel" "input" "dialout" "video" "render" ];
     packages = [ ];
     uid = 1000;
   };
@@ -138,7 +126,7 @@
     cryptsetup
     home-manager
     wpa_supplicant
-    spice-vdagent # Provides copy/paste support if this is a VM guest.
+    # spice-vdagent # Provides copy/paste support if this is a VM guest.
 
     # Shell script template (no shebang required):
     # (writeShellScriptBin "name" ''
@@ -186,13 +174,11 @@
             # Build and activate flake-based Home Manager configuration
             home-manager switch --flake $DOTFILES_DIR
     '')
-
     (writeShellScriptBin "chu-install-doom-emacs" ''
       git clone https://github.com/chumutt/doom ~/.config/doom
       git clone https://github.com/doomemacs/doomemacs --depth 1 ~/.config/emacs
       ~/.config/emacs/bin/doom install
     '')
-
     (writeShellScriptBin "chu-install-roswell" ''
       ros install sbcl-bin
       ros use sbcl
@@ -205,13 +191,10 @@
     (writeShellScriptBin "chu-install-cachix" ''
       cachix use ${userSettings.githubUserName}
     '')
-    ddcutil
-    libdbusmenu-gtk3
-    glib
   ];
 
   # Enable the copy/paste support for virtual machines.
-  services.spice-vdagentd.enable = true;
+  # services.spice-vdagentd.enable = true;
 
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
@@ -221,11 +204,7 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-wlr
-    ];
+    extraPortals = [ pkgs.xdg-desktop-portal pkgs.xdg-desktop-portal-gtk ];
   };
 
   # It is ok to leave this unchanged for compatibility purposes

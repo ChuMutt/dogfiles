@@ -40,10 +40,10 @@
                 browser
             ); # Browser spawn command must be specail for qb, since it doesn't gpu accelerate by default (why?)
         defaultRoamDir = "roam"; # Default org roam directory relative to ~/Org
-        term = "alacritty"; # Default terminal command;
+        term = "alacritty"; # Default terminal
         font = "Intel One Mono"; # Selected font
         fontPkg = pkgs.intel-one-mono; # Font package
-        editor = "neovide"; # Default editor;
+        editor = "neovide"; # Default editor
         # editor spawning translator
         # generates a command that can be used to spawn editor inside a gui
         # EDITOR and TERM session variables must be set in home.nix or other module
@@ -248,21 +248,23 @@
     home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-stable";
 
     hyprland = {
-      url = "github:hyprwm/Hyprland";
+      url = "github:hyprwm/Hyprland/v0.44.1?submodules=true";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
+      type = "git";
+      url = "https://code.hyprland.org/hyprwm/hyprland-plugins.git";
+      rev = "4d7f0b5d8b952f31f7d2e29af22ab0a55ca5c219"; #v0.44.1
       inputs.hyprland.follows = "hyprland";
     };
     hyprlock = {
-      url = "github:hyprwm/hyprlock";
+      type = "git";
+      url = "https://code.hyprland.org/hyprwm/hyprlock.git";
+      rev = "73b0fc26c0e2f6f82f9d9f5b02e660a958902763";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprgrass = {
-      url = "github:horriblename/hyprgrass";
-      inputs.hyprland.follows = "hyprland";
-    };
+    hyprgrass.url = "github:horriblename/hyprgrass/427690aec574fec75f5b7b800ac4a0b4c8e4b1d5";
+    hyprgrass.inputs.hyprland.follows = "hyprland";
 
     nvchad = {
       url = "github:NvChad/starter";
@@ -277,6 +279,8 @@
       url = "github:StevenBlack/hosts";
       flake = false;
     };
+
     ags.url = "github:Aylur/ags";
+
   };
 }

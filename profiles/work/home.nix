@@ -1,12 +1,4 @@
-{
-  inputs,
-  config,
-  pkgs,
-  pkgs-stable,
-  userSettings,
-  ...
-}:
-{
+{ inputs, config, pkgs, pkgs-stable, userSettings, ... }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = userSettings.username;
@@ -15,7 +7,8 @@
   programs.home-manager.enable = true;
 
   imports = [
-    (./. + "../../../user/wm" + ("/" + userSettings.wm + "/" + userSettings.wm) + ".nix") # My window manager selected from flake
+    (./. + "../../../user/wm" + ("/" + userSettings.wm + "/" + userSettings.wm)
+      + ".nix") # My window manager selected from flake
     ../../user/shell/sh.nix # My zsh and bash config
     ../../user/shell/cli-collection.nix # Useful CLI apps
     ../../user/app/emacs/emacs.nix # My doom emacs config
@@ -25,9 +18,10 @@
     ../../user/app/ranger/ranger.nix # My ranger file manager config
     ../../user/app/git/git.nix # My git config
     ../../user/app/keepass/keepass.nix # My password manager
-    (./. + "../../../user/app/browser" + ("/" + userSettings.browser) + ".nix") # My default browser selected from flake
+    (./. + "../../../user/app/browser" + ("/" + userSettings.browser)
+      + ".nix") # My default browser selected from flake
     ../../user/app/virtualization/virtualization.nix # Virtual machines
-    ../../user/app/flatpak/flatpak.nix # Flatpaks
+    # ../../user/app/flatpak/flatpak.nix # Flatpaks
     ../../user/style/stylix.nix # Styling and themes for my apps
     ../../user/lang/cc/cc.nix # C and C++ tools
     ../../user/lang/godot/godot.nix # Game development
@@ -39,257 +33,256 @@
 
   home.stateVersion = "22.11"; # Please read the comment before changing.
 
-  home.packages = (
-    with pkgs;
-    [
-      # Core
-      zsh
-      alacritty
-      brave
-      qutebrowser
-      git
-      syncthing
+  home.packages = (with pkgs; [
+    # Core
+    zsh
+    alacritty
+    brave
+    qutebrowser
+    git
+    syncthing
 
-      # Office
-      nextcloud-client
-      libreoffice-fresh
-      mate.atril
-      openboard
-      xournalpp
-      adwaita-icon-theme
-      shared-mime-info
-      glib
-      newsflash
-      foliate
-      nautilus
-      gnome-calendar
-      seahorse
-      gnome-maps
-      openvpn
-      protonmail-bridge
-      texliveSmall
-      numbat
-      element-desktop-wayland
-      dolphin
+    # Office
+    nextcloud-client
+    libreoffice-fresh
+    mate.atril
+    openboard
+    xournalpp
+    adwaita-icon-theme
+    shared-mime-info
+    glib
+    newsflash
+    foliate
+    nautilus
+    gnome-calendar
+    seahorse
+    gnome-maps
+    openvpn
+    protonmail-bridge
+    texliveSmall
+    numbat
+    element-desktop-wayland
+    dolphin
 
-      openai-whisper-cpp
+    openai-whisper-cpp
 
-      wine
-      bottles
+    wine
+    bottles
 
-      # The following requires 64-bit FL Studio (FL64) to be installed to a bottle
-      # With a bottle name of "FL Studio"
-      (pkgs.writeShellScriptBin "flstudio" ''
-        #!/bin/sh
-        if [ -z "$1" ]
-          then
-            bottles-cli run -b "FL Studio" -p FL64
-            #flatpak run --command=bottles-cli com.usebottles.bottles run -b FL\ Studio -p FL64
-          else
-            filepath=$(winepath --windows "$1")
-            echo \'"$filepath"\'
-            bottles-cli run -b "FL Studio" -p "FL64" --args \'"$filepath"\'
-            #flatpak run --command=bottles-cli com.usebottles.bottles run -b FL\ Studio -p FL64 -args "$filepath"
-          fi
-      '')
-      (pkgs.makeDesktopItem {
-        name = "flstudio";
-        desktopName = "FL Studio 64";
-        exec = "flstudio %U";
-        terminal = false;
-        type = "Application";
-        icon = "flstudio";
-        mimeTypes = [ "application/octet-stream" ];
-      })
-      (stdenv.mkDerivation {
-        name = "flstudio-icon";
-        # icon from https://www.reddit.com/r/MacOS/comments/jtmp7z/i_made_icons_for_discord_spotify_and_fl_studio_in/
-        src = [ ../../user/pkgs/flstudio.png ];
+    # The following requires 64-bit FL Studio (FL64) to be installed to a bottle
+    # With a bottle name of "FL Studio"
+    (pkgs.writeShellScriptBin "flstudio" ''
+      #!/bin/sh
+      if [ -z "$1" ]
+        then
+          bottles-cli run -b "FL Studio" -p FL64
+          #flatpak run --command=bottles-cli com.usebottles.bottles run -b FL\ Studio -p FL64
+        else
+          filepath=$(winepath --windows "$1")
+          echo \'"$filepath"\'
+          bottles-cli run -b "FL Studio" -p "FL64" --args \'"$filepath"\'
+          #flatpak run --command=bottles-cli com.usebottles.bottles run -b FL\ Studio -p FL64 -args "$filepath"
+        fi
+    '')
+    (pkgs.makeDesktopItem {
+      name = "flstudio";
+      desktopName = "FL Studio 64";
+      exec = "flstudio %U";
+      terminal = false;
+      type = "Application";
+      icon = "flstudio";
+      mimeTypes = [ "application/octet-stream" ];
+    })
+    (stdenv.mkDerivation {
+      name = "flstudio-icon";
+      # icon from https://www.reddit.com/r/MacOS/comments/jtmp7z/i_made_icons_for_discord_spotify_and_fl_studio_in/
+      src = [ ../../user/pkgs/flstudio.png ];
 
-        unpackPhase = ''
-          for srcFile in $src; do
-            # Copy file into build dir
-            cp $srcFile ./
-          done
-        '';
+      unpackPhase = ''
+        for srcFile in $src; do
+          # Copy file into build dir
+          cp $srcFile ./
+        done
+      '';
 
-        installPhase = ''
-          mkdir -p $out $out/share $out/share/pixmaps
-          ls $src
-          ls
-          cp $src $out/share/pixmaps/flstudio.png
-        '';
-      })
+      installPhase = ''
+        mkdir -p $out $out/share $out/share/pixmaps
+        ls $src
+        ls
+        cp $src $out/share/pixmaps/flstudio.png
+      '';
+    })
 
-      # Media
-      gimp
-      krita
-      pinta
-      inkscape
-      (pkgs-stable.lollypop.override { youtubeSupport = false; })
-      vlc
-      mpv
-      yt-dlp
-      blender-hip
-      libresprite
-      # (pkgs.appimageTools.wrapType2 {
-      #   name = "Cura";
-      #   src = fetchurl {
-      #     url =
-      #       "https://github.com/Ultimaker/Cura/releases/download/5.8.1/UltiMaker-Cura-5.8.1-linux-X64.AppImage";
-      #     hash = "sha256-VLd+V00LhRZYplZbKkEp4DXsqAhA9WLQhF933QAZRX0=";
-      #   };
-      #   extraPkgs = pkgs: with pkgs; [ ];
-      # })
-      #(pkgs-stable.cura.overrideAttrs (oldAttrs: {
-      #  postInstall = oldAttrs.postInstall + ''cp -rf ${(pkgs.makeDesktopItem {
-      #      name = "com.ultimaker.cura";
-      #      icon = "cura-icon";
-      #      desktopName = "Cura";
-      #      exec = "env QT_QPA_PLATFORM=xcb ${pkgs-stable.cura}/bin/cura %F";
-      #      tryExec = "env QT_QPA_PLATFORM=xcb ${pkgs-stable.cura}/bin/cura";
-      #      terminal = false;
-      #      type = "Application";
-      #      categories = ["Graphics"];
-      #      mimeTypes = ["model/stl" "application/vnd.ms-3mfdocument" "application/prs.wavefront-obj"
-      #                   "image/bmp" "image/gif" "image/jpeg" "image/png" "text/x-gcode" "application/x-amf"
-      #                   "application/x-ply" "application/x-ctm" "model/vnd.collada+xml" "model/gltf-binary"
-      #                   "model/gltf+json" "model/vnd.collada+xml+zip"];
-      #      })}/share/applications $out/share'';
-      #}))
-      #(pkgs.writeShellScriptBin "curax" ''env QT_QPA_PLATFORM=xcb ${pkgs-stable.cura}/bin/cura $@'')
-      # (pkgs-stable.curaengine_stable)
-      # openscad
-      # (stdenv.mkDerivation {
-      #   name = "cura-slicer";
-      #   version = "0.0.7";
-      #   src = fetchFromGitHub {
-      #     owner = "Spiritdude";
-      #     repo = "Cura-CLI-Wrapper";
-      #     rev = "ff076db33cfefb770e1824461a6336288f9459c7";
-      #     sha256 = "sha256-BkvdlqUqoTYEJpCCT3Utq+ZBU7g45JZFJjGhFEXPXi4=";
-      #   };
-      #   phases = "installPhase";
-      #   installPhase = ''
-      #     mkdir -p $out $out/bin $out/share $out/share/cura-slicer
-      #     cp $src/cura-slicer $out/bin
-      #     cp $src/settings/fdmprinter.def.json $out/share/cura-slicer
-      #     cp $src/settings/base.ini $out/share/cura-slicer
-      #     sed -i 's+#!/usr/bin/perl+#! /usr/bin/env nix-shell\n#! nix-shell -i perl -p perl538 perl538Packages.JSON+g' $out/bin/cura-slicer
-      #     sed -i 's+/usr/share+/home/${userSettings.username}/.nix-profile/share+g' $out/bin/cura-slicer
-      #   '';
-      #   propagatedBuildInputs = with pkgs-stable; [ curaengine_stable ];
-      # })
-      obs-studio
-      ffmpeg
-      (pkgs.writeScriptBin "kdenlive-accel" ''
-        #!/bin/sh
-        DRI_PRIME=0 kdenlive "$1"
-      '')
-      movit
-      mediainfo
-      libmediainfo
-      audio-recorder
-      cheese
-      ardour
-      rosegarden
-      tenacity
+    # Media
+    gimp
+    krita
+    pinta
+    inkscape
+    (pkgs-stable.lollypop.override { youtubeSupport = false; })
+    vlc
+    mpv
+    yt-dlp
+    blender-hip
+    libresprite
+    # (pkgs.appimageTools.wrapType2 {
+    #   name = "Cura";
+    #   src = fetchurl {
+    #     url =
+    #       "https://github.com/Ultimaker/Cura/releases/download/5.8.1/UltiMaker-Cura-5.8.1-linux-X64.AppImage";
+    #     hash = "sha256-VLd+V00LhRZYplZbKkEp4DXsqAhA9WLQhF933QAZRX0=";
+    #   };
+    #   extraPkgs = pkgs: with pkgs; [ ];
+    # })
+    #(pkgs-stable.cura.overrideAttrs (oldAttrs: {
+    #  postInstall = oldAttrs.postInstall + ''cp -rf ${(pkgs.makeDesktopItem {
+    #      name = "com.ultimaker.cura";
+    #      icon = "cura-icon";
+    #      desktopName = "Cura";
+    #      exec = "env QT_QPA_PLATFORM=xcb ${pkgs-stable.cura}/bin/cura %F";
+    #      tryExec = "env QT_QPA_PLATFORM=xcb ${pkgs-stable.cura}/bin/cura";
+    #      terminal = false;
+    #      type = "Application";
+    #      categories = ["Graphics"];
+    #      mimeTypes = ["model/stl" "application/vnd.ms-3mfdocument" "application/prs.wavefront-obj"
+    #                   "image/bmp" "image/gif" "image/jpeg" "image/png" "text/x-gcode" "application/x-amf"
+    #                   "application/x-ply" "application/x-ctm" "model/vnd.collada+xml" "model/gltf-binary"
+    #                   "model/gltf+json" "model/vnd.collada+xml+zip"];
+    #      })}/share/applications $out/share'';
+    #}))
+    #(pkgs.writeShellScriptBin "curax" ''env QT_QPA_PLATFORM=xcb ${pkgs-stable.cura}/bin/cura $@'')
+    # (pkgs-stable.curaengine_stable)
+    # openscad
+    # (stdenv.mkDerivation {
+    #   name = "cura-slicer";
+    #   version = "0.0.7";
+    #   src = fetchFromGitHub {
+    #     owner = "Spiritdude";
+    #     repo = "Cura-CLI-Wrapper";
+    #     rev = "ff076db33cfefb770e1824461a6336288f9459c7";
+    #     sha256 = "sha256-BkvdlqUqoTYEJpCCT3Utq+ZBU7g45JZFJjGhFEXPXi4=";
+    #   };
+    #   phases = "installPhase";
+    #   installPhase = ''
+    #     mkdir -p $out $out/bin $out/share $out/share/cura-slicer
+    #     cp $src/cura-slicer $out/bin
+    #     cp $src/settings/fdmprinter.def.json $out/share/cura-slicer
+    #     cp $src/settings/base.ini $out/share/cura-slicer
+    #     sed -i 's+#!/usr/bin/perl+#! /usr/bin/env nix-shell\n#! nix-shell -i perl -p perl538 perl538Packages.JSON+g' $out/bin/cura-slicer
+    #     sed -i 's+/usr/share+/home/${userSettings.username}/.nix-profile/share+g' $out/bin/cura-slicer
+    #   '';
+    #   propagatedBuildInputs = with pkgs-stable; [ curaengine_stable ];
+    # })
+    obs-studio
+    ffmpeg
+    (pkgs.writeScriptBin "kdenlive-accel" ''
+      #!/bin/sh
+      DRI_PRIME=0 kdenlive "$1"
+    '')
+    movit
+    mediainfo
+    libmediainfo
+    audio-recorder
+    cheese
+    ardour
+    rosegarden
+    tenacity
 
-      # Various dev packages
-      remmina
-      sshfs
-      texinfo
-      libffi
-      zlib
-      nodePackages.ungit
-      ventoy
+    # Various dev packages
+    remmina
+    sshfs
+    texinfo
+    libffi
+    zlib
+    nodePackages.ungit
+    ventoy
 
-      yabridge
-      yabridgectl # modern interface for windows vst2 & vst3 plugins
-      zfs
-      alsa-scarlett-gui
-      raysession
-      calf
-      mixxx
-      musescore
-      drumgizmo
-      geonkick
-      goattracker
-      airwindows-lv2
-      steam
-      protonup
-      discord
-      webcord
-      telegram-desktop
-      element
-      roswell
-      libreoffice-fresh
-      gimp
-      krita
-      pinta
-      inkscape
-      libresprite
-      xournalpp
-      mpv
-      yt-dlp
-      gallery-dl
-      obs-studio
-      ffmpeg
-      mediainfo
-      libmediainfo
-      cheese
-      movit
-      libffi
-      zlib
-      ventoy
-      looking-glass-client
-      drumgizmo
-      geonkick
-      goattracker
-      guitarix
-      helvum
-      jamesdsp
-      jconvolver
-      milkytracker
-      mixxx
-      musescore
-      odin2
-      paulstretch
-      pavucontrol
-      raysession
-      reaper
-      renoise
-      roomeqwizard
-      scream
-      touchosc
-      vcv-rack
-      vorbis-tools
-      wolf-shaper
-      ffmpeg
-      mpd
-      mpv
-      cheese
-      krita
-      gimp
-      inkscape
-      nh
-      xclip
-      beets
-      xdg-user-dirs
-      discord
-      telegram-desktop
-      nurl
-      nix-prefetch
+    yabridge
+    yabridgectl # modern interface for windows vst2 & vst3 plugins
+    zfs
+    alsa-scarlett-gui
+    raysession
+    calf
+    mixxx
+    musescore
+    drumgizmo
+    geonkick
+    goattracker
+    airwindows-lv2
+    steam
+    protonup
+    discord
+    webcord
+    telegram-desktop
+    element
+    roswell
+    libreoffice-fresh
+    gimp
+    krita
+    pinta
+    inkscape
+    libresprite
+    xournalpp
+    mpv
+    yt-dlp
+    gallery-dl
+    obs-studio
+    ffmpeg
+    mediainfo
+    libmediainfo
+    cheese
+    movit
+    libffi
+    zlib
+    ventoy
+    looking-glass-client
+    drumgizmo
+    geonkick
+    goattracker
+    guitarix
+    helvum
+    jamesdsp
+    jconvolver
+    milkytracker
+    mixxx
+    musescore
+    odin2
+    paulstretch
+    pavucontrol
+    raysession
+    reaper
+    renoise
+    roomeqwizard
+    scream
+    touchosc
+    vcv-rack
+    vorbis-tools
+    wolf-shaper
+    ffmpeg
+    mpd
+    mpv
+    cheese
+    krita
+    gimp
+    inkscape
+    nh
+    xclip
+    beets
+    xdg-user-dirs
+    discord
+    telegram-desktop
+    nurl
+    nix-prefetch
 
-      nnn
+    nnn
 
-    ]
-  );
+  ]);
 
-  home.file.".local/share/pixmaps/nixos-snowflake-stylix.svg".source = config.lib.stylix.colors {
-    template = builtins.readFile ../../user/pkgs/nixos-snowflake-stylix.svg.mustache;
-    extension = "svg";
-  };
+  home.file.".local/share/pixmaps/nixos-snowflake-stylix.svg".source =
+    config.lib.stylix.colors {
+      template =
+        builtins.readFile ../../user/pkgs/nixos-snowflake-stylix.svg.mustache;
+      extension = "svg";
+    };
 
   services.syncthing.enable = true;
   services.nextcloud-client = {
@@ -336,7 +329,10 @@
 
   gtk.iconTheme = {
     package = pkgs.papirus-icon-theme;
-    name = if (config.stylix.polarity == "dark") then "Papirus-Dark" else "Papirus-Light";
+    name = if (config.stylix.polarity == "dark") then
+      "Papirus-Dark"
+    else
+      "Papirus-Light";
   };
 
   services.pasystray.enable = true;
@@ -344,7 +340,5 @@
   services.arrpc.enable = true;
 
   # thefuck - magnificent app that corrects your previous console command.
-  programs.thefuck = {
-    enable = true;
-  };
+  programs.thefuck = { enable = true; };
 }
