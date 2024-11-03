@@ -583,7 +583,6 @@ in
       before_sleep_cmd = loginctl lock-session
       ignore_dbus_inhibit = false
     }
-
     # FIXME memory leak fries computer inbetween dpms off and suspend
     #listener {
     #  timeout = 150 # in seconds
@@ -591,12 +590,11 @@ in
     #  on-resume = hyprctl dispatch dpms on
     #}
     listener {
-      timeout = 165 # in seconds
+      timeout = 5000 # in seconds
       on-timeout = loginctl lock-session
     }
     listener {
-      timeout = 180 # in seconds
-      #timeout = 5400 # in seconds
+      timeout = 5400 # in seconds
       on-timeout = systemctl suspend
       on-resume = hyprctl dispatch dpms on
     }
@@ -663,7 +661,7 @@ in
 
     label {
       monitor =
-      text = Hello, Emmet
+      text = Hello, ''+userSettings.name+''
       color = rgb(''+config.lib.stylix.colors.base07-rgb-r+'',''+config.lib.stylix.colors.base07-rgb-g+'', ''+config.lib.stylix.colors.base07-rgb-b+'')
       font_size = 25
       font_family = ''+userSettings.font+''
