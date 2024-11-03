@@ -23,7 +23,7 @@
         name = "Chu"; # name/identifier
         githubUserName = "chumutt"; # github username
         email = "chufilthymutt@gmail.com"; # email (used for certain configurations)
-        dotfilesDir = "/home/chu/.dogfiles"; # absolute path of the local repo
+        dotfilesDir = "/home/chu/.dotfiles"; # absolute path of the local repo
         theme = "io"; # selcted theme from my themes directory (./themes/)
         wm = "hyprland"; # Selected window manager or desktop environment; must select one in both ./user/wm/ and ./system/wm/
         # window manager type (hyprland or x11) translator
