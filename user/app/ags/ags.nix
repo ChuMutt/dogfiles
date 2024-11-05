@@ -1,10 +1,10 @@
 { inputs, pkgs, config, ... }:
 
 {
-  home.file."${config.xdg.configHome}/ags/" = {
-    source = ./../../config/ags;
-    recursive = true;
-  };
+  # home.file."${config.xdg.configHome}/ags/" = {
+  #   source = ./../../config/ags;
+  #   recursive = true;
+  # };
     # add the home manager module
   imports = [ inputs.ags.homeManagerModules.default ];
 
