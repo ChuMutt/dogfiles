@@ -28,6 +28,7 @@
         wm = "hyprland"; # Selected window manager or desktop environment; must select one in both ./user/wm/ and ./system/wm/
         # window manager type (hyprland or x11) translator
         wmType = if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11";
+        sysTray = "waybar"; # for hyprland; waybar is default (waybar or ags)
         browser = "qutebrowser"; # Default browser; must select one from ./user/app/browser/
         spawnBrowser =
           if ((browser == "qutebrowser") && (wm == "hyprland")) then
@@ -39,11 +40,10 @@
               else
                 browser
             ); # Browser spawn command must be specail for qb, since it doesn't gpu accelerate by default (why?)
-        defaultRoamDir = "roam"; # Default org roam directory relative to ~/Org
         term = "alacritty"; # Default terminal
         font = "Intel One Mono"; # Selected font
         fontPkg = pkgs.intel-one-mono; # Font package
-        editor = "neovide"; # Default editor
+        editor = "neovim"; # Default editor
         # editor spawning translator
         # generates a command that can be used to spawn editor inside a gui
         # EDITOR and TERM session variables must be set in home.nix or other module
