@@ -171,7 +171,7 @@ in
        bind=,code:121,exec,swayosd-client --output-volume mute-toggle
        bind=,code:256,exec,swayosd-client --output-volume mute-toggle
        # SUPER+SHIFT+m to mute system audio
-       bind=SUPER,SHIFT,code:109,exec,swayosd-client --output-volume mute-toggle
+       bind=SUPER,SHIFT,M,exec,swayosd-client --output-volume mute-toggle
        bind=SHIFT,code:122,exec,swayosd-client --output-volume lower
        bind=SHIFT,code:123,exec,swayosd-client --output-volume raise
        bind=SUPER,-,exec,swayosd-client --output-volume lower
