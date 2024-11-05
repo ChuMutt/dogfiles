@@ -1,5 +1,9 @@
 { inputs, config, lib, pkgs, userSettings, systemSettings, pkgs-nwg-dock-hyprland, ... }: let
   pkgs-hyprland = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+  systemTray = if ((userSettings.sysTray == "waybar") ||
+                   (userSettings.sysTray == "ags"))
+               then "exec-once = waybar"
+               else "exec-once = ags";
 in
 {
   imports = [
@@ -21,7 +25,6 @@ in
     name = if (config.stylix.polarity == "light") then "Quintom_Ink" else "Quintom_Snow";
     size = 36;
   };
-
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
@@ -51,7 +54,7 @@ in
       exec-once = blueman-applet
       exec-once = GOMAXPROCS=1 syncthing --no-browser
       exec-once = protonmail-bridge --noninteractive
-      exec-once = waybar
+      '' + systemTray + ''
       exec-once = emacs --daemon
 
       exec-once = hypridle
@@ -155,8 +158,11 @@ in
        bind=,code:123,exec,swayosd-client --output-volume raise
        bind=,code:121,exec,swayosd-client --output-volume mute-toggle
        bind=,code:256,exec,swayosd-client --output-volume mute-toggle
+       bind=SUPER,SHIFT,M,exec,swayosd-client --output-volume mute-toggle
        bind=SHIFT,code:122,exec,swayosd-client --output-volume lower
        bind=SHIFT,code:123,exec,swayosd-client --output-volume raise
+       bind=SUPER,-,exec,swayosd-client --output-volume lower
+       bind=SUPER,+,exec,swayosd-client --output-volume raise
        bind=,code:232,exec,swayosd-client --brightness lower
        bind=,code:233,exec,swayosd-client --brightness raise
        bind=,code:237,exec,brightnessctl --device='asus::kbd_backlight' set 1-
