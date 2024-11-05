@@ -214,6 +214,7 @@
     webcord
     telegram-desktop
     element
+    patchelf
     roswell
     libreoffice-fresh
     gimp
@@ -273,7 +274,6 @@
     nurl
     nix-prefetch
 
-    nnn
 
   ]);
 
