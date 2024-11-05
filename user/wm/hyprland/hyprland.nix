@@ -1,9 +1,19 @@
 { inputs, config, lib, pkgs, userSettings, systemSettings, pkgs-nwg-dock-hyprland, ... }: let
   pkgs-hyprland = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-  systemTray = if ((userSettings.sysTray == "waybar") ||
-                   (userSettings.sysTray == "ags"))
-               then "exec-once = waybar"
-               else "exec-once = ags";
+  systemTrayExec =
+    if ((userSettings.systemTray == "waybar") ||
+        (userSettings.systemTray == "ags"))
+    then "exec-once = waybar"
+    else "exec-once = ags";
+  systemTrayLayerRules =
+    if ((userSettings.systemTray == "waybar") ||
+        (userSettings.systemTray == "ags"))
+    then ''
+       layerrule = blur,waybar
+       layerrule = xray,waybar
+       blurls = waybar
+       ''
+    else "";
 in
 {
   imports = [
@@ -54,7 +64,7 @@ in
       exec-once = blueman-applet
       exec-once = GOMAXPROCS=1 syncthing --no-browser
       exec-once = protonmail-bridge --noninteractive
-      '' + systemTray + ''
+      '' + systemTrayExec + ''
       exec-once = emacs --daemon
 
       exec-once = hypridle
@@ -310,10 +320,7 @@ in
        windowrulev2 = opacity 0.85,class:^(org.gnome.Nautilus)$
 
        windowrulev2 = opacity 0.85,initialTitle:^(Notes)$,initialClass:^(Brave-browser)$
-
-       layerrule = blur,waybar
-       layerrule = xray,waybar
-       blurls = waybar
+       '' + systemTrayLayerRules + ''
        layerrule = blur,launcher # fuzzel
        blurls = launcher # fuzzel
        layerrule = blur,gtk-layer-shell
@@ -324,8 +331,8 @@ in
        layerrule = animation fade,~nwggrid
        blurls = ~nwggrid
 
-       bind=SUPER,equal, exec, hyprctl keyword cursor:zoom_factor "$(hyprctl getoption cursor:zoom_factor | grep float | awk '{print $2 + 0.5}')"
-       bind=SUPER,minus, exec, hyprctl keyword cursor:zoom_factor "$(hyprctl getoption cursor:zoom_factor | grep float | awk '{print $2 - 0.5}')"
+       # bind=SUPER,equal, exec, hyprctl keyword cursor:zoom_factor "$(hyprctl getoption cursor:zoom_factor | grep float | awk '{print $2 + 0.5}')"
+       # bind=SUPER,minus, exec, hyprctl keyword cursor:zoom_factor "$(hyprctl getoption cursor:zoom_factor | grep float | awk '{print $2 - 0.5}')"
 
        bind=SUPER,I,exec,networkmanager_dmenu
        bind=SUPER,P,exec,keepmenu
@@ -589,12 +596,6 @@ in
       before_sleep_cmd = loginctl lock-session
       ignore_dbus_inhibit = false
     }
-    # FIXME memory leak fries computer inbetween dpms off and suspend
-    #listener {
-    #  timeout = 150 # in seconds
-    #  on-timeout = hyprctl dispatch dpms off
-    #  on-resume = hyprctl dispatch dpms on
-    #}
     listener {
       timeout = 5000 # in seconds
       on-timeout = loginctl lock-session
@@ -695,7 +696,7 @@ in
   services.swayosd.enable = true;
   services.swayosd.topMargin = 0.5;
   programs.waybar = {
-    enable = true;
+    enable = if (userSettings.systemTray == "waybar") then true else false;
     package = pkgs.waybar.overrideAttrs (oldAttrs: {
       postPatch = ''
         # use hyprctl to switch workspaces
