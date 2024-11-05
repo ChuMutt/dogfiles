@@ -171,7 +171,7 @@ in
        bind=,code:121,exec,swayosd-client --output-volume mute-toggle
        bind=,code:256,exec,swayosd-client --output-volume mute-toggle
        # SUPER+SHIFT+m to mute system audio
-       bind=SUPER,SHIFT,M,exec,swayosd-client --output-volume mute-toggle
+       bind=SUPER,code:109,exec,swayosd-client --output-volume mute-toggle
        bind=SHIFT,code:122,exec,swayosd-client --output-volume lower
        bind=SHIFT,code:123,exec,swayosd-client --output-volume raise
        bind=SUPER,-,exec,swayosd-client --output-volume lower
@@ -453,7 +453,7 @@ in
         };
      })
     )
-    gnome.zenity
+    zenity
     wlr-randr
     wtype
     ydotool
@@ -463,7 +463,7 @@ in
     inputs.hyprlock.packages.${pkgs.system}.default
     hypridle
     hyprpaper
-    fnott
+    (if ((userSettings.systemTray == "waybar" || userSettings.systemTray == "ags")) then fnott else nil)
     keepmenu
     pinentry-gnome3
     wev
