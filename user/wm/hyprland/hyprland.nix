@@ -111,8 +111,10 @@ in
 
        bind=SUPER,code:9,exec,nwggrid-wrapper
        bind=SUPER,code:66,exec,nwggrid-wrapper
-       bind=SUPER,SPACE,fullscreen,1
-       bind=SUPERSHIFT,F,fullscreen,0
+       # SUPER + f = semi-fullscreen
+       bind=SUPER,f,fullscreen,1
+       # SUPER + SHIFT + f = actual fullscreen
+       bind=SUPERSHIFT,f,fullscreen,0
        bind=SUPER,Y,workspaceopt,allfloat
        bind=ALT,TAB,cyclenext
        bind=ALT,TAB,bringactivetotop
