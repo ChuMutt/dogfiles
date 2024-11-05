@@ -224,8 +224,8 @@ in
 
        bind=SUPER,Z,exec,if hyprctl clients | grep scratch_term; then echo "scratch_term respawn not needed"; else alacritty --class scratch_term; fi
        bind=SUPER,Z,togglespecialworkspace,scratch_term
-       bind=SUPER,F,exec,if hyprctl clients | grep scratch_ranger; then echo "scratch_ranger respawn not needed"; else kitty --class scratch_ranger -e ranger; fi
-       bind=SUPER,F,togglespecialworkspace,scratch_ranger
+       # bind=SUPER,F,exec,if hyprctl clients | grep scratch_ranger; then echo "scratch_ranger respawn not needed"; else kitty --class scratch_ranger -e ranger; fi
+       # bind=SUPER,F,togglespecialworkspace,scratch_ranger
        bind=SUPER,N,exec,if hyprctl clients | grep scratch_numbat; then echo "scratch_ranger respawn not needed"; else alacritty --class scratch_numbat -e numbat; fi
        bind=SUPER,N,togglespecialworkspace,scratch_numbat
        bind=SUPER,M,exec,if hyprctl clients | grep lollypop; then echo "scratch_ranger respawn not needed"; else lollypop; fi
