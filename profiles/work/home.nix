@@ -27,7 +27,6 @@
     ../../user/lang/godot/godot.nix # Game development
     ../../user/hardware/bluetooth.nix # Bluetooth
 
-    inputs.ags.homeManagerModules.default
     ../../user/app/ags/ags.nix
   ];
 
@@ -68,6 +67,8 @@
 
     wine
     bottles
+
+    libcamera
 
     # The following requires 64-bit FL Studio (FL64) to be installed to a bottle
     # With a bottle name of "FL Studio"
@@ -195,6 +196,7 @@
     zlib
     nodePackages.ungit
     ventoy
+    ddcutil
 
     yabridge
     yabridgectl # modern interface for windows vst2 & vst3 plugins
