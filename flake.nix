@@ -28,7 +28,7 @@
         wm = "hyprland"; # Selected window manager or desktop environment; must select one in both ./user/wm/ and ./system/wm/
         # window manager type (hyprland or x11) translator
         wmType = if ((wm == "hyprland") || (wm == "plasma")) then "wayland" else "x11";
-        sysTray = "waybar"; # for hyprland; waybar is default (waybar or ags)
+        sysTray = "ags"; # for hyprland; waybar is default (waybar or ags)
         browser = "qutebrowser"; # Default browser; must select one from ./user/app/browser/
         spawnBrowser =
           if ((browser == "qutebrowser") && (wm == "hyprland")) then
