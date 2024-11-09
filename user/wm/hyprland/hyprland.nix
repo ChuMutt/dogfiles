@@ -1,13 +1,13 @@
 { inputs, config, lib, pkgs, userSettings, systemSettings, pkgs-nwg-dock-hyprland, ... }: let
   pkgs-hyprland = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
   systemTrayExec =
-    if ((userSettings.systemTray == "waybar") ||
-        (userSettings.systemTray == "ags"))
+    if (userSettings.systemTray == "waybar" ||
+        userSettings.systemTray == "ags")
     then "exec-once = waybar"
     else "exec-once = ags";
   systemTrayLayerRules =
-    if ((userSettings.systemTray == "waybar") ||
-        (userSettings.systemTray == "ags"))
+    if (userSettings.systemTray == "waybar" ||
+        userSettings.systemTray == "ags")
     then ''
        layerrule = blur,waybar
        layerrule = xray,waybar
