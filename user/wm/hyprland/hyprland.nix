@@ -1300,7 +1300,7 @@ in
       radius = 7;
     };
   };
-  services.fnott.enable = true;
+  services.fnott.enable = (if ((userSettings.systemTray == "waybar" || userSettings.systemTray == "ags")) then true else false);
   services.fnott.settings = {
     main = {
       anchor = "bottom-right";
