@@ -659,7 +659,7 @@ in {
       monitor =
       text = Hello, ''+userSettings.name+''
       color = rgb(''+config.lib.stylix.colors.base07-rgb-r+'',''+config.lib.stylix.colors.base07-rgb-g+'', ''+config.lib.stylix.colors.base07-rgb-b+'')
-      font_size = 25
+      font_size = 12
       font_family = ''+userSettings.font+''
 
       rotate = 0 # degrees, counter-clockwise
@@ -673,7 +673,7 @@ in {
       monitor =
       text = $TIME
       color = rgb(''+config.lib.stylix.colors.base07-rgb-r+'',''+config.lib.stylix.colors.base07-rgb-g+'', ''+config.lib.stylix.colors.base07-rgb-b+'')
-      font_size = 20
+      font_size = 12
       font_family = Intel One Mono
       rotate = 0 # degrees, counter-clockwise
 
@@ -1174,7 +1174,7 @@ in {
         box-shadow: none;
         color: #'' + config.lib.stylix.colors.base07 + '';
 
-        font-size: 20px;
+        font-size: 16px;
     }
 
     button {
@@ -1201,10 +1201,10 @@ in {
 
         color: #'' + config.lib.stylix.colors.base07 + '';
 
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-top: 16px;
+        margin-bottom: 16px;
 
-        font-size: 20px;
+        font-size: 16px;
     }
 
     #separator {
@@ -1267,7 +1267,7 @@ in {
   programs.fuzzel.package = pkgs.fuzzel;
   programs.fuzzel.settings = {
     main = {
-      font = userSettings.font + ":size=16";
+      font = userSettings.font + ":size=12";
       dpi-aware = "no";
       show-actions = "yes";
       terminal = "${pkgs.alacritty}/bin/alacritty";
