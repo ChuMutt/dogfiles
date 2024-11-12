@@ -1,21 +1,6 @@
 { inputs, config, lib, pkgs, userSettings, systemSettings, pkgs-nwg-dock-hyprland, ... }: let
   pkgs-hyprland = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-  systemTrayExec =
-    if (userSettings.systemTray == "waybar" ||
-        userSettings.systemTray == "ags")
-    then "exec-once = waybar"
-    else "exec-once = ags";
-  systemTrayLayerRules =
-    if (userSettings.systemTray == "waybar" ||
-        userSettings.systemTray == "ags")
-    then ''
-       layerrule = blur,waybar
-       layerrule = xray,waybar
-       blurls = waybar
-       ''
-    else "";
-in
-{
+in {
   imports = [
     ../../app/terminal/alacritty.nix
     ../../app/terminal/kitty.nix
@@ -64,7 +49,7 @@ in
       exec-once = blueman-applet
       exec-once = GOMAXPROCS=1 syncthing --no-browser
       exec-once = protonmail-bridge --noninteractive
-      '' + systemTrayExec + ''
+      exec-once = waybar
       exec-once = emacs --daemon
 
       exec-once = hypridle
@@ -111,10 +96,9 @@ in
 
        bind=SUPER,code:9,exec,nwggrid-wrapper
        bind=SUPER,code:66,exec,nwggrid-wrapper
-       # SUPER + f = semi-fullscreen
-       bind=SUPER,f,fullscreen,1
-       # SUPER + SHIFT + f = actual fullscreen
-       bind=SUPERSHIFT,f,fullscreen,0
+
+       bind=SUPER,f,fullscreen,1 # SUPER + f = semi-fullscreen
+       bind=SUPERSHIFT,f,fullscreen,0 # SUPER + SHIFT + f = actual fullscreen
        bind=SUPER,Y,workspaceopt,allfloat
        bind=ALT,TAB,cyclenext
        bind=ALT,TAB,bringactivetotop
@@ -323,7 +307,9 @@ in
        windowrulev2 = opacity 0.85,class:^(org.gnome.Nautilus)$
 
        windowrulev2 = opacity 0.85,initialTitle:^(Notes)$,initialClass:^(Brave-browser)$
-       '' + systemTrayLayerRules + ''
+       layerrule = blur,waybar
+       layerrule = xray,waybar
+       blurls = waybar
        layerrule = blur,launcher # fuzzel
        blurls = launcher # fuzzel
        layerrule = blur,gtk-layer-shell
@@ -463,7 +449,7 @@ in
     inputs.hyprlock.packages.${pkgs.system}.default
     hypridle
     hyprpaper
-    (if ((userSettings.systemTray == "waybar" || userSettings.systemTray == "ags")) then fnott else nil)
+    fnott
     keepmenu
     pinentry-gnome3
     wev
@@ -699,7 +685,7 @@ in
   services.swayosd.enable = true;
   services.swayosd.topMargin = 0.5;
   programs.waybar = {
-    enable = if (userSettings.systemTray == "waybar") then true else false;
+    enable = true;
     package = pkgs.waybar.overrideAttrs (oldAttrs: {
       postPatch = ''
         # use hyprctl to switch workspaces
@@ -1281,7 +1267,7 @@ in
   programs.fuzzel.package = pkgs.fuzzel;
   programs.fuzzel.settings = {
     main = {
-      font = userSettings.font + ":size=20";
+      font = userSettings.font + ":size=16";
       dpi-aware = "no";
       show-actions = "yes";
       terminal = "${pkgs.alacritty}/bin/alacritty";
@@ -1300,7 +1286,7 @@ in
       radius = 7;
     };
   };
-  services.fnott.enable = if (userSettings.systemTray == "waybar" || userSettings.systemTray == "ags") then true else false;
+  services.fnott.enable = true;
   services.fnott.settings = {
     main = {
       anchor = "bottom-right";

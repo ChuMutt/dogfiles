@@ -44,7 +44,7 @@ in {
       package = pkgs.noto-fonts-monochrome-emoji;
     };
     sizes = {
-      terminal = 18;
+      terminal = 12;
       applications = 12;
       popups = 12;
       desktop = 12;
