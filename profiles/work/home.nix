@@ -26,8 +26,6 @@
     ../../user/lang/cc/cc.nix # C and C++ tools
     ../../user/lang/godot/godot.nix # Game development
     ../../user/hardware/bluetooth.nix # Bluetooth
-
-    ../../user/app/ags/ags.nix
   ];
 
   home.stateVersion = "22.11"; # Please read the comment before changing.
