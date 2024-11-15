@@ -14,7 +14,7 @@
     ../../system/hardware/bluetooth.nix
     (./. + "../../../system/wm" + ("/" + userSettings.wm)
       + ".nix") # My window manager
-    # ../../system/app/flatpak.nix
+    ../../system/app/flatpak.nix
     ../../system/app/virtualization.nix
     (import ../../system/app/docker.nix {
       storageDriver = null;
@@ -146,33 +146,33 @@
       fi
     '')
     (writeShellScriptBin "chu-install-home-manager" ''
-            # Installs the standalone version of Home Manager.
-            # Step 1 of the configuration installation process following first
-            # "nixos-rebuild switch --flake etc..." run (I think).
+      # Installs the standalone version of Home Manager.
+      # Step 1 of the configuration installation process following first
+      # "nixos-rebuild switch --flake etc..." run (I think).
 
-            # By default, Home Manager generates a configuration file and writes it
-            # to ~/.config/home-manager/home.nix. Here, it'll go into $DOTFILES_DIR.
+      # By default, Home Manager generates a configuration file and writes it
+      # to ~/.config/home-manager/home.nix. Here, it'll go into $DOTFILES_DIR.
 
-            # Add Home Manager channel to channel list:
-            nix-channel --add \
-              https://github.com/nix-community/home-manager/archive/master.tar.gz \
-      	      home-manager
+      # Add Home Manager channel to channel list:
+      nix-channel --add \
+        https://github.com/nix-community/home-manager/archive/master.tar.gz \
+      	home-manager
 
-            # Pull channel updates from channel list:
-            nix-channel --update
+      # Pull channel updates from channel list:
+      nix-channel --update
 
-            # Generate a minimal Home Manager config at ~/.config/home-manager/home.nix
-            nix run home-manager/master -- init --switch $DOTFILES_DIR
+      # Generate a minimal Home Manager config at ~/.config/home-manager/home.nix
+      nix run home-manager/master -- init --switch $DOTFILES_DIR
 
-            # Flake inputs aren't updated by Home Manager, so we need to do it
-            # ourselves:
-            nix flake update
+      # Flake inputs aren't updated by Home Manager, so we need to do it
+      # ourselves:
+      nix flake update
 
-            # Install Home Manager via nix-shell.
-            nix-shell '<home-manager>' -A install
+      # Install Home Manager via nix-shell.
+      nix-shell '<home-manager>' -A install
 
-            # Build and activate flake-based Home Manager configuration
-            home-manager switch --flake $DOTFILES_DIR
+      # Build and activate flake-based Home Manager configuration
+      home-manager switch --flake $DOTFILES_DIR
     '')
     (writeShellScriptBin "chu-install-doom-emacs" ''
       git clone https://github.com/chumutt/doom ~/.config/doom

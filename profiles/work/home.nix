@@ -21,7 +21,7 @@
     (./. + "../../../user/app/browser" + ("/" + userSettings.browser)
       + ".nix") # My default browser selected from flake
     ../../user/app/virtualization/virtualization.nix # Virtual machines
-    # ../../user/app/flatpak/flatpak.nix # Flatpaks
+    ../../user/app/flatpak/flatpak.nix # Flatpaks
     ../../user/style/stylix.nix # Styling and themes for my apps
     ../../user/lang/cc/cc.nix # C and C++ tools
     ../../user/lang/godot/godot.nix # Game development
@@ -273,8 +273,6 @@
     telegram-desktop
     nurl
     nix-prefetch
-
-
   ]);
 
   home.file.".local/share/pixmaps/nixos-snowflake-stylix.svg".source =
@@ -285,6 +283,7 @@
     };
 
   services.syncthing.enable = true;
+
   services.nextcloud-client = {
     enable = true;
     startInBackground = true;
@@ -338,7 +337,4 @@
   services.pasystray.enable = true;
 
   services.arrpc.enable = true;
-
-  # thefuck - magnificent app that corrects your previous console command.
-  programs.thefuck = { enable = true; };
 }
