@@ -30,5 +30,6 @@
       variant = "";
       options = "caps:escape";
     };
+    videoDrivers = ["nvidia"];
   };
 }
