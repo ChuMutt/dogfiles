@@ -27,6 +27,7 @@
     ../../system/security/firejail.nix
     ../../system/security/openvpn.nix
     ../../system/security/automount.nix
+    ../../system/security/sshd.nix
     ../../system/style/stylix.nix
   ];
 
@@ -126,6 +127,7 @@
     cryptsetup
     home-manager
     wpa_supplicant
+    findutils
     # spice-vdagent # Provides copy/paste support if this is a VM guest.
 
     # Shell script template (no shebang required):
